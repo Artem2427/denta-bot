@@ -61,10 +61,10 @@ export function Header() {
           {/* Desktop Actions */}
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
-            <Button variant="outline" size="default" asChild>
+            <Button variant="brand-outline" size="default" asChild>
               <Link href={routes.demo}>Демо</Link>
             </Button>
-            <Button size="default" asChild>
+            <Button variant="brand" size="default" asChild>
               <Link href={routes.contacts}>Спробувати безкоштовно</Link>
             </Button>
           </div>
@@ -105,7 +105,7 @@ export function Header() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-2">
-                <Button variant="outline" size="default" asChild>
+                <Button variant="brand-outline" size="default" asChild>
                   <Link
                     href={routes.demo}
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -113,7 +113,7 @@ export function Header() {
                     Демо
                   </Link>
                 </Button>
-                <Button size="default" asChild>
+                <Button variant="brand" size="default" asChild>
                   <Link
                     href={routes.contacts}
                     onClick={() => setIsMobileMenuOpen(false)}
