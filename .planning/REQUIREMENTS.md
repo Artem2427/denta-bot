@@ -15,9 +15,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Premium Design System
 
-- [ ] **DESIGN-01**: The marketing site (`apps/web` — excluding the Demo page's embedded admin-panel simulation) renders with a bespoke premium visual system — its own palette (deep navy/teal/warm-white/coral/sage/amber), typography scale, and spacing/radius/shadow language — replacing Phase 1's brand-blue theme on `apps/web` pages. Not built on `packages/ui` as a base; `packages/ui`/`theme.css` is unmodified and stays the basis for `apps/admin-panel` and the Demo page's admin-panel simulation.
+- [x] **DESIGN-01**: The marketing site (`apps/web` — excluding the Demo page's embedded admin-panel simulation) renders with a bespoke premium visual system — its own palette (deep navy/teal/warm-white/coral/sage/amber), typography scale, and spacing/radius/shadow language — replacing Phase 1's brand-blue theme on `apps/web` pages. Not built on `packages/ui` as a base; `packages/ui`/`theme.css` is unmodified and stays the basis for `apps/admin-panel` and the Demo page's admin-panel simulation.
 - [ ] **DESIGN-02**: Site-wide motion system implemented per spec (scroll-triggered reveals, hover micro-interactions, chat-bot typing/message animation timings, signature coral interaction-marker) using `transform`/`opacity`, respecting `prefers-reduced-motion`
-- [ ] **DESIGN-03**: Site meets WCAG AA text contrast, visible `focus-visible` states on all interactive elements, and a Lighthouse Performance score ≥85 with animations enabled
+- [x] **DESIGN-03**: Site meets WCAG AA text contrast, visible `focus-visible` states on all interactive elements, and a Lighthouse Performance score ≥85 with animations enabled
 
 ### Layout
 
@@ -83,9 +83,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LAYOUT-01 | Phase 1 | Complete |
 | LAYOUT-02 | Phase 1 | Complete |
 | LAYOUT-03 | Phase 1 | Complete |
-| DESIGN-01 | Phase 01.1 | Pending |
+| DESIGN-01 | Phase 01.1 | Complete |
 | DESIGN-02 | Phase 01.1 | Pending |
-| DESIGN-03 | Phase 01.1 | Pending |
+| DESIGN-03 | Phase 01.1 | Complete |
 | HOME-01 | Phase 2 | Pending |
 | DEMO-01 | Phase 2 | Pending |
 | DEMO-02 | Phase 2 | Pending |
