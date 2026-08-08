@@ -47,14 +47,25 @@ Plans:
 
 ### Phase 01.1: Premium Design System (apps/web) (INSERTED)
 
-**Goal:** [Urgent work - to be planned] Establish a bespoke premium visual system for the marketing site (`apps/web`) per the client's new ТЗ — own color palette, typography, spacing/shadow/radius scale, motion/animation primitives, icon system — scoped to `apps/web` only. `packages/ui` (and its consumers — `apps/admin-panel` and the Demo page's embedded admin-panel simulation) stays on the existing theme; this phase does not touch it.
-**Requirements**: TBD
+**Goal:** Establish a bespoke premium visual system for the marketing site (`apps/web`) per the client's new ТЗ — own color palette, typography, spacing/shadow/radius scale, motion/animation primitives, icon system — scoped to `apps/web` only, with Phase 1's shipped shell (header/footer/logo/theme-toggle) retrofitted onto it. `packages/ui` (and its consumers — `apps/admin-panel` and the Demo page's embedded admin-panel simulation) stays on the existing theme; this phase does not touch it. This phase builds the design-system layer only — no page content (Home/Contacts/Demo/Prices/Blog) ships here.
+**Requirements**: DESIGN-01, DESIGN-02, DESIGN-03
 **Depends on:** Phase 1
-**Plans:** 0 plans
+**Plans:** 4 plans
 
 Plans:
 
-- [ ] TBD (run /gsd-plan-phase 01.1 to break down)
+**Wave 1**
+
+- [ ] 01.1-01-PLAN.md — Package Legitimacy Gate (motion, @phosphor-icons/react) + install + `dt-` premium token system (colors/radius/shadows/type scale) + self-hosted Inter heading/body fonts
+
+**Wave 2** *(parallel, both depend on Wave 1)*
+
+- [ ] 01.1-02-PLAN.md — Premium UI primitives: `PremiumButton`, `PremiumCard`, `Container`, local `cn()` helper
+- [ ] 01.1-03-PLAN.md — Motion/scroll-reveal utilities: `useInView`, `motion.ts` constants, `Reveal`, `SignatureMark`
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 01.1-04-PLAN.md — Shell rebuild (Logo/ThemeToggle/Header/Footer/Not-Found/root layout) on the premium system + `apps/web/components/`+`apps/web/lib/` → `apps/web/shared/` folder move
 
 ### Phase 2: Home, Contacts & Demo
 
