@@ -45,6 +45,17 @@ Plans:
 
 - [x] 01-02-PLAN.md — Build Logo/ThemeToggle/Header/Footer/Not-Found and wire `next-themes` + shell into the root layout
 
+### Phase 01.1: Premium Design System (apps/web) (INSERTED)
+
+**Goal:** [Urgent work - to be planned] Establish a bespoke premium visual system for the marketing site (`apps/web`) per the client's new ТЗ — own color palette, typography, spacing/shadow/radius scale, motion/animation primitives, icon system — scoped to `apps/web` only. `packages/ui` (and its consumers — `apps/admin-panel` and the Demo page's embedded admin-panel simulation) stays on the existing theme; this phase does not touch it.
+**Requirements**: TBD
+**Depends on:** Phase 1
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 01.1 to break down)
+
 ### Phase 2: Home, Contacts & Demo
 
 **Goal**: Users can view the Home landing page and complete the two primary lead-gen actions — request a demo via the scripted chat simulation and submit a contact inquiry with validated feedback.

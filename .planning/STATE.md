@@ -2,17 +2,17 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 2
-current_phase_name: Home, Contacts & Demo
-status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-08-08T14:59:36.772Z"
+current_phase: "01.1"
+current_phase_name: Premium Design System (apps/web)
+status: planning
+stopped_at: Phase 01.1 inserted (urgent), Phase 2 execution paused pending premium design system
+last_updated: "2026-08-08T15:21:17.434Z"
 last_activity: 2026-08-08
 last_activity_desc: Phase 01 complete, transitioned to Phase 2
 progress:
-  total_phases: 2
+  total_phases: 3
   completed_phases: 1
-  total_plans: 2
+  total_plans: 6
   completed_plans: 2
 ---
 
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-08)
 
 **Core value:** The migrated site must render all six pages from the design faithfully — content, layout, and theme — using `@repo/ui` components and Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
-**Current focus:** Phase 2 — Home, Contacts & Demo
+**Current focus:** Phase 01.1 — Premium Design System (apps/web); Phase 2 execution paused pending this phase
 
 ## Current Position
 
-Phase: 2 — Home, Contacts & Demo
+Phase: 01.1 — Premium Design System (apps/web)
 Plan: Not started
-Status: Ready to execute
-Last activity: 2026-08-08 — Phase 01 complete, transitioned to Phase 2
+Status: Not planned yet (run /gsd-plan-phase 01.1 --prd .planning/phases/01.1-premium-design-system/01.1-PRD.md)
+Last activity: 2026-08-08 — Phase 2 planned+verified (4 plans), then paused: client sent premium redesign ТЗ, Phase 01.1 inserted ahead of it
 
 Progress: [██████████] 100%
 
@@ -83,6 +83,10 @@ None yet.
 ### Blockers/Concerns
 
 - pnpm --filter web build's tsc step fails on packages/ui/src/components/shadcn-ui/button-group.tsx due to a pre-existing csstype@3.1.3 vs 3.2.3 duplicate-resolution conflict (deferred-items.md #5/#6); requires a monorepo-wide pnpm.overrides fix, out of scope for Phase 1 — recommended before/during Phase 2
+
+### Roadmap Evolution
+
+- Phase 01.1 inserted after Phase 1: Client sent a detailed premium visual-redesign ТЗ (new navy/teal/coral/sage/amber palette, typography, motion system, Phosphor icons) while Phase 2 execution was starting. Conflicts with Phase 1's shipped brand-blue theme and the 4 already-verified Phase 2 plans. Scoped to apps/web only per user direction — packages/ui stays as-is (used by admin-panel + Demo's embedded admin simulation). (URGENT)
 
 ## Deferred Items
 
