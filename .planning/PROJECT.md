@@ -59,16 +59,17 @@ The migrated site must render all six pages from the design faithfully — conte
 ## Constraints
 
 - **Tech stack**: Next.js 16.2 (App Router), React 19.2, Tailwind CSS v4, `@repo/ui` (Radix + shadcn + CVA) — must reuse, not replace, the existing monorepo stack
-- **Component reuse**: All UI must go through `@repo/ui`; app-specific one-off components only for page composition, not primitives already covered by the design system
+- **Component reuse**: For `apps/admin-panel` and the Demo page's embedded admin-panel simulation, all UI must go through `@repo/ui`; app-specific one-off components only for page composition, not primitives already covered by the design system. **Superseded for the `apps/web` marketing site (Home/Contacts/Demo's marketing chrome/Prices/Blog) as of the Phase 01.1 premium redesign (2026-08-08, client-directed):** the marketing site now uses its own bespoke component system (own palette/typography/motion), not built on `@repo/ui`. `packages/ui`/`theme.css` is unmodified and stays the base only for `apps/admin-panel` and the Demo page's admin-simulation tab.
 - **Forms**: `react-hook-form` + `zod` required for all form validation (Contacts, Demo if applicable)
 - **State management**: Zustand allowed but not mandatory — add only when local/prop-drilled state genuinely becomes unmanageable
 - **Data**: Mock/static data only this milestone — no real API integration
-- **Styling source of truth**: Design archive's `theme.css` tokens are authoritative for the new theme; existing Tailwind v4 token plumbing in `packages/ui/styles/theme.css` must be preserved structurally
+- **Styling source of truth**: For `apps/admin-panel`/admin-demo, `packages/ui/styles/theme.css` remains authoritative. For the `apps/web` marketing site, the Phase 01.1 premium design system (own tokens, likely under `apps/web/shared/`) is authoritative instead — see Phase 01.1 CONTEXT.md once planned.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
+| Marketing site (`apps/web`, excl. Demo's admin-simulation tab) gets its own bespoke premium component system, not built on `@repo/ui` | Client sent a detailed premium visual-redesign ТЗ (new palette/typography/motion) mid-Phase-2 that conflicts with the Phase 1 brand-blue `@repo/ui` theme; user explicitly said not to base the site on `packages/ui`, only the Demo page's admin-simulation should keep matching the real `@repo/ui`-based `apps/admin-panel` product | — Pending, Phase 01.1 |
 | Reuse `@repo/ui` instead of porting the design's own `components/ui/*` | Avoids a duplicate, drifting shadcn component set across the monorepo; `@repo/ui` is already consumed by `apps/web`, `apps/docs`, `apps/admin-panel` | — Pending |
 | Re-theme `packages/ui/styles/theme.css` globally (not a scoped override in `apps/web`) | Design tokens are meant to be the new brand theme, not a one-app override; keeps all `@repo/ui` consumers visually consistent | ✓ Good — Phase 1 |
 | Carry over Ukrainian copy verbatim from the design archive | Content is already finished/approved (headings, FAQ, blog posts, pricing); no rewrite requested | ✓ Good |

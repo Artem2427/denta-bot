@@ -13,6 +13,12 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **THEME-02**: Any shadcn primitive the pages require that's missing from `@repo/ui` is added to `@repo/ui` via its existing shadcn-CLI pattern — not duplicated locally in `apps/web`
 - [x] **THEME-03**: User can toggle light/dark theme from the header, and the choice persists across navigation (via `next-themes`)
 
+### Premium Design System
+
+- [ ] **DESIGN-01**: The marketing site (`apps/web` — excluding the Demo page's embedded admin-panel simulation) renders with a bespoke premium visual system — its own palette (deep navy/teal/warm-white/coral/sage/amber), typography scale, and spacing/radius/shadow language — replacing Phase 1's brand-blue theme on `apps/web` pages. Not built on `packages/ui` as a base; `packages/ui`/`theme.css` is unmodified and stays the basis for `apps/admin-panel` and the Demo page's admin-panel simulation.
+- [ ] **DESIGN-02**: Site-wide motion system implemented per spec (scroll-triggered reveals, hover micro-interactions, chat-bot typing/message animation timings, signature coral interaction-marker) using `transform`/`opacity`, respecting `prefers-reduced-motion`
+- [ ] **DESIGN-03**: Site meets WCAG AA text contrast, visible `focus-visible` states on all interactive elements, and a Lighthouse Performance score ≥85 with animations enabled
+
 ### Layout
 
 - [x] **LAYOUT-01**: User sees a consistent header with navigation to Home, Prices, Demo, Blog, Contacts on every page
@@ -61,7 +67,7 @@ Explicitly excluded. Documented to prevent scope creep.
 |---------|--------|
 | CMS or MDX-based blog content | Mock data in code is sufficient this milestone; no content backend exists yet |
 | i18n / multi-language support | Site ships Ukrainian-only, matching the design |
-| New or duplicate component library | All UI must route through the existing `@repo/ui`, not a new one scoped to `apps/web` |
+| New component library for `apps/admin-panel` or the Demo page's embedded admin-panel simulation | Those stay on `@repo/ui` — they represent the real `apps/admin-panel` product. **Superseded for `apps/web` marketing pages by DESIGN-01** (2026-08-08, client-directed premium redesign): the marketing site now gets its own bespoke component system, not routed through `@repo/ui`. |
 | Zustand added pre-emptively | Only introduce if a genuine cross-component client state need emerges (e.g. `next-themes` and local `useState` already cover known needs) |
 | Real backend/API wiring for forms or demo | No `apps/server` endpoint exists yet for this; see v2 INTEG-01/INTEG-02 |
 
@@ -77,6 +83,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LAYOUT-01 | Phase 1 | Complete |
 | LAYOUT-02 | Phase 1 | Complete |
 | LAYOUT-03 | Phase 1 | Complete |
+| DESIGN-01 | Phase 01.1 | Pending |
+| DESIGN-02 | Phase 01.1 | Pending |
+| DESIGN-03 | Phase 01.1 | Pending |
 | HOME-01 | Phase 2 | Pending |
 | DEMO-01 | Phase 2 | Pending |
 | DEMO-02 | Phase 2 | Pending |
@@ -90,11 +99,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 **Coverage:**
 
-- v1 requirements: 16 total
-- Mapped to phases: 16 (roadmap created — 3 phases)
+- v1 requirements: 19 total
+- Mapped to phases: 19 (roadmap has 4 phases: 1, 01.1, 2, 3)
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-08-08*
-*Last updated: 2026-08-08 after roadmap creation*
+*Last updated: 2026-08-08 — added DESIGN-01/02/03 for urgent Phase 01.1 (premium redesign)*
 </content>

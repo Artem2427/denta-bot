@@ -11,11 +11,11 @@
 ### Constraints
 
 - **Tech stack**: Next.js 16.2 (App Router), React 19.2, Tailwind CSS v4, `@repo/ui` (Radix + shadcn + CVA) — must reuse, not replace, the existing monorepo stack
-- **Component reuse**: All UI must go through `@repo/ui`; app-specific one-off components only for page composition, not primitives already covered by the design system
+- **Component reuse**: For `apps/admin-panel` and the Demo page's embedded admin-panel simulation, all UI must go through `@repo/ui`; app-specific one-off components only for page composition, not primitives already covered by the design system. **Superseded for the `apps/web` marketing site (Home/Contacts/Demo's marketing chrome/Prices/Blog) as of the Phase 01.1 premium redesign (2026-08-08, client-directed):** the marketing site now uses its own bespoke component system (own palette/typography/motion), not built on `@repo/ui`. `packages/ui`/`theme.css` is unmodified and stays the base only for `apps/admin-panel` and the Demo page's admin-simulation tab.
 - **Forms**: `react-hook-form` + `zod` required for all form validation (Contacts, Demo if applicable)
 - **State management**: Zustand allowed but not mandatory — add only when local/prop-drilled state genuinely becomes unmanageable
 - **Data**: Mock/static data only this milestone — no real API integration
-- **Styling source of truth**: Design archive's `theme.css` tokens are authoritative for the new theme; existing Tailwind v4 token plumbing in `packages/ui/styles/theme.css` must be preserved structurally
+- **Styling source of truth**: For `apps/admin-panel`/admin-demo, `packages/ui/styles/theme.css` remains authoritative. For the `apps/web` marketing site, the Phase 01.1 premium design system (own tokens, likely under `apps/web/shared/`) is authoritative instead — see Phase 01.1 CONTEXT.md once planned.
 
 <!-- GSD:project-end -->
 
