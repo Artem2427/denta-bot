@@ -1,20 +1,11 @@
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
+import { Footer } from '@/shared/components/footer';
+import { Header } from '@/shared/components/header';
 import { Toaster } from '@repo/ui';
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import localFont from 'next/font/local';
 
+import { interHeading, interBody } from './fonts';
 import './globals.css';
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-});
 
 export const metadata: Metadata = {
   title: 'DentaBot',
@@ -29,7 +20,9 @@ export default function RootLayout({
 }>): React.JSX.Element {
   return (
     <html lang="uk" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${interHeading.variable} ${interBody.variable} font-dt-body`}
+      >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />
           <main>{children}</main>
