@@ -349,7 +349,7 @@ npx shadcn@3.8.5 add form   # example: the one confirmed-missing primitive, need
 
 **If this table is empty:** N/A — two low-risk assumptions logged above; both are standard, well-established library behaviors, not compliance/security-sensitive claims.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 None blocking. The questions raised in this phase's research brief (App Router + `next-themes` integration specifics, Client/Server boundary conventions, the shadcn-CLI monorepo pattern, Tailwind v4 token-merging mechanics, and `not-found.tsx` vs. `global-not-found.js`) are all resolved above with codebase-verified or official-docs-cited answers.
 
