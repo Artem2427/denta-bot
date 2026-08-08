@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '@repo/ui/styles/theme.css';
+@import './premium-theme.css';
 
 @import 'tw-animate-css';
 
