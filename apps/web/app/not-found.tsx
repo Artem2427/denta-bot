@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Button } from '@repo/ui';
 
-export default function NotFound() {
+export default function NotFound(): React.JSX.Element {
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="max-w-md space-y-6 text-center">

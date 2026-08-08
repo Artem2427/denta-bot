@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Logo } from './logo';
 
-export function Footer() {
+export function Footer(): React.JSX.Element {
   return (
     <footer className="border-t border-border bg-muted">
       <div className="container mx-auto px-4 py-12 lg:px-8 lg:py-16">
