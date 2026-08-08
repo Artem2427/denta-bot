@@ -13,7 +13,7 @@ Replace `apps/web`'s default create-turbo starter with the real six-page marketi
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Theme & Site Shell** - Re-theme `@repo/ui` with the design's tokens and stand up the shared header/footer/theme-toggle/404 layout used by every page
+- [x] **Phase 1: Theme & Site Shell** - Re-theme `@repo/ui` with the design's tokens and stand up the shared header/footer/theme-toggle/404 layout used by every page (completed 2026-08-08)
 - [ ] **Phase 2: Home, Contacts & Demo** - Ship the Home landing page plus the two lead-gen surfaces (Contacts form, Demo chat simulation)
 - [ ] **Phase 3: Prices & Blog** - Ship the Prices page and the Blog listing/detail routes
 
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Theme & Site Shell | 2/2 | In Progress|  |
+| 1. Theme & Site Shell | 2/2 | Complete    | 2026-08-08 |
 | 2. Home, Contacts & Demo | 0/TBD | Not started | - |
 | 3. Prices & Blog | 0/TBD | Not started | - |
 </content>
