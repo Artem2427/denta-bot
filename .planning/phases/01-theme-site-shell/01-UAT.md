@@ -32,10 +32,6 @@ result: pass
 expected: Resize the browser viewport under 1024px width; confirm the mobile hamburger menu opens/closes and auto-closes after clicking a nav link. Full visual pass on `/` confirming brand-blue logo badge, correct nav labels, and the header's scroll-triggered blur/shadow style change. Hamburger menu toggles correctly and closes on link click; header visually matches the design source in both scroll states.
 result: pass
 
-### 5. Mobile hamburger menu + full visual pass
-expected: Resize the browser viewport under 1024px width; confirm the mobile hamburger menu opens/closes and auto-closes after clicking a nav link. Full visual pass on `/` confirming brand-blue logo badge, correct nav labels, and the header's scroll-triggered blur/shadow style change. Hamburger menu toggles correctly and closes on link click; header visually matches the design source in both scroll states.
-result: [pending]
-
 ## Summary
 
 total: 5
