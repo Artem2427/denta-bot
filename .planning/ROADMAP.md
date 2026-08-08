@@ -59,12 +59,16 @@ Plans:
   4. User sees a mocked success confirmation after submitting a valid Contacts form (no real backend call)
   5. User can view and expand the FAQ accordion on the Contacts page with all FAQ items from the design
 
-**Plans**: TBD
+**Plans**: 3 plans
 **UI hint**: yes
 
 Plans:
 
-- [ ] 02-01: TBD
+**Wave 1** *(all 3 plans are independent vertical slices — parallel)*
+
+- [ ] 02-01-PLAN.md — Home page (`/`): Hero, Problem, Solution, Features, CTA Banner, Testimonials sections, Unsplash images via next/image
+- [ ] 02-02-PLAN.md — Demo page (`/demo`): scripted Bot-tab chat simulation + Admin-tab panel switcher, typed mock data module
+- [ ] 02-03-PLAN.md — Contacts page (`/contacts`): react-hook-form + zod validated lead form, mocked confirmation, FAQ accordion (includes a blocking Package Legitimacy checkpoint before installing react-hook-form/zod/@hookform/resolvers)
 
 ### Phase 3: Prices & Blog
 
@@ -94,6 +98,6 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Theme & Site Shell | 2/2 | Complete    | 2026-08-08 |
-| 2. Home, Contacts & Demo | 0/TBD | Not started | - |
+| 2. Home, Contacts & Demo | 0/3 | Not started | - |
 | 3. Prices & Blog | 0/TBD | Not started | - |
 </content>
