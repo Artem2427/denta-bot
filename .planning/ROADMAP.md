@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. User navigating to an unmatched URL sees a proper Not Found page
   5. Any shadcn primitive later pages require that's missing from `@repo/ui` has been audited and added via the existing shadcn-CLI pattern, not duplicated locally in `apps/web`
 
-**Plans**: 1/2 plans executed
+**Plans**: 2/2 plans executed
 **UI hint**: yes
 
 Plans:
@@ -43,7 +43,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 01-02-PLAN.md — Build Logo/ThemeToggle/Header/Footer/Not-Found and wire `next-themes` + shell into the root layout
+- [x] 01-02-PLAN.md — Build Logo/ThemeToggle/Header/Footer/Not-Found and wire `next-themes` + shell into the root layout
 
 ### Phase 2: Home, Contacts & Demo
 
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Theme & Site Shell | 1/2 | In Progress|  |
+| 1. Theme & Site Shell | 2/2 | In Progress|  |
 | 2. Home, Contacts & Demo | 0/TBD | Not started | - |
 | 3. Prices & Blog | 0/TBD | Not started | - |
 </content>

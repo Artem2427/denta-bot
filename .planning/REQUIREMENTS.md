@@ -11,13 +11,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **THEME-01**: Site renders using `@repo/ui` components re-themed with the design archive's light/dark color tokens (`packages/ui/styles/theme.css` updated), replacing the current default shadcn/neutral theme
 - [x] **THEME-02**: Any shadcn primitive the pages require that's missing from `@repo/ui` is added to `@repo/ui` via its existing shadcn-CLI pattern — not duplicated locally in `apps/web`
-- [ ] **THEME-03**: User can toggle light/dark theme from the header, and the choice persists across navigation (via `next-themes`)
+- [x] **THEME-03**: User can toggle light/dark theme from the header, and the choice persists across navigation (via `next-themes`)
 
 ### Layout
 
-- [ ] **LAYOUT-01**: User sees a consistent header with navigation to Home, Prices, Demo, Blog, Contacts on every page
-- [ ] **LAYOUT-02**: User sees a consistent footer on every page
-- [ ] **LAYOUT-03**: User navigating to an unmatched URL sees a Not Found page
+- [x] **LAYOUT-01**: User sees a consistent header with navigation to Home, Prices, Demo, Blog, Contacts on every page
+- [x] **LAYOUT-02**: User sees a consistent footer on every page
+- [x] **LAYOUT-03**: User navigating to an unmatched URL sees a Not Found page
 
 ### Home
 
@@ -73,10 +73,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | THEME-01 | Phase 1 | Complete |
 | THEME-02 | Phase 1 | Complete |
-| THEME-03 | Phase 1 | Pending |
-| LAYOUT-01 | Phase 1 | Pending |
-| LAYOUT-02 | Phase 1 | Pending |
-| LAYOUT-03 | Phase 1 | Pending |
+| THEME-03 | Phase 1 | Complete |
+| LAYOUT-01 | Phase 1 | Complete |
+| LAYOUT-02 | Phase 1 | Complete |
+| LAYOUT-03 | Phase 1 | Complete |
 | HOME-01 | Phase 2 | Pending |
 | DEMO-01 | Phase 2 | Pending |
 | DEMO-02 | Phase 2 | Pending |
