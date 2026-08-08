@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 current_phase: 01.1
-current_phase_name: Premium Design System (apps/web)
-status: planning
+current_phase_name: premium-design-system
+status: executing
 stopped_at: Phase 01.1 inserted (urgent), Phase 2 execution paused pending premium design system
-last_updated: "2026-08-08T19:23:55.923Z"
+last_updated: "2026-08-08T19:28:33.186Z"
 last_activity: 2026-08-08
-last_activity_desc: "Phase 2 planned+verified (4 plans), then paused: client sent premium redesign ТЗ, Phase 01.1 inserted ahead of it"
+last_activity_desc: Phase 01.1 execution started
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 6
+  total_plans: 10
   completed_plans: 2
 ---
 
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-08)
 
 **Core value:** The migrated site must render all six pages from the design faithfully — content, layout, and theme — using `@repo/ui` components and Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
-**Current focus:** Phase 01.1 — Premium Design System (apps/web); Phase 2 execution paused pending this phase
+**Current focus:** Phase 01.1 — premium-design-system
 
 ## Current Position
 
-Phase: 01.1 — Premium Design System (apps/web)
-Plan: Not started
-Status: Ready to execute (4 plans, 3 waves — run /gsd-execute-phase 01.1)
-Last activity: 2026-08-08 — Phase 01.1 planned+verified (4 plans, 46/46 CONTEXT.md decisions covered)
+Phase: 01.1 (premium-design-system) — EXECUTING
+Plan: 1 of 4
+Status: Executing Phase 01.1
+Last activity: 2026-08-08 — Phase 01.1 execution started
 
 Progress: [██████████] 100%
 

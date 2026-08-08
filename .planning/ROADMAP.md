@@ -50,13 +50,13 @@ Plans:
 **Goal:** Establish a bespoke premium visual system for the marketing site (`apps/web`) per the client's new ТЗ — own color palette, typography, spacing/shadow/radius scale, motion/animation primitives, icon system — scoped to `apps/web` only, with Phase 1's shipped shell (header/footer/logo/theme-toggle) retrofitted onto it. `packages/ui` (and its consumers — `apps/admin-panel` and the Demo page's embedded admin-panel simulation) stays on the existing theme; this phase does not touch it. This phase builds the design-system layer only — no page content (Home/Contacts/Demo/Prices/Blog) ships here.
 **Requirements**: DESIGN-01, DESIGN-02, DESIGN-03
 **Depends on:** Phase 1
-**Plans:** 4 plans
+**Plans:** 1/4 plans executed
 
 Plans:
 
 **Wave 1**
 
-- [ ] 01.1-01-PLAN.md — Package Legitimacy Gate (motion, @phosphor-icons/react) + install + `dt-` premium token system (colors/radius/shadows/type scale) + self-hosted Inter heading/body fonts
+- [x] 01.1-01-PLAN.md — Package Legitimacy Gate (motion, @phosphor-icons/react) + install + `dt-` premium token system (colors/radius/shadows/type scale) + self-hosted Inter heading/body fonts
 
 **Wave 2** *(parallel, both depend on Wave 1)*
 
