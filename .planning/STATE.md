@@ -23,7 +23,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-08)
 
 **Core value:** The migrated site must render all six pages from the design faithfully — content, layout, and theme — using `@repo/ui` components and Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
-**Current focus:** Phase 01 — Theme & Site Shell
+**Current focus:** Phase 2 — Home, Contacts & Demo
 
 ## Current Position
 
@@ -70,10 +70,11 @@ Recent decisions affecting current work:
 
 - Roadmap: Foundation (theme + layout shell) sequenced before any page phase, per explicit user priority.
 - Roadmap: Page phases grouped by business priority — Home/Contacts/Demo (lead-gen) before Prices/Blog (remaining content) — to avoid thin single-requirement phases while preserving requested ordering.
-- [Phase ?]: brand token (--brand: #1d6be4) added to :root only, no .dark override, per D-02
-- [Phase ?]: shadcn form primitive deliberately deferred to Phase 2 (CONT-01) — react-hook-form not yet an installed dependency, requires Package Legitimacy Gate
-- [Phase ?]: next-themes/lucide-react added as explicit apps/web dependencies (Rule 3) — pnpm's per-package node_modules isolation doesn't expose @repo/ui's transitive deps to apps/web; both were already pinned in pnpm-lock.yaml at the same versions
-- [Phase ?]: Explicit React.JSX.Element return-type annotations added to Footer/Logo/NotFound/Home/RootLayout to unblock the pre-existing duplicate @types/react 'portable type' tsc error that cascades across the root layout's full type-check graph
+- [Phase 1]: brand token (--brand: #1d6be4) added to :root only, no .dark override, per D-02
+- [Phase 1]: shadcn form primitive deliberately deferred to Phase 2 (CONT-01) — react-hook-form not yet an installed dependency, requires Package Legitimacy Gate
+- [Phase 1]: next-themes/lucide-react added as explicit apps/web dependencies (Rule 3) — pnpm's per-package node_modules isolation doesn't expose @repo/ui's transitive deps to apps/web; both were already pinned in pnpm-lock.yaml at the same versions
+- [Phase 1]: Explicit React.JSX.Element return-type annotations added to Footer/Logo/NotFound/Home/RootLayout to unblock the pre-existing duplicate @types/react 'portable type' tsc error that cascades across the root layout's full type-check graph
+- [Phase 1]: apps/web restructured mid-phase (user-directed) — app/ holds only route files, components/ for shared UI, lib/routes.ts for centralized route constants, @/* tsconfig alias added
 
 ### Pending Todos
 
@@ -81,9 +82,7 @@ None yet.
 
 ### Blockers/Concerns
 
-yet.
-
-- pnpm --filter web build's tsc step fails on packages/ui/src/components/shadcn-ui/button-group.tsx due to a pre-existing csstype@3.1.3 vs 3.2.3 duplicate-resolution conflict (deferred-items.md #5/#6); requires a monorepo-wide pnpm.overrides fix, out of scope for Phase 1
+- pnpm --filter web build's tsc step fails on packages/ui/src/components/shadcn-ui/button-group.tsx due to a pre-existing csstype@3.1.3 vs 3.2.3 duplicate-resolution conflict (deferred-items.md #5/#6); requires a monorepo-wide pnpm.overrides fix, out of scope for Phase 1 — recommended before/during Phase 2
 
 ## Deferred Items
 
@@ -95,7 +94,7 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-08T11:48:51.141Z
-Stopped at: Completed 01-02-PLAN.md
+Last session: 2026-08-08T14:20:00Z
+Stopped at: Phase 1 complete, ready to plan Phase 2
 Resume file: None
 </content>
