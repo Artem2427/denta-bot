@@ -1,10 +1,10 @@
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
 import { Toaster } from '@repo/ui';
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import localFont from 'next/font/local';
 
-import { Footer } from './_components/footer';
-import { Header } from './_components/header';
 import './globals.css';
 
 const geistSans = localFont({

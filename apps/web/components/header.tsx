@@ -1,21 +1,21 @@
 'use client';
 
+import { routes } from '@/lib/routes';
+import { Button } from '@repo/ui';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
-import { Button } from '@repo/ui';
-
 import { Logo } from './logo';
 import { ThemeToggle } from './theme-toggle';
 
 const navLinks = [
-  { href: '/', label: 'Продукт' },
-  { href: '/prices', label: 'Ціни' },
-  { href: '/demo', label: 'Демо' },
-  { href: '/blog', label: 'Блог' },
-  { href: '/contacts', label: 'Контакти' },
+  { href: routes.home, label: 'Продукт' },
+  { href: routes.prices, label: 'Ціни' },
+  { href: routes.demo, label: 'Демо' },
+  { href: routes.blog, label: 'Блог' },
+  { href: routes.contacts, label: 'Контакти' },
 ];
 
 export function Header() {
@@ -62,10 +62,10 @@ export function Header() {
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
             <Button variant="outline" size="default" asChild>
-              <Link href="/demo">Демо</Link>
+              <Link href={routes.demo}>Демо</Link>
             </Button>
             <Button size="default" asChild>
-              <Link href="/contacts">Спробувати безкоштовно</Link>
+              <Link href={routes.contacts}>Спробувати безкоштовно</Link>
             </Button>
           </div>
 
@@ -77,7 +77,11 @@ export function Header() {
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -102,12 +106,18 @@ export function Header() {
               ))}
               <div className="flex flex-col gap-2 pt-2">
                 <Button variant="outline" size="default" asChild>
-                  <Link href="/demo" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link
+                    href={routes.demo}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     Демо
                   </Link>
                 </Button>
                 <Button size="default" asChild>
-                  <Link href="/contacts" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link
+                    href={routes.contacts}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     Спробувати безкоштовно
                   </Link>
                 </Button>

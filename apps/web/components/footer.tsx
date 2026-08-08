@@ -1,3 +1,4 @@
+import { routes } from '@/lib/routes';
 import Link from 'next/link';
 
 import { Logo } from './logo';
@@ -11,7 +12,8 @@ export function Footer(): React.JSX.Element {
           <div className="space-y-4">
             <Logo />
             <p className="text-sm text-muted-foreground">
-              Автоматизація запису пацієнтів у стоматологічні клініки через Telegram бот
+              Автоматизація запису пацієнтів у стоматологічні клініки через
+              Telegram бот
             </p>
             <div className="flex gap-3">
               <a
@@ -39,7 +41,7 @@ export function Footer(): React.JSX.Element {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/"
+                  href={routes.home}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand"
                 >
                   Головна
@@ -47,7 +49,7 @@ export function Footer(): React.JSX.Element {
               </li>
               <li>
                 <Link
-                  href="/prices"
+                  href={routes.prices}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand"
                 >
                   Ціни
@@ -55,7 +57,7 @@ export function Footer(): React.JSX.Element {
               </li>
               <li>
                 <Link
-                  href="/demo"
+                  href={routes.demo}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand"
                 >
                   Демо
@@ -63,7 +65,7 @@ export function Footer(): React.JSX.Element {
               </li>
               <li>
                 <Link
-                  href="/blog"
+                  href={routes.blog}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand"
                 >
                   Блог
@@ -78,7 +80,7 @@ export function Footer(): React.JSX.Element {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/about"
+                  href={routes.about}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand"
                 >
                   Про нас
@@ -86,7 +88,7 @@ export function Footer(): React.JSX.Element {
               </li>
               <li>
                 <Link
-                  href="/contacts"
+                  href={routes.contacts}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand"
                 >
                   Контакти
@@ -94,7 +96,7 @@ export function Footer(): React.JSX.Element {
               </li>
               <li>
                 <Link
-                  href="/privacy"
+                  href={routes.privacy}
                   className="text-sm text-muted-foreground transition-colors hover:text-brand"
                 >
                   Політика конфіденційності
@@ -108,13 +110,20 @@ export function Footer(): React.JSX.Element {
             <h3 className="font-semibold text-foreground">Контакти</h3>
             <ul className="space-y-3">
               <li className="text-sm text-muted-foreground">
-                <span className="mb-1 block font-medium text-foreground">Email</span>
-                <a href="mailto:hello@dentabot.ua" className="transition-colors hover:text-brand">
+                <span className="mb-1 block font-medium text-foreground">
+                  Email
+                </span>
+                <a
+                  href="mailto:hello@dentabot.ua"
+                  className="transition-colors hover:text-brand"
+                >
                   hello@dentabot.ua
                 </a>
               </li>
               <li className="text-sm text-muted-foreground">
-                <span className="mb-1 block font-medium text-foreground">Telegram</span>
+                <span className="mb-1 block font-medium text-foreground">
+                  Telegram
+                </span>
                 <a
                   href="https://t.me/dentabot_support"
                   className="transition-colors hover:text-brand"
@@ -123,7 +132,9 @@ export function Footer(): React.JSX.Element {
                 </a>
               </li>
               <li className="text-sm text-muted-foreground">
-                <span className="mb-1 block font-medium text-foreground">Робочі години</span>
+                <span className="mb-1 block font-medium text-foreground">
+                  Робочі години
+                </span>
                 Пн-Пт: 9:00 - 18:00
               </li>
             </ul>
@@ -131,7 +142,9 @@ export function Footer(): React.JSX.Element {
         </div>
 
         <div className="mt-12 border-t border-border pt-8">
-          <p className="text-center text-sm text-muted-foreground">© 2026 DentaBot by Dankohub</p>
+          <p className="text-center text-sm text-muted-foreground">
+            © 2026 DentaBot by Dankohub
+          </p>
         </div>
       </div>
     </footer>

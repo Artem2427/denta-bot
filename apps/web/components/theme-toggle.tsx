@@ -1,10 +1,9 @@
 'use client';
 
+import { Button } from '@repo/ui';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
-
-import { Button } from '@repo/ui';
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -29,7 +28,11 @@ export function ThemeToggle() {
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="h-10 w-10"
     >
-      {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+      {theme === 'dark' ? (
+        <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
+      )}
       <span className="sr-only">Перемкнути тему</span>
     </Button>
   );

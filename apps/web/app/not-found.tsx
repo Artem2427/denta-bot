@@ -1,7 +1,7 @@
+import { routes } from '@/lib/routes';
+import { Button } from '@repo/ui';
 import { Home } from 'lucide-react';
 import Link from 'next/link';
-
-import { Button } from '@repo/ui';
 
 export default function NotFound(): React.JSX.Element {
   return (
@@ -13,7 +13,7 @@ export default function NotFound(): React.JSX.Element {
           Вибачте, сторінка яку ви шукаєте не існує або була переміщена.
         </p>
         <Button size="lg" asChild>
-          <Link href="/">
+          <Link href={routes.home}>
             <Home className="mr-2 h-5 w-5" />
             На головну
           </Link>
