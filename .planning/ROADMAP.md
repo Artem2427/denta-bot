@@ -59,15 +59,19 @@ Plans:
   4. User sees a mocked success confirmation after submitting a valid Contacts form (no real backend call)
   5. User can view and expand the FAQ accordion on the Contacts page with all FAQ items from the design
 
-**Plans**: 3 plans
+**Plans**: 4 plans
 **UI hint**: yes
 
 Plans:
 
-**Wave 1** *(all 3 plans are independent vertical slices — parallel)*
+**Wave 1** *(foundational — folder-structure move required before Wave 2's page plans can build)*
+
+- [ ] 02-04-PLAN.md — Restructure `apps/web` into the three-layer convention (`app/` routes-only, `shared/` cross-page code, `modules/<page>/` page-scoped code): relocate Phase 1's `components/`/`lib/` into `shared/`, update `layout.tsx`/`not-found.tsx` imports
+
+**Wave 2** *(all 3 page plans are independent vertical slices — parallel, depend on 02-04)*
 
 - [ ] 02-01-PLAN.md — Home page (`/`): Hero, Problem, Solution, Features, CTA Banner, Testimonials sections, Unsplash images via next/image
-- [ ] 02-02-PLAN.md — Demo page (`/demo`): scripted Bot-tab chat simulation + Admin-tab panel switcher, typed mock data module
+- [ ] 02-02-PLAN.md — Demo page (`/demo`): scripted Bot-tab chat simulation + Admin-tab panel switcher, typed mock data module (`apps/web/modules/demo/_data.ts`)
 - [ ] 02-03-PLAN.md — Contacts page (`/contacts`): react-hook-form + zod validated lead form, mocked confirmation, FAQ accordion (includes a blocking Package Legitimacy checkpoint before installing react-hook-form/zod/@hookform/resolvers)
 
 ### Phase 3: Prices & Blog
