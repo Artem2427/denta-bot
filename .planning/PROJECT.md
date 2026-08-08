@@ -22,15 +22,17 @@ The migrated site must render all six pages from the design faithfully — conte
 - ✓ Monorepo scaffolding — pnpm workspaces + Turborepo, `apps/web` (Next.js 16.2, React 19.2), `apps/server` (NestJS), `apps/admin-panel` (Vite), `apps/docs` (Next.js) — existing
 - ✓ Shared component library `@repo/ui` (`packages/ui`) — Radix UI + shadcn primitives (button, card, dialog, accordion, tabs, form, input, badge, etc.), CVA + clsx/tailwind-merge, lucide-react, next-themes, sonner, Tailwind v4 token architecture (`styles/theme.css`) — existing
 - ✓ Codebase mapped — `.planning/codebase/*` (ARCHITECTURE, STACK, CONVENTIONS, STRUCTURE, TESTING, INTEGRATIONS, CONCERNS) — existing
+- ✓ Replaced `packages/ui/styles/theme.css` design tokens with the design archive's light/dark palette + new `--brand` token — Phase 1
+- ✓ Header/footer/theme-toggle/not-found shared shell wired into `apps/web/app/layout.tsx` via `next-themes` — Phase 1
+- ✓ THEME-02 shadcn-primitive audit for the shell (header/footer/404) — Phase 1; broader page-content audit still Active below
 
 ### Active
 
-- [ ] Port all 6 routes from the design (Home `/`, Prices `/prices`, Demo `/demo`, Blog `/blog`, Blog Post `/blog/[slug]`, Contacts `/contacts`, plus `not-found`) to Next.js App Router under `apps/web/app/`
-- [ ] Replace `apps/web`'s default create-turbo starter content entirely
-- [ ] Rebuild page content using `@repo/ui` components instead of the design's local copy of shadcn components (`src/app/components/ui/*` in the archive) — extend `@repo/ui` with any missing primitives (e.g. `alert-dialog` variants, chart, carousel, command, context-menu, menubar, navigation-menu, resizable, scroll-area — audit against what pages actually use) via the existing shadcn-CLI pattern already used in `packages/ui`
-- [ ] Replace `packages/ui/styles/theme.css` design tokens with the tokens from the design archive's `src/styles/theme.css` (light/dark oklch + hex values), preserving the existing `@theme inline` / `:root` / `.dark` Tailwind v4 structure — this re-themes every app consuming `@repo/ui`, not just `apps/web`
-- [ ] Header/footer/theme-toggle ported as shared layout (`apps/web/app/layout.tsx` + components), using `next-themes` (already a `@repo/ui` dependency) instead of the archive's standalone `theme-provider.tsx`
+- [ ] Port remaining 5 page routes' content (Home `/`, Prices `/prices`, Demo `/demo`, Blog `/blog`, Blog Post `/blog/[slug]`, Contacts `/contacts`) to Next.js App Router under `apps/web/app/` — shell/not-found done in Phase 1, page content is Phase 2/3
+- [ ] Replace `apps/web`'s default create-turbo starter page content (`app/page.tsx` still the starter home page) — layout/shell already replaced in Phase 1
+- [ ] Rebuild remaining page content using `@repo/ui` components instead of the design's local copy of shadcn components (`src/app/components/ui/*` in the archive) — extend `@repo/ui` with any missing primitives (e.g. `alert-dialog` variants, chart, carousel, command, context-menu, menubar, navigation-menu, resizable, scroll-area — audit against what pages actually use) via the existing shadcn-CLI pattern already used in `packages/ui`
 - [ ] Contacts and Demo forms rebuilt with `react-hook-form` + `zod` validation (replacing the archive's raw `useState` form handling); submission is mocked (simulated delay + `sonner` toast), matching current design behavior — no real backend call yet
+- [ ] Fix pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict blocking `pnpm --filter web build`'s (and `apps/admin-panel`'s) production type-check — discovered in Phase 1, unrelated to Phase 1's own changes but should land before/during Phase 2 (`pnpm.overrides` pin)
 - [ ] All Ukrainian copy (headings, FAQ, 6 blog posts, pricing tiers) carried over as-is from the design archive into mock data/constants in code
 - [ ] Blog listing + blog post detail routes driven by static mock data (in-code, not CMS/MDX) with a clear seam for future real content source
 - [ ] Demo page kept as a scripted client-side chat simulation (local `useState`) — no real bot/API integration this milestone
@@ -68,11 +70,14 @@ The migrated site must render all six pages from the design faithfully — conte
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Reuse `@repo/ui` instead of porting the design's own `components/ui/*` | Avoids a duplicate, drifting shadcn component set across the monorepo; `@repo/ui` is already consumed by `apps/web`, `apps/docs`, `apps/admin-panel` | — Pending |
-| Re-theme `packages/ui/styles/theme.css` globally (not a scoped override in `apps/web`) | Design tokens are meant to be the new brand theme, not a one-app override; keeps all `@repo/ui` consumers visually consistent | — Pending |
+| Re-theme `packages/ui/styles/theme.css` globally (not a scoped override in `apps/web`) | Design tokens are meant to be the new brand theme, not a one-app override; keeps all `@repo/ui` consumers visually consistent | ✓ Good — Phase 1 |
 | Carry over Ukrainian copy verbatim from the design archive | Content is already finished/approved (headings, FAQ, blog posts, pricing); no rewrite requested | ✓ Good |
 | Forms use `react-hook-form` + `zod`, submission stays mocked | Matches explicit requirement; no backend endpoint exists yet to call | — Pending |
 | Demo page stays a scripted UI simulation | Explicit decision — real bot integration deferred to a future milestone | ✓ Good |
 | Zustand deferred until proven necessary | Avoids premature state-management complexity; `next-themes` + local `useState` cover current known needs | — Pending |
+| New brand accent token `--brand: #1d6be4` added to `theme.css` (not in the design's own token set) | Design's `--primary` (`#030213`) is a separate dark-navy token that drives the default `Button`; the bright blue used for logo/active-nav/hover needed its own first-class token, not scattered `bg-[#1d6be4]` utility classes | ✓ Good — Phase 1 |
+| `apps/web` restructured: `app/` holds only route files; shared components live in a top-level `components/`, route paths centralized in `lib/routes.ts` (with a `@/*` tsconfig alias) | User-directed mid-Phase-1 refactor — keeps Next.js App Router convention clean as page count grows in Phase 2/3, avoids hardcoded href strings scattered across components | ✓ Good — Phase 1 |
+| Styling changes route through `packages/ui/styles/theme.css` (via `apps/web/app/globals.css`'s import); `@repo/ui` components can gain new variants as pages need them, keeping palette consistency with established tokens | User-confirmed ongoing convention for this milestone — the token/component layer is a living part of the design-archive port, not frozen after Phase 1 | ✓ Good — Phase 1 |
 
 ## Evolution
 
@@ -92,4 +97,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-08-08 after initialization*
+*Last updated: 2026-08-08 after Phase 1 (Theme & Site Shell)*
