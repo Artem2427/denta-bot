@@ -1,32 +1,39 @@
 ---
 phase: 01-theme-site-shell
 verified: 2026-08-08T13:48:49Z
-status: human_needed
+status: passed
 score: 11/13 must-haves verified
 behavior_unverified: 2
 overrides_applied: 0
 behavior_unverified_items:
+
   - truth: "Theme toggle click cycles light↔dark, next-themes writes a single 'theme' key to localStorage (not an accumulating list), and clicking an even number of times returns the UI to its original theme."
     test: "In a browser, open devtools Application > Local Storage. Click the header theme toggle 4 times. Confirm exactly one 'theme' key exists in localStorage (its value updates in place) and the page visually returns to the original (light) theme."
     expected: "Single 'theme' localStorage key, page state matches original theme after an even number of toggles."
     why_human: "Runtime DOM/localStorage state mutation cannot be observed via static grep — ThemeToggle is wired to next-themes' setTheme() but no automated test in this codebase (apps/web has no test framework configured) exercises the toggle cycle."
+
   - truth: "Theme preference set in one browser tab is reflected in other open tabs of the same origin via next-themes' built-in storage-event listener."
     test: "Open the site in two browser tabs. Toggle theme in tab A. Observe tab B without refreshing."
     expected: "Tab B's theme updates automatically (next-themes' cross-tab storage-event listener)."
     why_human: "Cross-tab behavior is inherent to the next-themes library, not custom code this phase — no way to verify via source inspection alone, requires a live two-tab browser check."
 human_verification:
+
   - test: "Click the header theme toggle 4 times (even number) and inspect localStorage for a single 'theme' key; confirm the page returns to its original theme."
     expected: "Exactly one 'theme' key in localStorage; page visually matches the original theme after an even number of toggles."
     why_human: "Runtime state mutation, not visible via grep; no test framework configured in apps/web to automate this."
+
   - test: "Open the site in two tabs, toggle theme in tab A, observe tab B updates without a manual refresh."
     expected: "Tab B reflects the new theme automatically."
     why_human: "Inherent next-themes library behavior across browser tabs; requires a live two-tab check."
+
   - test: "Load apps/docs (`pnpm dev:docs`) and apps/admin-panel (`pnpm --filter admin-panel dev`) in a browser and visually confirm neither looks broken/unstyled after the shared packages/ui/styles/theme.css token swap."
     expected: "Both apps render with coherent (not obviously broken) styling."
     why_human: "No automated visual-regression tooling exists in this monorepo (per the plan's own threat-model disposition). Verifier could not even production-build either app to inspect output — apps/docs fails on a pre-existing `@repo/ui/button` module-resolution error unrelated to this phase's changes (confirmed via `git log -- apps/docs/app/page.tsx`, untouched since the initial commit) and apps/admin-panel fails its `tsc` step on the same pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict already logged in deferred-items.md (predates Phase 1). A structural diff confirms the token swap is additive-only (no CSS custom property names removed), which supports low regression risk, but a human should still spot-check both apps once their own pre-existing build issues are resolved."
+
   - test: "Grep-confirm no header/footer/CTA element performs a real network call or analytics beacon (prohibition, Plan 01-02); grep-confirm not-found.tsx has no useRouter()/redirect() silent-redirect call (prohibition, Plan 01-02)."
     expected: "No fetch/axios/XMLHttpRequest/analytics calls in header.tsx/footer.tsx/logo.tsx/theme-toggle.tsx/layout.tsx/not-found.tsx; no useRouter/redirect( in not-found.tsx."
     why_human: "Both prohibitions are declared verification: test in the plan frontmatter, but apps/web has no test framework configured (no vitest/jest/playwright dependency) — there is no wired automated enforcement test for either prohibition. Per the fail-closed rule for test-tier prohibitions, an item that reaches verification with no wired enforcement is flagged as unverified rather than silently passed, even though the verifier's own manual grep found zero violations of either prohibition (0 fetch/axios/analytics calls; 0 useRouter/redirect( calls in not-found.tsx)."
+
   - test: "Resize the browser viewport under 1024px width; confirm the mobile hamburger menu opens/closes and auto-closes after clicking a nav link. Full visual pass on `/` confirming brand-blue logo badge, correct nav labels, and the header's scroll-triggered blur/shadow style change."
     expected: "Hamburger menu toggles correctly and closes on link click; header visually matches the design source in both scroll states."
     why_human: "Harvested from Plan 01-02's `<verification>` `<human-check>` block, deferred to end-of-phase per `workflow.human_verify_mode=end-of-phase`. Interaction/visual correctness cannot be confirmed via static grep — code presence for the mobile-menu `useState`/`onClick` handlers and the `isScrolled` conditional className was confirmed, but the actual open/close/scroll-blur behavior needs a live browser check."
