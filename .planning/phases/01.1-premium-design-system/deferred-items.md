@@ -16,3 +16,7 @@ Items discovered during execution that are out of scope for the current plan/tas
   - Identical error set to Plan 01.1-01's entry above, confined to `packages/ui/src/components/shadcn-ui/{button-group,calendar,sidebar}.tsx` — none reference `apps/web/shared/lib/cn.ts`, `apps/web/shared/components/premium-button.tsx`, `premium-card.tsx`, or `container.tsx`.
   - No new instance introduced by this plan; all 4 new files this plan created are error-free.
   - Not fixed here — remains tracked at the project level for a `pnpm.overrides` fix.
+
+## Plan 01.1-03
+
+- **Same pre-existing `csstype` conflict reappears in `pnpm --filter web check-types`** (Task 2 verify step) — identical 5 errors, same 3 files (`button-group.tsx`, `calendar.tsx`, `sidebar.tsx`), none touched by this plan. `apps/web/shared/hooks/use-in-view.ts`, `apps/web/shared/lib/motion.ts`, `apps/web/shared/components/reveal.tsx`, and `apps/web/shared/components/signature-mark.tsx` are all error-free. Not fixed here for the same reason as above.
