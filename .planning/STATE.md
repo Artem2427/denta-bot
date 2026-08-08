@@ -2,18 +2,18 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 1
+current_phase: 01
 current_phase_name: Theme & Site Shell
 status: executing
-stopped_at: Phase 1 context gathered
-last_updated: "2026-08-08T11:30:58.943Z"
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-08-08T11:37:12.355Z"
 last_activity: 2026-08-08
-last_activity_desc: Roadmap created (3 phases, 16/16 requirements mapped)
+last_activity_desc: Phase 01 execution started
 progress:
   total_phases: 1
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 2
+  completed_plans: 1
 ---
 
 # Project State
@@ -23,16 +23,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-08)
 
 **Core value:** The migrated site must render all six pages from the design faithfully — content, layout, and theme — using `@repo/ui` components and Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
-**Current focus:** Phase 1 — Theme & Site Shell
+**Current focus:** Phase 01 — Theme & Site Shell
 
 ## Current Position
 
-Phase: 1 of 3 (Theme & Site Shell)
-Plan: 0 of TBD in current phase
+Phase: 01 (Theme & Site Shell) — EXECUTING
+Plan: 2 of 2
 Status: Ready to execute
-Last activity: 2026-08-08 — Roadmap created (3 phases, 16/16 requirements mapped)
+Last activity: 2026-08-08 — Phase 01 execution started
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
@@ -54,6 +54,11 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+**Per-Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 01 P01 | 8min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -64,6 +69,8 @@ Recent decisions affecting current work:
 
 - Roadmap: Foundation (theme + layout shell) sequenced before any page phase, per explicit user priority.
 - Roadmap: Page phases grouped by business priority — Home/Contacts/Demo (lead-gen) before Prices/Blog (remaining content) — to avoid thin single-requirement phases while preserving requested ordering.
+- [Phase ?]: brand token (--brand: #1d6be4) added to :root only, no .dark override, per D-02
+- [Phase ?]: shadcn form primitive deliberately deferred to Phase 2 (CONT-01) — react-hook-form not yet an installed dependency, requires Package Legitimacy Gate
 
 ### Pending Todos
 
@@ -83,7 +90,7 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-08T10:28:50.831Z
-Stopped at: Phase 1 context gathered
-Resume file: .planning/phases/01-theme-site-shell/01-CONTEXT.md
+Last session: 2026-08-08T11:37:12.349Z
+Stopped at: Completed 01-01-PLAN.md
+Resume file: None
 </content>
