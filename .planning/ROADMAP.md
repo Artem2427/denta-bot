@@ -29,11 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User sees a consistent header (with navigation to Home, Prices, Demo, Blog, Contacts) and footer on every page
   4. User navigating to an unmatched URL sees a proper Not Found page
   5. Any shadcn primitive later pages require that's missing from `@repo/ui` has been audited and added via the existing shadcn-CLI pattern, not duplicated locally in `apps/web`
-**Plans**: TBD
+**Plans**: 2 plans
 **UI hint**: yes
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Re-theme `@repo/ui` design tokens (`--brand` + design archive palette), fix `sonner.tsx` client boundary, close out THEME-02 shadcn-primitive audit
+- [ ] 01-02-PLAN.md — Build Logo/ThemeToggle/Header/Footer/Not-Found and wire `next-themes` + shell into the root layout
 
 ### Phase 2: Home, Contacts & Demo
 **Goal**: Users can view the Home landing page and complete the two primary lead-gen actions — request a demo via the scripted chat simulation and submit a contact inquiry with validated feedback.
@@ -75,7 +76,7 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Theme & Site Shell | 0/TBD | Not started | - |
+| 1. Theme & Site Shell | 0/2 | Not started | - |
 | 2. Home, Contacts & Demo | 0/TBD | Not started | - |
 | 3. Prices & Blog | 0/TBD | Not started | - |
 </content>
