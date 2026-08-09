@@ -11,7 +11,6 @@ import { routes } from '@/shared/lib/routes';
 
 import { Logo } from './logo';
 import { PremiumButton } from './premium-button';
-import { ThemeToggle } from './theme-toggle';
 
 const navLinks = [
   { href: routes.home, label: 'Продукт' },
@@ -63,7 +62,6 @@ export function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-3 lg:flex">
-            <ThemeToggle />
             <PremiumButton variant="outline" size="default" asChild>
               <Link href={routes.demo}>Демо</Link>
             </PremiumButton>
@@ -74,7 +72,6 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
-            <ThemeToggle />
             <PremiumButton
               variant="ghost"
               size="icon"
