@@ -7,7 +7,7 @@ import { routes } from '@/shared/lib/routes';
 
 export function CtaBanner(): React.JSX.Element {
   return (
-    <section className="bg-dt-navy py-16 lg:py-24">
+    <section className="bg-dt-navy py-8 lg:py-12">
       <Container>
         <Reveal>
           <div className="mx-auto max-w-2xl space-y-6 text-center">

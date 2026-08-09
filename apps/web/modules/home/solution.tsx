@@ -68,7 +68,7 @@ function StepColumn({
 
 export function Solution(): React.JSX.Element {
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-8 lg:py-12">
       <Container>
         <Reveal>
           <div className="mb-12 text-center">

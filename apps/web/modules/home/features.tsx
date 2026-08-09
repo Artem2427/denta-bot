@@ -19,7 +19,7 @@ import { StaggerGrid, StaggerItem } from './stagger-grid';
 
 export function Features(): React.JSX.Element {
   return (
-    <section id="features" className="py-16 lg:py-24">
+    <section id="features" className="py-8 lg:py-12">
       <Container>
         <Reveal>
           <div className="mb-12 text-center">

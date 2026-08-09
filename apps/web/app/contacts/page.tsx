@@ -20,7 +20,7 @@ export default function Contacts(): React.JSX.Element {
           </div>
         </Container>
       </section>
-      <section className="pb-16 lg:pb-24">
+      <section className="pb-8 lg:pb-12">
         <Container>
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
             <ContactForm />
@@ -28,7 +28,7 @@ export default function Contacts(): React.JSX.Element {
           </div>
         </Container>
       </section>
-      <section className="bg-dt-navy/5 py-16 lg:py-24">
+      <section className="bg-dt-navy/5 py-8 lg:py-12">
         <Container>
           <Reveal>
             <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy text-center mb-12">
