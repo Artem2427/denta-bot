@@ -59,7 +59,7 @@ export function Hero(): React.JSX.Element {
           </Reveal>
           <div className="relative">
             <Image
-              src="https://images.unsplash.com/photo-1766171359875-73155eff7f66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXB0b3AlMjBkYXNoYm9hcmQlMjBtb2NrdXAlMjBzY3JlZW58ZW58MXx8fHwxNzcyOTA1MjU0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
               alt="DentaBot Dashboard"
               width={800}
               height={600}
