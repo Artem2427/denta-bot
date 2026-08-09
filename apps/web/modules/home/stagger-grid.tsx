@@ -1,10 +1,9 @@
 'use client';
 
-import { motion } from 'motion/react';
-import * as React from 'react';
-
 import { useInView } from '@/shared/hooks/use-in-view';
 import { revealContainerVariants, revealVariants } from '@/shared/lib/motion';
+import { motion, useReducedMotion } from 'motion/react';
+import * as React from 'react';
 
 export function StaggerGrid({
   children,
@@ -14,12 +13,17 @@ export function StaggerGrid({
   className?: string;
 }) {
   const { ref, inView } = useInView<HTMLDivElement>(0.15);
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      variants={revealContainerVariants}
+      variants={
+        prefersReducedMotion
+          ? { hidden: {}, visible: {} }
+          : revealContainerVariants
+      }
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
     >
@@ -29,8 +33,17 @@ export function StaggerGrid({
 }
 
 export function StaggerItem({ children }: { children: React.ReactNode }) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <motion.div className="h-full" variants={revealVariants}>
+    <motion.div
+      className="h-full"
+      variants={
+        prefersReducedMotion
+          ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
+          : revealVariants
+      }
+    >
       {children}
     </motion.div>
   );
