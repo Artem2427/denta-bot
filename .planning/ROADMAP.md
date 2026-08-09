@@ -75,26 +75,18 @@ Plans:
 **Requirements**: HOME-01, DEMO-01, DEMO-02, CONT-01, CONT-02, CONT-03
 **Success Criteria** (what must be TRUE):
 
-  1. User can view the Home page at `/` with all sections from the design (hero, features, etc.) ported with `@repo/ui` components and the original Ukrainian copy
+  1. User can view the Home page at `/` with all sections from the design (hero, features, etc.) ported with the Phase 01.1 premium design system components and the original Ukrainian copy
   2. User can view the Demo page at `/demo`, interact with the scripted chat-bot simulation, and switch between dashboard sections as in the design (client-side, local state, no real API)
   3. User can fill and submit the Contacts form (name, clinic, contact, message) with `react-hook-form` + `zod` validation, seeing inline field errors for invalid input
   4. User sees a mocked success confirmation after submitting a valid Contacts form (no real backend call)
   5. User can view and expand the FAQ accordion on the Contacts page with all FAQ items from the design
 
-**Plans**: 4 plans
+**Plans**: TBD (replanning against Phase 01.1's premium design system — original plans built pre-redesign, removed 2026-08-09)
 **UI hint**: yes
 
 Plans:
 
-**Wave 1** *(foundational — folder-structure move required before Wave 2's page plans can build)*
-
-- [ ] 02-04-PLAN.md — Restructure `apps/web` into the three-layer convention (`app/` routes-only, `shared/` cross-page code, `modules/<page>/` page-scoped code): relocate Phase 1's `components/`/`lib/` into `shared/`, update `layout.tsx`/`not-found.tsx` imports
-
-**Wave 2** *(all 3 page plans are independent vertical slices — parallel, depend on 02-04)*
-
-- [ ] 02-01-PLAN.md — Home page (`/`): Hero, Problem, Solution, Features, CTA Banner, Testimonials sections, Unsplash images via next/image
-- [ ] 02-02-PLAN.md — Demo page (`/demo`): scripted Bot-tab chat simulation + Admin-tab panel switcher, typed mock data module (`apps/web/modules/demo/_data.ts`)
-- [ ] 02-03-PLAN.md — Contacts page (`/contacts`): react-hook-form + zod validated lead form, mocked confirmation, FAQ accordion (includes a blocking Package Legitimacy checkpoint before installing react-hook-form/zod/@hookform/resolvers)
+- [ ] TBD (run /gsd-plan-phase 2 to break down)
 
 ### Phase 3: Prices & Blog
 
