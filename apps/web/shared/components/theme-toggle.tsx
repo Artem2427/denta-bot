@@ -18,6 +18,7 @@ export function ThemeToggle(): React.JSX.Element {
     return (
       <PremiumButton variant="ghost" size="icon" className="h-10 w-10">
         <Sun weight="regular" className="h-5 w-5" />
+        <span className="sr-only">Перемкнути тему</span>
       </PremiumButton>
     );
   }

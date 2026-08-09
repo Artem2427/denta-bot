@@ -76,6 +76,8 @@ export function Header() {
             <PremiumButton
               variant="ghost"
               size="icon"
+              aria-label={isMobileMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
+              aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
