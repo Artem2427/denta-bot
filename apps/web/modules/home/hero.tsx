@@ -3,7 +3,6 @@
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { Reveal } from '@/shared/components/reveal';
-import { SignatureMark } from '@/shared/components/signature-mark';
 import { idleBounceAnimate, idleBounceTransition } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
 import { ArrowRightIcon, BellIcon, CheckIcon } from '@phosphor-icons/react/ssr';
@@ -21,7 +20,7 @@ export function Hero(): React.JSX.Element {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="pt-24 pb-16 lg:pt-32 lg:pb-24">
+    <section className="pt-24 pb-8 lg:pt-32 lg:pb-12">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
