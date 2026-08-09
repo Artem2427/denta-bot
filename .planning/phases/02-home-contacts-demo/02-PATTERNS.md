@@ -1,234 +1,211 @@
 # Phase 2: Home, Contacts & Demo - Pattern Map
 
-**Mapped:** 2026-08-08
-**Files analyzed:** 8 (3 route pages, 1 layout-scoped client component set, 2 data/const files, 1 config, 1 dependency addition)
-**Analogs found:** 8 / 8 (all resolve to Phase 1 files; no cross-app analogs needed)
+**Mapped:** 2026-08-09 (REPLAN — supersedes prior PATTERNS.md, aligns to Phase 01.1's premium design system)
+**Files analyzed:** 12 new/modified files (Home, Demo, Contacts pages + supporting modules/data + next.config.js)
+**Analogs found:** 12 / 12
+
+**⚠ This replaces the stale pre-01.1 PATTERNS.md.** All Home/Contacts and the Demo page's Bot-tab/outer chrome analogs come from `apps/web/shared/components/` (the premium system), NOT `@repo/ui`/`apps/web/components/` (deleted in 01.1-04). The Demo page's admin-panel-simulation tab is the sole exception and still uses `@repo/ui` (`packages/ui/src/components/shadcn-ui/*`).
 
 ## File Classification
 
 | New/Modified File | Role | Data Flow | Closest Analog | Match Quality |
 |-------------------|------|-----------|-----------------|---------------|
-| `apps/web/app/page.tsx` (rewrite) | route/component | request-response (static render) | `apps/web/app/not-found.tsx` (existing route composing `@repo/ui` + `routes`) | role-match |
-| `apps/web/app/demo/page.tsx` | route/component (client, stateful) | event-driven (chat playback, tab/section state) | `apps/web/components/header.tsx` (existing `'use client'` + `useState` + conditional render pattern) | role-match |
-| `apps/web/app/demo/_data.ts` | data/const module | transform (static mock data) | `apps/web/lib/routes.ts` (existing `as const` data module) | exact |
-| `apps/web/app/contacts/page.tsx` | route/component (client, form) | CRUD-like (form submit, mocked) / request-response | `apps/web/components/header.tsx` (client component with local state) + new RHF/zod pattern (no existing analog) | partial |
-| `apps/web/components/section-heading.tsx` (optional shared helper, discretion) | component | transform (presentational) | `apps/web/components/logo.tsx` (small presentational component) | role-match |
-| `apps/web/next.config.js` (edit: add `images.remotePatterns`) | config | n/a | itself (existing file, additive edit) | exact |
-| `apps/web/package.json` (edit: add `react-hook-form`, `zod`, `@hookform/resolvers`) | config | n/a | itself (existing dependency block) | exact |
-| `apps/web/app/globals.css` / brand tokens | config (no changes expected) | n/a | `packages/ui/src/components/shadcn-ui/button.tsx` (brand token source) | reference only |
+| `apps/web/app/page.tsx` | route/page | request-response | `apps/web/app/not-found.tsx` (premium page shape) + `apps/web/shared/components/header.tsx` (section/CTA composition) | role-match |
+| `apps/web/modules/home/*.tsx` (section components: hero, problem, solution, features, cta-banner, testimonials) | component | request-response | `apps/web/shared/components/header.tsx`, `premium-card.tsx`, `reveal.tsx` | role-match |
+| `apps/web/app/demo/page.tsx` | route/page (client, `useState`) | event-driven | `apps/web/shared/components/header.tsx` (client component w/ local state pattern) | role-match |
+| `apps/web/modules/demo/bot-tab.tsx` (chat UI, scenario buttons) | component | event-driven | `apps/web/shared/components/header.tsx` (client `'use client'` + `useState` + Motion) | role-match |
+| `apps/web/modules/demo/admin-tab.tsx` (admin-simulation) | component | CRUD-display | `packages/ui/src/components/shadcn-ui/tabs.tsx`, `table.tsx`, `badge.tsx`, `card.tsx` | exact (intentional @repo/ui exception) |
+| `apps/web/modules/demo/_data.ts` (mock appointments/doctors/scenarios) | utility/config | transform | none (new pattern) — plain exported const arrays | no analog needed |
+| `apps/web/app/contacts/page.tsx` | route/page (client, RHF+zod form) | request-response | `apps/web/shared/components/header.tsx` (client state pattern); form itself has no in-repo RHF+zod analog | partial — new pattern (see No Analog Found) |
+| `apps/web/modules/contacts/contact-form.tsx` | component | request-response | `apps/web/shared/components/premium-button.tsx` (submit button), `premium-card.tsx` (form container) | role-match |
+| `apps/web/modules/contacts/faq-accordion.tsx` | component | request-response | none in premium system (Accordion not yet built) — build new primitive following `premium-card.tsx`'s cva-free style, OR use `@repo/ui`'s `accordion.tsx` only as a structural (non-visual) Radix-usage reference | no analog / build new |
+| `apps/web/shared/components/premium-input.tsx` (new primitive, if planner judges needed per D-09 discretion) | component (primitive) | request-response | `apps/web/shared/components/premium-button.tsx` (cva pattern), `premium-card.tsx` (token usage) | role-match |
+| `apps/web/next.config.js` | config | — | existing `apps/web/next.config.js` (add `images.remotePatterns` for `images.unsplash.com`) | exact (self-modify) |
+| `apps/web/app/globals.css` / `premium-theme.css` | config | — | no change expected; reference only | n/a |
 
 ## Pattern Assignments
 
-### `apps/web/app/page.tsx` (route, request-response)
+### `apps/web/app/page.tsx` (route, Home)
 
-**Analog:** `apps/web/app/not-found.tsx` (full file already read — 25 lines) and `apps/web/components/header.tsx` for nav/Button/Link conventions.
+**Analog:** `apps/web/app/not-found.tsx` (page shape) + `apps/web/app/layout.tsx` (import conventions)
 
-**Imports pattern** (`apps/web/app/not-found.tsx` lines 1-4):
+**Imports pattern** (`apps/web/app/not-found.tsx` lines 1-5):
 ```tsx
-import { routes } from '@/lib/routes';
-import { Button } from '@repo/ui';
-import { Home } from 'lucide-react';
+import { House } from '@phosphor-icons/react/ssr';
 import Link from 'next/link';
+
+import { PremiumButton } from '@/shared/components/premium-button';
+import { routes } from '@/shared/lib/routes';
 ```
-Apply the same import grouping to `page.tsx`: `@/lib/routes` for internal links, `@repo/ui` named imports (`Button`, `Card`, `CardHeader`, `CardContent`, `CardTitle`, `CardDescription`, `Badge`), `lucide-react` icons, `next/link`, `next/image` (new — for the two Unsplash hotlinks per D-08).
+Use `@phosphor-icons/react/ssr` for any icon that doesn't need client interactivity (server components); use `@phosphor-icons/react` (non-`/ssr`) only inside `'use client'` files if needed.
 
-**Route-file shape** (`apps/web/app/not-found.tsx` lines 6-24): default export function, explicit `React.JSX.Element` return type (established Phase 1 convention — no import needed, `React` is global JSX namespace via `tsconfig`), no `'use client'` (Home page is fully static/server — no interactivity beyond the `#features` anchor, which needs no client JS).
-
-**Link-to-internal-route pattern** (`apps/web/app/not-found.tsx` lines 15-20):
+**Explicit return type pattern** (established convention, `apps/web/app/not-found.tsx` line 7):
 ```tsx
-<Button size="lg" asChild>
-  <Link href={routes.home}>
-    <Home className="mr-2 h-5 w-5" />
-    На головну
-  </Link>
-</Button>
+export default function Home(): React.JSX.Element {
 ```
-Use `asChild` + `<Link href={routes.demo}>` for all Home page internal CTAs (never `<a href="/demo">` or react-router `<Link to>` from the archive). For the `#features` same-page anchor, per CONTEXT.md discretion, use a plain `<Link href="#features">` or `<a href="#features">` since it's a same-page hash, not a `routes` entry.
 
-**Brand-token normalization** (already applied in `apps/web/components/header.tsx` lines 64-69 and `apps/web/app/not-found.tsx` line 10):
+**Section composition / Container usage** (`apps/web/shared/components/header.tsx` lines 44-46):
 ```tsx
-<Button variant="brand" size="default" asChild>
-  <Link href={routes.contacts}>Спробувати безкоштовно</Link>
-</Button>
+<Container>
+  <div className="flex h-16 items-center justify-between lg:h-20">
 ```
-and
+Home's sections should each wrap content in `<Container>` (not raw `container mx-auto px-4 lg:px-8` from the design source) — `Container` already encodes the 1280px max-width + gutter.
+
+**Scroll-reveal wrapping** (`apps/web/shared/components/reveal.tsx` lines 21-35, full file): wrap each major Home section's content in `<Reveal>` for the fade+translateY-on-scroll spec (D-28). Example usage pattern:
 ```tsx
-<div className="text-8xl font-bold text-brand">404</div>
+<Reveal>
+  <h2 className="text-dt-h2 text-dt-navy">Знайомо?</h2>
+</Reveal>
 ```
-Apply this exact rule to every `#1d6be4` / `bg-[#1d6be4]` / `text-[#1d6be4]` occurrence in the Home page source: stat numbers → `text-brand`, hero button → `variant="brand"`/`variant="brand-outline"`, CTA banner section → `bg-brand`, CTA banner buttons → `variant="secondary"` stays (already semantic on a brand bg) but the outline one becomes `variant="brand-outline"`-style override (`border-white text-white hover:bg-white hover:text-brand` — replace only the `#1d6be4` in `hover:text-[#1d6be4]` with `hover:text-brand`, the white/border-white styling is intentionally literal for on-brand-bg contrast and has no token).
 
-**Gray-token normalization** (Phase 1 established rule, D-03, no local Phase 2 file demonstrates it yet but rule is explicit in CONTEXT.md lines 78-79): replace `text-gray-900 dark:text-white` → `text-foreground`, `text-gray-600 dark:text-gray-400` → `text-muted-foreground`, `bg-white dark:bg-gray-950`/`bg-gray-50 dark:bg-gray-900` → `bg-background`/`bg-muted` as appropriate per section.
+**Card grid pattern** (`apps/web/shared/components/premium-card.tsx`, full file, lines 5-18): use `PremiumCard` for the Problem section's 4-card grid and Features' 8-card grid instead of `@repo/ui`'s `Card`/`CardHeader`/`CardContent`/`CardTitle`. `PremiumCard` is a single flat div wrapper (no sub-components) — icon/title/description go directly inside as plain JSX, not a Card* component family.
 
-**Card grid pattern** (Problem section, 4-card grid) — use `packages/ui/src/components/shadcn-ui/card.tsx` composition exactly as documented in that file (lines 5-92): `Card > CardHeader (icon + CardTitle) + CardContent > CardDescription`. No modification needed to the `@repo/ui` Card component itself.
-
-**Image pattern** (D-08, new — no exact analog in repo): use `next/image` directly (drop `ImageWithFallback` per CONTEXT.md discretion, simplest option):
+**CTA button pattern** (`apps/web/shared/components/premium-button.tsx` lines 7-29, full variants block): hero/CTA-banner buttons use `PremiumButton` variant `coral` (primary, always paired with `text-dt-navy` — never override text color) or `outline`, sizes `default`/`lg`, `asChild` with `next/link`:
 ```tsx
-import Image from 'next/image';
-// ...
-<Image
-  src="https://images.unsplash.com/photo-..."
-  alt="DentaBot Dashboard"
-  width={1080}
-  height={720}
-  className="h-auto w-full"
-/>
+<PremiumButton variant="coral" size="lg" asChild>
+  <Link href={routes.demo}>Спробувати демо</Link>
+</PremiumButton>
 ```
-Requires `apps/web/next.config.js` edit — see Shared Patterns below.
+
+**SignatureMark for confirmation moments** (`apps/web/shared/components/signature-mark.tsx`, full file): use on the hero's floating "Новий запис від Олени Коваль" card (a confirmation-style UI moment), not decoratively elsewhere.
+
+**Routes** (`apps/web/shared/lib/routes.ts`, full file): import `routes` and use `routes.demo`/`routes.contacts`/`routes.home`, never hardcoded path strings; `#features` anchor stays a raw string since it's not a route.
+
+**Token palette:** replace all design-source `#1d6be4`/`text-gray-*`/`bg-blue-50` literals with `dt-*` tokens: `bg-dt-navy`, `text-dt-navy`, `text-dt-teal`, `bg-dt-warm-white`, `text-dt-graphite`, `text-dt-coral` (coral action-only). Do not use `text-foreground`/`bg-muted` (old Phase 1 pattern).
 
 ---
 
-### `apps/web/app/demo/page.tsx` (route, event-driven, client)
+### `apps/web/modules/demo/*` — Bot tab + outer chrome (client component, event-driven)
 
-**Analog:** `apps/web/components/header.tsx` (client component with `useState`/`useEffect`, full file read — 132 lines) for the `'use client'` + local-state conventions; `packages/ui/src/components/shadcn-ui/tabs.tsx` (full file, 90 lines) for `Tabs`/`TabsList`/`TabsTrigger`/`TabsContent` API.
+**Analog:** `apps/web/shared/components/header.tsx` (client component with local `useState`, Motion-driven transitions)
 
-**Client directive + state pattern** (`apps/web/components/header.tsx` lines 1, 21-24):
+**Client directive + state pattern** (`apps/web/shared/components/header.tsx` lines 1-9, 24-34):
 ```tsx
 'use client';
 
-import { routes } from '@/lib/routes';
-import { Button } from '@repo/ui';
-// ...
+import { motion, useReducedMotion } from 'motion/react';
 import * as React from 'react';
-
-export function Header() {
-  const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+...
+const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+const prefersReducedMotion = useReducedMotion();
 ```
-Apply same shape to `demo/page.tsx`: `'use client'` at top (required — chat state, tab-driven admin section, `setInterval` playback), `React.useState` for `chatMessages`, `selectedSection`, keep `React.JSX.Element` return type on the default export.
+Demo's chat state (`chatMessages`, `selectedSection` in the design source) follows this same local-`useState` shape; the message-appearance animation (D-20: slide-in translateY 8px→0, 250ms, expo-out) should use `motion.div` + `EASE_DT_EXPO_OUT` from `apps/web/shared/lib/motion.ts` (lines 1, full file) exactly as Header's mobile menu does (lines 96-116), swapped for per-message enter animation instead of a menu-collapse.
 
-**Effect cleanup pattern** (`apps/web/components/header.tsx` lines 26-30):
-```tsx
-React.useEffect(() => {
-  const handleScroll = () => setIsScrolled(window.scrollY > 20);
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
-```
-Reuse this cleanup-return idiom for the `runScenario` interval fix (CONTEXT.md discretion item): store the interval id in a `React.useRef<NodeJS.Timeout | null>`, `clearInterval` any existing one before starting a new one, and clear on unmount via `useEffect` cleanup, mirroring this exact `addEventListener`/`removeEventListener` cleanup shape but for `setInterval`/`clearInterval`.
+**Reduced-motion branching** (`apps/web/shared/components/header.tsx` lines 97-116): every Motion animation must branch on `prefersReducedMotion` exactly like this — simplified/instant variant when true.
 
-**Tabs composition** (`packages/ui/src/components/shadcn-ui/tabs.tsx` lines 7-89 — full API, no changes needed to the component): use exactly as documented:
-```tsx
-<Tabs defaultValue="bot" className="w-full">
-  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 h-14 mb-8">
-    <TabsTrigger value="bot" className="text-base">🤖 Бот — вид пацієнта</TabsTrigger>
-    <TabsTrigger value="admin" className="text-base">⚙️ Адмін панель</TabsTrigger>
-  </TabsList>
-  <TabsContent value="bot">...</TabsContent>
-  <TabsContent value="admin">...</TabsContent>
-</Tabs>
-```
-Port the archive's `Tabs` usage verbatim — API is identical between the archive's local shadcn copy and `@repo/ui`'s `tabs.tsx`.
+**Quick-reply/scenario buttons** (`apps/web/shared/components/premium-button.tsx`): scenario-select buttons use `PremiumButton` variant `outline`; the coral variant is reserved for the primary "Відкрити в Telegram" action per D-06 (action-accent, sparingly).
 
-**Data extraction pattern** (`apps/web/lib/routes.ts`, full file, exact analog):
-```ts
-export const routes = {
-  home: '/',
-  prices: '/prices',
-  // ...
-} as const;
-```
-Mirror this `as const` typed-object-literal shape for `apps/web/app/demo/_data.ts` (mock `appointments`, `doctors`, bar-chart data, dashboard stats) — export named `const` arrays/objects with explicit union literal types (e.g. `status: 'confirmed' | 'pending'`) rather than loose `string`.
-
-**Internal link inside demo (admin banner CTA to `/contacts`)** — same `asChild`+`Link`+`routes.contacts` pattern as `header.tsx` lines 67-69.
+**SignatureMark on new bot messages** (`apps/web/shared/components/signature-mark.tsx`): render `<SignatureMark pulse />` next to a just-arrived bot message per D-34 ("new demo message" is an explicit example use case in CONTEXT.md).
 
 ---
 
-### `apps/web/app/contacts/page.tsx` (route, CRUD-like form, client)
+### `apps/web/modules/demo/admin-tab.tsx` — admin-panel simulation (exception: stays on `@repo/ui`)
 
-**Analog:** `apps/web/components/header.tsx` for `'use client'`/state shape (partial — no existing form in repo); `packages/ui/src/components/shadcn-ui/card.tsx` for the form-in-card wrapper.
+**Analog:** `packages/ui/src/components/shadcn-ui/tabs.tsx`, `badge.tsx`, `table.tsx`, `card.tsx`
 
-**No existing RHF+zod analog in this codebase** — `react-hook-form` and `zod` are not yet dependencies anywhere in the repo (confirmed via repo-wide grep, zero hits outside lockfile). This is a **new pattern** for the codebase; RESEARCH.md/community conventions apply, not a local analog. Build from scratch following the standard RHF + zod + shadcn pattern:
-
+**Imports pattern** (`packages/ui/index.tsx` barrel export, lines 1-39 — import from `@repo/ui`, not deep paths):
 ```tsx
-'use client';
+import { Tabs, TabsList, TabsTrigger, TabsContent, Badge, Table, Card, CardHeader, CardTitle, CardContent } from '@repo/ui';
+```
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Button, Card, CardContent, CardHeader, CardTitle, CardDescription, Input, Textarea, Label } from '@repo/ui';
-import { toast } from 'sonner';
-
-const contactSchema = z.object({
-  name: z.string().min(2, 'Ім\'я має містити щонайменше 2 символи'),
-  clinic: z.string().optional(),
-  contact: z
-    .string()
-    .min(1, 'Вкажіть телефон або email')
-    .refine(
-      (val) => /^\+?[0-9\s()-]{7,}$/.test(val) || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
-      'Введіть коректний телефон або email',
-    ),
-  message: z.string().optional(),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
-
-export default function ContactsPage(): React.JSX.Element {
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: { name: '', clinic: '', contact: '', message: '' },
-  });
-
-  const onSubmit = (values: ContactFormValues) => {
-    setTimeout(() => {
-      setIsSubmitted(true);
-      toast.success('Заявку успішно надіслано!');
-    }, 500);
-  };
-  // ...
+**Tabs pattern** (`packages/ui/src/components/shadcn-ui/tabs.tsx` lines 7-24, 76-87):
+```tsx
+function Tabs({ className, orientation = 'horizontal', ...props }: ...) {
+  return <TabsPrimitive.Root data-slot="tabs" ... />;
 }
 ```
+Use `Tabs`/`TabsList`/`TabsTrigger`/`TabsContent` exactly as `@repo/ui` exports them (Radix-based, `data-slot` attributes) for the "🤖 Бот"/"⚙️ Адмін панель" tab switcher, matching the design source's structure verbatim.
 
-**Toast pattern** (already wired, `apps/web/app/layout.tsx` line 37 — `<Toaster />` from `@repo/ui`, confirmed present): call `toast.success(...)` directly from `sonner`, no extra setup needed — matches archive's `import { toast } from "sonner"` exactly, just swap `useState`-driven submit for `form.handleSubmit(onSubmit)`.
+**Badge variants** (`packages/ui/src/components/shadcn-ui/badge.tsx` lines 7-24): use `Badge` `default`/`secondary` variants for appointment status ("Підтверджено"/"Очікує"), matching the design source's `Badge default=/secondary=` usage. `lucide-react` icons stay acceptable here (matching `@repo/ui` usage elsewhere per CONTEXT.md), not Phosphor.
 
-**Field error display** — react-hook-form's `formState.errors.<field>?.message`, rendered under each `Input`/`Textarea`, styled with existing `text-destructive` token (check `packages/ui/src/components/shadcn-ui/button.tsx` line 14 for `text-destructive`/`bg-destructive` token usage precedent — reuse `text-destructive text-sm` for inline field errors, consistent with the design system's only existing error-state color).
+**Do not** import `PremiumButton`/`PremiumCard`/`dt-*` tokens inside this tab — it must visually read as the real `apps/admin-panel` product, per D-02/CONTEXT.md's explicit exception.
 
-**Accordion (FAQ)** — use `packages/ui/src/components/shadcn-ui/accordion.tsx` (not read in full this pass, but present and exported — same shadcn API as archive's `Accordion`/`AccordionItem`/`AccordionTrigger`/`AccordionContent`; archive usage at contacts.tsx is a direct verbatim port target).
+---
+
+### `apps/web/modules/contacts/contact-form.tsx` (component, request-response, react-hook-form + zod)
+
+**Analog:** No in-repo RHF+zod analog exists yet (new pattern for this codebase) — build using `PremiumButton` for the submit action and `PremiumCard` for the form container/success-state card, per the premium primitives above.
+
+**Submit button pattern** (`apps/web/shared/components/premium-button.tsx` lines 7-29): submit button is `PremiumButton` variant `coral` size `lg`, `className="w-full"` (design source: `<Button type="submit" size="lg" className="w-full">`).
+
+**Card container pattern** (`apps/web/shared/components/premium-card.tsx` lines 5-18): wrap the form and its title/description directly inside `<PremiumCard>` — no `CardHeader`/`CardTitle`/`CardContent` sub-components exist in the premium system; use plain `<h2>`/`<p>` with `dt-*` typography classes (`text-dt-h3`, `text-dt-graphite`) instead.
+
+**Inputs:** no premium `Input`/`Textarea` primitive exists yet (confirmed — only `premium-button.tsx`, `premium-card.tsx`, `container.tsx` exist in `apps/web/shared/components/`). Per CONTEXT.md's Claude's-Discretion note, either:
+  (a) build `apps/web/shared/components/premium-input.tsx`/`premium-textarea.tsx` following `premium-button.tsx`'s cva pattern (rounded `6px` per D-12's input-specific radius, not `rounded-dt-card`), styled with `dt-*` tokens (border `border-dt-navy/20`, focus ring `focus-visible:ring-dt-navy`), or
+  (b) style plain `<input>`/`<textarea>` inline with `dt-*` token classes.
+Either is acceptable; if (a), follow the exact `cn()` + `React.ComponentProps<'input'>` + `data-slot` shape used by `premium-button.tsx` lines 31-50.
+
+**Toast pattern** (already wired, `apps/web/app/layout.tsx` line 3, 30):
+```tsx
+import { Toaster } from '@repo/ui';
+...
+<Toaster />
+```
+`sonner`'s `toast.success(...)` call itself is imported directly from `sonner` (as the design source does: `import { toast } from "sonner";`) — `Toaster` render target is already mounted in the root layout, no change needed there.
+
+**Validation:** `react-hook-form` + `zod` — no existing schema file in the repo to pattern-match; use standard `zodResolver(schema)` + `useForm` wiring (React Hook Form's documented pattern), inline field error rendering via `formState.errors`.
+
+---
+
+### `apps/web/modules/contacts/faq-accordion.tsx` (component)
+
+**Analog:** none in the premium system yet. `@repo/ui`'s `accordion.tsx` exists but CONTEXT.md's SUPERSEDED note excludes `@repo/ui` components from Home/Contacts. Build a minimal premium-token-styled accordion (native `<details>`/`<summary>` or a small local Radix `Accordion.Root` wrapper styled with `dt-*` tokens, following `premium-card.tsx`'s plain-div-plus-`cn()` structural style) — Claude's Discretion on exact implementation, not covered by an existing premium file.
 
 ---
 
 ## Shared Patterns
 
-### Brand-blue Button/token normalization
-**Source:** `packages/ui/src/components/shadcn-ui/button.tsx` lines 22-25 (`brand` / `brand-outline` variants), applied in `apps/web/components/header.tsx` lines 64-69, `apps/web/app/not-found.tsx` line 10
-**Apply to:** every `#1d6be4` / `bg-[#1d6be4]` / `text-[#1d6be4]` in Home, Demo, and Contacts archive source — replace with `variant="brand"`/`variant="brand-outline"` on `Button`, `bg-brand`/`text-brand` elsewhere (icon badges, stat numbers, chart bars, chat bubbles, admin banner).
-```tsx
-<Button variant="brand" size="default" asChild>
-  <Link href={routes.contacts}>Спробувати безкоштовно</Link>
-</Button>
+### `cn()` className helper
+**Source:** `apps/web/shared/lib/cn.ts` (full file, 6 lines)
+```ts
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 ```
+**Apply to:** every new premium-system component in `apps/web/modules/{home,demo,contacts}/` and any new `apps/web/shared/components/` primitive. Import as `import { cn } from '@/shared/lib/cn'` — never `@repo/ui`'s `lib/utils.ts` version.
 
-### Semantic gray-token normalization (D-03, Phase 1 rule)
-**Source:** established convention, referenced in `.planning/phases/02-home-contacts-demo/02-CONTEXT.md` lines 78-79; visible in `apps/web/app/not-found.tsx` (`text-muted-foreground` line 12-13) and `apps/web/components/footer.tsx` (`text-muted-foreground`, `bg-muted`, `border-border` throughout)
-**Apply to:** all three new pages — `text-gray-900 dark:text-white` → `text-foreground`, `text-gray-600 dark:text-gray-400` → `text-muted-foreground`, `bg-gray-50 dark:bg-gray-900` → `bg-muted`, `bg-white dark:bg-gray-950`/`dark:bg-gray-800` → `bg-background`/`bg-card`, `border dark:border-gray-700` → `border-border`.
+### Motion / Reveal
+**Source:** `apps/web/shared/lib/motion.ts` (full file, 23 lines), `apps/web/shared/components/reveal.tsx` (full file, 36 lines)
+**Apply to:** all Home sections (scroll reveals per D-28), Demo's chat message entrance animation, any hover-lift on cards (`hoverLift` constant, translateY-only per D-30 — matches `premium-card.tsx`'s own hover already built in).
 
-### Internal navigation via `routes` object
-**Source:** `apps/web/lib/routes.ts` (full file), consumed in `apps/web/components/header.tsx` lines 3, 14-18, 65, 68 and `apps/web/app/not-found.tsx` lines 1, 16
-**Apply to:** all internal links across Home/Demo/Contacts — never hardcode `/demo`, `/contacts`, `#features`-adjacent internal paths as string literals; import `routes` from `@/lib/routes` and use `<Link href={routes.demo}>` etc. `#features` is a same-page anchor and is the one exception (not a `routes` entry).
+### PremiumButton
+**Source:** `apps/web/shared/components/premium-button.tsx` (full file, 53 lines)
+**Apply to:** all CTAs across Home/Demo/Contacts except the Demo admin-simulation tab (which uses `@repo/ui`'s `Button`). Variant rule: `coral` = single primary action per view, `text-dt-navy` always paired (never override), `outline`/`ghost` for secondary actions.
 
-### `'use client'` + React.useState/useEffect for interactive components
-**Source:** `apps/web/components/header.tsx` lines 1, 21-30
-**Apply to:** `demo/page.tsx` (chat + admin section state) and `contacts/page.tsx` (form state via RHF, `isSubmitted` toggle) — both need `'use client'` at file top since Home is the only page that can remain a server component.
+### Container
+**Source:** `apps/web/shared/components/container.tsx` (full file, 16 lines)
+**Apply to:** every page-level section wrapper on Home/Demo/Contacts, replacing the design source's `container mx-auto px-4 lg:px-8`.
 
-### Explicit `React.JSX.Element` return type
-**Source:** `apps/web/app/not-found.tsx` line 6 (`export default function NotFound(): React.JSX.Element`), `apps/web/app/page.tsx` line 3 (current starter, same pattern)
-**Apply to:** all three new/rewritten route `page.tsx` default exports (Phase 1 `tsc` duplicate-`@types/react` workaround, still required).
+### routes constant
+**Source:** `apps/web/shared/lib/routes.ts` (full file, 11 lines)
+**Apply to:** every internal `<Link>`/`asChild` navigation target across all three pages — never hardcode `/demo`, `/contacts`, etc.
 
-### Card composition for grids/panels
-**Source:** `packages/ui/src/components/shadcn-ui/card.tsx` (full file, 92 lines — `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`, `CardAction`)
-**Apply to:** Home's Problem/Testimonials grids, Demo's dashboard stat cards/doctor cards, Contacts' form card and contact-method/benefit cards — no changes to the component itself, compose as documented.
+### SignatureMark
+**Source:** `apps/web/shared/components/signature-mark.tsx` (full file, 23 lines)
+**Apply to:** Home hero's "new booking" floating card, Demo's new-bot-message moments, Contacts' form-success confirmation — interaction/confirmation points only, per D-34's "disciplined to interaction points, not decorative" rule.
+
+### `React.JSX.Element` explicit return type
+**Source:** `apps/web/app/not-found.tsx` line 7, `apps/web/app/layout.tsx` line 20
+**Apply to:** all new page-level (`page.tsx`) components — established Phase-1 workaround convention, still active.
+
+### `@phosphor-icons/react` (premium parts) vs `lucide-react` (admin-sim only)
+**Source:** `apps/web/shared/components/header.tsx` line 3 (`@phosphor-icons/react/ssr`), design source's demo.tsx (`lucide-react`)
+**Apply to:** Home/Contacts/Demo-bot-tab icons use Phosphor (`/ssr` import path for server components, non-`/ssr` inside `'use client'` files that need it); Demo's admin-simulation tab keeps `lucide-react`, matching its `@repo/ui` styling.
 
 ## No Analog Found
 
 | File | Role | Data Flow | Reason |
 |------|------|-----------|--------|
-| `apps/web/app/contacts/page.tsx` (RHF + zod form logic specifically) | component | CRUD-like (mocked submit) | No `react-hook-form`/`zod` usage exists anywhere in the repo yet (confirmed via grep) — this introduces the pattern fresh per PROJECT.md constraint; follow standard `zodResolver` + `useForm` community convention, not a local analog |
-| `apps/web/app/demo/page.tsx` (`setInterval` chat-playback logic) | component (event-driven) | event-driven | No existing timer/interval-driven UI exists in the codebase; nearest analog (`header.tsx`'s scroll-listener `useEffect`) only covers the cleanup idiom, not the interval-driven state-append logic itself — build fresh per archive source, applying the cleanup idiom above |
+| `apps/web/modules/contacts/contact-form.tsx` (RHF+zod wiring specifically) | component | request-response | No existing `react-hook-form`/`zod` usage anywhere in the repo to pattern-match; first introduction of this validation stack (per PROJECT.md's Forms constraint) — use RHF/zod's own documented API conventions directly |
+| `apps/web/shared/components/premium-input.tsx` / `premium-textarea.tsx` (if built) | component (primitive) | request-response | Not yet built in Phase 01.1; only `premium-button.tsx`/`premium-card.tsx`/`container.tsx` exist as primitives — extend the cva pattern from `premium-button.tsx` by analogy, not a direct copy |
+| `apps/web/modules/contacts/faq-accordion.tsx` | component | request-response | No accordion primitive in the premium system; `@repo/ui`'s `accordion.tsx` is excluded from Home/Contacts scope per CONTEXT.md — build new |
+| `apps/web/modules/demo/_data.ts` (mock data constants) | utility/config | transform | No existing "local mock data module" convention in `apps/web` yet — plain exported `const` arrays/objects is the natural, un-patterned choice |
 
 ## Metadata
 
-**Analog search scope:** `apps/web/app/`, `apps/web/components/`, `apps/web/lib/`, `packages/ui/src/components/shadcn-ui/`
-**Files scanned:** `apps/web/app/page.tsx`, `apps/web/app/layout.tsx`, `apps/web/app/not-found.tsx`, `apps/web/components/header.tsx`, `apps/web/components/footer.tsx`, `apps/web/components/theme-toggle.tsx`, `apps/web/lib/routes.ts`, `packages/ui/src/components/shadcn-ui/{button,card,badge,tabs}.tsx`, `apps/web/next.config.js`, `apps/web/package.json`
-**Pattern extraction date:** 2026-08-08
+**Analog search scope:** `apps/web/shared/components/`, `apps/web/shared/lib/`, `apps/web/app/`, `packages/ui/src/components/shadcn-ui/`, `packages/ui/index.tsx`
+**Files scanned:** premium-button.tsx, premium-card.tsx, container.tsx, reveal.tsx, signature-mark.tsx, header.tsx, footer.tsx (referenced), logo.tsx (referenced), cn.ts, motion.ts, routes.ts, use-in-view.ts (referenced), not-found.tsx, layout.tsx, packages/ui/src/components/shadcn-ui/{tabs,badge}.tsx, packages/ui/index.tsx
+**Pattern extraction date:** 2026-08-09
