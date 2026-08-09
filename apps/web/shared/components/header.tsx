@@ -9,6 +9,7 @@ import * as React from 'react';
 import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
 
+import { Container } from './container';
 import { Logo } from './logo';
 import { PremiumButton } from './premium-button';
 
@@ -39,7 +40,7 @@ export function Header() {
           : 'fixed top-0 left-0 right-0 z-50 bg-dt-warm-white transition-all duration-300'
       }
     >
-      <div className="container mx-auto px-4 lg:px-8">
+      <Container>
         <div className="flex h-16 items-center justify-between lg:h-20">
           <Logo />
 
@@ -133,7 +134,7 @@ export function Header() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </Container>
     </header>
   );
 }

@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { routes } from '@/shared/lib/routes';
 
+import { Container } from './container';
 import { Logo } from './logo';
 
 const socialIconClassName =
@@ -10,7 +11,7 @@ const socialIconClassName =
 export function Footer(): React.JSX.Element {
   return (
     <footer className="border-t border-dt-navy/10 bg-dt-warm-white">
-      <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-24">
+      <Container className="py-16 lg:py-24">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           {/* Column 1 — Logo + description */}
           <div className="space-y-4">
@@ -156,7 +157,7 @@ export function Footer(): React.JSX.Element {
             © 2026 DentaBot by Dankohub
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
