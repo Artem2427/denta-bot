@@ -81,10 +81,13 @@ Plans:
   4. User sees a mocked success confirmation after submitting a valid Contacts form (no real backend call)
   5. User can view and expand the FAQ accordion on the Contacts page with all FAQ items from the design
 
-**Plans**: 3/3 plans executed
+**Plans**: 4/4 plans executed
 **UI hint**: yes
 
 Plans:
+
+- [x] 02-04-PLAN.md
+
 **Wave 1** *(all 3 independent — Home, Contacts, Demo touch disjoint files, no shared-infra dependency this phase)*
 
 - [x] 02-01-PLAN.md — Home page: Hero/Problem/Solution/Features/CtaBanner/Testimonials on the premium design system
@@ -119,6 +122,6 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Theme & Site Shell | 2/2 | Complete    | 2026-08-08 |
-| 2. Home, Contacts & Demo | 3/3 | In Progress|  |
+| 2. Home, Contacts & Demo | 4/4 | In Progress|  |
 | 3. Prices & Blog | 0/TBD | Not started | - |
 </content>
