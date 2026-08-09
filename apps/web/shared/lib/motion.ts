@@ -1,4 +1,5 @@
 export const EASE_DT_EXPO_OUT = [0.16, 1, 0.3, 1] as const;
+export const EASE_DT_BOUNCE = [0.34, 1.56, 0.64, 1] as const;
 
 export const revealVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -26,5 +27,5 @@ export const idleBounceAnimate = { y: [0, -8, 0] };
 export const idleBounceTransition = {
   duration: 1.6,
   repeat: Infinity,
-  ease: EASE_DT_EXPO_OUT,
+  ease: EASE_DT_BOUNCE,
 };
