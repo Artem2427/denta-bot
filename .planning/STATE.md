@@ -2,18 +2,18 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 01.1
-current_phase_name: premium-design-system
-status: executing
-stopped_at: Phase 01.1 inserted (urgent), Phase 2 execution paused pending premium design system
-last_updated: "2026-08-08T19:28:33.186Z"
-last_activity: 2026-08-08
-last_activity_desc: Phase 01.1 execution started
+current_phase: 02
+current_phase_name: Home, Contacts & Demo
+status: planning
+stopped_at: Phase 2 context gathered
+last_updated: "2026-08-09T09:33:02.221Z"
+last_activity: 2026-08-09
+last_activity_desc: Phase 01.1 complete, transitioned to Phase 02
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 10
-  completed_plans: 2
+  completed_plans: 6
 ---
 
 # Project State
@@ -27,10 +27,10 @@ See: .planning/PROJECT.md (updated 2026-08-08)
 
 ## Current Position
 
-Phase: 01.1 (premium-design-system) — EXECUTING
-Plan: 1 of 4
-Status: Executing Phase 01.1
-Last activity: 2026-08-08 — Phase 01.1 execution started
+Phase: 02 — Home, Contacts & Demo
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-08-09 — Phase 01.1 complete, transitioned to Phase 02
 
 Progress: [██████████] 100%
 
@@ -38,7 +38,7 @@ Progress: [██████████] 100%
 
 **Velocity:**
 
-- Total plans completed: 2
+- Total plans completed: 6
 - Average duration: - min
 - Total execution time: 0 hours
 
@@ -47,6 +47,7 @@ Progress: [██████████] 100%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 2 | - | - |
+| 01.1 | 4 | - | - |
 
 **Recent Trend:**
 
@@ -94,7 +95,7 @@ Items acknowledged and carried forward from previous milestone close:
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| *(none)* | | | |
+| Dark mode (THEME-03 regression) | Premium `apps/web` site has no dark-mode `dt-*` token values; `ThemeToggle` removed from Header in Phase 01.1's code-review fix. `apps/web/shared/components/theme-toggle.tsx` still exists, unused. Needs a decision: design dark `dt-*` values and re-wire, or formally drop dark mode for the premium site this milestone. | Deferred — explicit user decision (2026-08-09): "skip for now" | Phase 01.1 |
 
 ## Session Continuity
 
