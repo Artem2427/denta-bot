@@ -11,7 +11,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **THEME-01**: Site renders using `@repo/ui` components re-themed with the design archive's light/dark color tokens (`packages/ui/styles/theme.css` updated), replacing the current default shadcn/neutral theme
 - [x] **THEME-02**: Any shadcn primitive the pages require that's missing from `@repo/ui` is added to `@repo/ui` via its existing shadcn-CLI pattern — not duplicated locally in `apps/web`
-- [x] **THEME-03**: User can toggle light/dark theme from the header, and the choice persists across navigation (via `next-themes`)
+- [x] **THEME-03**: User can toggle light/dark theme from the header, and the choice persists across navigation (via `next-themes`) — **Regressed on the premium `apps/web` site as of Phase 01.1** (2026-08-09): the code-review fixer removed the header's `ThemeToggle` entirely rather than ship a broken dark mode, since the client's premium ТЗ defined no dark-mode token values for the new `dt-*` palette. `apps/web/shared/components/theme-toggle.tsx` still exists, unused. Needs a follow-up decision: either design dark-mode `dt-*` values and re-wire the toggle, or formally descope dark mode for the premium site this milestone. Still `Complete` for `apps/admin-panel` (unaffected, still on `packages/ui`/`theme.css`).
 
 ### Premium Design System
 
