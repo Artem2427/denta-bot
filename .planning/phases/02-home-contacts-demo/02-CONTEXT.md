@@ -6,9 +6,22 @@
 <domain>
 ## Phase Boundary
 
-Ship the Home landing page (`/`), the Demo page (`/demo`, scripted Telegram-bot + admin-panel simulation), and the Contacts page (`/contacts`, lead form + FAQ). All content, copy, and layout come from the design archive — this phase ports it faithfully into `@repo/ui` + Next.js App Router, replacing the current default `apps/web/app/page.tsx` starter content. Prices and Blog are out of scope (Phase 3).
+Ship the Home landing page (`/`), the Demo page (`/demo`, scripted Telegram-bot + admin-panel simulation), and the Contacts page (`/contacts`, lead form + FAQ). Content, copy, and section structure come from the design archive (transcribed verbatim below) — but the VISUAL/COMPONENT implementation has changed since this CONTEXT.md was first written: see the "⚠ SUPERSEDED — Premium Design System" note immediately below before reading anything else in this file. Prices and Blog are out of scope (Phase 3).
 
 Requirements covered: HOME-01, DEMO-01, DEMO-02, CONT-01, CONT-02, CONT-03 (see `.planning/REQUIREMENTS.md`).
+
+### ⚠ SUPERSEDED — Premium Design System (read first, overrides everything below about component reuse)
+
+Phase 01.1 (executed and complete AFTER this CONTEXT.md was originally written) shipped a bespoke premium design system for `apps/web`, per the client's premium-redesign ТЗ. This changes how Phase 2 must be built — the "Reusable Assets" and "Established Patterns" sections below are **stale** and describe the OLD Phase-1 `@repo/ui`-based approach. Use this instead:
+
+- **Do NOT use `@repo/ui` components** (`Button`, `Card`, `Badge`, `Tabs`, `Accordion`, `Input`, `Textarea`, `Label`) for Home, Contacts, or the Demo page's marketing/chat chrome. Use the premium primitives from `apps/web/shared/components/` instead: `PremiumButton` (variants incl. a coral action variant — always paired with `text-dt-navy`, never white/warm-white text, per WCAG AA), `PremiumCard`, `Container` (use instead of Tailwind's default `.container` or any hardcoded max-width). `apps/web/shared/lib/cn.ts` is the className helper (not `@repo/ui`'s).
+- **Exception:** the Demo page's embedded admin-panel-simulation tab ("⚙️ Адмін панель" in the design source below) DOES still use `@repo/ui` components (`Tabs`, `Table`, `Badge`, `Card`, etc.) — it represents the real `apps/admin-panel` product and must keep looking like it. Only the Demo page's Bot-tab chat UI and the page's outer chrome (if any) use the premium system.
+- **Palette:** replace ALL of this CONTEXT.md's references to the old brand-blue token (`bg-brand`/`text-brand`/`#1d6be4`) with the premium `dt-*` tokens from `apps/web/app/premium-theme.css` — deep navy `#1A2B3D` (`dt-navy`), teal `#2C7A7B` (`dt-teal`), warm white `#FAFAF8` (`dt-warm-white`), coral `#E86B5A` (`dt-coral`, action-only, sparingly), graphite `#2D3436` (`dt-graphite`). Do NOT normalize grays to `text-foreground`/`bg-muted`/etc. (the old Phase 1 pattern) — use the `dt-*` tokens instead. Sage (`dt-sage`)/amber (`dt-amber`) are scoped to the Demo admin-simulation's `@repo/ui`-based status badges only.
+- **Motion:** apply the site-wide motion system from `apps/web/shared/components/reveal.tsx` (`Reveal`) and `apps/web/shared/lib/motion.ts` for scroll-triggered section reveals on Home especially (hero, problem/solution/features/testimonials sections) — per the client ТЗ's animation spec (fade + translateY on scroll, staggered children, respects `prefers-reduced-motion`). `SignatureMark` (`apps/web/shared/components/signature-mark.tsx`) is the recurring coral action-indicator — use at genuine interaction/confirmation moments (new demo message, form success), not decoratively.
+- **Icons:** use `@phosphor-icons/react` (already installed) for anything in the premium-system parts of these pages, matching the shell's icon choice. `lucide-react` stays acceptable only inside the Demo admin-simulation tab (matching `@repo/ui` usage elsewhere).
+- **Folder structure — already done, not this phase's job:** `apps/web/components/` → `apps/web/shared/components/` and `apps/web/lib/` → `apps/web/shared/lib/` was completed by Phase 01.1. `routes.ts` now lives at `apps/web/shared/lib/routes.ts` (not `apps/web/lib/routes.ts`). New page-specific components go under `apps/web/modules/<page>/` per the established convention (`modules/home/`, `modules/demo/`, `modules/contacts/`), reserving `apps/web/shared/` for cross-page code.
+- **Header/Footer/Logo/ThemeToggle:** already rebuilt on the premium system in Phase 01.1 — no changes needed to them this phase, just use them as-is (import from `apps/web/shared/components/`). Note: `ThemeToggle` was removed from `Header` (dark mode regressed/deferred, see `.planning/STATE.md` Deferred Items) — don't re-add it without a fresh decision.
+- **Contacts form (D-09 below) still applies unchanged** — `react-hook-form`/`zod` requirement is orthogonal to the visual system; just build the form's fields/inputs using premium primitives (`PremiumButton` for submit, plain styled `<input>`/`<textarea>` with `dt-*` tokens, or extend a premium `Input`/`Textarea` primitive if the planner judges one is needed — Claude's Discretion, not yet built in Phase 01.1).
 
 </domain>
 
@@ -46,10 +59,12 @@ Requirements covered: HOME-01, DEMO-01, DEMO-02, CONT-01, CONT-02, CONT-03 (see 
 **Downstream agents MUST read these before planning or implementing.**
 
 ### Project-level specs
-- `.planning/PROJECT.md` — Core value, constraints (tech stack, forms, images), Key Decisions table (includes Phase 1's brand-blue Button variants: `brand`/`brand-outline`)
-- `.planning/REQUIREMENTS.md` — HOME-01, DEMO-01/02, CONT-01/02/03 full requirement text and traceability
+- `.planning/PROJECT.md` — Core value, constraints (tech stack, forms, images), Key Decisions table (updated 2026-08-09 with the premium-redesign component-reuse carve-out)
+- `.planning/REQUIREMENTS.md` — HOME-01, DEMO-01/02, CONT-01/02/03 full requirement text and traceability; DESIGN-01/02/03 for the premium system this phase must consume
 - `.planning/ROADMAP.md` — Phase 2 goal, success criteria, dependencies (depends on Phase 1)
-- `.planning/phases/01-theme-site-shell/01-CONTEXT.md` — Phase 1 decisions this phase builds on (theming, layout shell, brand token)
+- `.planning/phases/01-theme-site-shell/01-CONTEXT.md` — Phase 1 decisions (superseded for `apps/web` by Phase 01.1, see below)
+- `.planning/phases/01.1-premium-design-system/01.1-CONTEXT.md` — **the premium design system's full decision record** (colors, typography, motion spec, a11y) — read this for anything not covered by the SUPERSEDED note above
+- `.planning/phases/01.1-premium-design-system/01.1-04-SUMMARY.md` — exact shell-rebuild details (Header/Footer/Logo/ThemeToggle) this phase's pages sit under
 
 ### Codebase maps
 - `.planning/codebase/CONVENTIONS.md` — naming, formatting, import order
@@ -66,24 +81,22 @@ Requirements covered: HOME-01, DEMO-01, DEMO-02, CONT-01, CONT-02, CONT-03 (see 
 <code_context>
 ## Existing Code Insights
 
-### Reusable Assets (already in `@repo/ui`, confirmed present — no THEME-02 gaps this phase)
-- `Button` (incl. Phase 1's new `brand`/`brand-outline` variants for any brand-accented CTA)
-- `Card`, `CardHeader`, `CardContent`, `CardTitle`, `CardDescription`
-- `Badge`, `Tabs`/`TabsList`/`TabsTrigger`/`TabsContent`, `Accordion`/`AccordionItem`/`AccordionTrigger`/`AccordionContent`
-- `Input`, `Textarea`, `Label`
-- `Toaster` (sonner) — already wired into `apps/web/app/layout.tsx` in Phase 1, `'use client'` bug already fixed
-- `routes` const object (`apps/web/lib/routes.ts`) — use `routes.home`/`routes.demo`/`routes.contacts` etc. for all internal links, do NOT hardcode path strings (established Phase 1 pattern)
+### Reusable Assets — CURRENT (post-Phase-01.1, see SUPERSEDED note above for full detail)
+- Premium: `PremiumButton`, `PremiumCard`, `Container`, `cn()` — `apps/web/shared/components/` and `apps/web/shared/lib/cn.ts`
+- Motion: `Reveal`, `SignatureMark`, `useInView`, `motion.ts` constants — `apps/web/shared/components/` and `apps/web/shared/lib/`
+- `Toaster` (sonner) — wired into `apps/web/app/layout.tsx`
+- `routes` const object — now at `apps/web/shared/lib/routes.ts` (moved by Phase 01.1) — use `routes.home`/`routes.demo`/`routes.contacts` etc. for all internal links
+- `@repo/ui` (`Button`, `Card`, `Badge`, `Tabs`, `Accordion`, `Input`, `Textarea`, `Label`, `Table`) — ONLY for the Demo page's admin-panel-simulation tab, per the SUPERSEDED note above
 
-### Established Patterns (from Phase 1)
-- `apps/web/app/` holds only route files (`page.tsx`, `layout.tsx`, `not-found.tsx`); shared components go in `apps/web/components/`, non-route utilities in `apps/web/lib/`
-- Semantic Tailwind tokens over literal grays: normalize the archive's `text-gray-900 dark:text-white`, `bg-gray-50 dark:bg-gray-900`, `text-gray-600 dark:text-gray-400` etc. to `text-foreground`, `bg-muted`/`bg-card`, `text-muted-foreground` (same D-03 rule from Phase 1, applies repo-wide)
-- Brand blue: the archive hardcodes `#1d6be4` / `bg-[#1d6be4]` / `text-[#1d6be4]` everywhere in these three pages — normalize ALL of these to `bg-brand`/`text-brand` (Phase 1's token), never raw hex
+### Established Patterns (current)
+- `apps/web/app/` holds only route files (`page.tsx`, `layout.tsx`, `not-found.tsx`); cross-page shared code in `apps/web/shared/{components,lib,hooks}/`; page-specific code in `apps/web/modules/<page>/`
+- `dt-*` premium tokens (not `text-foreground`/`bg-brand`/literal grays) — see SUPERSEDED note above for the full palette
 - `React.JSX.Element` explicit return types on components (Phase 1 workaround for a pre-existing duplicate-`@types/react` `tsc` error) — keep applying this pattern to new page components
 
 ### Integration Points
 - `apps/web/app/page.tsx` — currently the default create-turbo starter; this phase replaces its content entirely with the Home page
 - New routes: `apps/web/app/demo/page.tsx`, `apps/web/app/contacts/page.tsx`
-- Header's "Демо" and "Спробувати безкоштовно" CTAs (Phase 1) already link to `/demo` and `/contacts` via `routes.demo`/`routes.contacts` — no header changes needed this phase
+- Header's "Демо" and "Спробувати безкоштовно" CTAs already link to `/demo` and `/contacts` via `routes.demo`/`routes.contacts` (rebuilt on the premium system in Phase 01.1) — no header changes needed this phase
 
 ### Design source — Home page (`src/app/pages/home.tsx`, react-router → Next.js App Router)
 Full page, 6 sections in order: Hero (badge + h1 + subhead + 2 CTAs + 3 stats + hero image w/ 2 floating cards) → Problem (4-card grid, "Знайомо?") → Solution (2-column "Для пацієнта"/"Для клініки" numbered steps + CTA) → Features (8-card grid, `#features` anchor target) → CTA Banner (blue bg, 2 buttons both → `/demo`) → Testimonials (3-card grid, 1 real photo + 2 emoji avatars, 5-star ratings).
