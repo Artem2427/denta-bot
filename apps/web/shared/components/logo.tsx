@@ -1,5 +1,4 @@
 import { routes } from '@/shared/lib/routes';
-import { ChatCircleDots } from '@phosphor-icons/react/ssr';
 import Link from 'next/link';
 
 export function Logo(): React.JSX.Element {
