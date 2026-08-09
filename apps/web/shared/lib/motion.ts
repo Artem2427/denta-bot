@@ -20,3 +20,11 @@ export const hoverLift = {
   y: -4,
   transition: { duration: 0.2, ease: EASE_DT_EXPO_OUT },
 };
+
+export const idleBounceAnimate = { y: [0, -6, 0] };
+
+export const idleBounceTransition = {
+  duration: 3,
+  repeat: Infinity,
+  ease: 'easeInOut',
+};

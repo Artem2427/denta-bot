@@ -30,9 +30,9 @@
     0 20px 32px rgba(26, 43, 61, 0.1);
 
   /* Type scale (D-09/D-10) */
-  --text-dt-h1: 4rem; /* hero, within 3.5-4.5rem range */
+  --text-dt-h1: clamp(2.25rem, 6vw + 1rem, 4rem); /* hero, fluid mobile→desktop, caps at the original 3.5-4.5rem range */
   --text-dt-h1--line-height: 1.15;
-  --text-dt-h2: 2.5rem; /* sections, within 2.25-2.75rem range */
+  --text-dt-h2: clamp(1.75rem, 4vw + 0.75rem, 2.5rem); /* sections, fluid mobile→desktop, caps at the original 2.25-2.75rem range */
   --text-dt-h2--line-height: 1.15;
   --text-dt-h3: 1.5rem; /* card subheads */
   --text-dt-h3--line-height: 1.15;

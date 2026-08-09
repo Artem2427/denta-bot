@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="uk" suppressHydrationWarning>
       <body
-        className={`${interHeading.variable} ${interBody.variable} font-dt-body`}
+        className={`${interHeading.variable} ${interBody.variable} font-dt-body overflow-x-hidden`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />

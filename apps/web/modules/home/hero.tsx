@@ -1,9 +1,13 @@
+'use client';
+
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { Reveal } from '@/shared/components/reveal';
 import { SignatureMark } from '@/shared/components/signature-mark';
+import { idleBounceAnimate, idleBounceTransition } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
 import { ArrowRightIcon, BellIcon, CheckIcon } from '@phosphor-icons/react/ssr';
+import { motion, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -14,6 +18,8 @@ const stats = [
 ];
 
 export function Hero(): React.JSX.Element {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="pt-24 pb-16 lg:pt-32 lg:pb-24">
       <Container>
@@ -59,7 +65,7 @@ export function Hero(): React.JSX.Element {
           </Reveal>
           <div className="relative">
             <Image
-              src="https://images.unsplash.com/photo-1766171359875-73155eff7f66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXB0b3AlMjBkYXNoYm9hcmQlMjBtb2NrdXAlMjBzY3JlZW58ZW58MXx8fHwxNzcyOTA1MjU0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
               alt="DentaBot Dashboard"
               width={800}
               height={600}
@@ -67,13 +73,17 @@ export function Hero(): React.JSX.Element {
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="h-auto w-full rounded-dt-card shadow-[var(--shadow-dt-card)]"
             />
-            <div className="absolute -top-4 -right-4 flex items-center gap-2 rounded-dt-card bg-dt-warm-white p-4 shadow-[var(--shadow-dt-hover)]">
+            <motion.div
+              className="absolute -top-4 -right-4 flex items-center gap-2 rounded-dt-card bg-dt-warm-white p-4 shadow-[var(--shadow-dt-hover)]"
+              animate={prefersReducedMotion ? undefined : idleBounceAnimate}
+              transition={prefersReducedMotion ? undefined : idleBounceTransition}
+            >
               <CheckIcon weight="bold" className="h-5 w-5 text-dt-teal" />
               <SignatureMark pulse />
               <span className="text-sm font-medium text-dt-navy">
                 Новий запис від Олени Коваль
               </span>
-            </div>
+            </motion.div>
             <div className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-dt-card bg-dt-warm-white p-4 shadow-[var(--shadow-dt-hover)]">
               <BellIcon weight="regular" className="h-5 w-5 text-dt-teal" />
               <span className="text-sm font-medium text-dt-navy">
