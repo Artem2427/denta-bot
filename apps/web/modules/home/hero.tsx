@@ -1,12 +1,11 @@
-import { ArrowRight, Bell, Check } from '@phosphor-icons/react/ssr';
-import Image from 'next/image';
-import Link from 'next/link';
-
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { Reveal } from '@/shared/components/reveal';
 import { SignatureMark } from '@/shared/components/signature-mark';
 import { routes } from '@/shared/lib/routes';
+import { ArrowRightIcon, BellIcon, CheckIcon } from '@phosphor-icons/react/ssr';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const stats = [
   { value: '500+', label: 'клінік' },
@@ -29,17 +28,17 @@ export function Hero(): React.JSX.Element {
                 Нова платформа для стоматологій
               </div>
               <h1 className="text-dt-h1 font-dt-heading font-bold text-dt-navy">
-                Автоматичний запис пацієнтів через Telegram. Без дзвінків.
+                Автоматичний запис пацієнтів через Telegram
               </h1>
               <p className="text-dt-body text-dt-graphite">
-                Підключіть бота за 1 день — пацієнти записуються самі, отримують нагадування і не
-                забувають про прийом.
+                Підключіть бота за 1 день — пацієнти записуються самі, отримують
+                нагадування і не забувають про прийом.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <PremiumButton variant="coral" size="lg" asChild>
                   <Link href={routes.demo}>
                     Спробувати демо
-                    <ArrowRight weight="regular" className="ml-2 h-5 w-5" />
+                    <ArrowRightIcon weight="regular" className="ml-2 h-5 w-5" />
                   </Link>
                 </PremiumButton>
                 <PremiumButton variant="outline" size="lg" asChild>
@@ -69,14 +68,14 @@ export function Hero(): React.JSX.Element {
               className="h-auto w-full rounded-dt-card shadow-[var(--shadow-dt-card)]"
             />
             <div className="absolute -top-4 -right-4 flex items-center gap-2 rounded-dt-card bg-dt-warm-white p-4 shadow-[var(--shadow-dt-hover)]">
-              <Check weight="bold" className="h-5 w-5 text-dt-teal" />
+              <CheckIcon weight="bold" className="h-5 w-5 text-dt-teal" />
               <SignatureMark pulse />
               <span className="text-sm font-medium text-dt-navy">
                 Новий запис від Олени Коваль
               </span>
             </div>
             <div className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-dt-card bg-dt-warm-white p-4 shadow-[var(--shadow-dt-hover)]">
-              <Bell weight="regular" className="h-5 w-5 text-dt-teal" />
+              <BellIcon weight="regular" className="h-5 w-5 text-dt-teal" />
               <span className="text-sm font-medium text-dt-navy">
                 Нагадування відправлено 24 пацієнтам
               </span>
