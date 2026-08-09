@@ -147,6 +147,10 @@ None - no external service configuration required.
 - Manual spot-check (browser verification of scroll-reveal stagger timing, `#features` anchor scroll, both `/demo` CTAs) was explicitly out of scope for this plan's automated verification (per the plan's `<verification>` section) — recommended before phase sign-off.
 - No blockers for Contacts/Demo plans in this phase.
 
+## Self-Check: PASSED
+
+All 9 created/modified files confirmed present on disk (next.config.js, app/page.tsx, and 7 modules/home/*.tsx files). All 3 commits (`fa691cc`, `3d674d1`, `9cecfff`) confirmed present in `git log`.
+
 ---
 *Phase: 02-home-contacts-demo*
 *Completed: 2026-08-09*
