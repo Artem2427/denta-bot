@@ -81,12 +81,15 @@ Plans:
   4. User sees a mocked success confirmation after submitting a valid Contacts form (no real backend call)
   5. User can view and expand the FAQ accordion on the Contacts page with all FAQ items from the design
 
-**Plans**: TBD (replanning against Phase 01.1's premium design system — original plans built pre-redesign, removed 2026-08-09)
+**Plans**: 0/3 plans executed
 **UI hint**: yes
 
 Plans:
+**Wave 1** *(all 3 independent — Home, Contacts, Demo touch disjoint files, no shared-infra dependency this phase)*
 
-- [ ] TBD (run /gsd-plan-phase 2 to break down)
+- [ ] 02-01-PLAN.md — Home page: Hero/Problem/Solution/Features/CtaBanner/Testimonials on the premium design system
+- [ ] 02-02-PLAN.md — Contacts page: react-hook-form + zod validated lead form, contact-info cards, FAQ accordion
+- [ ] 02-03-PLAN.md — Demo page: scripted Telegram-bot chat simulation + admin-panel simulation
 
 ### Phase 3: Prices & Blog
 
