@@ -29,5 +29,9 @@ export function StaggerGrid({
 }
 
 export function StaggerItem({ children }: { children: React.ReactNode }) {
-  return <motion.div variants={revealVariants}>{children}</motion.div>;
+  return (
+    <motion.div className="h-full" variants={revealVariants}>
+      {children}
+    </motion.div>
+  );
 }

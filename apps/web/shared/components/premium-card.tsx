@@ -7,7 +7,7 @@ export function PremiumCard({ className, children, ...props }: React.ComponentPr
     <div
       data-slot="premium-card"
       className={cn(
-        'rounded-dt-card border border-dt-navy/10 bg-dt-warm-white p-6 shadow-[var(--shadow-dt-card)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-dt-hover)]',
+        'h-full rounded-dt-card border border-dt-navy/10 bg-dt-warm-white p-6 shadow-[var(--shadow-dt-card)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-dt-hover)]',
         className,
       )}
       {...props}
