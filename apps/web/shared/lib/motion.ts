@@ -21,10 +21,10 @@ export const hoverLift = {
   transition: { duration: 0.2, ease: EASE_DT_EXPO_OUT },
 };
 
-export const idleBounceAnimate = { y: [0, -6, 0] };
+export const idleBounceAnimate = { y: [0, -8, 0] };
 
 export const idleBounceTransition = {
-  duration: 3,
+  duration: 1.6,
   repeat: Infinity,
-  ease: 'easeInOut',
+  ease: EASE_DT_EXPO_OUT,
 };
