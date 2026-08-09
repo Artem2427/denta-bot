@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 const stats = [
   { target: 500, suffix: '+', label: 'клінік' },
-  { target: 15000, suffix: '+', label: 'записів/місяць', thousands: true },
+  { target: 9500, suffix: '+', label: 'записів/місяць', thousands: true },
   { target: 98, suffix: '%', label: 'задоволених' },
 ];
 
@@ -22,7 +22,11 @@ function formatStatNumber(value: number, thousands?: boolean): string {
   return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
-function HeroStat({ stat }: { stat: (typeof stats)[number] }): React.JSX.Element {
+function HeroStat({
+  stat,
+}: {
+  stat: (typeof stats)[number];
+}): React.JSX.Element {
   const count = useCountUp(stat.target, 1800);
 
   return (

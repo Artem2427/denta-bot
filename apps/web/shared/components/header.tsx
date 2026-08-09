@@ -1,13 +1,12 @@
 'use client';
 
+import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
+import { routes } from '@/shared/lib/routes';
 import { List, X } from '@phosphor-icons/react/ssr';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
-
-import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
-import { routes } from '@/shared/lib/routes';
 
 import { Container } from './container';
 import { Logo } from './logo';
