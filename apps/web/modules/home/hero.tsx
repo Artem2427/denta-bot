@@ -3,6 +3,7 @@
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { Reveal } from '@/shared/components/reveal';
+import { useCountUp } from '@/shared/hooks/use-count-up';
 import { idleBounceAnimate, idleBounceTransition } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
 import { ArrowRightIcon, BellIcon, CheckIcon } from '@phosphor-icons/react/ssr';
@@ -11,10 +12,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const stats = [
-  { value: '500+', label: 'клінік' },
-  { value: '15 000+', label: 'записів/місяць' },
-  { value: '98%', label: 'задоволених' },
+  { target: 500, suffix: '+', label: 'клінік' },
+  { target: 15000, suffix: '+', label: 'записів/місяць', thousands: true },
+  { target: 98, suffix: '%', label: 'задоволених' },
 ];
+
+function formatStatNumber(value: number, thousands?: boolean): string {
+  if (!thousands) return String(value);
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+function HeroStat({ stat }: { stat: (typeof stats)[number] }): React.JSX.Element {
+  const count = useCountUp(stat.target, 1800);
+
+  return (
+    <div className="space-y-1">
+      <div className="text-dt-h2 font-dt-heading font-bold text-dt-teal">
+        {formatStatNumber(count, stat.thousands)}
+        {stat.suffix}
+      </div>
+      <div className="text-sm text-dt-graphite">{stat.label}</div>
+    </div>
+  );
+}
 
 export function Hero(): React.JSX.Element {
   const prefersReducedMotion = useReducedMotion();
@@ -52,12 +72,7 @@ export function Hero(): React.JSX.Element {
               </div>
               <div className="grid grid-cols-3 gap-4 pt-8">
                 {stats.map((stat) => (
-                  <div key={stat.label} className="space-y-1">
-                    <div className="text-dt-h2 font-dt-heading font-bold text-dt-teal">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-dt-graphite">{stat.label}</div>
-                  </div>
+                  <HeroStat key={stat.label} stat={stat} />
                 ))}
               </div>
             </div>
