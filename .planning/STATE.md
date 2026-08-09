@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-08-08)
 Phase: 02 (home-contacts-demo) — EXECUTING
 Plan: 1 of 3
 Status: Executing Phase 02
-Last activity: 2026-08-09 — Completed quick task 260809-v35: Tuned idle bounce animation on hero notification card
+Last activity: 2026-08-09 — Completed quick task 260809-vac: Switched idle bounce ease to spring/overshoot curve
 
 Progress: [██████████] 100%
 
@@ -90,6 +90,8 @@ None yet.
 | 260809-k1r | Add one-line description to each of the 8 Features cards on Home | 2026-08-09 | 52180c8 | [260809-k1r-add-a-one-line-description-under-each-of](./quick/260809-k1r-add-a-one-line-description-under-each-of/) |
 | 260809-kcz | Fix 3 BLOCKER findings from 02-UI-REVIEW.md — fluid h1/h2 tokens + overflow-x-hidden, hero image swap, idle bounce on notification card | 2026-08-09 | f83b51a | [260809-kcz-fix-3-blocker-findings-from-02-ui-review](./quick/260809-kcz-fix-3-blocker-findings-from-02-ui-review/) |
 | 260809-v35 | Tune idle bounce animation on hero notification card — faster, bigger amplitude, EASE_DT_EXPO_OUT | 2026-08-09 | a0f23a0 | [260809-v35-tune-idle-bounce-animation-on-hero-notif](./quick/260809-v35-tune-idle-bounce-animation-on-hero-notif/) |
+| 260809-v68 | Remove double-padding gaps between adjacent Home/Contacts sections — halved py-16/lg:py-24 across 7 sections | 2026-08-09 | 999fc6d | [260809-v68-remove-double-padding-gaps-between-adjac](./quick/260809-v68-remove-double-padding-gaps-between-adjac/) |
+| 260809-vac | Switch idle bounce ease to spring/overshoot EASE_DT_BOUNCE curve for a more physical bounce feel | 2026-08-09 | bf5b359 | [260809-vac-switch-idle-bounce-animation-ease-to-a-s](./quick/260809-vac-switch-idle-bounce-animation-ease-to-a-s/) |
 
 ### Blockers/Concerns
 
