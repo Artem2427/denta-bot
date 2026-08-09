@@ -125,3 +125,11 @@ None - no external service configuration required.
 ---
 *Phase: 02-home-contacts-demo*
 *Completed: 2026-08-09*
+
+## Self-Check: PASSED
+- FOUND: apps/web/modules/home/stagger-grid.tsx
+- FOUND: apps/web/modules/demo/bot-tab.tsx
+- FOUND: .planning/phases/02-home-contacts-demo/02-04-SUMMARY.md
+- FOUND commit: 094c463
+- FOUND commit: cbffd8b
+- FOUND commit: 52fff9c
