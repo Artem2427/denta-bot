@@ -48,7 +48,7 @@ export function Footer(): React.JSX.Element {
               <li>
                 <Link
                   href={routes.home}
-                  className="text-sm text-dt-graphite transition-colors hover:text-dt-coral"
+                  className="text-sm text-dt-graphite transition-colors hover:text-dt-teal"
                 >
                   Головна
                 </Link>
@@ -56,7 +56,7 @@ export function Footer(): React.JSX.Element {
               <li>
                 <Link
                   href={routes.prices}
-                  className="text-sm text-dt-graphite transition-colors hover:text-dt-coral"
+                  className="text-sm text-dt-graphite transition-colors hover:text-dt-teal"
                 >
                   Ціни
                 </Link>
@@ -64,7 +64,7 @@ export function Footer(): React.JSX.Element {
               <li>
                 <Link
                   href={routes.demo}
-                  className="text-sm text-dt-graphite transition-colors hover:text-dt-coral"
+                  className="text-sm text-dt-graphite transition-colors hover:text-dt-teal"
                 >
                   Демо
                 </Link>
@@ -72,7 +72,7 @@ export function Footer(): React.JSX.Element {
               <li>
                 <Link
                   href={routes.blog}
-                  className="text-sm text-dt-graphite transition-colors hover:text-dt-coral"
+                  className="text-sm text-dt-graphite transition-colors hover:text-dt-teal"
                 >
                   Блог
                 </Link>
@@ -89,7 +89,7 @@ export function Footer(): React.JSX.Element {
               <li>
                 <Link
                   href={routes.about}
-                  className="text-sm text-dt-graphite transition-colors hover:text-dt-coral"
+                  className="text-sm text-dt-graphite transition-colors hover:text-dt-teal"
                 >
                   Про нас
                 </Link>
@@ -97,7 +97,7 @@ export function Footer(): React.JSX.Element {
               <li>
                 <Link
                   href={routes.contacts}
-                  className="text-sm text-dt-graphite transition-colors hover:text-dt-coral"
+                  className="text-sm text-dt-graphite transition-colors hover:text-dt-teal"
                 >
                   Контакти
                 </Link>
@@ -105,7 +105,7 @@ export function Footer(): React.JSX.Element {
               <li>
                 <Link
                   href={routes.privacy}
-                  className="text-sm text-dt-graphite transition-colors hover:text-dt-coral"
+                  className="text-sm text-dt-graphite transition-colors hover:text-dt-teal"
                 >
                   Політика конфіденційності
                 </Link>
@@ -125,7 +125,7 @@ export function Footer(): React.JSX.Element {
                 </span>
                 <a
                   href="mailto:hello@dentabot.ua"
-                  className="transition-colors hover:text-dt-coral"
+                  className="transition-colors hover:text-dt-teal"
                 >
                   hello@dentabot.ua
                 </a>
@@ -136,7 +136,7 @@ export function Footer(): React.JSX.Element {
                 </span>
                 <a
                   href="https://t.me/dentabot_support"
-                  className="transition-colors hover:text-dt-coral"
+                  className="transition-colors hover:text-dt-teal"
                 >
                   @dentabot_support
                 </a>

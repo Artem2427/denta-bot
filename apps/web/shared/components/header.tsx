@@ -52,7 +52,7 @@ export function Header() {
                 className={
                   pathname === link.href
                     ? 'text-base font-semibold text-dt-navy transition-colors'
-                    : 'text-base font-medium text-dt-graphite transition-colors hover:text-dt-coral'
+                    : 'text-base font-medium text-dt-graphite transition-colors hover:text-dt-teal'
                 }
               >
                 {link.label}
