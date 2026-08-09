@@ -36,7 +36,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Demo
 
 - [x] **DEMO-01**: User can view the Demo page at `/demo` and interact with the scripted chat-bot simulation (client-side, local state, no real API)
-- [ ] **DEMO-02**: User can switch between dashboard sections on the Demo page as in the design
+- [x] **DEMO-02**: User can switch between dashboard sections on the Demo page as in the design
 
 ### Blog
 
@@ -46,9 +46,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Contacts
 
-- [ ] **CONT-01**: User can fill and submit the Contacts request form (name, clinic, contact, message) with `react-hook-form` + `zod` validation, seeing inline field errors for invalid input
-- [ ] **CONT-02**: User sees a success confirmation after submitting a valid Contacts form (mocked — no real backend call)
-- [ ] **CONT-03**: User can view the FAQ accordion on the Contacts page with all FAQ items from the design
+- [x] **CONT-01**: User can fill and submit the Contacts request form (name, clinic, contact, message) with `react-hook-form` + `zod` validation, seeing inline field errors for invalid input
+- [x] **CONT-02**: User sees a success confirmation after submitting a valid Contacts form (mocked — no real backend call)
+- [x] **CONT-03**: User can view the FAQ accordion on the Contacts page with all FAQ items from the design
 
 ## v2 Requirements
 
@@ -88,10 +88,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DESIGN-03 | Phase 01.1 | Complete |
 | HOME-01 | Phase 2 | Complete |
 | DEMO-01 | Phase 2 | Complete |
-| DEMO-02 | Phase 2 | Pending |
-| CONT-01 | Phase 2 | Pending |
-| CONT-02 | Phase 2 | Pending |
-| CONT-03 | Phase 2 | Pending |
+| DEMO-02 | Phase 2 | Complete |
+| CONT-01 | Phase 2 | Complete |
+| CONT-02 | Phase 2 | Complete |
+| CONT-03 | Phase 2 | Complete |
 | PRICE-01 | Phase 3 | Pending |
 | BLOG-01 | Phase 3 | Pending |
 | BLOG-02 | Phase 3 | Pending |
