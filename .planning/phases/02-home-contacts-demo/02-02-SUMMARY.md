@@ -185,3 +185,7 @@ None - no external service configuration required.
 ---
 *Phase: 02-home-contacts-demo*
 *Completed: 2026-08-09*
+
+## Self-Check: PASSED
+
+All 8 created files confirmed present on disk; all 3 commits (`f934d05`, `d2b7dae`, `aea5521`) confirmed in git log.
