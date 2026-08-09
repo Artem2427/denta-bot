@@ -50,7 +50,7 @@ Plans:
 **Goal:** Establish a bespoke premium visual system for the marketing site (`apps/web`) per the client's new ТЗ — own color palette, typography, spacing/shadow/radius scale, motion/animation primitives, icon system — scoped to `apps/web` only, with Phase 1's shipped shell (header/footer/logo/theme-toggle) retrofitted onto it. `packages/ui` (and its consumers — `apps/admin-panel` and the Demo page's embedded admin-panel simulation) stays on the existing theme; this phase does not touch it. This phase builds the design-system layer only — no page content (Home/Contacts/Demo/Prices/Blog) ships here.
 **Requirements**: DESIGN-01, DESIGN-02, DESIGN-03
 **Depends on:** Phase 1
-**Plans:** 3/4 plans executed
+**Plans:** 4/4 plans executed
 
 Plans:
 
@@ -65,7 +65,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 01.1-04-PLAN.md — Shell rebuild (Logo/ThemeToggle/Header/Footer/Not-Found/root layout) on the premium system + `apps/web/components/`+`apps/web/lib/` → `apps/web/shared/` folder move
+- [x] 01.1-04-PLAN.md — Shell rebuild (Logo/ThemeToggle/Header/Footer/Not-Found/root layout) on the premium system + `apps/web/components/`+`apps/web/lib/` → `apps/web/shared/` folder move
 
 ### Phase 2: Home, Contacts & Demo
 
