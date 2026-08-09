@@ -35,6 +35,7 @@ export function Features(): React.JSX.Element {
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Telegram бот
               </h3>
+              <p className="text-dt-graphite">Пацієнти записуються через звичний месенджер</p>
             </PremiumCard>
           </StaggerItem>
           <StaggerItem>
@@ -43,6 +44,7 @@ export function Features(): React.JSX.Element {
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Розклад лікарів
               </h3>
+              <p className="text-dt-graphite">Налаштування робочих годин та вихідних</p>
             </PremiumCard>
           </StaggerItem>
           <StaggerItem>
@@ -51,18 +53,21 @@ export function Features(): React.JSX.Element {
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Автонагадування
               </h3>
+              <p className="text-dt-graphite">Автоматичні повідомлення перед прийомом</p>
             </PremiumCard>
           </StaggerItem>
           <StaggerItem>
             <PremiumCard>
               <ChartBar weight="regular" className="mb-3 h-10 w-10 text-dt-teal" />
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">Аналітика</h3>
+              <p className="text-dt-graphite">Статистика записів та завантаженості</p>
             </PremiumCard>
           </StaggerItem>
           <StaggerItem>
             <PremiumCard>
               <Star weight="regular" className="mb-3 h-10 w-10 text-dt-teal" />
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">Відгуки</h3>
+              <p className="text-dt-graphite">Збір відгуків після відвідування</p>
             </PremiumCard>
           </StaggerItem>
           <StaggerItem>
@@ -71,6 +76,7 @@ export function Features(): React.JSX.Element {
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Адмін панель
               </h3>
+              <p className="text-dt-graphite">Зручне управління всіма записами</p>
             </PremiumCard>
           </StaggerItem>
           <StaggerItem>
@@ -79,6 +85,7 @@ export function Features(): React.JSX.Element {
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Управління персоналом
               </h3>
+              <p className="text-dt-graphite">Додавання лікарів та налаштування прав</p>
             </PremiumCard>
           </StaggerItem>
           <StaggerItem>
@@ -87,6 +94,7 @@ export function Features(): React.JSX.Element {
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Скасування запису
               </h3>
+              <p className="text-dt-graphite">Пацієнти можуть перенести або скасувати</p>
             </PremiumCard>
           </StaggerItem>
         </StaggerGrid>
