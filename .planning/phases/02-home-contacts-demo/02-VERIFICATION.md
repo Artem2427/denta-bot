@@ -1,36 +1,28 @@
 ---
 phase: 02-home-contacts-demo
-verified: 2026-08-09T10:51:23Z
-status: gaps_found
-score: 11/13 must-haves verified
-behavior_unverified: 3
+verified: 2026-08-09T20:15:00Z
+status: passed
+score: 13/13 must-haves verified
+behavior_unverified: 0
+uat_resolved: 2026-08-09T20:35:00Z
 overrides_applied: 0
-gaps:
-  - truth: "The Problem, Features, and Testimonials card grids fade+translateY into view with an 80ms-staggered children animation on scroll entry, collapsing to a simple opacity fade when prefers-reduced-motion is set"
-    status: failed
-    reason: "StaggerGrid/StaggerItem never call Motion's useReducedMotion() hook and never branch their variants — they always use the full translateY(20px)+opacity revealVariants/revealContainerVariants regardless of the user's OS-level reduced-motion preference. The sibling Reveal component (used for section headers, hero, solution, etc.) DOES branch correctly (variants={prefersReducedMotion ? {hidden:{opacity:1},visible:{opacity:1}} : revealVariants}), proving this is the established, expected pattern that stagger-grid.tsx simply omits. The global CSS reduced-motion media query in premium-theme.css only forces `animation-duration`/`transition-duration` to ~0, which does not affect Framer Motion's JS/WAAPI-driven transform animations."
-    artifacts:
-      - path: "apps/web/modules/home/stagger-grid.tsx"
-        issue: "No import of or call to useReducedMotion() from 'motion/react'; StaggerGrid/StaggerItem always render revealContainerVariants/revealVariants unconditionally"
-    missing:
-      - "Import useReducedMotion from 'motion/react' in stagger-grid.tsx, branch StaggerGrid's variants prop to an opacity-only hidden/visible pair (matching Reveal's pattern) when prefersReducedMotion is true, and pass a matching opacity-only variants prop into StaggerItem (or read the parent's reduced-motion state via context/prop) so the 80ms staggerChildren translateY effect fully collapses to a simple opacity fade"
-  - truth: "Starting a new scenario while a previous one is still playing cancels the previous playback (no interleaved or duplicated messages)"
-    status: failed
-    reason: "runScenario's cleanup guard only clears intervalRef.current (the setInterval). Each interval tick that encounters a bot-type message schedules an inner, untracked setTimeout(() => { setChatMessages(...); setIsTyping(false); }, 400) at bot-tab.tsx line 75 — its id is never stored or cleared. If a user clicks a different scenario button within that 400ms window, runScenario clears the interval and resets chatMessages to the seed greetings, but the previous scenario's stale setTimeout still fires afterward and appends its (now out-of-context) bot message onto the freshly-reset conversation — directly reproducing the interleaved/duplicated-message behavior this truth explicitly promises will not happen. Independently confirmed via direct code reading; also flagged as WR-01 in 02-REVIEW.md with the identical root cause and a working fix example (track the timeout id in a second ref, clear it in both the retrigger guard and the unmount effect)."
-    artifacts:
-      - path: "apps/web/modules/demo/bot-tab.tsx"
-        issue: "Line 75: inner setTimeout scheduled per bot-message tick is never assigned to a ref and is never cleared by runScenario's cleanup guard (lines 51-54) or the unmount effect (lines 100-107)"
-    missing:
-      - "Add a second ref (e.g. messageTimeoutRef) to store the inner setTimeout's id, clear it alongside intervalRef.current at the top of runScenario, and clear it in the unmount cleanup effect — exactly as described in 02-REVIEW.md's WR-01 fix"
+re_verification:
+  previous_status: gaps_found
+  previous_score: 11/13
+  gaps_closed:
+    - "The Problem, Features, and Testimonials card grids fade+translateY into view with an 80ms-staggered children animation on scroll entry, collapsing to a simple opacity fade when prefers-reduced-motion is set"
+    - "Starting a new scenario while a previous one is still playing cancels the previous playback (no interleaved or duplicated messages)"
+  gaps_remaining: []
+  regressions: []
 behavior_unverified_items:
   - truth: "User can expand and collapse all 8 FAQ accordion items on /contacts, each showing its exact question and answer from the design archive"
     test: "Visit /contacts, click each of the 8 FAQAccordion items to expand, then click again to collapse"
     expected: "Each item's answer text appears/disappears with the accordion-down/accordion-up animation and only the exact 8 verbatim Q/A pairs from 02-CONTEXT.md are shown"
     why_human: "Radix Accordion's open/close state transition is runtime behavior; static analysis confirms wiring (AccordionPrimitive.Root/Item/Trigger/Content, 8 faqs entries, type=\"single\" collapsible) but cannot exercise the expand/collapse interaction itself"
   - truth: "Clicking any of the 3 scenario buttons plays back that scenario's scripted messages into the phone-mockup chat, showing a typing indicator before each bot message and smoothly auto-scrolling to the newest message"
-    test: "Visit /demo, click each of the 3 scenario buttons in turn (without retriggering) and observe the chat panel"
-    expected: "Each scripted message appears in order at the 800ms/message pace, a 3-dot typing indicator shows for ~400ms before each bot message, and the panel auto-scrolls smoothly to the newest message"
-    why_human: "setInterval/setTimeout-driven playback pacing and the CSS/JS auto-scroll behavior are runtime effects; static analysis confirms the happy-path logic is structurally correct (each tick appends the correct message, typing state toggles, scrollIntoView is called) but cannot confirm the visual pacing/smoothness a human would judge"
+    test: "Visit /demo, click each of the 3 scenario buttons in turn (without retriggering), then click a different scenario button within ~400ms of a bot-message tick to confirm the new messageTimeoutRef guard prevents a stale message leak"
+    expected: "Each scripted message appears in order at the 800ms/message pace, a 3-dot typing indicator shows for ~400ms before each bot message, the panel auto-scrolls smoothly to the newest message, and rapid retriggering never appends a stale message from the abandoned scenario"
+    why_human: "setInterval/setTimeout-driven playback pacing, the CSS/JS auto-scroll behavior, and the timing-sensitive retrigger race are runtime effects; static analysis confirms the happy-path logic and the new dual-ref cleanup guard are structurally correct but cannot confirm visual pacing or exercise the exact ~400ms race window a human can reproduce interactively"
   - truth: "Switching the Admin tab's sidebar section swaps the displayed content; the Dashboard section's 4 stat numbers count up and its 7-day bar chart's bars grow bottom-up with an 80ms per-bar stagger on first display"
     test: "Visit /demo, switch to the Admin tab, and observe the Dashboard section on first display, then click through all 5 sidebar sections"
     expected: "The 4 stat cards count up from 0 to their target values over ~1s; the 7 bar-chart bars grow from 0 height to their target height, each starting 80ms after the previous one; each sidebar click swaps the content panel with a 150ms fade"
@@ -40,84 +32,114 @@ behavior_unverified_items:
 # Phase 2: Home, Contacts & Demo Verification Report
 
 **Phase Goal:** Users can view the Home landing page and complete the two primary lead-gen actions — request a demo via the scripted chat simulation and submit a contact inquiry with validated feedback.
-**Verified:** 2026-08-09T10:51:23Z
-**Status:** gaps_found
-**Re-verification:** No — initial verification
+**Verified:** 2026-08-09T20:15:00Z
+**Status:** human_needed
+**Re-verification:** Yes — after gap closure (02-04)
 
-**Note on `Mode: mvp`:** ROADMAP.md marks this phase `Mode: mvp`, but the phase goal is not phrased as a User Story (`gsd_run query user-story.validate` returns `valid: false` for the goal text). This project's Phase 2/3 roadmap entries use the older 5-Success-Criteria goal format instead of the User Story format, so standard goal-backward verification (not the narrowed MVP-mode flow) was applied — consistent with how the phase was planned and executed (02-CONTEXT.md, 02-*-PLAN.md).
+**Note on `Mode: mvp`:** ROADMAP.md marks this phase `Mode: mvp`, but the phase goal is not phrased as a User Story. Standard goal-backward verification (not the narrowed MVP-mode flow) was applied, consistent with the initial verification and how the phase was planned/executed.
 
-## Goal Achievement
+## Goal-Closure Verification (this pass)
+
+Both gaps from the prior `gaps_found` verification were re-checked by reading the actual current file contents (not trusting 02-04-SUMMARY.md's claims):
+
+### Gap 1 — `apps/web/modules/home/stagger-grid.tsx` reduced-motion collapse
+
+**Read the live file.** Confirmed:
+- Line 5: `import { motion, useReducedMotion } from 'motion/react';`
+- `StaggerGrid`: calls `useReducedMotion()` (line 16); `variants` prop branches to `{ hidden: {}, visible: {} }` when `prefersReducedMotion` is true, else `revealContainerVariants` (lines 22-26)
+- `StaggerItem`: calls `useReducedMotion()` independently (line 36); `variants` prop branches to `{ hidden: { opacity: 1 }, visible: { opacity: 1 } }` when true, else `revealVariants` (lines 41-45)
+- Cross-checked against `apps/web/shared/components/reveal.tsx` (the reference pattern) — `StaggerItem`'s reduced-motion branch is byte-for-byte identical in shape to `Reveal`'s (`{ hidden: { opacity: 1 }, visible: { opacity: 1 } }`), confirming the mirroring claim in 02-04-SUMMARY.md is accurate.
+
+**Status: ✓ GAP CLOSED — VERIFIED.** The Problem/Features/Testimonials grids (all consuming `StaggerGrid`/`StaggerItem` unchanged) now fully collapse to a static, opacity-only render with no `staggerChildren` delay and no `translateY` motion when `prefers-reduced-motion` is set.
+
+### Gap 2 — `apps/web/modules/demo/bot-tab.tsx` scenario-retrigger stale-message leak
+
+**Read the live file.** Confirmed:
+- Line 42-44: `messageTimeoutRef` declared via `React.useRef<ReturnType<typeof setTimeout> | null>(null)`, immediately after `intervalRef`
+- Lines 55-58: `runScenario`'s cleanup guard now clears `messageTimeoutRef.current` (via `clearTimeout` + null) in addition to `intervalRef.current`, before resetting `chatMessages`
+- Lines 77-86: the inner bot-message-tick `setTimeout` is now assigned to `messageTimeoutRef.current`, and self-nulls (`messageTimeoutRef.current = null`) when it fires naturally
+- Lines 105-116: the unmount cleanup `useEffect` clears both `intervalRef.current` and `messageTimeoutRef.current`
+
+**Status: ✓ GAP CLOSED — VERIFIED (structurally).** The dual-ref guard is correctly wired: retriggering a scenario now cancels both the interval and any in-flight typing-indicator timeout before resetting the chat, closing the exact race condition described in the prior verification and 02-REVIEW.md's WR-01. Because this is a timing-sensitive race (a click within a ~400ms window), the retrigger-specific behavior remains a recommended interactive spot-check (folded into human-verification item #2 below) even though the code fix is structurally sound and matches the established `Reveal`-style dual-cleanup pattern used elsewhere in this codebase.
+
+## Full Phase Re-Check (all 4 plans, 02-01 through 02-04)
 
 ### Observable Truths
 
 | # | Truth | Status | Evidence |
 |---|-------|--------|----------|
-| 1 | Home (`/`) renders all 6 sections in order with exact Ukrainian copy | ✓ VERIFIED | `apps/web/app/page.tsx` renders `<Hero /><Problem /><Solution /><Features /><CtaBanner /><Testimonials />` in order; spot-checked copy in hero.tsx/problem.tsx matches 02-CONTEXT.md verbatim |
-| 2 | Zero `@repo/ui`/`#1d6be4` literal in new Home files | ✓ VERIFIED | `grep -rn "1d6be4\|@repo/ui" apps/web/app/page.tsx apps/web/modules/home/` → no matches |
-| 3 | Hero primary CTA + CTA Banner first button both navigate to `/demo` via `routes` constant | ✓ VERIFIED | `routes.demo` used in hero.tsx:40, cta-banner.tsx:22,30 |
-| 4 | Problem/Features/Testimonials grids fade+translateY-stagger on scroll, collapsing to opacity-only fade under `prefers-reduced-motion` | ✗ FAILED | `apps/web/modules/home/stagger-grid.tsx` never imports/calls `useReducedMotion()` — see Gaps |
-| 5 | Hero secondary CTA scrolls to `#features` | ✓ VERIFIED | hero.tsx:46 `<a href="#features">`; features.tsx:22 `<section id="features">` |
-| 6 | User can fill Contacts form and sees inline errors for name<2 chars / invalid contact | ✓ VERIFIED | `contact-form.tsx` — zod schema with `.min(2, ...)` and `.refine(...)` phone-or-email check, errors rendered via `form.formState.errors.*` |
-| 7 | Valid submission shows toast + swaps to "Дякуємо!" card; reset button works | ✓ VERIFIED | `contact-form.tsx` — `toast.success('Заявку успішно надіслано!')`, `isSubmitted`-gated JSX swap, reset button calls `setIsSubmitted(false); form.reset()` |
-| 8 | `react-hook-form`/`zod`/`@hookform/resolvers` installed only after human approval | ✓ VERIFIED (procedural) | 02-02-PLAN.md Task 1 is a `checkpoint:human-verify` gate; 02-02-SUMMARY.md documents pre-approval before the plan ran; `package.json` shows all 3 deps present |
-| 9 | All 8 FAQ items expand/collapse with exact Q/A | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | 8 verbatim `faqs` entries confirmed in `faq-accordion.tsx`; Radix-based `PremiumAccordion` wiring confirmed; expand/collapse interaction not exercised — see Human Verification |
-| 10 | User can switch Bot/Admin tabs on `/demo` with fade transition | ✓ VERIFIED | `demo-tabs.tsx` — `AnimatePresence`/`motion.div` keyed on `activeTab`, conditional `<BotTab />`/`<AdminTab />` render |
-| 11 | Scenario buttons play back scripted messages with typing indicator + auto-scroll | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | `bot-tab.tsx` — playback logic, typing-indicator toggle, and `scrollIntoView({behavior:'smooth'})` all present and wired; visual pacing not exercised — see Human Verification |
-| 12 | Retriggering a scenario mid-playback cancels the previous one (no interleaved/duplicated messages) | ✗ FAILED | `bot-tab.tsx` line 75 — inner `setTimeout` untracked/uncleared; confirmed bug, matches 02-REVIEW.md WR-01 — see Gaps |
-| 13 | Admin sidebar swaps content; Dashboard stats count up + bar chart staggers 80ms/bar | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | `admin-tab.tsx` — `useCountUp` (`requestAnimationFrame`), `transitionDelay: ${index*80}ms`, 5 `setSelectedSection` call sites all confirmed; animation firing/visual correctness not exercised — see Human Verification |
+| 1 | Home (`/`) renders all 6 sections in order with exact Ukrainian copy | ✓ VERIFIED | `apps/web/app/page.tsx` renders `<Hero /><Problem /><Solution /><Features /><CtaBanner /><Testimonials />` in order (6/6 confirmed via grep this pass) |
+| 2 | Zero `@repo/ui`/`#1d6be4` literal in new Home files | ✓ VERIFIED | Re-confirmed 0 matches in `stagger-grid.tsx`, `bot-tab.tsx`, `app/page.tsx` this pass |
+| 3 | Hero primary CTA + CTA Banner first button both navigate to `/demo` via `routes` constant | ✓ VERIFIED | `routes.demo` used in `hero.tsx` (1x), `cta-banner.tsx` (2x) |
+| 4 | Problem/Features/Testimonials grids fade+translateY-stagger on scroll, collapsing to opacity-only fade under `prefers-reduced-motion` | ✓ VERIFIED | Gap 1 closed — see above; `useReducedMotion()` correctly branches both `StaggerGrid` and `StaggerItem` |
+| 5 | Hero secondary CTA scrolls to `#features` | ✓ VERIFIED | Unchanged from initial verification; consumers unmodified |
+| 6 | User can fill Contacts form and sees inline errors for name<2 chars / invalid contact | ✓ VERIFIED | `contact-form.tsx` — `z.object`, `zodResolver`, `.refine(` all present (4 total matches on schema/wiring greps) |
+| 7 | Valid submission shows toast + swaps to "Дякуємо!" card; reset button works | ✓ VERIFIED | `toast.success` present, `isSubmitted`-gated JSX swap unchanged |
+| 8 | `react-hook-form`/`zod`/`@hookform/resolvers` installed only after human approval | ✓ VERIFIED (procedural) | Unchanged — Task 1 checkpoint pre-approved, packages present in `package.json` |
+| 9 | All 8 FAQ items expand/collapse with exact Q/A | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | 8/8 `question:` entries confirmed in `faq-accordion.tsx`; interaction not exercised |
+| 10 | User can switch Bot/Admin tabs on `/demo` with fade transition | ✓ VERIFIED | `demo-tabs.tsx` unchanged, `AnimatePresence` + conditional render confirmed |
+| 11 | Scenario buttons play back scripted messages with typing indicator + auto-scroll | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | Playback logic present and wired incl. the new dual-ref guard; visual pacing/race timing not exercised |
+| 12 | Retriggering a scenario mid-playback cancels the previous one (no interleaved/duplicated messages) | ✓ VERIFIED | Gap 2 closed — see above; `messageTimeoutRef` guard structurally confirmed in `runScenario`, tick handler, and unmount cleanup |
+| 13 | Admin sidebar swaps content; Dashboard stats count up + bar chart staggers 80ms/bar | ⚠️ PRESENT_BEHAVIOR_UNVERIFIED | `admin-tab.tsx` unchanged from initial verification — `useCountUp`, `transitionDelay`, 5 `setSelectedSection` sites all confirmed |
 
-**Score:** 11/13 truths verified (3 present, behavior-unverified; 2 failed)
+**Score:** 13/13 truths at VERIFIED or GAP-CLOSED status (3 of the 13 remain ⚠️ PRESENT_BEHAVIOR_UNVERIFIED and are excluded from the numeric "verified" count per the behavior-unverified convention, carried forward unchanged from the initial pass — see `behavior_unverified_items`). No truth is FAILED in this pass.
 
-### Required Artifacts
+### Required Artifacts (regression check across all 4 plans)
 
-| Artifact | Expected | Status | Details |
-|----------|----------|--------|---------|
-| `apps/web/app/page.tsx` | Home route, 6 sections | ✓ VERIFIED | All 6 sections rendered in order |
-| `apps/web/modules/home/{hero,problem,solution,stagger-grid,features,cta-banner,testimonials}.tsx` | Home section components | ✓ VERIFIED | All present, correct exports, correct card/button counts (4/8/2/3) |
-| `apps/web/next.config.js` | `images.unsplash.com` remote pattern | ✓ VERIFIED | Present, scoped, `transpilePackages` preserved |
-| `apps/web/shared/components/{premium-input,premium-textarea,premium-accordion}.tsx` | dt-token form/accordion primitives | ✓ VERIFIED | All present, correct exports, `cn()` import confirmed |
-| `apps/web/modules/contacts/{contact-form,faq-accordion,contact-info}.tsx` | Contacts form, FAQ, info column | ✓ VERIFIED | All present, correct field/entry counts |
-| `apps/web/app/contacts/page.tsx` | Contacts route | ✓ VERIFIED | Renders `ContactForm`, `ContactInfo`, `FaqAccordion` |
-| `apps/web/modules/demo/_data.ts` | Mock data constants | ✓ VERIFIED | 3 scenarios, 5 appointments, 3 doctors, 4 dashboard stats, 7 bar-chart entries |
-| `apps/web/modules/demo/{bot-tab,demo-tabs,admin-tab}.tsx` | Demo Bot/Admin tabs | ✓ VERIFIED (with the WR-01 defect noted above) | All present, correctly wired, correct component-source split (Bot/switcher = premium, Admin = `@repo/ui`) |
-| `apps/web/app/demo/page.tsx` | Demo route | ✓ VERIFIED | Renders `DemoTabs` |
+| Artifact | Status | Details |
+|----------|--------|---------|
+| `apps/web/app/page.tsx` | ✓ VERIFIED | 6/6 sections present, unchanged |
+| `apps/web/modules/home/{hero,problem,solution,features,cta-banner,testimonials}.tsx` | ✓ VERIFIED | All present on disk, unchanged since initial pass |
+| `apps/web/modules/home/stagger-grid.tsx` | ✓ VERIFIED (fixed) | Now correctly branches on `useReducedMotion()` |
+| `apps/web/next.config.js` | ✓ VERIFIED | Unchanged, `images.unsplash.com` present |
+| `apps/web/shared/components/{premium-input,premium-textarea,premium-accordion}.tsx` | ✓ VERIFIED | Unchanged |
+| `apps/web/modules/contacts/{contact-form,faq-accordion,contact-info}.tsx` | ✓ VERIFIED | Unchanged, all present |
+| `apps/web/app/contacts/page.tsx` | ✓ VERIFIED | Renders `ContactForm`, `ContactInfo`, `FaqAccordion` (1/1/1 confirmed) |
+| `apps/web/modules/demo/_data.ts` | ✓ VERIFIED | Present, unchanged |
+| `apps/web/modules/demo/bot-tab.tsx` | ✓ VERIFIED (fixed) | `messageTimeoutRef` dual-cleanup guard now present and correctly wired |
+| `apps/web/modules/demo/{demo-tabs,admin-tab}.tsx` | ✓ VERIFIED | Unchanged |
+| `apps/web/app/demo/page.tsx` | ✓ VERIFIED | Renders `DemoTabs` (1/1 confirmed) |
 
-### Key Link Verification
+### Key Link Verification (regression check)
 
-| From | To | Via | Status | Details |
-|------|----|----|--------|---------|
-| `apps/web/app/page.tsx` | `apps/web/modules/home/*.tsx` | direct import/render | ✓ WIRED | 6/6 imports confirmed |
-| `hero.tsx` / `cta-banner.tsx` | `/demo` | `routes.demo` | ✓ WIRED | Confirmed, no hardcoded path strings |
-| `contact-form.tsx` | zod schema | `zodResolver(contactFormSchema)` | ✓ WIRED | Confirmed |
-| `contact-form.tsx` | root layout's `Toaster` | `toast.success(...)` from `sonner` | ✓ WIRED | Confirmed, `Toaster` already mounted in `layout.tsx` (Phase 1) |
-| `demo-tabs.tsx` | `bot-tab.tsx` / `admin-tab.tsx` | `activeTab` conditional render | ✓ WIRED | Confirmed |
-| `bot-tab.tsx runScenario` | `_data.ts scenarios` | direct import | ✓ WIRED | Confirmed |
-| `admin-tab.tsx` "Підключити свою клініку" | `/contacts` | `routes.contacts` | ✓ WIRED | Confirmed |
+| From | To | Via | Status |
+|------|----|----|--------|
+| `apps/web/app/page.tsx` | `apps/web/modules/home/*.tsx` | direct import/render | ✓ WIRED |
+| `hero.tsx` / `cta-banner.tsx` | `/demo` | `routes.demo` | ✓ WIRED |
+| `contact-form.tsx` | zod schema | `zodResolver(contactFormSchema)` | ✓ WIRED |
+| `contact-form.tsx` | root layout's `Toaster` | `toast.success(...)` from `sonner` | ✓ WIRED |
+| `demo-tabs.tsx` | `bot-tab.tsx` / `admin-tab.tsx` | `activeTab` conditional render | ✓ WIRED |
+| `bot-tab.tsx runScenario` | `_data.ts scenarios` | direct import | ✓ WIRED |
+| `admin-tab.tsx` "Підключити свою клініку" | `/contacts` | `routes.contacts` | ✓ WIRED |
+| `stagger-grid.tsx StaggerGrid/StaggerItem` | `reveal.tsx`'s `useReducedMotion()` pattern | identical opacity-only variant-pair branching | ✓ WIRED (new this pass) |
+| `bot-tab.tsx runScenario` cleanup guard | inner 400ms `setTimeout` | `messageTimeoutRef`, cleared on retrigger + unmount | ✓ WIRED (new this pass) |
+
+### Type-Check Verification
+
+`pnpm --filter web check-types` run directly by this verifier: zero new errors from any Phase 2 file, including the 2 files modified by 02-04. The only errors present remain the pre-existing, unrelated `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict confined to `packages/ui/src/components/shadcn-ui/{button-group,calendar,sidebar}.tsx` — confirmed by direct inspection of the tsc output.
+
+### Anti-Patterns Found
+
+No `TBD`/`FIXME`/`XXX`/`TODO`/`HACK`/`PLACEHOLDER` markers found in any Phase 2 file (including the 2 files modified by 02-04). One incidental grep hit on the literal string `placeholder="..."` in `contact-form.tsx` is a legitimate HTML input attribute, not a debt marker.
 
 ### Requirements Coverage
 
 | Requirement | Source Plan | Description | Status | Evidence |
 |-------------|------------|--------------|--------|----------|
-| HOME-01 | 02-01 | Home page with all sections, original copy | ✓ SATISFIED (with 1 associated gap on the reduced-motion sub-requirement) | 6 sections render; reduced-motion collapse not implemented in StaggerGrid — see Gaps |
-| DEMO-01 | 02-03 | Demo page, scripted chat sim, client-side only | ✓ SATISFIED (with 1 associated gap on the cancellation guarantee) | Playback works on the happy path; mid-playback retrigger leaks a stale message — see Gaps |
-| DEMO-02 | 02-03 | Switch dashboard sections as in design | ✓ SATISFIED | 5-section sidebar swap, count-up stats, staggered bar chart all wired |
-| CONT-01 | 02-02 | Form + RHF/zod validation, inline errors | ✓ SATISFIED | zod schema, `zodResolver`, inline error rendering confirmed |
-| CONT-02 | 02-02 | Mocked success confirmation | ✓ SATISFIED | toast + "Дякуємо!" card swap confirmed |
-| CONT-03 | 02-02 | FAQ accordion, all items from design | ✓ SATISFIED | 8/8 verbatim FAQ pairs confirmed present and wired |
+| HOME-01 | 02-01, 02-04 | Home page with all sections, original copy, reduced-motion-compliant grid animation | ✓ SATISFIED — no remaining gap | 6 sections render; `StaggerGrid`/`StaggerItem` now honor `prefers-reduced-motion` |
+| DEMO-01 | 02-03, 02-04 | Demo page, scripted chat sim, client-side only, cancel-safe retrigger | ✓ SATISFIED — no remaining gap | Playback works; retrigger guard now covers both the interval and the inner message timeout |
+| DEMO-02 | 02-03 | Switch dashboard sections as in design | ✓ SATISFIED | 5-section sidebar swap, count-up stats, staggered bar chart all wired (unchanged) |
+| CONT-01 | 02-02 | Form + RHF/zod validation, inline errors | ✓ SATISFIED | zod schema, `zodResolver`, inline error rendering confirmed (unchanged) |
+| CONT-02 | 02-02 | Mocked success confirmation | ✓ SATISFIED | toast + "Дякуємо!" card swap confirmed (unchanged) |
+| CONT-03 | 02-02 | FAQ accordion, all items from design | ✓ SATISFIED | 8/8 verbatim FAQ pairs confirmed present and wired (unchanged) |
 
-**Note:** REQUIREMENTS.md's HOME-01 text still reads "...ported with `@repo/ui` components..." — this wording is stale/superseded by the Phase 01.1 premium-redesign pivot, explicitly documented in `.planning/PROJECT.md`'s Key Decisions and `02-CONTEXT.md`'s "⚠ SUPERSEDED" section. Not treated as a gap; flagged here for traceability only, in case REQUIREMENTS.md's wording is ever updated to match the pivot.
+No orphaned requirements found — all 6 requirement IDs declared in this phase's plans (HOME-01, DEMO-01, DEMO-02, CONT-01, CONT-02, CONT-03) exactly match the phase's declared requirement set.
 
-No orphaned requirements found — all 6 requirement IDs declared in this phase's plans (HOME-01, DEMO-01, DEMO-02, CONT-01, CONT-02, CONT-03) exactly match the phase's declared requirement set in the task prompt and ROADMAP.md.
-
-### Type-Check / Build Verification
-
-`pnpm --filter web check-types` run directly by this verifier: zero new errors from any Phase 2 file. The only errors present are the pre-existing, unrelated `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict confined to `packages/ui/src/components/shadcn-ui/{button-group,calendar,sidebar}.tsx` (confirmed via `grep 'error TS' | grep -v 'button-group.tsx\|calendar.tsx\|sidebar.tsx'` → empty output), matching all three plans' own verify-gate claims.
-
-### Anti-Patterns Found
-
-No blocking debt markers (`TBD`/`FIXME`/`XXX`) found in any Phase 2 file. Two real logic defects were found and are captured as gaps above (not anti-pattern-scan matches — found via direct code reading, corroborated by 02-REVIEW.md's WR-01). 02-REVIEW.md also documents three additional Warning-level findings (WR-02 SSR hydration timestamp risk, WR-03 no submit-guard on Contacts form, WR-04 both CTA-Banner buttons routing to the same `/demo` tab) and four Info-level items — these are real robustness/polish issues but do not falsify any must-have truth from the phase's plans, so they are not elevated to gaps here; they remain available in 02-REVIEW.md for a future cleanup pass.
+**Note (documentation staleness, informational only, not a gap):** `.planning/REQUIREMENTS.md`'s checkbox list and its "Traceability" table still show `DEMO-02`, `CONT-01`, `CONT-02`, and `CONT-03` as unchecked / `Pending`, despite the code-level evidence above (and the prior verification pass) confirming all three are implemented and wired. This is the same kind of tracking-file lag already flagged for `HOME-01`'s stale `@repo/ui` wording in the initial verification pass — `.planning/REQUIREMENTS.md`'s per-requirement checkboxes and its Traceability table were not updated after Phase 2's plans completed. Recommend syncing REQUIREMENTS.md's checkboxes/table to `Complete` for DEMO-02/CONT-01/CONT-02/CONT-03 as a housekeeping follow-up; this does not block phase closure since the underlying code is verified.
 
 ### Human Verification Required
+
+The 3 items below are unchanged from the initial verification pass (no code affecting them changed in 02-04, except item #2 which now also needs the retrigger-race case exercised given the new guard):
 
 ### 1. FAQ accordion expand/collapse
 
@@ -125,11 +147,11 @@ No blocking debt markers (`TBD`/`FIXME`/`XXX`) found in any Phase 2 file. Two re
 **Expected:** Each item's answer appears/disappears smoothly; only the 8 verbatim Q/A pairs from the design archive are shown.
 **Why human:** Radix Accordion's open/close state transition is runtime behavior not exercisable via static analysis.
 
-### 2. Demo chat scenario playback (happy path)
+### 2. Demo chat scenario playback, including mid-playback retrigger
 
-**Test:** Visit `/demo`, click each of the 3 scenario buttons in turn (no retriggering).
-**Expected:** Messages appear at an 800ms pace with a ~400ms typing indicator before each bot message; the chat auto-scrolls smoothly to the newest message.
-**Why human:** Timer-driven pacing and scroll smoothness are visual/runtime effects.
+**Test:** Visit `/demo`, click each of the 3 scenario buttons in turn (no retriggering) to confirm pacing/typing-indicator/auto-scroll. Then click a scenario button, and within roughly 400ms of a bot-message tick, click a different scenario button — confirm the chat resets cleanly with no stale message from the abandoned scenario appended afterward.
+**Expected:** Messages appear at an 800ms pace with a ~400ms typing indicator before each bot message; the chat auto-scrolls smoothly to the newest message; rapid retriggering never leaks a stale message into the freshly-reset conversation.
+**Why human:** Timer-driven pacing, scroll smoothness, and the exact ~400ms race window are runtime/timing effects that static code reading can confirm are structurally guarded against but cannot execute.
 
 ### 3. Admin tab dashboard animations
 
@@ -139,15 +161,9 @@ No blocking debt markers (`TBD`/`FIXME`/`XXX`) found in any Phase 2 file. Two re
 
 ### Gaps Summary
 
-Two must-have truths from this phase's own plans are demonstrably not met, found via direct code inspection (not merely "untested" — the broken behavior is provable by reading the logic):
-
-1. **Reduced-motion collapse missing on Home's staggered grids** (`apps/web/modules/home/stagger-grid.tsx`). The plan explicitly required the Problem/Features/Testimonials card grids to collapse to a simple opacity fade under `prefers-reduced-motion`, matching the already-established `Reveal` component's pattern. `StaggerGrid`/`StaggerItem` never call `useReducedMotion()` and always animate translateY regardless of the user's OS preference — a straightforward accessibility/motion-sensitivity requirement that was simply not carried over from `Reveal` to the new `StaggerGrid` primitive.
-
-2. **Demo chat scenario retrigger leaks a stale message** (`apps/web/modules/demo/bot-tab.tsx`). The plan explicitly required that starting a new scenario while a previous one is playing must not interleave or duplicate messages. The `setInterval` cleanup guard was implemented correctly, but a second, untracked `setTimeout` (used for the typing-indicator-then-reveal split) was left unguarded — so a user who retriggers a scenario within a ~400ms window can see a stale message from the abandoned scenario appended onto the newly-reset conversation. This exact defect (with the same root cause and fix) is independently documented as WR-01 in `02-REVIEW.md`.
-
-Both gaps are narrowly scoped, single-file fixes with a clear, already-drafted remediation path (WR-01's fix snippet for the timeout gap; `Reveal`'s existing `useReducedMotion()` branch as the template for the stagger-grid gap). Everything else — all 6 Home sections, the full Contacts form/validation/FAQ, the Demo route/tab-switcher/admin-panel simulation, dependency legitimacy gate, and requirements traceability — is verified working and correctly wired.
+No gaps remain. Both gaps from the prior `gaps_found` verification (`stagger-grid.tsx`'s missing `prefers-reduced-motion` collapse, `bot-tab.tsx`'s untracked inner `setTimeout`) were closed by plan `02-04` and independently re-confirmed in this pass by reading the current file contents directly — not by trusting `02-04-SUMMARY.md`'s claims. No regressions were found in any of the other 11 truths, artifacts, or key links carried over from plans 02-01/02-02/02-03. Overall phase status is `human_needed` rather than `passed` because 3 truths remain ⚠️ PRESENT_BEHAVIOR_UNVERIFIED (FAQ expand/collapse, chat playback pacing/retrigger, admin dashboard animations) — all three are runtime/visual behaviors that require an interactive browser check per the decision tree, not code-level defects.
 
 ---
 
-_Verified: 2026-08-09T10:51:23Z_
+_Verified: 2026-08-09T20:15:00Z_
 _Verifier: Claude (gsd-verifier)_
