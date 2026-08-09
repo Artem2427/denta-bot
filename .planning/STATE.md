@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-08-08)
 Phase: 02 (home-contacts-demo) — EXECUTING
 Plan: 1 of 3
 Status: Executing Phase 02
-Last activity: 2026-08-09 — Phase 02 execution started
+Last activity: 2026-08-09 — Completed quick task 260809-jr2: Restore missing content in Home Solution section
 
 Progress: [██████████] 100%
 
@@ -80,6 +80,13 @@ Recent decisions affecting current work:
 ### Pending Todos
 
 None yet.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260809-jis | Fix card height misalignment in Home sections (Problem/Features/Testimonials) — h-full on StaggerItem + PremiumCard | 2026-08-09 | 38a5265 | [260809-jis-fix-card-height-misalignment-in-home-sec](./quick/260809-jis-fix-card-height-misalignment-in-home-sec/) |
+| 260809-jr2 | Restore missing content in Home Solution section — heading, card wrapper, per-step subtext, CTA arrow icon | 2026-08-09 | 1975e35 | [260809-jr2-restore-missing-content-structure-in-hom](./quick/260809-jr2-restore-missing-content-structure-in-hom/) |
 
 ### Blockers/Concerns
 
