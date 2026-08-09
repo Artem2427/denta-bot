@@ -25,7 +25,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />
-          <main>{children}</main>
+          <main className="pt-16 lg:pt-20">{children}</main>
           <Footer />
           <Toaster />
         </ThemeProvider>
