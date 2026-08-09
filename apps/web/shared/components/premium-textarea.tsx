@@ -1,8 +1,10 @@
+import { cn } from '@/shared/lib/cn';
 import * as React from 'react';
 
-import { cn } from '@/shared/lib/cn';
-
-function PremiumTextarea({ className, ...props }: React.ComponentProps<'textarea'>) {
+function PremiumTextarea({
+  className,
+  ...props
+}: React.ComponentProps<'textarea'>) {
   return (
     <textarea
       data-slot="premium-textarea"
