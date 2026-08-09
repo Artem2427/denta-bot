@@ -1,10 +1,19 @@
-import { Button } from '@repo/ui';
+import { CtaBanner } from '@/modules/home/cta-banner';
+import { Features } from '@/modules/home/features';
+import { Hero } from '@/modules/home/hero';
+import { Problem } from '@/modules/home/problem';
+import { Solution } from '@/modules/home/solution';
+import { Testimonials } from '@/modules/home/testimonials';
 
 export default function Home(): React.JSX.Element {
   return (
     <div>
-      dfgdfgd
-      <Button>Home</Button>
+      <Hero />
+      <Problem />
+      <Solution />
+      <Features />
+      <CtaBanner />
+      <Testimonials />
     </div>
   );
 }
