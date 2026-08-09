@@ -1,12 +1,11 @@
 'use client';
 
-import { Checks } from '@phosphor-icons/react';
-import { motion } from 'motion/react';
-import * as React from 'react';
-
 import { PremiumButton } from '@/shared/components/premium-button';
 import { SignatureMark } from '@/shared/components/signature-mark';
 import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
+import { Checks } from '@phosphor-icons/react';
+import { motion } from 'motion/react';
+import * as React from 'react';
 
 import { scenarios } from './_data';
 
@@ -39,7 +38,8 @@ export function BotTab(): React.JSX.Element {
     seedGreetings(),
   );
   const [isTyping, setIsTyping] = React.useState(false);
-  const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(
+  const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
+  const messageTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
@@ -51,6 +51,10 @@ export function BotTab(): React.JSX.Element {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
+    }
+    if (messageTimeoutRef.current) {
+      clearTimeout(messageTimeoutRef.current);
+      messageTimeoutRef.current = null;
     }
 
     setIsTyping(false);
@@ -72,12 +76,13 @@ export function BotTab(): React.JSX.Element {
 
       if (nextMessage.type === 'bot') {
         setIsTyping(true);
-        setTimeout(() => {
+        messageTimeoutRef.current = setTimeout(() => {
           setChatMessages((prev) => [
             ...prev,
             { ...nextMessage, time: nowTime() },
           ]);
           setIsTyping(false);
+          messageTimeoutRef.current = null;
         }, 400);
       } else {
         setChatMessages((prev) => [
@@ -102,6 +107,10 @@ export function BotTab(): React.JSX.Element {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
+      }
+      if (messageTimeoutRef.current) {
+        clearTimeout(messageTimeoutRef.current);
+        messageTimeoutRef.current = null;
       }
     };
   }, []);
