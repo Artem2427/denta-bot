@@ -3,7 +3,6 @@
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { Reveal } from '@/shared/components/reveal';
-import { SignatureMark } from '@/shared/components/signature-mark';
 import { idleBounceAnimate, idleBounceTransition } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
 import { ArrowRightIcon, BellIcon, CheckIcon } from '@phosphor-icons/react/ssr';
