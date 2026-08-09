@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-08-08)
 Phase: 02 (home-contacts-demo) — EXECUTING
 Plan: 1 of 3
 Status: Executing Phase 02
-Last activity: 2026-08-09 — Completed quick task 260809-jr2: Restore missing content in Home Solution section
+Last activity: 2026-08-09 — Completed quick task 260809-k1r: Add descriptions to Home Features cards
 
 Progress: [██████████] 100%
 
@@ -87,6 +87,7 @@ None yet.
 |---|-------------|------|--------|-----------|
 | 260809-jis | Fix card height misalignment in Home sections (Problem/Features/Testimonials) — h-full on StaggerItem + PremiumCard | 2026-08-09 | 38a5265 | [260809-jis-fix-card-height-misalignment-in-home-sec](./quick/260809-jis-fix-card-height-misalignment-in-home-sec/) |
 | 260809-jr2 | Restore missing content in Home Solution section — heading, card wrapper, per-step subtext, CTA arrow icon | 2026-08-09 | 1975e35 | [260809-jr2-restore-missing-content-structure-in-hom](./quick/260809-jr2-restore-missing-content-structure-in-hom/) |
+| 260809-k1r | Add one-line description to each of the 8 Features cards on Home | 2026-08-09 | 52180c8 | [260809-k1r-add-a-one-line-description-under-each-of](./quick/260809-k1r-add-a-one-line-description-under-each-of/) |
 
 ### Blockers/Concerns
 
