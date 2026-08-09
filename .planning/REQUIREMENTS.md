@@ -27,7 +27,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Home
 
-- [ ] **HOME-01**: User can view the Home page at `/` with all sections from the design (hero, features, etc.) ported with `@repo/ui` components and the original Ukrainian copy
+- [x] **HOME-01**: User can view the Home page at `/` with all sections from the design (hero, features, etc.) ported with `@repo/ui` components and the original Ukrainian copy
 
 ### Prices
 
@@ -35,7 +35,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Demo
 
-- [ ] **DEMO-01**: User can view the Demo page at `/demo` and interact with the scripted chat-bot simulation (client-side, local state, no real API)
+- [x] **DEMO-01**: User can view the Demo page at `/demo` and interact with the scripted chat-bot simulation (client-side, local state, no real API)
 - [ ] **DEMO-02**: User can switch between dashboard sections on the Demo page as in the design
 
 ### Blog
@@ -86,8 +86,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DESIGN-01 | Phase 01.1 | Complete |
 | DESIGN-02 | Phase 01.1 | Complete |
 | DESIGN-03 | Phase 01.1 | Complete |
-| HOME-01 | Phase 2 | Pending |
-| DEMO-01 | Phase 2 | Pending |
+| HOME-01 | Phase 2 | Complete |
+| DEMO-01 | Phase 2 | Complete |
 | DEMO-02 | Phase 2 | Pending |
 | CONT-01 | Phase 2 | Pending |
 | CONT-02 | Phase 2 | Pending |
