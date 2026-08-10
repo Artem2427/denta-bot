@@ -1,14 +1,14 @@
 'use client';
 
-import { Check } from '@phosphor-icons/react/ssr';
-import Link from 'next/link';
-import * as React from 'react';
-
 import { Container } from '@/shared/components/container';
+import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { PremiumSwitch } from '@/shared/components/premium-switch';
 import { routes } from '@/shared/lib/routes';
+import { Check } from '@phosphor-icons/react/ssr';
+import Link from 'next/link';
+import * as React from 'react';
 
 const plans = [
   {
@@ -80,6 +80,7 @@ export function PricingCards(): React.JSX.Element {
               <span className="text-sm text-dt-graphite">Щомісяця</span>
               <PremiumSwitch checked={isYearly} onCheckedChange={setIsYearly} />
               <span className="text-sm text-dt-graphite">Щороку</span>
+              <PremiumBadge variant="teal">-20%</PremiumBadge>
             </div>
           </div>
         </Container>
@@ -89,7 +90,19 @@ export function PricingCards(): React.JSX.Element {
         <Container>
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
             {plans.map((plan) => (
-              <PremiumCard key={plan.name}>
+              <PremiumCard
+                key={plan.name}
+                className="flex h-full flex-col"
+                highlighted={plan.popular}
+              >
+                {plan.popular && (
+                  <PremiumBadge
+                    variant="coral"
+                    className="absolute -top-4 left-1/2 -translate-x-1/2"
+                  >
+                    Популярний
+                  </PremiumBadge>
+                )}
                 <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                   {plan.name}
                 </h3>
@@ -111,7 +124,7 @@ export function PricingCards(): React.JSX.Element {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6">
+                <div className="mt-auto pt-6">
                   <PremiumButton
                     asChild
                     variant={plan.popular ? 'coral' : 'outline'}
