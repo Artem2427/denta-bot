@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Theme & Site Shell** - Re-theme `@repo/ui` with the design's tokens and stand up the shared header/footer/theme-toggle/404 layout used by every page (completed 2026-08-08)
 - [x] **Phase 2: Home, Contacts & Demo** - Ship the Home landing page plus the two lead-gen surfaces (Contacts form, Demo chat simulation) (completed 2026-08-09)
-- [ ] **Phase 3: Prices & Blog** - Ship the Prices page and the Blog listing/detail routes
+- [x] **Phase 3: Prices & Blog** - Ship the Prices page and the Blog listing/detail routes (completed 2026-08-10)
 
 ## Phase Details
 
@@ -129,5 +129,5 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Theme & Site Shell | 2/2 | Complete    | 2026-08-08 |
 | 2. Home, Contacts & Demo | 4/4 | Complete    | 2026-08-09 |
-| 3. Prices & Blog | 2/2 | In Progress|  |
+| 3. Prices & Blog | 2/2 | Complete    | 2026-08-10 |
 </content>

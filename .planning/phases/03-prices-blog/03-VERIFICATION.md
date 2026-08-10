@@ -1,14 +1,16 @@
 ---
 phase: 03-prices-blog
 verified: 2026-08-10T00:00:00Z
-status: human_needed
+status: passed
 score: 13/13 must-haves verified
 behavior_unverified: 0
 overrides_applied: 0
 human_verification:
+
   - test: "Visit /prices in a dev server. Toggle the billing switch (Щомісяця/Щороку) and confirm all 3 tier prices switch smoothly without a reload; confirm the Бізнес card visually shows the teal border + 'Популярний' badge and Старт/Клініка do not; expand/collapse each of the 7 FAQ accordion items; click each 'Обрати план' CTA and the closing 'Напишіть нам' CTA and confirm they navigate to /contacts."
     expected: "Billing toggle updates prices live with no console errors; Бізнес card is visually distinct; FAQ items expand/collapse via Radix; all CTAs land on /contacts."
     why_human: "Visual parity with the design archive, hover/interaction feel, and accordion animation cannot be confirmed by static grep/type-check — this is explicitly flagged by the plan's own <verification> section as a manual/end-of-phase check (workflow.human_verify_mode: end-of-phase)."
+
   - test: "Visit /blog. Type a search string that matches nothing (e.g. 'zzz') and confirm the empty-state message renders; type a string that matches a real post title/excerpt and confirm the grid narrows; click each category filter button and confirm exact-category narrowing; clear all filters and confirm the original 5-post order returns; confirm the featured post card never duplicates into the grid or moves; confirm 'Завантажити ще' does nothing when clicked (by design, D-03). Then open 3 different post detail pages (including the featured post) and confirm real, distinct body content renders, the CTA card buttons route to /demo and /contacts respectively, and the 'Схожі статті' related-posts links work."
     expected: "Filters visibly narrow/restore the grid; featured post stays static; each visited post shows unique, non-empty body content; all internal links resolve correctly."
     why_human: "Client-side filter interaction and real-content read-through require visual/interactive confirmation beyond what tsc/grep can prove — explicitly deferred to end-of-phase human check per the plan's <verification> section."
@@ -101,6 +103,7 @@ No orphaned requirements — REQUIREMENTS.md's Phase 3 traceability row (PRICE-0
 No debt markers (`TBD`/`FIXME`/`XXX`/`TODO`/`HACK`/`PLACEHOLDER`) found in any of the 13 phase-3 files. One incidental match on the literal word "placeholder" in `blog-filters.tsx` is the legitimate HTML `placeholder="Пошук статей..."` input attribute, not a stub marker.
 
 The prior code review (`03-REVIEW.md`, 0 critical / 8 warning / 5 info) flagged several quality issues that do not fail any must-have truth and are advisory per this project's review policy:
+
 - **WR-01:** the static "-20%" badge overstates the discount for Старт/Бізнес (actual ~16.7%, only Клініка is truly -20%) — faithfully ported from the design archive's own non-per-plan badge, not a fabrication introduced by this phase.
 - **WR-05:** `RelatedPosts` excludes the current slug but doesn't actually match by category/topic — the must-have only required self-exclusion + first-3, which is met; "relatedness" quality is a legitimate follow-up, not a phase-goal blocker.
 - **WR-03/WR-04:** "Завантажити ще" and "Поділитися" buttons are non-functional — WR-03 is explicit design decision D-03 (decorative, no handler by intent); WR-04 (Share) was not a must-have and doesn't block BLOG-01/02/03.
