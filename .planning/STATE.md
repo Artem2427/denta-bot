@@ -6,9 +6,9 @@ current_phase: 3
 current_phase_name: Prices & Blog
 status: executing
 stopped_at: Phase 3 context gathered
-last_updated: "2026-08-10T05:53:06.389Z"
-last_activity: 2026-08-09
-last_activity_desc: Phase 01.1 complete, transitioned to Phase 02
+last_updated: "2026-08-10T06:43:57.057Z"
+last_activity: 2026-08-10
+last_activity_desc: Phase 3 execution started
 progress:
   total_phases: 4
   completed_phases: 3
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-08)
 
 **Core value:** The migrated site must render all six pages from the design faithfully — content, layout, and theme — using `@repo/ui` components and Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
-**Current focus:** Phase 02 — home-contacts-demo
+**Current focus:** Phase 3 — Prices & Blog
 
 ## Current Position
 
-Phase: 3 — Prices & Blog
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-08-09 — Phase 02 complete, transitioned to Phase 3
+Phase: 3 (Prices & Blog) — EXECUTING
+Plan: 1 of 2
+Status: Executing Phase 3
+Last activity: 2026-08-10 - Completed quick task 260810-ddh: Add unified-source-of-truth admin highlight block to Home page
 
 Progress: [██████████] 100%
 
@@ -94,6 +94,7 @@ None yet.
 | 260809-v68 | Remove double-padding gaps between adjacent Home/Contacts sections — halved py-16/lg:py-24 across 7 sections | 2026-08-09 | 999fc6d | [260809-v68-remove-double-padding-gaps-between-adjac](./quick/260809-v68-remove-double-padding-gaps-between-adjac/) |
 | 260809-vac | Switch idle bounce ease to spring/overshoot EASE_DT_BOUNCE curve for a more physical bounce feel | 2026-08-09 | bf5b359 | [260809-vac-switch-idle-bounce-animation-ease-to-a-s](./quick/260809-vac-switch-idle-bounce-animation-ease-to-a-s/) |
 | 260809-vcj | Add count-up animation to Home hero stats (500+/15 000+/98%) — new useCountUp hook, animates on first load | 2026-08-09 | 713d8b1 | [260809-vcj-add-count-up-animation-to-the-3-hero-sta](./quick/260809-vcj-add-count-up-animation-to-the-3-hero-sta/) |
+| 260810-ddh | Add unified-source-of-truth admin highlight block to Home page (bot+manual booking single core, role-based access, created_via analytics) | 2026-08-10 | 2b2af6c | [260810-ddh-add-a-new-dedicated-highlight-block-to-t](./quick/260810-ddh-add-a-new-dedicated-highlight-block-to-t/) |
 
 ### Blockers/Concerns
 
