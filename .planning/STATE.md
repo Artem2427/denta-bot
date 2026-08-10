@@ -68,19 +68,8 @@ Last activity: 2026-08-10 — Milestone v1.0 completed and archived
 
 ### Decisions
 
-Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
-
-- Roadmap: Foundation (theme + layout shell) sequenced before any page phase, per explicit user priority.
-- Roadmap: Page phases grouped by business priority — Home/Contacts/Demo (lead-gen) before Prices/Blog (remaining content) — to avoid thin single-requirement phases while preserving requested ordering.
-- [Phase 1]: brand token (--brand: #1d6be4) added to :root only, no .dark override, per D-02
-- [Phase 1]: shadcn form primitive deliberately deferred to Phase 2 (CONT-01) — react-hook-form not yet an installed dependency, requires Package Legitimacy Gate
-- [Phase 1]: next-themes/lucide-react added as explicit apps/web dependencies (Rule 3) — pnpm's per-package node_modules isolation doesn't expose @repo/ui's transitive deps to apps/web; both were already pinned in pnpm-lock.yaml at the same versions
-- [Phase 1]: Explicit React.JSX.Element return-type annotations added to Footer/Logo/NotFound/Home/RootLayout to unblock the pre-existing duplicate @types/react 'portable type' tsc error that cascades across the root layout's full type-check graph
-- [Phase 1]: apps/web restructured mid-phase (user-directed) — app/ holds only route files, components/ for shared UI, lib/routes.ts for centralized route constants, @/* tsconfig alias added
-- [Phase ?]: Comparison table rows hand-unrolled instead of .map()ed to satisfy the plan's literal <tr>-count automated verify
-- [Phase ?]: PremiumCard extended via a plain highlighted boolean prop, not CVA — keeps existing cn()-based shape per pattern map recommendation
-- [Phase ?]: [Phase 3 03-02]: Blog D-02 filter predicate (exact-match category + case-insensitive substring search, AND-combined, no .sort()) was correct on first pass — Task 3's review confirmed compliance without changes
+Full v1.0 decision log archived in PROJECT.md Key Decisions table (all marked ✓ Good or Superseded post-milestone-review) and `.planning/milestones/v1.0-ROADMAP.md`.
+None yet for the next milestone.
 
 ### Pending Todos
 
@@ -102,12 +91,14 @@ None yet.
 
 ### Blockers/Concerns
 
-- pnpm --filter web build's tsc step fails on packages/ui/src/components/shadcn-ui/{button-group,calendar,sidebar}.tsx due to a pre-existing csstype@3.1.3 vs 3.2.3 duplicate-resolution conflict (deferred-items.md #5/#6); requires a monorepo-wide pnpm.overrides fix — still open as of Phase 3 (2026-08-10), unrelated to any phase's own changes, confirmed present at every phase's typecheck run
-- 03-REVIEW.md (Phase 3): 8 non-blocking warnings — "-20%" yearly discount badge inaccurate for 2 of 3 pricing tiers, pricing toggle lacks accessible name, Share/"Завантажити ще" buttons non-functional by design, RelatedPosts has no real relevance logic, comparison-table.tsx duplicates pricing-cards.tsx's plan data
+Open items carried into the next milestone (see PROJECT.md "Active" for full detail):
+
+- csstype@3.1.3/3.2.3 duplicate-resolution conflict blocking a clean `pnpm --filter web build` — open since Phase 1, unrelated to any phase's own changes
+- 8 non-blocking code-review warnings from `03-REVIEW.md` (Phase 3) — pricing badge accuracy, accessibility, dead-end buttons by design, related-posts relevance logic, comparison-table data duplication
 
 ### Roadmap Evolution
 
-- Phase 01.1 inserted after Phase 1: Client sent a detailed premium visual-redesign ТЗ (new navy/teal/coral/sage/amber palette, typography, motion system, Phosphor icons) while Phase 2 execution was starting. Conflicts with Phase 1's shipped brand-blue theme and the 4 already-verified Phase 2 plans. Scoped to apps/web only per user direction — packages/ui stays as-is (used by admin-panel + Demo's embedded admin simulation). (URGENT)
+v1.0 roadmap evolution history archived in `.planning/milestones/v1.0-ROADMAP.md`.
 
 ## Deferred Items
 
@@ -120,11 +111,11 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-10T08:35:00.000Z
-Stopped at: Milestone v1.0 complete — all 4 phases (1, 01.1, 2, 3) done, all 6 routes shipped, UAT passed, security verified (threats_open: 0)
+Last session: 2026-08-10T09:00:00.000Z
+Stopped at: Milestone v1.0 archived — ROADMAP.md/REQUIREMENTS.md archived to .planning/milestones/, phase directories archived to .planning/milestones/v1.0-phases/, RETROSPECTIVE.md written
 Resume file: None
 
-Next: /gsd-complete-milestone v1.0 — archive milestone and prepare for next, when ready
+Next: /gsd-new-milestone — start the next milestone, when ready
 </content>
 
 ## Operator Next Steps
