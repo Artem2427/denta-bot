@@ -1,0 +1,1 @@
+No external API integration: Phase 3 (Prices & Blog) renders static/mock pricing and blog data client- and server-side with no external API, SDK, or backend call — matches the project's "mock data only" constraint for this milestone.
