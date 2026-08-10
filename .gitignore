@@ -18,6 +18,9 @@ coverage
 # Turbo
 .turbo
 
+# Prisma generated client (build artifact, not source)
+packages/db/generated/
+
 # Vercel
 .vercel
 
