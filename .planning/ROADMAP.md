@@ -107,7 +107,7 @@ Plans:
   3. User can view an individual Blog Post at `/blog/[slug]` with the post content from the design
   4. User navigating to a blog slug not present in the mock data sees a Not Found state
 
-**Plans**: 1/2 plans executed
+**Plans**: 2/2 plans executed
 **UI hint**: yes
 
 Plans:
@@ -118,7 +118,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 03-02-PLAN.md — Blog: listing + detail + not-found, functional search/category filters, 6 posts with real body content
+- [x] 03-02-PLAN.md — Blog: listing + detail + not-found, functional search/category filters, 6 posts with real body content
 
 ## Progress
 
@@ -129,5 +129,5 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Theme & Site Shell | 2/2 | Complete    | 2026-08-08 |
 | 2. Home, Contacts & Demo | 4/4 | Complete    | 2026-08-09 |
-| 3. Prices & Blog | 1/2 | In Progress|  |
+| 3. Prices & Blog | 2/2 | In Progress|  |
 </content>

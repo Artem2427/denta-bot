@@ -40,9 +40,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Blog
 
-- [ ] **BLOG-01**: User can view the Blog listing page at `/blog` showing all 6 mock posts from the design
-- [ ] **BLOG-02**: User can view an individual Blog Post at `/blog/[slug]` with the post content from the design
-- [ ] **BLOG-03**: User navigating to a blog slug not present in the mock data sees a Not Found state
+- [x] **BLOG-01**: User can view the Blog listing page at `/blog` showing all 6 mock posts from the design
+- [x] **BLOG-02**: User can view an individual Blog Post at `/blog/[slug]` with the post content from the design
+- [x] **BLOG-03**: User navigating to a blog slug not present in the mock data sees a Not Found state
 
 ### Contacts
 
@@ -93,9 +93,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CONT-02 | Phase 2 | Complete |
 | CONT-03 | Phase 2 | Complete |
 | PRICE-01 | Phase 3 | Complete |
-| BLOG-01 | Phase 3 | Pending |
-| BLOG-02 | Phase 3 | Pending |
-| BLOG-03 | Phase 3 | Pending |
+| BLOG-01 | Phase 3 | Complete |
+| BLOG-02 | Phase 3 | Complete |
+| BLOG-03 | Phase 3 | Complete |
 
 **Coverage:**
 
