@@ -2,10 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 3
-status: completed
-stopped_at: Completed 03-02-PLAN.md
-last_updated: "2026-08-10T08:28:54.475Z"
+status: Awaiting next milestone
+stopped_at: "Milestone v1.0 complete — all 4 phases (1, 01.1, 2, 3) done, all 6 routes shipped, UAT passed, security verified (threats_open: 0)"
+last_updated: "2026-08-10T08:46:25.376Z"
 last_activity: 2026-08-10
 last_activity_desc: Phase 3 execution started
 progress:
@@ -13,6 +12,7 @@ progress:
   completed_phases: 4
   total_plans: 12
   completed_plans: 12
+current_phase: 3
 current_phase_name: Prices & Blog
 ---
 
@@ -27,12 +27,10 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
-Status: All phases complete
-Last activity: 2026-08-10 — Phase 3 complete
-
-Progress: [██████████] 100%
+Phase: Milestone v1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-08-10 — Milestone v1.0 completed and archived
 
 ## Performance Metrics
 
@@ -118,6 +116,7 @@ Items acknowledged and carried forward from previous milestone close:
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
 | Dark mode (THEME-03 regression) | Premium `apps/web` site has no dark-mode `dt-*` token values; `ThemeToggle` removed from Header in Phase 01.1's code-review fix. `apps/web/shared/components/theme-toggle.tsx` still exists, unused. Needs a decision: design dark `dt-*` values and re-wire, or formally drop dark mode for the premium site this milestone. | Deferred — explicit user decision (2026-08-09): "skip for now" | Phase 01.1 |
+| csstype dependency conflict | `pnpm --filter web check-types`/`build`'s `tsc` step fails on a pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict confined to `packages/ui/src/components/shadcn-ui/{button-group,calendar,sidebar}.tsx` — surfaced identically across every Phase 01.1/2/3 plan's verify step, confirmed unrelated to any file any plan created/modified. Requires a monorepo-wide `pnpm.overrides` fix. | Acknowledged at v1.0 milestone close (2026-08-10) — does not block any shipped page; recommended before/during next milestone | Phase 1 (first seen), open through v1.0 close |
 
 ## Session Continuity
 
@@ -127,3 +126,7 @@ Resume file: None
 
 Next: /gsd-complete-milestone v1.0 — archive milestone and prepare for next, when ready
 </content>
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone

@@ -36,30 +36,26 @@ The migrated site renders all six pages from the design faithfully — content, 
 
 ### Active
 
-None — milestone v1.0 requirements fully shipped as of Phase 3 (2026-08-10).
+Candidates for next milestone (none scheduled yet):
 
-### Emerged (not yet scheduled)
-
-- [ ] "Unified source of truth" positioning — DentaBot is per-clinic (each clinic gets its own bot instance with its own settings/functions), not one shared bot; a Home page highlight section covering this (bot + manual admin booking on one core, role-based access, `created_via` analytics) shipped as an ad-hoc quick task (260810-ddh) outside the original 6-page migration scope
-- [ ] Code review findings from `03-REVIEW.md` (8 warnings, non-blocking): "-20%" yearly discount badge only matches 1 of 3 pricing tiers' actual discount; pricing toggle lacks an accessible name; "Завантажити ще"/Share buttons are non-functional by design; `RelatedPosts` doesn't compute real relevance (declaration-order only); `comparison-table.tsx` duplicates `pricing-cards.tsx`'s plan data with no shared source of truth
-- [ ] Fix pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict blocking `pnpm --filter web build`'s (and `apps/admin-panel`'s) production type-check — discovered in Phase 1, still open as of Phase 3
+- [ ] "Unified source of truth" positioning — DentaBot is per-clinic (each clinic gets its own bot instance with its own settings/functions), not one shared bot; a Home page highlight section covering this (bot + manual admin booking on one core, role-based access, `created_via` analytics) shipped as an ad-hoc quick task (260810-ddh) outside the original 6-page migration scope — worth extending with real backend semantics once a real bot/admin backend exists
+- [ ] Code review findings from `03-REVIEW.md` (8 warnings, non-blocking, all still open): "-20%" yearly discount badge only matches 1 of 3 pricing tiers' actual discount; pricing toggle lacks an accessible name; "Завантажити ще"/Share buttons are non-functional by design; `RelatedPosts` doesn't compute real relevance (declaration-order only); `comparison-table.tsx` duplicates `pricing-cards.tsx`'s plan data with no shared source of truth
+- [ ] Fix pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict blocking `pnpm --filter web build`'s (and `apps/admin-panel`'s) production type-check — discovered in Phase 1, still open at v1.0 close; needs a monorepo-wide `pnpm.overrides` fix
+- [ ] Dark mode for the premium `apps/web` site — no dark-mode `dt-*` token values exist; `ThemeToggle` removed from Header in Phase 01.1, component still exists unused; explicitly deferred at Phase 01.1 close, needs a fresh decision
+- [ ] Real backend integration for Contacts/Demo forms, real bot/chat API wiring — natural v1.1+ scope once `apps/server` grows real endpoints
 
 ### Out of Scope
 
-- Real backend integration for Contacts/Demo forms — no `apps/server` endpoint exists yet for this; deferred until a future milestone
-- Real bot/chat API wiring on the Demo page — stays a UI simulation this milestone
 - CMS or MDX-based blog content — mock data in code is sufficient for now
 - i18n / multi-language support — site ships Ukrainian-only, matching the design
-- New/duplicate component library — everything routes through the existing `@repo/ui`, not a new one scoped to `apps/web`
+- ~~New/duplicate component library — everything routes through the existing `@repo/ui`~~ — **invalidated at Phase 01.1**: the client's premium-redesign ТЗ required a bespoke `dt-*` system for the marketing site specifically because `@repo/ui`'s theme couldn't express it; `@repo/ui` remains authoritative only for `apps/admin-panel` and the Demo page's admin-simulation tab
 
 ## Context
 
-- Design source: Figma file (`Дизайн з темами`, exported as a Vite + react-router + Tailwind v4 + shadcn code bundle: `Дизайн з темами.zip`). Unzipped for reference at `/private/tmp/claude-501/-Users-artemdanko-Developer-denta-bot/8b5d7e59-0e2d-435b-b260-ad43cb13b1c8/scratchpad/design-archive/` — this is scratch space, not persistent; relevant content should be transcribed into `apps/web`/`packages/ui` during execution, not referenced from that path long-term.
-- Design pages source: `src/app/pages/{home,prices,demo,blog,blog-post,contacts,not-found}.tsx`, shared `header.tsx`/`footer.tsx`/`theme-provider.tsx`/`theme-toggle.tsx`, routing in `src/app/routes.ts` (react-router `createBrowserRouter`).
-- Design theme source: `src/styles/theme.css` — custom light/dark tokens (e.g. light `--primary: #030213`), distinct from `@repo/ui`'s current default shadcn/neutral theme in `packages/ui/styles/theme.css`.
-- `@repo/ui` already has ~38 shadcn components in `packages/ui/src/components/shadcn-ui/`; the design archive has its own ~45-component copy in `src/app/components/ui/` — these are near-duplicates (same shadcn lineage) but not guaranteed identical; use `@repo/ui`'s versions as the base and only add what's genuinely missing.
-- Page ordering decided for roadmap: Home → Contacts/Demo (forms first, business priority) → Prices → Blog/Blog Post.
-- No `.env`, no database client, no deployment config detected in the monorepo yet (per `.planning/codebase/STACK.md`) — this milestone is frontend-only, mock-data-only.
+- **v1.0 shipped 2026-08-10.** Design source was a Figma file (`Дизайн з темами`), exported as a Vite + react-router + Tailwind v4 + shadcn code bundle (`Дизайн з темами.zip`) and unzipped to ephemeral scratch paths per-session for reference during each phase — all relevant content was transcribed into `apps/web` during execution, nothing depends on that scratch path persisting.
+- Final architecture: `apps/web` runs its own bespoke premium `dt-*` design system (`apps/web/shared/components/premium-*.tsx`, `apps/web/app/premium-theme.css`) built in Phase 01.1, not `@repo/ui` — this was a mid-milestone pivot after the client sent a premium visual-redesign ТЗ during Phase 2. `@repo/ui`/`packages/ui/styles/theme.css` remains the styling source of truth only for `apps/admin-panel` and the Demo page's embedded admin-panel simulation tab.
+- Final route structure: `apps/web/app/` holds only route files (`page.tsx`, `layout.tsx`, `not-found.tsx`); `apps/web/modules/<page>/` holds page-specific composition components; `apps/web/shared/{components,lib,hooks}/` holds cross-page code; `apps/web/shared/lib/routes.ts` centralizes all internal route constants.
+- No `.env`, no database client, no deployment config exists in the monorepo (per `.planning/codebase/STACK.md`) — v1.0 is frontend-only, mock-data-only, matching scope.
 
 ## Constraints
 
@@ -68,22 +64,24 @@ None — milestone v1.0 requirements fully shipped as of Phase 3 (2026-08-10).
 - **Forms**: `react-hook-form` + `zod` required for all form validation (Contacts, Demo if applicable)
 - **State management**: Zustand allowed but not mandatory — add only when local/prop-drilled state genuinely becomes unmanageable
 - **Data**: Mock/static data only this milestone — no real API integration
-- **Styling source of truth**: For `apps/admin-panel`/admin-demo, `packages/ui/styles/theme.css` remains authoritative. For the `apps/web` marketing site, the Phase 01.1 premium design system (own tokens, likely under `apps/web/shared/`) is authoritative instead — see Phase 01.1 CONTEXT.md once planned.
+- **Styling source of truth**: For `apps/admin-panel`/admin-demo, `packages/ui/styles/theme.css` remains authoritative. For the `apps/web` marketing site, `apps/web/app/premium-theme.css`'s `dt-*` token system (Phase 01.1) is authoritative instead.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Marketing site (`apps/web`, excl. Demo's admin-simulation tab) gets its own bespoke premium component system, not built on `@repo/ui` | Client sent a detailed premium visual-redesign ТЗ (new palette/typography/motion) mid-Phase-2 that conflicts with the Phase 1 brand-blue `@repo/ui` theme; user explicitly said not to base the site on `packages/ui`, only the Demo page's admin-simulation should keep matching the real `@repo/ui`-based `apps/admin-panel` product | — Pending, Phase 01.1 |
-| Reuse `@repo/ui` instead of porting the design's own `components/ui/*` | Avoids a duplicate, drifting shadcn component set across the monorepo; `@repo/ui` is already consumed by `apps/web`, `apps/docs`, `apps/admin-panel` | — Pending |
+| Marketing site (`apps/web`, excl. Demo's admin-simulation tab) gets its own bespoke premium component system, not built on `@repo/ui` | Client sent a detailed premium visual-redesign ТЗ (new palette/typography/motion) mid-Phase-2 that conflicts with the Phase 1 brand-blue `@repo/ui` theme; user explicitly said not to base the site on `packages/ui`, only the Demo page's admin-simulation should keep matching the real `@repo/ui`-based `apps/admin-panel` product | ✓ Good — Phase 01.1, held for Phases 2–3 without regression |
+| Reuse `@repo/ui` instead of porting the design's own `components/ui/*` | Avoids a duplicate, drifting shadcn component set across the monorepo; `@repo/ui` is already consumed by `apps/web`, `apps/docs`, `apps/admin-panel` | ✓ Good, though superseded for `apps/web`'s own marketing pages by the decision above — `@repo/ui` reuse held for `apps/admin-panel` and Demo's admin-simulation as designed |
 | Re-theme `packages/ui/styles/theme.css` globally (not a scoped override in `apps/web`) | Design tokens are meant to be the new brand theme, not a one-app override; keeps all `@repo/ui` consumers visually consistent | ✓ Good — Phase 1 |
-| Carry over Ukrainian copy verbatim from the design archive | Content is already finished/approved (headings, FAQ, blog posts, pricing); no rewrite requested | ✓ Good |
-| Forms use `react-hook-form` + `zod`, submission stays mocked | Matches explicit requirement; no backend endpoint exists yet to call | — Pending |
-| Demo page stays a scripted UI simulation | Explicit decision — real bot integration deferred to a future milestone | ✓ Good |
-| Zustand deferred until proven necessary | Avoids premature state-management complexity; `next-themes` + local `useState` cover current known needs | — Pending |
-| New brand accent token `--brand: #1d6be4` added to `theme.css` (not in the design's own token set) | Design's `--primary` (`#030213`) is a separate dark-navy token that drives the default `Button`; the bright blue used for logo/active-nav/hover needed its own first-class token, not scattered `bg-[#1d6be4]` utility classes | ✓ Good — Phase 1 |
-| `apps/web` restructured: `app/` holds only route files; shared components live in a top-level `components/`, route paths centralized in `lib/routes.ts` (with a `@/*` tsconfig alias) | User-directed mid-Phase-1 refactor — keeps Next.js App Router convention clean as page count grows in Phase 2/3, avoids hardcoded href strings scattered across components | ✓ Good — Phase 1 |
-| Styling changes route through `packages/ui/styles/theme.css` (via `apps/web/app/globals.css`'s import); `@repo/ui` components can gain new variants as pages need them, keeping palette consistency with established tokens | User-confirmed ongoing convention for this milestone — the token/component layer is a living part of the design-archive port, not frozen after Phase 1 | ✓ Good — Phase 1 |
+| Carry over Ukrainian copy verbatim from the design archive | Content is already finished/approved (headings, FAQ, blog posts, pricing); no rewrite requested | ✓ Good — held through Phase 3, minor original additions (5 new blog post bodies, Home's unified-source section) written in matching tone |
+| Forms use `react-hook-form` + `zod`, submission stays mocked | Matches explicit requirement; no backend endpoint exists yet to call | ✓ Good — Phase 2 (Contacts form) |
+| Demo page stays a scripted UI simulation | Explicit decision — real bot integration deferred to a future milestone | ✓ Good — Phase 2 |
+| Zustand deferred until proven necessary | Avoids premature state-management complexity; `next-themes` + local `useState` cover current known needs | ✓ Good — never needed across all 4 phases; local state was always sufficient |
+| New brand accent token `--brand: #1d6be4` added to `theme.css` (not in the design's own token set) | Design's `--primary` (`#030213`) is a separate dark-navy token that drives the default `Button`; the bright blue used for logo/active-nav/hover needed its own first-class token, not scattered `bg-[#1d6be4]` utility classes | ✓ Good — Phase 1, later superseded by the `dt-*` system for `apps/web` at Phase 01.1 |
+| `apps/web` restructured: `app/` holds only route files; shared components live in a top-level `components/`, route paths centralized in `lib/routes.ts` (with a `@/*` tsconfig alias) | User-directed mid-Phase-1 refactor — keeps Next.js App Router convention clean as page count grows in Phase 2/3, avoids hardcoded href strings scattered across components | ✓ Good — Phase 1, structure held (evolved to `modules/<page>/` + `shared/` at Phase 01.1) all the way through Phase 3 |
+| Styling changes route through `packages/ui/styles/theme.css` (via `apps/web/app/globals.css`'s import); `@repo/ui` components can gain new variants as pages need them, keeping palette consistency with established tokens | User-confirmed ongoing convention for this milestone — the token/component layer is a living part of the design-archive port, not frozen after Phase 1 | Superseded — `apps/web` moved to the standalone `dt-*` system at Phase 01.1; this convention held only for `apps/admin-panel`/Demo's admin-simulation as originally scoped |
+| Blog posts beyond the one archived article need original body content (5 of 6 posts) | Design archive only fully wrote body content for the featured post; the other 5 posts had title/excerpt only | ✓ Good — Phase 3, written in matching tone, grounded in each post's existing title/excerpt, no fabricated stats contradicting the archived article's figures |
+| Blog search/category filters made functional (not decorative like the archive) | Archive's filter UI had zero wiring; functional filtering was a small addition given the data was already local | ✓ Good — Phase 3, AND-combined exact-category + substring-search, verified via UAT |
 
 ## Evolution
 
@@ -103,4 +101,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-08-10 after Phase 3 (Prices & Blog) — milestone v1.0 complete*
+*Last updated: 2026-08-10 after v1.0 milestone close*
