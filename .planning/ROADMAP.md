@@ -112,10 +112,13 @@ Plans:
 
 Plans:
 
-- [x] 03-01-PLAN.md
-- [ ] 03-02-PLAN.md
+**Wave 1**
 
-- [x] 03-01: TBD
+- [x] 03-01-PLAN.md — Prices page: billing toggle, 3-tier pricing grid, PremiumSwitch/PremiumBadge primitives, comparison table, FAQ, closing CTA
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 03-02-PLAN.md — Blog: listing + detail + not-found, functional search/category filters, 6 posts with real body content
 
 ## Progress
 
