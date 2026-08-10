@@ -538,17 +538,17 @@ bootstrap();
 
 **If this table is empty:** N/A — six assumptions listed above need no further user confirmation before planning (all are implementation-detail-level, none touch locked CONTEXT.md decisions), but planner/executor should verify A3 and A4 concretely during Wave 0 before deep AuthModule work.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Does INFRA-02 require `apps/web`/`apps/platform-admin` to actually import `@repo/db` in Phase 4, or just be "structurally ready" per CONTEXT.md's phrasing?**
+1. **Does INFRA-02 require `apps/web`/`apps/platform-admin` to actually import `@repo/db` in Phase 4, or just be "structurally ready" per CONTEXT.md's phrasing?** RESOLVED
    - What we know: REQUIREMENTS.md's INFRA-02 text says types are "consumable from `apps/server`, `apps/web`, and `apps/platform-admin`." CONTEXT.md's Phase 4 success criteria #2 softens this to "structurally ready... to consume later." The milestone SUMMARY.md's architecture recommendation is explicit that frontends should stay behind the REST/HTTP boundary and never import raw Prisma client types (security: would expose `passwordHash` and other sensitive fields on the `PlatformAdmin` model type).
    - What's unclear: Whether the planner should add a no-op "add `@repo/db` as a devDependency of `apps/platform-admin`" task just to prove workspace-linkability, or whether "structurally ready" is satisfied purely by `@repo/db` existing as a valid, publishable-shaped workspace package.
-   - Recommendation: Treat CONTEXT.md's phrasing as authoritative (it's the phase-specific refinement of the broader milestone requirement) — Phase 4 should NOT wire any frontend import of `@repo/db`. Verify INFRA-02 at the API/Swagger level only, per the phase's own stated verification approach ("success criteria are verified at the API/Swagger level"). Flag this explicitly in the plan so it isn't second-guessed mid-execution.
+   - Resolution: Treat CONTEXT.md's phrasing as authoritative (it's the phase-specific refinement of the broader milestone requirement) — Phase 4 does NOT wire any frontend import of `@repo/db`. INFRA-02 is verified at the API/Swagger level only, per the phase's own stated verification approach ("success criteria are verified at the API/Swagger level"). Reflected in Plan 04-01's `must_haves`/prohibitions.
 
-2. **`SameSite` cookie attribute value: `'lax'` or `'strict'`?**
+2. **`SameSite` cookie attribute value: `'lax'` or `'strict'`?** RESOLVED
    - What we know: D-05 flags production domain topology as undecided but assumed to be same-parent-domain subdomains, which browsers treat as "same-site" for `SameSite` purposes (subdomains under one registrable domain, e.g. `admin.dentabot.com` → `api.dentabot.com`, are same-site regardless of subdomain). Local dev is all `localhost` with different ports, also same-site by browser `SameSite` rules (port isn't part of "site").
    - What's unclear: Whether `'strict'` (stronger CSRF protection, but blocks the cookie on top-level cross-site navigation entirely) or `'lax'` (default-safe middle ground) is preferred. Since the refresh cookie is scoped to `path: '/auth/refresh'` and only ever sent via same-site `fetch`/XHR calls (never a top-level navigation), `'strict'` should work without UX friction and is the more conservative choice.
-   - Recommendation: Default to `'strict'`, expose it as an env var alongside the `Domain` attribute (already planned per D-05) so it can be relaxed to `'lax'` if a real deployment topology later turns out to be genuinely cross-site (different top-level domains, not subdomains) — at which point `SameSite=None; Secure` would be required instead, a bigger change worth flagging if it ever comes up.
+   - Resolution: `SameSite=strict` adopted, exposed as an env var (`REFRESH_COOKIE_SAMESITE`) alongside the `Domain` attribute (already planned per D-05) so it can be relaxed to `'lax'` if a real deployment topology later turns out to be genuinely cross-site (different top-level domains, not subdomains) — at which point `SameSite=None; Secure` would be required instead, a bigger change worth flagging if it ever comes up. Reflected in `.env.example` / Plan 04-01's action block.
 
 ## Environment Availability
 
