@@ -2,11 +2,11 @@
 
 ## What This Is
 
-`apps/web` is the public marketing site for denta-bot — a SaaS product that gives dental clinics a Telegram/chat bot for patient booking automation. The site currently ships as the default `create-turbo` Next.js starter; this milestone replaces it with a real marketing site (Home, Prices, Demo, Blog, Blog Post, Contacts) migrated from a Figma-exported design prototype into Next.js 16 (App Router), built on the monorepo's shared `@repo/ui` component library.
+`apps/web` is the public marketing site for denta-bot — a SaaS product that gives dental clinics a Telegram/chat bot for patient booking automation. This milestone replaced the default `create-turbo` Next.js starter with a real marketing site (Home, Prices, Demo, Blog, Blog Post, Contacts) migrated from a Figma-exported design prototype into Next.js 16 (App Router). As of Phase 01.1, the marketing site runs on its own bespoke premium `dt-*` design system (own palette/typography/motion), not `@repo/ui` — `@repo/ui`/`packages/ui` remains the base only for `apps/admin-panel` and the Demo page's embedded admin-panel simulation.
 
 ## Core Value
 
-The migrated site must render all six pages from the design faithfully — content, layout, and theme — using `@repo/ui` components and Next.js App Router conventions, so the marketing site is production-shaped (typed, validated forms, proper routing) even though it currently runs entirely on mock data.
+The migrated site renders all six pages from the design faithfully — content, layout, and theme — using Next.js App Router conventions, so the marketing site is production-shaped (typed, validated forms, proper routing) even though it currently runs entirely on mock data. **Milestone v1.0 shipped 2026-08-10: all six routes (`/`, `/prices`, `/demo`, `/blog`, `/blog/[slug]`, `/contacts`) are live.**
 
 ## Business Context
 
@@ -20,24 +20,29 @@ The migrated site must render all six pages from the design faithfully — conte
 ### Validated
 
 - ✓ Monorepo scaffolding — pnpm workspaces + Turborepo, `apps/web` (Next.js 16.2, React 19.2), `apps/server` (NestJS), `apps/admin-panel` (Vite), `apps/docs` (Next.js) — existing
-- ✓ Shared component library `@repo/ui` (`packages/ui`) — Radix UI + shadcn primitives (button, card, dialog, accordion, tabs, form, input, badge, etc.), CVA + clsx/tailwind-merge, lucide-react, next-themes, sonner, Tailwind v4 token architecture (`styles/theme.css`) — existing
+- ✓ Shared component library `@repo/ui` (`packages/ui`) — Radix UI + shadcn primitives (button, card, dialog, accordion, tabs, form, input, badge, etc.), CVA + clsx/tailwind-merge, lucide-react, next-themes, sonner, Tailwind v4 token architecture (`styles/theme.css`) — existing (base for `apps/admin-panel` + Demo's admin-simulation tab only, per Phase 01.1 pivot)
 - ✓ Codebase mapped — `.planning/codebase/*` (ARCHITECTURE, STACK, CONVENTIONS, STRUCTURE, TESTING, INTEGRATIONS, CONCERNS) — existing
 - ✓ Replaced `packages/ui/styles/theme.css` design tokens with the design archive's light/dark palette + new `--brand` token — Phase 1
-- ✓ Header/footer/theme-toggle/not-found shared shell wired into `apps/web/app/layout.tsx` via `next-themes` — Phase 1
-- ✓ THEME-02 shadcn-primitive audit for the shell (header/footer/404) — Phase 1; broader page-content audit still Active below
+- ✓ Header/footer/theme-toggle/not-found shared shell wired into `apps/web/app/layout.tsx` via `next-themes` — Phase 1 (theme-toggle later removed from Header in Phase 01.1; dark mode deferred, see Blockers/Concerns)
+- ✓ THEME-02 shadcn-primitive audit for the shell (header/footer/404) — Phase 1
+- ✓ Bespoke premium `dt-*` design system (own palette/typography/motion/icons) for the `apps/web` marketing site, superseding `@repo/ui` for Home/Contacts/Demo/Prices/Blog — Phase 01.1
+- ✓ All six page routes shipped: Home `/`, Contacts `/contacts`, Demo `/demo`, Prices `/prices`, Blog `/blog`, Blog Post `/blog/[slug]` — Phase 2 + Phase 3
+- ✓ Contacts and Demo forms rebuilt with `react-hook-form` + `zod` validation; submission mocked (simulated delay + `sonner` toast) — Phase 2
+- ✓ Blog listing + blog post detail routes driven by static mock data (in-code `apps/web/modules/blog/_data.ts`), with functional search/category filtering and a Not Found state for unknown slugs — Phase 3
+- ✓ Prices page with functional monthly/yearly billing toggle, 3-tier comparison, FAQ — Phase 3
+- ✓ Demo page kept as a scripted client-side chat simulation (local `useState`) — no real bot/API integration this milestone — Phase 2
+- ✓ All Ukrainian copy (headings, FAQ, 6 blog posts, pricing tiers) carried over as-is from the design archive into mock data/constants in code — Phase 2 + Phase 3
+- ✓ Next.js App Router best practices applied: Server Components by default, `"use client"` only where interactivity requires it, `next/image` for images — Phase 1–3
 
 ### Active
 
-- [ ] Port remaining 5 page routes' content (Home `/`, Prices `/prices`, Demo `/demo`, Blog `/blog`, Blog Post `/blog/[slug]`, Contacts `/contacts`) to Next.js App Router under `apps/web/app/` — shell/not-found done in Phase 1, page content is Phase 2/3
-- [ ] Replace `apps/web`'s default create-turbo starter page content (`app/page.tsx` still the starter home page) — layout/shell already replaced in Phase 1
-- [ ] Rebuild remaining page content using `@repo/ui` components instead of the design's local copy of shadcn components (`src/app/components/ui/*` in the archive) — extend `@repo/ui` with any missing primitives (e.g. `alert-dialog` variants, chart, carousel, command, context-menu, menubar, navigation-menu, resizable, scroll-area — audit against what pages actually use) via the existing shadcn-CLI pattern already used in `packages/ui`
-- [ ] Contacts and Demo forms rebuilt with `react-hook-form` + `zod` validation (replacing the archive's raw `useState` form handling); submission is mocked (simulated delay + `sonner` toast), matching current design behavior — no real backend call yet
-- [ ] Fix pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict blocking `pnpm --filter web build`'s (and `apps/admin-panel`'s) production type-check — discovered in Phase 1, unrelated to Phase 1's own changes but should land before/during Phase 2 (`pnpm.overrides` pin)
-- [ ] All Ukrainian copy (headings, FAQ, 6 blog posts, pricing tiers) carried over as-is from the design archive into mock data/constants in code
-- [ ] Blog listing + blog post detail routes driven by static mock data (in-code, not CMS/MDX) with a clear seam for future real content source
-- [ ] Demo page kept as a scripted client-side chat simulation (local `useState`) — no real bot/API integration this milestone
-- [ ] Zustand introduced only if a genuine cross-component client state need emerges during implementation (e.g. multi-step form state) — not pre-emptively added for theme (next-themes covers that) or the demo simulation (local state suffices)
-- [ ] Apply Next.js App Router best practices throughout: Server Components by default, `"use client"` only where interactivity requires it (forms, demo chat, theme toggle), `metadata` API per route, `next/image` for images, `next/font` instead of the archive's `fonts.css`, semantic HTML
+None — milestone v1.0 requirements fully shipped as of Phase 3 (2026-08-10).
+
+### Emerged (not yet scheduled)
+
+- [ ] "Unified source of truth" positioning — DentaBot is per-clinic (each clinic gets its own bot instance with its own settings/functions), not one shared bot; a Home page highlight section covering this (bot + manual admin booking on one core, role-based access, `created_via` analytics) shipped as an ad-hoc quick task (260810-ddh) outside the original 6-page migration scope
+- [ ] Code review findings from `03-REVIEW.md` (8 warnings, non-blocking): "-20%" yearly discount badge only matches 1 of 3 pricing tiers' actual discount; pricing toggle lacks an accessible name; "Завантажити ще"/Share buttons are non-functional by design; `RelatedPosts` doesn't compute real relevance (declaration-order only); `comparison-table.tsx` duplicates `pricing-cards.tsx`'s plan data with no shared source of truth
+- [ ] Fix pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict blocking `pnpm --filter web build`'s (and `apps/admin-panel`'s) production type-check — discovered in Phase 1, still open as of Phase 3
 
 ### Out of Scope
 
@@ -98,4 +103,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-08-08 after Phase 1 (Theme & Site Shell)*
+*Last updated: 2026-08-10 after Phase 3 (Prices & Blog) — milestone v1.0 complete*

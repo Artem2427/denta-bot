@@ -3,10 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 current_phase: 3
-current_phase_name: Prices & Blog
-status: verifying
+status: completed
 stopped_at: Completed 03-02-PLAN.md
-last_updated: "2026-08-10T07:41:45.917Z"
+last_updated: "2026-08-10T08:28:54.475Z"
 last_activity: 2026-08-10
 last_activity_desc: Phase 3 execution started
 progress:
@@ -14,23 +13,24 @@ progress:
   completed_phases: 4
   total_plans: 12
   completed_plans: 12
+current_phase_name: Prices & Blog
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-08-08)
+See: .planning/PROJECT.md (updated 2026-08-10)
 
-**Core value:** The migrated site must render all six pages from the design faithfully — content, layout, and theme — using `@repo/ui` components and Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
-**Current focus:** Phase 3 — Prices & Blog
+**Core value:** The migrated site renders all six pages from the design faithfully — content, layout, and theme — using Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
+**Current focus:** Milestone v1.0 complete — all six routes shipped (2026-08-10)
 
 ## Current Position
 
-Phase: 3 (Prices & Blog) — EXECUTING
-Plan: 2 of 2
-Status: Phase complete — ready for verification
-Last activity: 2026-08-10 - Completed quick task 260810-ddh: Add unified-source-of-truth admin highlight block to Home page
+Phase: 3
+Plan: Not started
+Status: All phases complete
+Last activity: 2026-08-10 — Phase 3 complete
 
 Progress: [██████████] 100%
 
@@ -38,7 +38,7 @@ Progress: [██████████] 100%
 
 **Velocity:**
 
-- Total plans completed: 10
+- Total plans completed: 12
 - Average duration: - min
 - Total execution time: 0 hours
 
@@ -49,6 +49,7 @@ Progress: [██████████] 100%
 | 01 | 2 | - | - |
 | 01.1 | 4 | - | - |
 | 02 | 4 | - | - |
+| 3 | 2 | - | - |
 
 **Recent Trend:**
 
@@ -103,7 +104,8 @@ None yet.
 
 ### Blockers/Concerns
 
-- pnpm --filter web build's tsc step fails on packages/ui/src/components/shadcn-ui/button-group.tsx due to a pre-existing csstype@3.1.3 vs 3.2.3 duplicate-resolution conflict (deferred-items.md #5/#6); requires a monorepo-wide pnpm.overrides fix, out of scope for Phase 1 — recommended before/during Phase 2
+- pnpm --filter web build's tsc step fails on packages/ui/src/components/shadcn-ui/{button-group,calendar,sidebar}.tsx due to a pre-existing csstype@3.1.3 vs 3.2.3 duplicate-resolution conflict (deferred-items.md #5/#6); requires a monorepo-wide pnpm.overrides fix — still open as of Phase 3 (2026-08-10), unrelated to any phase's own changes, confirmed present at every phase's typecheck run
+- 03-REVIEW.md (Phase 3): 8 non-blocking warnings — "-20%" yearly discount badge inaccurate for 2 of 3 pricing tiers, pricing toggle lacks accessible name, Share/"Завантажити ще" buttons non-functional by design, RelatedPosts has no real relevance logic, comparison-table.tsx duplicates pricing-cards.tsx's plan data
 
 ### Roadmap Evolution
 
@@ -119,7 +121,9 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-10T07:41:45.906Z
-Stopped at: Completed 03-02-PLAN.md
+Last session: 2026-08-10T08:35:00.000Z
+Stopped at: Milestone v1.0 complete — all 4 phases (1, 01.1, 2, 3) done, all 6 routes shipped, UAT passed, security verified (threats_open: 0)
 Resume file: None
+
+Next: /gsd-complete-milestone v1.0 — archive milestone and prepare for next, when ready
 </content>
