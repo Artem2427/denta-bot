@@ -8,6 +8,7 @@
 ## Phases
 
 **Phase Numbering:**
+
 - Integer phases (1, 2, 3, 4, 5, 6): Planned milestone work
 - Decimal phases (01.1): Urgent insertions between surrounding integers
 
@@ -34,42 +35,56 @@ Full phase details archived at `.planning/milestones/v1.0-ROADMAP.md`.
 ## Phase Details
 
 ### Phase 4: Backend Foundation & Auth
+
 **Goal**: A real Postgres + Prisma + NestJS backend exists — documented via Swagger, with secure PlatformAdmin JWT authentication (access + refresh, rotation with reuse detection, server-side logout revocation, and protected-route enforcement) — replacing the untouched NestJS scaffold. No `apps/platform-admin` UI exists yet; success criteria are verified at the API/Swagger level.
 **Depends on**: Phase 3 (v1.0 foundation; first phase of v1.1)
 **Requirements**: INFRA-01, INFRA-02, INFRA-03, AUTH-01, AUTH-02, AUTH-03, AUTH-04
 **Success Criteria** (what must be TRUE):
+
   1. Prisma schema + migrations live in a shared `packages/db` package, version-controlled, and are the only way the DB schema changes (no manual DB edits) — running the migration produces the full schema (PlatformAdmin, RefreshToken, Clinic, Lead, BlogPost, PricingPlan tables)
   2. The generated Prisma client/types are importable from `apps/server` via `packages/db`, structurally ready for `apps/web`/`apps/platform-admin` to consume later
   3. `apps/server` serves a browsable Swagger/OpenAPI doc listing every implemented endpoint
   4. Calling `POST /auth/login` with valid PlatformAdmin credentials returns an access token + refresh token; refreshing the session rotates the refresh token and detects/punishes reuse (revokes the session family); logging out invalidates the refresh token server-side
   5. Calling any protected endpoint without a valid access token is rejected (401)
+
 **Plans**: 2 plans
 Plans:
+**Wave 1**
+
 - [ ] 04-01-PLAN.md — packages/db schema/migration/seed + apps/server Prisma integration + POST /auth/login tracer + Swagger
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 04-02-PLAN.md — POST /auth/refresh (rotation + reuse detection), POST /auth/logout, global fail-closed AccessTokenGuard, GET /auth/me
 
 ### Phase 5: Clinic, Lead & Content Management
+
 **Goal**: PlatformAdmin staff can log into `apps/platform-admin` and fully manage clinic accounts, the unified lead inbox, and CMS content (blog posts + pricing plans) through real screens backed by the API — turning the currently-empty Vite scaffold into a working internal tool.
 **Depends on**: Phase 4
 **Requirements**: CLINIC-01, CLINIC-02, CLINIC-03, CLINIC-04, CLINIC-05, LEAD-03, LEAD-04, LEAD-05, LEAD-06, LEAD-07, CMS-01, CMS-03, INFRA-04, INFRA-05
 **Success Criteria** (what must be TRUE):
+
   1. PlatformAdmin logs into `apps/platform-admin` and can view a list of all clinic accounts, open a single clinic's detail (contact info, status, plan, stubbed bot-usage fields), create a new clinic, edit an existing clinic's info/status/plan, and filter the list by status
   2. PlatformAdmin can view a unified Lead inbox tagged by source (contacts/demo), filter it by status and date, open a lead's full submitted detail, update a lead's status (New/Contacted/Converted), and convert a lead into a linked Clinic record
   3. PlatformAdmin can create, edit, and delete Blog posts and Pricing plans from within `apps/platform-admin`
   4. All platform-admin list/detail screens fetch data via TanStack Query against a typed client generated from the OpenAPI spec, and reflect mutations without a manual page refresh
   5. Clinic, Lead, and Content records show who last updated them and when
+
 **Plans**: TBD
 **UI hint**: yes
 
 ### Phase 6: apps/web Integration
+
 **Goal**: The public marketing site (`apps/web`) is wired to the real backend — Contacts/Demo submissions persist as Leads, and the Blog and Prices pages render real CMS content instead of mock data — closing the loop from Phase 5's API/screens back to the public site.
 **Depends on**: Phase 5
 **Requirements**: LEAD-01, LEAD-02, CMS-02, CMS-04
 **Success Criteria** (what must be TRUE):
+
   1. Submitting the Contacts form on `apps/web` persists a Lead via the API, tagged `source: contacts`
   2. Submitting the Demo form on `apps/web` persists a Lead via the API, tagged `source: demo`
   3. `apps/web`'s Blog list and blog post detail pages render real posts fetched from the API, with `modules/blog/_data.ts` removed
   4. `apps/web`'s Prices page renders real pricing plans fetched from the API, replacing hardcoded data and collapsing the `pricing-cards.tsx`/`comparison-table.tsx` duplication
+
 **Plans**: TBD
 **UI hint**: yes
 
