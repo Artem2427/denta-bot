@@ -142,6 +142,10 @@ None - no external service configuration required.
 
 No blockers for 03-02.
 
+## Self-Check: PASSED
+
+All created/modified files confirmed present on disk; all 4 commit hashes (6dd334e, e01402b, aae7a62, bbb4af8) confirmed in git log.
+
 ---
 *Phase: 03-prices-blog*
 *Completed: 2026-08-10*

@@ -107,12 +107,15 @@ Plans:
   3. User can view an individual Blog Post at `/blog/[slug]` with the post content from the design
   4. User navigating to a blog slug not present in the mock data sees a Not Found state
 
-**Plans**: TBD
+**Plans**: 1/2 plans executed
 **UI hint**: yes
 
 Plans:
 
-- [ ] 03-01: TBD
+- [x] 03-01-PLAN.md
+- [ ] 03-02-PLAN.md
+
+- [x] 03-01: TBD
 
 ## Progress
 
@@ -123,5 +126,5 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Theme & Site Shell | 2/2 | Complete    | 2026-08-08 |
 | 2. Home, Contacts & Demo | 4/4 | Complete    | 2026-08-09 |
-| 3. Prices & Blog | 0/TBD | Not started | - |
+| 3. Prices & Blog | 1/2 | In Progress|  |
 </content>

@@ -31,7 +31,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Prices
 
-- [ ] **PRICE-01**: User can view the Prices page at `/prices` with all pricing tiers from the design ported with `@repo/ui` components and original copy
+- [x] **PRICE-01**: User can view the Prices page at `/prices` with all pricing tiers from the design ported with `@repo/ui` components and original copy
 
 ### Demo
 
@@ -92,7 +92,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CONT-01 | Phase 2 | Complete |
 | CONT-02 | Phase 2 | Complete |
 | CONT-03 | Phase 2 | Complete |
-| PRICE-01 | Phase 3 | Pending |
+| PRICE-01 | Phase 3 | Complete |
 | BLOG-01 | Phase 3 | Pending |
 | BLOG-02 | Phase 3 | Pending |
 | BLOG-03 | Phase 3 | Pending |
