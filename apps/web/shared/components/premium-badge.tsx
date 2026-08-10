@@ -1,8 +1,7 @@
+import { cn } from '@/shared/lib/cn';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
 import * as React from 'react';
-
-import { cn } from '@/shared/lib/cn';
 
 const premiumBadgeVariants = cva(
   'inline-flex w-fit shrink-0 items-center justify-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap',
