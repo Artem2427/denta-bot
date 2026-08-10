@@ -86,37 +86,37 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | TBD | Pending |
-| INFRA-02 | TBD | Pending |
-| INFRA-03 | TBD | Pending |
-| INFRA-04 | TBD | Pending |
-| INFRA-05 | TBD | Pending |
-| AUTH-01 | TBD | Pending |
-| AUTH-02 | TBD | Pending |
-| AUTH-03 | TBD | Pending |
-| AUTH-04 | TBD | Pending |
-| CLINIC-01 | TBD | Pending |
-| CLINIC-02 | TBD | Pending |
-| CLINIC-03 | TBD | Pending |
-| CLINIC-04 | TBD | Pending |
-| CLINIC-05 | TBD | Pending |
-| LEAD-01 | TBD | Pending |
-| LEAD-02 | TBD | Pending |
-| LEAD-03 | TBD | Pending |
-| LEAD-04 | TBD | Pending |
-| LEAD-05 | TBD | Pending |
-| LEAD-06 | TBD | Pending |
-| LEAD-07 | TBD | Pending |
-| CMS-01 | TBD | Pending |
-| CMS-02 | TBD | Pending |
-| CMS-03 | TBD | Pending |
-| CMS-04 | TBD | Pending |
+| INFRA-01 | Phase 4 | Pending |
+| INFRA-02 | Phase 4 | Pending |
+| INFRA-03 | Phase 4 | Pending |
+| INFRA-04 | Phase 5 | Pending |
+| INFRA-05 | Phase 5 | Pending |
+| AUTH-01 | Phase 4 | Pending |
+| AUTH-02 | Phase 4 | Pending |
+| AUTH-03 | Phase 4 | Pending |
+| AUTH-04 | Phase 4 | Pending |
+| CLINIC-01 | Phase 5 | Pending |
+| CLINIC-02 | Phase 5 | Pending |
+| CLINIC-03 | Phase 5 | Pending |
+| CLINIC-04 | Phase 5 | Pending |
+| CLINIC-05 | Phase 5 | Pending |
+| LEAD-01 | Phase 6 | Pending |
+| LEAD-02 | Phase 6 | Pending |
+| LEAD-03 | Phase 5 | Pending |
+| LEAD-04 | Phase 5 | Pending |
+| LEAD-05 | Phase 5 | Pending |
+| LEAD-06 | Phase 5 | Pending |
+| LEAD-07 | Phase 5 | Pending |
+| CMS-01 | Phase 5 | Pending |
+| CMS-02 | Phase 6 | Pending |
+| CMS-03 | Phase 5 | Pending |
+| CMS-04 | Phase 6 | Pending |
 
 **Coverage:**
-- v1 requirements: 23 total
-- Mapped to phases: 0
-- Unmapped: 23 ⚠️ (roadmap not yet created)
+- v1 requirements: 25 total (corrected from an earlier stale "23" summary — the enumerated list above has always had 25 rows: 5 INFRA + 4 AUTH + 5 CLINIC + 7 LEAD + 4 CMS)
+- Mapped to phases: 25
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-08-10*
-*Last updated: 2026-08-10 after initial definition*
+*Last updated: 2026-08-10 after v1.1 ROADMAP.md creation (Phases 4-6)*

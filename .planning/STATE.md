@@ -6,7 +6,7 @@ status: planning
 last_updated: "2026-08-10T09:46:27.976Z"
 last_activity: 2026-08-10
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -19,15 +19,17 @@ progress:
 
 See: .planning/PROJECT.md (updated 2026-08-10)
 
-**Core value:** The migrated site renders all six pages from the design faithfully — content, layout, and theme — using Next.js App Router conventions, so the marketing site is production-shaped even though it currently runs entirely on mock data.
-**Current focus:** Milestone v1.0 complete — all six routes shipped (2026-08-10)
+**Core value:** A real NestJS + Prisma backend feeds `apps/platform-admin` (clinic/lead/content monitoring) and the site's CMS-backed content, so denta-bot staff can operate on real data instead of hardcoded fixtures.
+**Current focus:** v1.1 roadmap created — ready to plan Phase 4 (Backend Foundation & Auth)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-08-10 — Milestone v1.1 started
+Phase: 4 of 7 (Backend Foundation & Auth) — first phase of v1.1 (1 of 3 milestone phases)
+Plan: — (not yet planned)
+Status: Ready to plan
+Last activity: 2026-08-10 — ROADMAP.md created for v1.1 (Phases 4, 5, 6), 25/25 v1 requirements mapped
+
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
@@ -66,7 +68,11 @@ Last activity: 2026-08-10 — Milestone v1.1 started
 ### Decisions
 
 Full v1.0 decision log archived in PROJECT.md Key Decisions table (all marked ✓ Good or Superseded post-milestone-review) and `.planning/milestones/v1.0-ROADMAP.md`.
-None yet for the next milestone.
+
+v1.1 roadmap-level decisions:
+- Merged research's suggested "Prisma foundation" + "server core + Auth" phases into one Phase 4 — both are pure backend/API work with no independent user-observable milestone between them
+- Merged research's suggested "Clinics/Leads/Content CRUD modules" + "platform-admin data layer/screens" phases into one Phase 5 — splitting API-only CRUD from the screens that consume it would have left the screens phase with a single unique requirement (INFRA-04), violating the single-requirement-phase anti-pattern; PlatformAdmin's "can view/create/edit" requirements are only truly observable once the actual `apps/platform-admin` screens exist
+- LEAD-01/LEAD-02 (Contacts/Demo submissions persisting) and CMS-02/CMS-04 (`apps/web` rendering real data) assigned to Phase 6, not Phase 5 — these requirements describe `apps/web`-side behavior that only becomes true once the marketing site's existing mocked handlers are rewired, not when the backend endpoint alone exists
 
 ### Pending Todos
 
@@ -88,14 +94,18 @@ None yet.
 
 ### Blockers/Concerns
 
-Open items carried into the next milestone (see PROJECT.md "Active" for full detail):
+Open items carried into v1.1 (see PROJECT.md "Active" for full detail):
 
 - csstype@3.1.3/3.2.3 duplicate-resolution conflict blocking a clean `pnpm --filter web build` — open since Phase 1, unrelated to any phase's own changes
 - 8 non-blocking code-review warnings from `03-REVIEW.md` (Phase 3) — pricing badge accuracy, accessibility, dead-end buttons by design, related-posts relevance logic, comparison-table data duplication
+- Production domain/subdomain topology for `apps/web` and `apps/platform-admin` is undecided — needed before Phase 4 finalizes refresh-token cookie `SameSite` config (flagged in research/SUMMARY.md)
+- `apps/server`'s Node engine floor (`>=18` at root) is below Prisma 7's requirement (`>=20.19.0`) — manifest fix needed early in Phase 4, not a real blocker since local dev already runs Node 22
 
 ### Roadmap Evolution
 
 v1.0 roadmap evolution history archived in `.planning/milestones/v1.0-ROADMAP.md`.
+
+- 2026-08-10: v1.1 roadmap created — Phases 4 (Backend Foundation & Auth), 5 (Clinic, Lead & Content Management), 6 (apps/web Integration). 25/25 v1 requirements mapped (REQUIREMENTS.md's stated "23 total" summary was stale against its own 25-row traceability table; corrected during roadmap creation).
 
 ## Deferred Items
 
@@ -108,13 +118,12 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-10T09:00:00.000Z
-Stopped at: Milestone v1.0 archived — ROADMAP.md/REQUIREMENTS.md archived to .planning/milestones/, phase directories archived to .planning/milestones/v1.0-phases/, RETROSPECTIVE.md written
+Last session: 2026-08-10T09:46:27.976Z
+Stopped at: v1.1 ROADMAP.md created (Phases 4-6), STATE.md and REQUIREMENTS.md traceability updated
 Resume file: None
 
-Next: /gsd-new-milestone — start the next milestone, when ready
-</content>
+Next: /gsd-plan-phase 4 — plan Phase 4 (Backend Foundation & Auth)
 
 ## Operator Next Steps
 
-- Start the next milestone with /gsd-new-milestone
+- Run /gsd-plan-phase 4 to create the detailed plan for Phase 4
