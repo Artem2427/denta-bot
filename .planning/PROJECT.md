@@ -1,12 +1,26 @@
-# denta-bot Marketing Site (apps/web)
+# denta-bot Platform
 
 ## What This Is
 
-`apps/web` is the public marketing site for denta-bot — a SaaS product that gives dental clinics a Telegram/chat bot for patient booking automation. This milestone replaced the default `create-turbo` Next.js starter with a real marketing site (Home, Prices, Demo, Blog, Blog Post, Contacts) migrated from a Figma-exported design prototype into Next.js 16 (App Router). As of Phase 01.1, the marketing site runs on its own bespoke premium `dt-*` design system (own palette/typography/motion), not `@repo/ui` — `@repo/ui`/`packages/ui` remains the base only for `apps/admin-panel` and the Demo page's embedded admin-panel simulation.
+denta-bot is a SaaS product that gives dental clinics a Telegram/chat bot for patient booking automation. `apps/web` is the public marketing site (Home, Prices, Demo, Blog, Blog Post, Contacts), migrated from a Figma-exported design prototype into Next.js 16 (App Router) and shipped as v1.0. It runs on its own bespoke premium `dt-*` design system (own palette/typography/motion), not `@repo/ui` — `@repo/ui`/`packages/ui` remains the base only for `apps/admin-panel`-lineage apps (`apps/platform-admin`, `apps/client-admin`) and the Demo page's embedded admin-panel simulation. Starting v1.1, the product grows a real backend (`apps/server`, NestJS + Prisma) and its first real admin surface, `apps/platform-admin` — a SaaS-staff dashboard for monitoring clinic accounts, site leads, and content — replacing the mock-data-only, backend-less v1.0 state.
 
 ## Core Value
 
-The migrated site renders all six pages from the design faithfully — content, layout, and theme — using Next.js App Router conventions, so the marketing site is production-shaped (typed, validated forms, proper routing) even though it currently runs entirely on mock data. **Milestone v1.0 shipped 2026-08-10: all six routes (`/`, `/prices`, `/demo`, `/blog`, `/blog/[slug]`, `/contacts`) are live.**
+The migrated site renders all six pages from the design faithfully — content, layout, and theme — using Next.js App Router conventions, so the marketing site is production-shaped (typed, validated forms, proper routing). **Milestone v1.0 shipped 2026-08-10: all six routes (`/`, `/prices`, `/demo`, `/blog`, `/blog/[slug]`, `/contacts`) are live**, still on mock data. **Milestone v1.1 (in progress)** replaces the mock layer: a real NestJS + Prisma backend feeds `apps/platform-admin` (clinic/lead/content monitoring) and the site's CMS-backed content, so denta-bot staff can operate on real data instead of hardcoded fixtures.
+
+## Current Milestone: v1.1 Platform Admin API
+
+**Goal:** Build a real NestJS + Prisma backend that powers `apps/platform-admin` — a SaaS-staff dashboard for monitoring clinic accounts — and give it a CMS layer for the marketing site's content, replacing the current no-backend / mock-data state.
+
+**Target features:**
+- Dedicated `PlatformAdmin` auth table (JWT access + refresh tokens; separate from any future clinic-user table)
+- Clinic (client) monitoring: CRUD + account/subscription status; bot-usage fields modeled but stubbed (no real bot exists yet)
+- Site leads: Contacts + Demo form submissions from `apps/web` persist to the DB and are manageable in `platform-admin`
+- CMS: blog posts and pricing plans become DB-backed and editable via the API/`platform-admin`, replacing `apps/web/modules/blog/_data.ts` and hardcoded pricing data
+- Prisma ORM, schema changes only via migrations, generated types/client shared via a `packages/` package usable from `server`, `web`, and `platform-admin`
+- REST + Swagger (`@nestjs/swagger`) on the backend; `TanStack Query` on the frontend(s)
+
+**Explicitly deferred:** `apps/client-admin` (per-clinic self-service panel) — next milestone. Real Telegram bot integration (webhook, booking flow) — future milestone.
 
 ## Business Context
 
@@ -36,17 +50,26 @@ The migrated site renders all six pages from the design faithfully — content, 
 
 ### Active
 
-Candidates for next milestone (none scheduled yet):
+**v1.1 (this milestone):**
+
+- [ ] `PlatformAdmin` auth (JWT access + refresh, dedicated table)
+- [ ] Clinic (client) CRUD + account/subscription monitoring
+- [ ] Site leads: Contacts/Demo form submissions persisted + manageable in platform-admin
+- [ ] CMS: blog posts + pricing plans DB-backed, editable via API/platform-admin
+- [ ] Prisma schema + migrations, shared generated types in `packages/`
+- [ ] REST + Swagger API surface, `TanStack Query` on consuming frontends
+
+**Carried backlog (not yet scheduled):**
 
 - [ ] "Unified source of truth" positioning — DentaBot is per-clinic (each clinic gets its own bot instance with its own settings/functions), not one shared bot; a Home page highlight section covering this (bot + manual admin booking on one core, role-based access, `created_via` analytics) shipped as an ad-hoc quick task (260810-ddh) outside the original 6-page migration scope — worth extending with real backend semantics once a real bot/admin backend exists
 - [ ] Code review findings from `03-REVIEW.md` (8 warnings, non-blocking, all still open): "-20%" yearly discount badge only matches 1 of 3 pricing tiers' actual discount; pricing toggle lacks an accessible name; "Завантажити ще"/Share buttons are non-functional by design; `RelatedPosts` doesn't compute real relevance (declaration-order only); `comparison-table.tsx` duplicates `pricing-cards.tsx`'s plan data with no shared source of truth
 - [ ] Fix pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict blocking `pnpm --filter web build`'s (and `apps/admin-panel`'s) production type-check — discovered in Phase 1, still open at v1.0 close; needs a monorepo-wide `pnpm.overrides` fix
 - [ ] Dark mode for the premium `apps/web` site — no dark-mode `dt-*` token values exist; `ThemeToggle` removed from Header in Phase 01.1, component still exists unused; explicitly deferred at Phase 01.1 close, needs a fresh decision
-- [ ] Real backend integration for Contacts/Demo forms, real bot/chat API wiring — natural v1.1+ scope once `apps/server` grows real endpoints
+- [ ] Real bot/chat API wiring for the Demo page — deferred past v1.1 (v1.1 covers backend CRM/CMS, not the Telegram bot itself)
 
 ### Out of Scope
 
-- CMS or MDX-based blog content — mock data in code is sufficient for now
+- ~~CMS or MDX-based blog content — mock data in code is sufficient for now~~ — **invalidated at v1.1 start**: blog/pricing content becomes DB-backed via the new platform-admin API this milestone
 - i18n / multi-language support — site ships Ukrainian-only, matching the design
 - ~~New/duplicate component library — everything routes through the existing `@repo/ui`~~ — **invalidated at Phase 01.1**: the client's premium-redesign ТЗ required a bespoke `dt-*` system for the marketing site specifically because `@repo/ui`'s theme couldn't express it; `@repo/ui` remains authoritative only for `apps/admin-panel` and the Demo page's admin-simulation tab
 
@@ -63,7 +86,7 @@ Candidates for next milestone (none scheduled yet):
 - **Component reuse**: For `apps/admin-panel` and the Demo page's embedded admin-panel simulation, all UI must go through `@repo/ui`; app-specific one-off components only for page composition, not primitives already covered by the design system. **Superseded for the `apps/web` marketing site (Home/Contacts/Demo's marketing chrome/Prices/Blog) as of the Phase 01.1 premium redesign (2026-08-08, client-directed):** the marketing site now uses its own bespoke component system (own palette/typography/motion), not built on `@repo/ui`. `packages/ui`/`theme.css` is unmodified and stays the base only for `apps/admin-panel` and the Demo page's admin-simulation tab.
 - **Forms**: `react-hook-form` + `zod` required for all form validation (Contacts, Demo if applicable)
 - **State management**: Zustand allowed but not mandatory — add only when local/prop-drilled state genuinely becomes unmanageable
-- **Data**: Mock/static data only this milestone — no real API integration
+- **Data**: v1.0 was mock/static-data only. Starting v1.1, `apps/platform-admin` and the marketing site's leads/CMS content are backed by a real NestJS + Prisma API — no more mock data for those surfaces
 - **Styling source of truth**: For `apps/admin-panel`/admin-demo, `packages/ui/styles/theme.css` remains authoritative. For the `apps/web` marketing site, `apps/web/app/premium-theme.css`'s `dt-*` token system (Phase 01.1) is authoritative instead.
 
 ## Key Decisions
@@ -101,4 +124,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-08-10 after v1.0 milestone close*
+*Last updated: 2026-08-10 after v1.1 milestone start*
