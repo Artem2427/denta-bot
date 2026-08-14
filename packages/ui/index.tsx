@@ -10,6 +10,7 @@ export * from './src/components/shadcn-ui/button-group';
 export * from './src/components/shadcn-ui/calendar';
 export * from './src/components/shadcn-ui/card';
 export * from './src/components/shadcn-ui/checkbox';
+export * from './src/components/shadcn-ui/data-table';
 export * from './src/components/shadcn-ui/dialog';
 export * from './src/components/shadcn-ui/drawer';
 export * from './src/components/shadcn-ui/dropdown-menu';
