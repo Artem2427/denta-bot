@@ -57,6 +57,16 @@
 
 ---
 
+## Blog featured-post derivation (surfaced by research, post-discussion)
+
+| Question | Options | Selected |
+|---|---|---|
+| How should the Blog hero "featured post" be chosen, given BlogPost has no `featured` field? | Newest published post / Drop the featured-post hero section / Add a `featured: boolean` field to BlogPost (schema migration) | ✓ Newest published post |
+
+**Notes:** The researcher found this gap by reading the real `BlogPost` Prisma schema against `apps/web/app/blog/page.tsx`'s hardcoded `featuredPost` mock export — CONTEXT.md's original discussion didn't surface it. Resolved as D-12 and folded back into `06-CONTEXT.md` before planning.
+
+---
+
 ## Claude's Discretion
 
 - Exact DTO shapes for the new public endpoints

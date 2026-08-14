@@ -34,6 +34,9 @@ No auth work, no `apps/platform-admin` UI work, no real bot/chat integration —
 - **D-10:** A "Запросити доступ" / "Замовити демо"-style CTA button on `/demo`, placed in the header area near the "DEMO MODE" badge (visible regardless of which tab — bot or admin — the visitor is on), opens a modal reusing the Contacts form's field set and zod schema. — **Reversibility:** reversible — new isolated component, no dependency from existing Demo page code.
 - **D-11:** The Demo modal form collects the same fields as Contacts: name (required), clinic (optional), contact = phone or email (required), message (optional) — same zod schema, submits with `source: demo` instead of `source: contacts`.
 
+### Blog featured-post derivation (found during research — no `featured` field on `BlogPost`)
+- **D-12:** `apps/web/app/blog/page.tsx`'s hero "featured post" card is derived as the newest published post (highest `createdAt` among `published: true`) — no schema change. The grid below (`blog-filters.tsx`) excludes that post from its list to avoid showing it twice. — **Reversibility:** reversible — pure query/derivation logic, no schema or contract dependency.
+
 ### Claude's Discretion
 - Exact DTO shapes for the new public endpoints, response caching/revalidation strategy for `fetch()` calls (`revalidate`/`cache` options), and whether the Demo modal form shares a literal component with `contact-form.tsx` or is a parallel copy are left to planning/implementation — no explicit preference expressed beyond "reuse the same fields and schema."
 - Exact `@nestjs/throttler` limits (requests/window) for `POST /leads` left to planning — "a few requests per minute per IP" is directional, not a hard number.
@@ -53,6 +56,9 @@ No auth work, no `apps/platform-admin` UI work, no real bot/chat integration —
 ### Prior phase decisions (still binding)
 - `.planning/phases/04-backend-foundation-auth/04-CONTEXT.md` — D-08 (CORS already covers `apps/web`'s dev origin — no CORS work needed this phase), D-12 (`BlogPost` schema mirrors `apps/web/modules/blog/_data.ts`'s `Post`/`PostBodyBlock` shape field-for-field), D-13 (`PricingPlan` schema mirrors `pricing-cards.tsx`'s plan shape), D-14 (`Lead.source: contacts | demo`, `Lead.status` enums)
 - `.planning/research/SUMMARY.md` §"Phase 5: apps/web integration" (originally numbered before the 4/5/6 phase split; content still applies to what is now Phase 6) — recommends server-side `fetch()` for public reads + client POST for the two forms; flags rate limiting on the public leads endpoint as an open item to revisit "when that endpoint is actually built" (now, this phase)
+
+### Phase 6 research
+- `.planning/phases/06-apps-web-integration/06-RESEARCH.md` — `@nestjs/throttler` v6.5.0 setup (per-route `@UseGuards(ThrottlerGuard)` + `@Throttle()`, not global); Next.js 16 `fetch(url, { next: { revalidate: N } })` conventions (no `cacheComponents`/`dynamicIO` flag set in `apps/web/next.config.js`, so standard caching model applies); Prisma `findUnique({ where: { slug } })` limitation (`published: true` must be checked in application code, not composable into the same unique-where call); two silent-break risks — `pricing-cards.tsx` reads `plan.popular` but the Prisma field is `isPopular`, and no `featured` flag exists on `BlogPost` (resolved as D-12 above); no modal/dialog component exists yet in `apps/web/shared/components/` (radix-ui `Dialog` primitive is available as a raw dependency, pattern proven in `packages/ui/src/components/shadcn-ui/dialog.tsx`); no `NEXT_PUBLIC_*`/API-base-URL env convention exists yet in `apps/web` — recommends `API_URL` (server-side reads) + `NEXT_PUBLIC_API_URL` (client-side `POST /leads`)
 
 </canonical_refs>
 
