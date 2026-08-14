@@ -13,7 +13,7 @@ Requirements for the v1.1 "Platform Admin API" milestone. Each maps to roadmap p
 - [x] **INFRA-02**: Generated Prisma types/client are consumable from `apps/server`, `apps/web`, and `apps/platform-admin` via a shared `packages/` package
 - [x] **INFRA-03**: `apps/server` exposes a REST API documented via Swagger/OpenAPI
 - [ ] **INFRA-04**: Frontend data-fetching uses `TanStack Query` with a typed client generated from the OpenAPI spec
-- [ ] **INFRA-05**: `updatedBy`/`updatedAt` trace fields exist on Clinic, Lead, and Content records
+- [x] **INFRA-05**: `updatedBy`/`updatedAt` trace fields exist on Clinic, Lead, and Content records
 
 ### Auth (AUTH)
 
@@ -24,11 +24,11 @@ Requirements for the v1.1 "Platform Admin API" milestone. Each maps to roadmap p
 
 ### Clinic Monitoring (CLINIC)
 
-- [ ] **CLINIC-01**: PlatformAdmin can view a list of all clinic accounts
-- [ ] **CLINIC-02**: PlatformAdmin can view a single clinic's detail (contact info, status, plan, stubbed bot-usage fields)
-- [ ] **CLINIC-03**: PlatformAdmin can create a new clinic account
-- [ ] **CLINIC-04**: PlatformAdmin can edit a clinic's info, status, and plan
-- [ ] **CLINIC-05**: PlatformAdmin can search/filter the clinic list by status
+- [x] **CLINIC-01**: PlatformAdmin can view a list of all clinic accounts
+- [x] **CLINIC-02**: PlatformAdmin can view a single clinic's detail (contact info, status, plan, stubbed bot-usage fields)
+- [x] **CLINIC-03**: PlatformAdmin can create a new clinic account
+- [x] **CLINIC-04**: PlatformAdmin can edit a clinic's info, status, and plan
+- [x] **CLINIC-05**: PlatformAdmin can search/filter the clinic list by status
 
 ### Lead Inbox (LEAD)
 
@@ -90,16 +90,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-02 | Phase 4 | Complete |
 | INFRA-03 | Phase 4 | Complete |
 | INFRA-04 | Phase 5 | Pending |
-| INFRA-05 | Phase 5 | Pending |
+| INFRA-05 | Phase 5 | Complete |
 | AUTH-01 | Phase 4 | Complete |
 | AUTH-02 | Phase 4 | Complete |
 | AUTH-03 | Phase 4 | Complete |
 | AUTH-04 | Phase 4 | Complete |
-| CLINIC-01 | Phase 5 | Pending |
-| CLINIC-02 | Phase 5 | Pending |
-| CLINIC-03 | Phase 5 | Pending |
-| CLINIC-04 | Phase 5 | Pending |
-| CLINIC-05 | Phase 5 | Pending |
+| CLINIC-01 | Phase 5 | Complete |
+| CLINIC-02 | Phase 5 | Complete |
+| CLINIC-03 | Phase 5 | Complete |
+| CLINIC-04 | Phase 5 | Complete |
+| CLINIC-05 | Phase 5 | Complete |
 | LEAD-01 | Phase 6 | Pending |
 | LEAD-02 | Phase 6 | Pending |
 | LEAD-03 | Phase 5 | Pending |
