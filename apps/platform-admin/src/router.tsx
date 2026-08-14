@@ -6,6 +6,7 @@ import { ClinicDetailPage } from './modules/clinics/clinic-detail-page';
 import { ClinicsListPage } from './modules/clinics/clinics-list-page';
 import { BlogPostFormPage } from './modules/content/blog-post-form-page';
 import { BlogPostsPage } from './modules/content/blog-posts-page';
+import { PricingPlansPage } from './modules/content/pricing-plans-page';
 import { LeadDetailPage } from './modules/leads/lead-detail-page';
 import { LeadsInboxPage } from './modules/leads/leads-inbox-page';
 import { AppShell } from './shared/components/app-shell';
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
       { path: 'content/blog', Component: BlogPostsPage },
       { path: 'content/blog/new', Component: BlogPostFormPage },
       { path: 'content/blog/:id/edit', Component: BlogPostFormPage },
+      { path: 'content/pricing', Component: PricingPlansPage },
     ],
   },
 ]);

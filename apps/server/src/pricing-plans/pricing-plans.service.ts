@@ -17,6 +17,7 @@ export class PricingPlansService {
   async findOne(id: string) {
     const pricingPlan = await this.prisma.pricingPlan.findUnique({
       where: { id },
+      include: { updatedBy: { select: { email: true } } },
     });
     if (!pricingPlan) {
       throw new NotFoundException('Pricing plan not found');
