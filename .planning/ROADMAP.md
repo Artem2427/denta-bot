@@ -70,12 +70,12 @@ Plans:
   4. All platform-admin list/detail screens fetch data via TanStack Query against a typed client generated from the OpenAPI spec, and reflect mutations without a manual page refresh
   5. Clinic, Lead, and Content records show who last updated them and when
 
-**Plans**: 7 plans
+**Plans**: 2/7 plans executed
 Plans:
 **Wave 1**
 
-- [ ] 05-01-PLAN.md — packages/db updatedById migration (all 4 models) + ClinicsModule (CLINIC-01..05)
-- [ ] 05-02-PLAN.md — @repo/ui Form + DataTable primitives (UI-SPEC Gaps 1/2)
+- [x] 05-01-PLAN.md — packages/db updatedById migration (all 4 models) + ClinicsModule (CLINIC-01..05)
+- [x] 05-02-PLAN.md — @repo/ui Form + DataTable primitives (UI-SPEC Gaps 1/2)
 
 **Wave 2** *(blocked on Wave 1)*
 
@@ -126,5 +126,5 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 2. Home, Contacts & Demo | 4/4 | Complete | 2026-08-09 |
 | 3. Prices & Blog | 2/2 | Complete | 2026-08-10 |
 | 4. Backend Foundation & Auth | 2/2 | Complete    | 2026-08-14 |
-| 5. Clinic, Lead & Content Management | 0/TBD | Not started | - |
+| 5. Clinic, Lead & Content Management | 2/7 | In Progress|  |
 | 6. apps/web Integration | 0/TBD | Not started | - |
