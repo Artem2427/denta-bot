@@ -13,7 +13,12 @@ import {
 import { cn } from '../../lib/utils';
 import { Label } from './label';
 
-const Form = FormProvider;
+// Re-exported (not re-bound to a new `const`) so the emitted declaration can
+// reference react-hook-form's own FormProvider export directly, instead of
+// TS needing to synthesize a portable inferred type for a new local binding
+// — the latter fails (TS2742) when the monorepo resolves more than one
+// @types/react copy (see spinner.tsx's comment for the same root cause).
+export { FormProvider as Form };
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -151,4 +156,4 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
   );
 }
 
-export { useFormField, Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField };
+export { useFormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField };
