@@ -4,6 +4,8 @@ import { getAccessToken, refreshAccessToken } from './lib/auth/auth-store';
 import { LoginPage } from './modules/auth/login-page';
 import { ClinicDetailPage } from './modules/clinics/clinic-detail-page';
 import { ClinicsListPage } from './modules/clinics/clinics-list-page';
+import { LeadDetailPage } from './modules/leads/lead-detail-page';
+import { LeadsInboxPage } from './modules/leads/leads-inbox-page';
 import { AppShell } from './shared/components/app-shell';
 
 async function authLoader() {
@@ -26,6 +28,8 @@ export const router = createBrowserRouter([
       { index: true, loader: () => redirect('/clinics') },
       { path: 'clinics', Component: ClinicsListPage },
       { path: 'clinics/:id', Component: ClinicDetailPage },
+      { path: 'leads', Component: LeadsInboxPage },
+      { path: 'leads/:id', Component: LeadDetailPage },
     ],
   },
 ]);
