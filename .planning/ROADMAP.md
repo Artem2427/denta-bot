@@ -70,7 +70,33 @@ Plans:
   4. All platform-admin list/detail screens fetch data via TanStack Query against a typed client generated from the OpenAPI spec, and reflect mutations without a manual page refresh
   5. Clinic, Lead, and Content records show who last updated them and when
 
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+**Wave 1**
+
+- [ ] 05-01-PLAN.md — packages/db updatedById migration (all 4 models) + ClinicsModule (CLINIC-01..05)
+- [ ] 05-02-PLAN.md — @repo/ui Form + DataTable primitives (UI-SPEC Gaps 1/2)
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 05-03-PLAN.md — LeadsModule incl. Lead-to-Clinic conversion transaction (LEAD-03..07)
+
+**Wave 3** *(blocked on Wave 2 — app.module.ts conflict with 05-03)*
+
+- [ ] 05-04-PLAN.md — BlogPostsModule + PricingPlansModule (CMS-01, CMS-03)
+
+**Wave 4** *(blocked on Waves 1-3 — full backend + primitives needed for typed-client codegen)*
+
+- [ ] 05-05-PLAN.md — apps/platform-admin bootstrap (router/query/typed client/auth) + Clinics screens — phase tracer
+
+**Wave 5** *(blocked on Wave 4 — router.tsx conflict)*
+
+- [ ] 05-06-PLAN.md — Leads inbox + detail + status + convert-to-Clinic screens
+
+**Wave 6** *(blocked on Wave 5 — router.tsx conflict)*
+
+- [ ] 05-07-PLAN.md — Blog Posts + Pricing Plans screens
+
 **UI hint**: yes
 
 ### Phase 6: apps/web Integration
