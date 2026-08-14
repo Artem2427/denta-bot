@@ -29,7 +29,7 @@ Full phase details archived at `.planning/milestones/v1.0-ROADMAP.md`.
 **Milestone Goal:** Build a real NestJS + Prisma backend that powers `apps/platform-admin` (clinic/lead/content monitoring) and gives the marketing site a CMS layer for blog/pricing content, replacing the current no-backend / mock-data-only state.
 
 - [x] **Phase 4: Backend Foundation & Auth** - Prisma-backed NestJS API with Swagger docs and secure PlatformAdmin JWT authentication (completed 2026-08-14)
-- [ ] **Phase 5: Clinic, Lead & Content Management** - `apps/platform-admin` screens for full clinic/lead/CMS CRUD, backed by the API
+- [x] **Phase 5: Clinic, Lead & Content Management** - `apps/platform-admin` screens for full clinic/lead/CMS CRUD, backed by the API (completed 2026-08-14)
 - [ ] **Phase 6: apps/web Integration** - Contacts/Demo submissions and Blog/Prices content go live on real data
 
 ## Phase Details
@@ -126,5 +126,5 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 2. Home, Contacts & Demo | 4/4 | Complete | 2026-08-09 |
 | 3. Prices & Blog | 2/2 | Complete | 2026-08-10 |
 | 4. Backend Foundation & Auth | 2/2 | Complete    | 2026-08-14 |
-| 5. Clinic, Lead & Content Management | 7/7 | In Progress|  |
+| 5. Clinic, Lead & Content Management | 7/7 | Complete    | 2026-08-14 |
 | 6. apps/web Integration | 0/TBD | Not started | - |

@@ -12,7 +12,7 @@ Requirements for the v1.1 "Platform Admin API" milestone. Each maps to roadmap p
 - [x] **INFRA-01**: Prisma schema + migrations are the single source of DB schema truth, version-controlled (no manual DB edits)
 - [x] **INFRA-02**: Generated Prisma types/client are consumable from `apps/server`, `apps/web`, and `apps/platform-admin` via a shared `packages/` package
 - [x] **INFRA-03**: `apps/server` exposes a REST API documented via Swagger/OpenAPI
-- [ ] **INFRA-04**: Frontend data-fetching uses `TanStack Query` with a typed client generated from the OpenAPI spec
+- [x] **INFRA-04**: Frontend data-fetching uses `TanStack Query` with a typed client generated from the OpenAPI spec
 - [x] **INFRA-05**: `updatedBy`/`updatedAt` trace fields exist on Clinic, Lead, and Content records
 
 ### Auth (AUTH)
@@ -34,17 +34,17 @@ Requirements for the v1.1 "Platform Admin API" milestone. Each maps to roadmap p
 
 - [ ] **LEAD-01**: A Contacts-form submission on `apps/web` is persisted as a Lead via the API
 - [ ] **LEAD-02**: A Demo-form submission on `apps/web` is persisted as a Lead via the API
-- [ ] **LEAD-03**: PlatformAdmin can view a unified list of all Leads (tagged by source: contacts/demo)
-- [ ] **LEAD-04**: PlatformAdmin can view a Lead's full submitted detail
-- [ ] **LEAD-05**: PlatformAdmin can update a Lead's status (New/Contacted/Converted)
-- [ ] **LEAD-06**: PlatformAdmin can search/filter Leads by status and date
-- [ ] **LEAD-07**: PlatformAdmin can convert a Lead into a linked Clinic record
+- [x] **LEAD-03**: PlatformAdmin can view a unified list of all Leads (tagged by source: contacts/demo)
+- [x] **LEAD-04**: PlatformAdmin can view a Lead's full submitted detail
+- [x] **LEAD-05**: PlatformAdmin can update a Lead's status (New/Contacted/Converted)
+- [x] **LEAD-06**: PlatformAdmin can search/filter Leads by status and date
+- [x] **LEAD-07**: PlatformAdmin can convert a Lead into a linked Clinic record
 
 ### Content / CMS (CMS)
 
-- [ ] **CMS-01**: PlatformAdmin can create, edit, and delete Blog posts
+- [x] **CMS-01**: PlatformAdmin can create, edit, and delete Blog posts
 - [ ] **CMS-02**: `apps/web`'s Blog list/detail pages render real Blog posts from the API, replacing `modules/blog/_data.ts`
-- [ ] **CMS-03**: PlatformAdmin can create, edit, and delete Pricing plans
+- [x] **CMS-03**: PlatformAdmin can create, edit, and delete Pricing plans
 - [ ] **CMS-04**: `apps/web`'s Prices page renders real Pricing plans from the API, replacing hardcoded data and collapsing the `pricing-cards.tsx`/`comparison-table.tsx` duplication
 
 ## v2 Requirements
@@ -89,7 +89,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-01 | Phase 4 | Complete |
 | INFRA-02 | Phase 4 | Complete |
 | INFRA-03 | Phase 4 | Complete |
-| INFRA-04 | Phase 5 | Pending |
+| INFRA-04 | Phase 5 | Complete |
 | INFRA-05 | Phase 5 | Complete |
 | AUTH-01 | Phase 4 | Complete |
 | AUTH-02 | Phase 4 | Complete |
@@ -102,14 +102,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CLINIC-05 | Phase 5 | Complete |
 | LEAD-01 | Phase 6 | Pending |
 | LEAD-02 | Phase 6 | Pending |
-| LEAD-03 | Phase 5 | Pending |
-| LEAD-04 | Phase 5 | Pending |
-| LEAD-05 | Phase 5 | Pending |
-| LEAD-06 | Phase 5 | Pending |
-| LEAD-07 | Phase 5 | Pending |
-| CMS-01 | Phase 5 | Pending |
+| LEAD-03 | Phase 5 | Complete |
+| LEAD-04 | Phase 5 | Complete |
+| LEAD-05 | Phase 5 | Complete |
+| LEAD-06 | Phase 5 | Complete |
+| LEAD-07 | Phase 5 | Complete |
+| CMS-01 | Phase 5 | Complete |
 | CMS-02 | Phase 6 | Pending |
-| CMS-03 | Phase 5 | Pending |
+| CMS-03 | Phase 5 | Complete |
 | CMS-04 | Phase 6 | Pending |
 
 **Coverage:**
