@@ -20,12 +20,15 @@ export class AuthService {
   ) {}
 
   // Shared building block reused by Plan 04-02's refresh() with the SAME familyId.
+  // `email` is embedded in the access token payload so GET /auth/me (Task 2)
+  // can return it without an extra DB round trip on every protected request.
   private async issueTokenPair(
     platformAdminId: string,
+    email: string,
     familyId: string = crypto.randomUUID(),
   ): Promise<IssuedTokenPair> {
     const accessToken = this.jwtService.sign(
-      { sub: platformAdminId },
+      { sub: platformAdminId, email },
       {
         secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
         expiresIn: '15m',
@@ -78,7 +81,10 @@ export class AuthService {
       throw invalidCredentials();
     }
 
-    const { accessToken, refreshToken } = await this.issueTokenPair(admin.id);
+    const { accessToken, refreshToken } = await this.issueTokenPair(
+      admin.id,
+      admin.email,
+    );
 
     return {
       accessToken,
@@ -124,6 +130,24 @@ export class AuthService {
       throw new UnauthorizedException('Refresh token reuse detected');
     }
 
-    return this.issueTokenPair(payload.sub, payload.familyId);
+    // The refresh token's own payload doesn't carry email (only sub/familyId/
+    // jti) — look it up so the freshly issued access token still embeds it.
+    const admin = await this.prisma.platformAdmin.findUniqueOrThrow({
+      where: { id: payload.sub },
+      select: { email: true },
+    });
+
+    return this.issueTokenPair(payload.sub, admin.email, payload.familyId);
+  }
+
+  // AUTH-03. Scoped exclusively to the jti extracted from the caller's OWN
+  // verified RefreshTokenGuard-validated request — never an id/token
+  // supplied in a request body — so logout can never revoke a session
+  // belonging to a different admin (T-04-02-06, IDOR prevention).
+  async logout(payload: { jti: string }): Promise<void> {
+    await this.prisma.refreshToken.updateMany({
+      where: { id: payload.jti, revokedAt: null },
+      data: { revokedAt: new Date() },
+    });
   }
 }

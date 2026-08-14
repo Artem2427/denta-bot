@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { AccessTokenGuard } from './guards/access-token.guard';
+import { AccessTokenStrategy } from './strategies/access-token.strategy';
 import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
 
 @Module({
@@ -13,6 +16,13 @@ import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
     JwtModule.register({}),
   ],
   controllers: [AuthController],
-  providers: [AuthService, RefreshTokenStrategy],
+  providers: [
+    AuthService,
+    AccessTokenStrategy,
+    RefreshTokenStrategy,
+    // Applies AccessTokenGuard to every route in the app by default
+    // (fail-closed, AUTH-04) — routes opt out explicitly via @Public().
+    { provide: APP_GUARD, useClass: AccessTokenGuard },
+  ],
 })
 export class AuthModule {}
