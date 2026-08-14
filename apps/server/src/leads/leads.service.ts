@@ -43,6 +43,11 @@ export class LeadsService {
   }
 
   async updateStatus(id: string, dto: UpdateLeadStatusDto, adminId: string) {
+    if (dto.status === 'converted') {
+      throw new BadRequestException(
+        'Use POST /leads/:id/convert to mark a Lead as converted — it also creates the linked Clinic record',
+      );
+    }
     try {
       // Setting the same status value the lead already has is a valid,
       // idempotent update — no special-case short-circuit needed.

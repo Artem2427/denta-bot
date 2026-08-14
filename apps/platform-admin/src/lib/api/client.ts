@@ -10,11 +10,22 @@ export const api = createClient<paths>({
   credentials: 'include',
 });
 
+// Request.clone() is only valid before the body has been read — by the time
+// onResponse runs, openapi-fetch has already dispatched `request` through
+// fetch(), so its body (for every POST/PATCH) is already consumed and
+// clone() throws. Stash an unconsumed clone in onRequest, before dispatch,
+// keyed by the same Request instance (openapi-fetch mutates and returns the
+// same object between onRequest and onResponse, so the reference is stable).
+const unconsumedClones = new WeakMap<Request, Request>();
+
 api.use({
   onRequest({ request }) {
     const token = getAccessToken();
     if (token) {
       request.headers.set('Authorization', `Bearer ${token}`);
+    }
+    if (request.body) {
+      unconsumedClones.set(request, request.clone());
     }
     return request;
   },
@@ -33,7 +44,8 @@ api.use({
       return response;
     }
 
-    const retryRequest = request.clone();
+    const retryRequest = unconsumedClones.get(request) ?? request.clone();
+    unconsumedClones.delete(request);
     retryRequest.headers.set('Authorization', `Bearer ${newToken}`);
     return fetch(retryRequest);
   },
