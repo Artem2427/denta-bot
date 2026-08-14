@@ -49,16 +49,19 @@ Declared values (already established in `premium-theme.css` / existing component
 
 ## Typography
 
-Already established (`premium-theme.css` — reused verbatim, zero new sizes/weights introduced):
+Scoped to what this phase's new UI actually introduces (Demo modal, empty/error states) — 2 sizes, 2 weights, within contract limits (max 4 sizes / max 2 weights):
 
-| Role | Size | Weight | Line Height |
-|------|------|--------|-------------|
-| Body | 18px (`text-dt-body`, `1.125rem`) | 400 (`font-dt-body`) | 1.5 |
-| Label / caption | 13px (`text-dt-caption`) / `text-sm` (14px) for form labels | 500 (`font-medium`) | default |
-| Heading (h3 — card/modal titles) | 24px (`text-dt-h3`, `1.5rem`) | 600 (`font-semibold`) via `font-dt-heading` | 1.15 |
-| Display (h1 — page hero) | fluid `clamp(2.25rem, 6vw+1rem, 4rem)` | 700 (`font-bold`) via `font-dt-heading` | 1.15 |
+| Role | Size | Weight | Line Height | Used In |
+|------|------|--------|-------------|---------|
+| Body | 18px (`text-dt-body`, `1.125rem`) | 400 (`font-dt-body`) | 1.5 | Modal description copy; Blog/Prices empty-state body; Blog/Prices error-state body |
+| Heading | 24px (`text-dt-h3`, `1.5rem`) | 600 (`font-dt-heading font-semibold`) | 1.15 | Modal title (matches `ContactForm`'s `<h2 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">` pattern exactly); Blog empty-state heading; Prices empty-state heading; Blog/Prices error-state heading (`error.tsx` boundary) |
 
-**This phase's new UI (Demo modal, empty/error states) uses only these four existing roles** — no new size/weight combination is introduced. Modal title uses the `h3` role (matches `ContactForm`'s `<h2 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">` pattern exactly).
+**Pre-existing patterns reused unchanged inside this phase's new UI — not counted toward the table above** (already shipped in `ContactForm`/`premium-theme.css` before this phase; the phase doesn't introduce, change, or newly rely on these — they simply continue to render as-is because components are reused verbatim):
+- Form labels — `text-sm font-medium` (14px / weight 500) — `PremiumDialog`'s form fields reuse `ContactForm`'s existing label markup unchanged.
+- Form-success heading — `text-dt-h3 font-dt-heading font-bold` (24px / weight 700) — `ContactForm`'s existing post-submit "Дякуємо!" block is reused verbatim inside the modal's success state (see Copywriting Contract).
+- Sitewide Display/h1 hero role — fluid `clamp(2.25rem, 6vw+1rem, 4rem)` / weight 700 — existing page-hero styling (`app/blog/page.tsx`, `modules/prices/pricing-cards.tsx`), untouched by this phase and not used by any new surface this phase introduces.
+
+If a future phase touches these reused surfaces directly, reconcile them into the primary 2-weight budget above rather than re-introducing 500/700 as new contract entries.
 
 ---
 
@@ -139,7 +142,7 @@ No dialog/modal primitive exists in `apps/web/shared/components/` yet (confirmed
 | Overlay | `bg-dt-navy/40` with `backdrop-blur-sm`, fades in/out via Radix `data-[state=open]`/`data-[state=closed]` attributes, `duration-200` (matches `PremiumButton`/`PremiumCard`'s existing transition timing) |
 | Content surface | `bg-dt-warm-white`, `rounded-dt-card`, `shadow-[var(--shadow-dt-hover)]`, `border border-dt-navy/10` — visually identical language to `PremiumCard` |
 | Content sizing | `max-w-md` (28rem), `p-6 sm:p-8`, `max-h-[90vh] overflow-y-auto` (scrolls internally if content exceeds viewport height — mobile keyboard-open scenario) |
-| Close affordance | `X` icon button (Phosphor `X`, `weight="regular"`) top-right, `variant="ghost" size="icon"` `PremiumButton`; plus Radix defaults: ESC key and overlay-click both close |
+| Close affordance | `X` icon button (Phosphor `X`, `weight="regular"`) top-right, `variant="ghost" size="icon"` `PremiumButton`, `aria-label="Закрити"` (icon-only button carries no visible text — an explicit accessible name is required per WCAG 4.1.2); plus Radix defaults: ESC key and overlay-click both close |
 | Focus management | Radix default focus trap — no custom implementation (per research's "Don't Hand-Roll" guidance) |
 | Trigger | `PremiumButton variant="coral"` reading "Замовити демо" (see Copywriting Contract), rendered in `/demo`'s header block adjacent to the "DEMO MODE" badge, visible regardless of active tab (D-10) |
 
