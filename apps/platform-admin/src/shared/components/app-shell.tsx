@@ -15,6 +15,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
+  Toaster,
 } from '@repo/ui';
 import { NavLink, Outlet, useNavigate } from 'react-router';
 
@@ -36,6 +37,7 @@ export function AppShell() {
 
   return (
     <SidebarProvider>
+      <Toaster />
       <Sidebar>
         <SidebarHeader>
           <span className="px-2 text-lg font-medium">DentaBot Admin</span>

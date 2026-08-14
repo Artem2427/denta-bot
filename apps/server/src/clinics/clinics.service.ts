@@ -17,7 +17,10 @@ export class ClinicsService {
   }
 
   async findOne(id: string) {
-    const clinic = await this.prisma.clinic.findUnique({ where: { id } });
+    const clinic = await this.prisma.clinic.findUnique({
+      where: { id },
+      include: { updatedBy: { select: { email: true } } },
+    });
     if (!clinic) {
       throw new NotFoundException('Clinic not found');
     }
@@ -45,6 +48,7 @@ export class ClinicsService {
       return await this.prisma.clinic.update({
         where: { id },
         data: { ...dto, updatedById: adminId },
+        include: { updatedBy: { select: { email: true } } },
       });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {

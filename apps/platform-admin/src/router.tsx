@@ -2,6 +2,7 @@ import { createBrowserRouter, redirect } from 'react-router';
 
 import { getAccessToken, refreshAccessToken } from './lib/auth/auth-store';
 import { LoginPage } from './modules/auth/login-page';
+import { ClinicDetailPage } from './modules/clinics/clinic-detail-page';
 import { ClinicsListPage } from './modules/clinics/clinics-list-page';
 import { AppShell } from './shared/components/app-shell';
 
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, loader: () => redirect('/clinics') },
       { path: 'clinics', Component: ClinicsListPage },
+      { path: 'clinics/:id', Component: ClinicDetailPage },
     ],
   },
 ]);

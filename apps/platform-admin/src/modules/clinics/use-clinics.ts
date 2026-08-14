@@ -35,12 +35,27 @@ export function useClinic(id: string) {
   });
 }
 
+// Carries the HTTP status alongside the parsed error body so callers can
+// distinguish e.g. a 409 duplicate-email conflict from other failures
+// without re-parsing the raw Response themselves.
+export class ApiError extends Error {
+  status: number;
+  constructor(status: number) {
+    super(`Request failed with status ${status}`);
+    this.status = status;
+  }
+}
+
 export function useCreateClinic() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (body: CreateClinicInput) => {
-      const { data, error } = await api.POST('/clinics', { body });
-      if (error) throw error;
+      const { data, response } = await api.POST('/clinics', { body });
+      // Checked via response.ok (not the `error` field) — none of these
+      // endpoints declare an explicit error response schema, so the
+      // generated `error` type resolves to `never` and narrowing on it
+      // collapses the whole branch (including `response`) to `never` too.
+      if (!response.ok) throw new ApiError(response.status);
       return data;
     },
     onSuccess: () => {
@@ -53,11 +68,11 @@ export function useUpdateClinic() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (input: { id: string; body: UpdateClinicInput }) => {
-      const { data, error } = await api.PATCH('/clinics/{id}', {
+      const { data, response } = await api.PATCH('/clinics/{id}', {
         params: { path: { id: input.id } },
         body: input.body,
       });
-      if (error) throw error;
+      if (!response.ok) throw new ApiError(response.status);
       return data;
     },
     onSuccess: (_data, variables) => {

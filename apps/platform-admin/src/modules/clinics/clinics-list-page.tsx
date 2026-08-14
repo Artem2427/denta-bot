@@ -19,6 +19,7 @@ import type { ColumnDef } from '@tanstack/react-table';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import { ClinicFormDialog } from './clinic-form-dialog';
 import type { Clinic, ClinicStatus } from './use-clinics';
 import { useClinics } from './use-clinics';
 
@@ -90,6 +91,7 @@ function buildColumns(
 export function ClinicsListPage() {
   const navigate = useNavigate();
   const [status, setStatus] = useState<ClinicStatus | undefined>(undefined);
+  const [createOpen, setCreateOpen] = useState(false);
   const { data, isPending, isError, refetch } = useClinics(status);
 
   const columns = buildColumns((clinic) => navigate(`/clinics/${clinic.id}`));
@@ -101,7 +103,7 @@ export function ClinicsListPage() {
     <div className="grid gap-6">
       <div className="flex items-center justify-between">
         <h1>Clinics</h1>
-        <Button>Add Clinic</Button>
+        <Button onClick={() => setCreateOpen(true)}>Add Clinic</Button>
       </div>
 
       <div className="flex items-center gap-2">
@@ -151,7 +153,7 @@ export function ClinicsListPage() {
             Add your first clinic to start tracking accounts.
           </EmptyDescription>
           <EmptyContent>
-            <Button>Add Clinic</Button>
+            <Button onClick={() => setCreateOpen(true)}>Add Clinic</Button>
           </EmptyContent>
         </Empty>
       ) : isEmpty && hasStatusFilter ? (
@@ -170,6 +172,8 @@ export function ClinicsListPage() {
       ) : (
         <DataTable columns={columns} data={data ?? []} />
       )}
+
+      <ClinicFormDialog open={createOpen} onOpenChange={setCreateOpen} />
     </div>
   );
 }
