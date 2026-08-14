@@ -18,6 +18,13 @@ coverage
 # Turbo
 .turbo
 
+# Prisma generated client (build artifact, not source)
+packages/db/generated/
+# @repo/db's own compiled output (real CJS, required so plain `node` runtimes —
+# e.g. apps/server's compiled dist/main.js — can require() it without Node's
+# native ESM auto-detection misidentifying raw generated .ts source as ESM)
+packages/db/dist/
+
 # Vercel
 .vercel
 
