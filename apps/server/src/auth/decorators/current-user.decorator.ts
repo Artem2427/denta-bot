@@ -1,7 +1,4 @@
-import {
-  createParamDecorator,
-  type ExecutionContext,
-} from '@nestjs/common';
+import { createParamDecorator, type ExecutionContext } from '@nestjs/common';
 import type { Request } from 'express';
 
 // Reads req.user, populated by whichever passport strategy guarded the
