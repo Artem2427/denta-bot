@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Patch, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { AccessTokenPayload } from '../auth/strategies/access-token.strategy';
@@ -8,8 +18,9 @@ import { LeadsService } from './leads.service';
 
 // No @Public() on any route here — protected by the existing global
 // AccessTokenGuard by default (AUTH-04, already active app-wide).
-// No POST (create) route this phase — Lead creation is Phase 6's scope
-// (apps/web's public Contacts/Demo forms).
+// No POST /leads (create) route this phase — Lead creation is Phase 6's
+// scope (apps/web's public Contacts/Demo forms). POST /leads/:id/convert
+// below is a state-transition action on an existing Lead, not a create.
 @ApiTags('leads')
 @ApiBearerAuth('access-token')
 @Controller('leads')
@@ -33,5 +44,11 @@ export class LeadsController {
     @CurrentUser() user: AccessTokenPayload,
   ) {
     return this.leadsService.updateStatus(id, dto, user.sub);
+  }
+
+  @Post(':id/convert')
+  @HttpCode(HttpStatus.OK)
+  convert(@Param('id') id: string, @CurrentUser() user: AccessTokenPayload) {
+    return this.leadsService.convert(id, user.sub);
   }
 }
