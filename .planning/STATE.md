@@ -4,17 +4,17 @@ milestone: v1.1
 milestone_name: Platform Admin API
 current_phase: 4
 current_phase_name: first phase of v1.1
-status: executing
-stopped_at: Phase 4 context gathered
-last_updated: "2026-08-10T20:49:40.658Z"
-last_activity: 2026-08-10
-last_activity_desc: ROADMAP.md created for v1.1 (Phases 4, 5, 6), 25/25 v1 requirements mapped
+status: verifying
+stopped_at: Completed 04-02-PLAN.md — Phase 4 (Backend Foundation & Auth) complete
+last_updated: "2026-08-14T09:46:09.989Z"
+last_activity: 2026-08-14
+last_activity_desc: Plan 04-02 (refresh rotation, logout, global AccessTokenGuard) complete — Phase 4 (Backend Foundation & Auth) fully complete, all 7 requirements (INFRA-01/02/03, AUTH-01/02/03/04) satisfied
 progress:
   total_phases: 3
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 0
-  percent: 0
+  completed_plans: 2
+  percent: 33
 ---
 
 # Project State
@@ -24,16 +24,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-10)
 
 **Core value:** A real NestJS + Prisma backend feeds `apps/platform-admin` (clinic/lead/content monitoring) and the site's CMS-backed content, so denta-bot staff can operate on real data instead of hardcoded fixtures.
-**Current focus:** v1.1 roadmap created — ready to plan Phase 4 (Backend Foundation & Auth)
+**Current focus:** Phase 4 (Backend Foundation & Auth) complete — ready for phase verification, then Phase 5 planning
 
 ## Current Position
 
 Phase: 4 of 7 (Backend Foundation & Auth) — first phase of v1.1 (1 of 3 milestone phases)
-Plan: — (not yet planned)
-Status: Ready to execute
-Last activity: 2026-08-10 — ROADMAP.md created for v1.1 (Phases 4, 5, 6), 25/25 v1 requirements mapped
+Plan: 2 of 2
+Status: Phase complete — ready for verification
+Last activity: 2026-08-14 — Plan 04-02 (refresh rotation, logout, global AccessTokenGuard) complete — Phase 4 fully complete
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -66,6 +66,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P02 | 10min | 3 tasks | 9 files |
 | Phase 03 P01 | 25min | 3 tasks | 7 files |
 | Phase 03 P02 | 20min | 3 tasks | 6 files |
+| Phase 04 P02 | 50min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,9 @@ v1.1 roadmap-level decisions:
 - Merged research's suggested "Prisma foundation" + "server core + Auth" phases into one Phase 4 — both are pure backend/API work with no independent user-observable milestone between them
 - Merged research's suggested "Clinics/Leads/Content CRUD modules" + "platform-admin data layer/screens" phases into one Phase 5 — splitting API-only CRUD from the screens that consume it would have left the screens phase with a single unique requirement (INFRA-04), violating the single-requirement-phase anti-pattern; PlatformAdmin's "can view/create/edit" requirements are only truly observable once the actual `apps/platform-admin` screens exist
 - LEAD-01/LEAD-02 (Contacts/Demo submissions persisting) and CMS-02/CMS-04 (`apps/web` rendering real data) assigned to Phase 6, not Phase 5 — these requirements describe `apps/web`-side behavior that only becomes true once the marketing site's existing mocked handlers are rewired, not when the backend endpoint alone exists
+- [Phase 04]: Plan 04-02: Registered RefreshTokenStrategy in auth.module.ts during Task 1 (ahead of Task 2's planned registration) — required for Passport to resolve the 'jwt-refresh' strategy at all
+- [Phase 04]: Plan 04-02: Embedded email in the access-token JWT payload (issueTokenPair signature extended) — GET /auth/me needs the admin's email, which Plan 04-01's token payload didn't carry
+- [Phase 04]: Plan 04-02: AuthResponseDto.platformAdmin made optional — POST /refresh omits it (no re-fetch needed), POST /login still returns it
 
 ### Pending Todos
 
@@ -123,9 +127,9 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-10T19:15:01.742Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-backend-foundation-auth/04-CONTEXT.md
+Last session: 2026-08-14T09:46:09.979Z
+Stopped at: Completed 04-02-PLAN.md — Phase 4 (Backend Foundation & Auth) complete
+Resume file: None
 
 Next: /gsd-plan-phase 4 — plan Phase 4 (Backend Foundation & Auth)
 

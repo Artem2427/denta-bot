@@ -189,3 +189,7 @@ None — no new external service configuration. The leftover Docker Postgres con
 ---
 *Phase: 04-backend-foundation-auth*
 *Completed: 2026-08-14*
+
+## Self-Check: PASSED
+
+All created files confirmed present on disk; all task/summary commit hashes (`c3f27d7`, `1484bb9`, `dd9cdf2`, `176cdc6`) confirmed in `git log`.

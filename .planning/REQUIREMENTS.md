@@ -18,9 +18,9 @@ Requirements for the v1.1 "Platform Admin API" milestone. Each maps to roadmap p
 ### Auth (AUTH)
 
 - [ ] **AUTH-01**: PlatformAdmin can log in with email + password and receive an access token + refresh token
-- [ ] **AUTH-02**: PlatformAdmin's session persists via refresh-token rotation (with reuse detection) without re-entering credentials
-- [ ] **AUTH-03**: PlatformAdmin can log out, invalidating the refresh token server-side
-- [ ] **AUTH-04**: Unauthenticated requests to protected endpoints are rejected
+- [x] **AUTH-02**: PlatformAdmin's session persists via refresh-token rotation (with reuse detection) without re-entering credentials
+- [x] **AUTH-03**: PlatformAdmin can log out, invalidating the refresh token server-side
+- [x] **AUTH-04**: Unauthenticated requests to protected endpoints are rejected
 
 ### Clinic Monitoring (CLINIC)
 
@@ -92,9 +92,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-04 | Phase 5 | Pending |
 | INFRA-05 | Phase 5 | Pending |
 | AUTH-01 | Phase 4 | Pending |
-| AUTH-02 | Phase 4 | Pending |
-| AUTH-03 | Phase 4 | Pending |
-| AUTH-04 | Phase 4 | Pending |
+| AUTH-02 | Phase 4 | Complete |
+| AUTH-03 | Phase 4 | Complete |
+| AUTH-04 | Phase 4 | Complete |
 | CLINIC-01 | Phase 5 | Pending |
 | CLINIC-02 | Phase 5 | Pending |
 | CLINIC-03 | Phase 5 | Pending |
@@ -113,6 +113,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CMS-04 | Phase 6 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 25 total (corrected from an earlier stale "23" summary — the enumerated list above has always had 25 rows: 5 INFRA + 4 AUTH + 5 CLINIC + 7 LEAD + 4 CMS)
 - Mapped to phases: 25
 - Unmapped: 0 ✓

@@ -47,15 +47,15 @@ Full phase details archived at `.planning/milestones/v1.0-ROADMAP.md`.
   4. Calling `POST /auth/login` with valid PlatformAdmin credentials returns an access token + refresh token; refreshing the session rotates the refresh token and detects/punishes reuse (revokes the session family); logging out invalidates the refresh token server-side
   5. Calling any protected endpoint without a valid access token is rejected (401)
 
-**Plans**: 2 plans
+**Plans**: 2/2 plans executed
 Plans:
 **Wave 1**
 
-- [ ] 04-01-PLAN.md — packages/db schema/migration/seed + apps/server Prisma integration + POST /auth/login tracer + Swagger
+- [x] 04-01-PLAN.md — packages/db schema/migration/seed + apps/server Prisma integration + POST /auth/login tracer + Swagger
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 04-02-PLAN.md — POST /auth/refresh (rotation + reuse detection), POST /auth/logout, global fail-closed AccessTokenGuard, GET /auth/me
+- [x] 04-02-PLAN.md — POST /auth/refresh (rotation + reuse detection), POST /auth/logout, global fail-closed AccessTokenGuard, GET /auth/me
 
 ### Phase 5: Clinic, Lead & Content Management
 
@@ -99,6 +99,6 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 01.1. Premium Design System | 4/4 | Complete | 2026-08-08 |
 | 2. Home, Contacts & Demo | 4/4 | Complete | 2026-08-09 |
 | 3. Prices & Blog | 2/2 | Complete | 2026-08-10 |
-| 4. Backend Foundation & Auth | 0/2 | Not started | - |
+| 4. Backend Foundation & Auth | 2/2 | In Progress|  |
 | 5. Clinic, Lead & Content Management | 0/TBD | Not started | - |
 | 6. apps/web Integration | 0/TBD | Not started | - |
