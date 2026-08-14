@@ -20,6 +20,10 @@ export class AuthResponseDto {
   @ApiProperty()
   accessToken: string;
 
-  @ApiProperty({ type: PlatformAdminSummaryDto })
-  platformAdmin: PlatformAdminSummaryDto;
+  // Optional: present on POST /login, omitted on POST /refresh — refresh()
+  // doesn't re-fetch the PlatformAdmin row (the client already has the
+  // summary from its original login response; no behavioral need to pay an
+  // extra DB round trip on every rotation just to repeat it).
+  @ApiProperty({ type: PlatformAdminSummaryDto, required: false })
+  platformAdmin?: PlatformAdminSummaryDto;
 }

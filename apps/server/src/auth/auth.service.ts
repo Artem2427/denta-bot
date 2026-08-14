@@ -90,4 +90,40 @@ export class AuthService {
       },
     };
   }
+
+  // Rotation with reuse detection (AUTH-02, RESEARCH.md Pattern 3, hardened).
+  //
+  // The rotation claim is a SINGLE atomic `updateMany` conditioned on
+  // `revokedAt: null` (and a tokenHash match) rather than a `findUnique`
+  // followed by a separate `update` — this closes the TOCTOU race two
+  // concurrent requests presenting the same refresh token would otherwise
+  // hit (T-04-02-02). Whatever fails to win the atomic claim — because the
+  // row is missing, already revoked, the hash doesn't match, OR a concurrent
+  // request already won — is treated identically as reuse/tampering and
+  // revokes the entire token family. This exception is never caught/swallowed
+  // anywhere in this call chain (reuse-suppression prohibition).
+  async refresh(
+    payload: { sub: string; familyId: string; jti: string },
+    rawToken: string,
+  ): Promise<IssuedTokenPair> {
+    const tokenHash = crypto
+      .createHash('sha256')
+      .update(rawToken)
+      .digest('hex');
+
+    const claimed = await this.prisma.refreshToken.updateMany({
+      where: { id: payload.jti, revokedAt: null, tokenHash },
+      data: { revokedAt: new Date() },
+    });
+
+    if (claimed.count !== 1) {
+      await this.prisma.refreshToken.updateMany({
+        where: { familyId: payload.familyId, revokedAt: null },
+        data: { revokedAt: new Date() },
+      });
+      throw new UnauthorizedException('Refresh token reuse detected');
+    }
+
+    return this.issueTokenPair(payload.sub, payload.familyId);
+  }
 }
