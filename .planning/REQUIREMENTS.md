@@ -9,15 +9,15 @@ Requirements for the v1.1 "Platform Admin API" milestone. Each maps to roadmap p
 
 ### Foundation (INFRA)
 
-- [ ] **INFRA-01**: Prisma schema + migrations are the single source of DB schema truth, version-controlled (no manual DB edits)
-- [ ] **INFRA-02**: Generated Prisma types/client are consumable from `apps/server`, `apps/web`, and `apps/platform-admin` via a shared `packages/` package
-- [ ] **INFRA-03**: `apps/server` exposes a REST API documented via Swagger/OpenAPI
+- [x] **INFRA-01**: Prisma schema + migrations are the single source of DB schema truth, version-controlled (no manual DB edits)
+- [x] **INFRA-02**: Generated Prisma types/client are consumable from `apps/server`, `apps/web`, and `apps/platform-admin` via a shared `packages/` package
+- [x] **INFRA-03**: `apps/server` exposes a REST API documented via Swagger/OpenAPI
 - [ ] **INFRA-04**: Frontend data-fetching uses `TanStack Query` with a typed client generated from the OpenAPI spec
 - [ ] **INFRA-05**: `updatedBy`/`updatedAt` trace fields exist on Clinic, Lead, and Content records
 
 ### Auth (AUTH)
 
-- [ ] **AUTH-01**: PlatformAdmin can log in with email + password and receive an access token + refresh token
+- [x] **AUTH-01**: PlatformAdmin can log in with email + password and receive an access token + refresh token
 - [x] **AUTH-02**: PlatformAdmin's session persists via refresh-token rotation (with reuse detection) without re-entering credentials
 - [x] **AUTH-03**: PlatformAdmin can log out, invalidating the refresh token server-side
 - [x] **AUTH-04**: Unauthenticated requests to protected endpoints are rejected
@@ -86,12 +86,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 4 | Pending |
-| INFRA-02 | Phase 4 | Pending |
-| INFRA-03 | Phase 4 | Pending |
+| INFRA-01 | Phase 4 | Complete |
+| INFRA-02 | Phase 4 | Complete |
+| INFRA-03 | Phase 4 | Complete |
 | INFRA-04 | Phase 5 | Pending |
 | INFRA-05 | Phase 5 | Pending |
-| AUTH-01 | Phase 4 | Pending |
+| AUTH-01 | Phase 4 | Complete |
 | AUTH-02 | Phase 4 | Complete |
 | AUTH-03 | Phase 4 | Complete |
 | AUTH-04 | Phase 4 | Complete |
