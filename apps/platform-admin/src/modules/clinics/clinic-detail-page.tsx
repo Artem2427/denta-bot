@@ -5,6 +5,10 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyTitle,
   Form,
   FormControl,
   FormField,
@@ -42,7 +46,7 @@ type ClinicEditValues = z.infer<typeof clinicEditSchema>;
 
 export function ClinicDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { data: clinic, isPending } = useClinic(id ?? '');
+  const { data: clinic, isPending, isError, refetch } = useClinic(id ?? '');
   const updateClinic = useUpdateClinic();
 
   const form = useForm<ClinicEditValues>({
@@ -101,13 +105,29 @@ export function ClinicDetailPage() {
     }
   });
 
-  if (isPending || !clinic) {
+  if (isPending) {
     return (
       <div className="grid gap-4 max-w-2xl">
         <Skeleton className="h-8 w-64" />
         <Skeleton className="h-4 w-48" />
         <Skeleton className="h-64 w-full" />
       </div>
+    );
+  }
+
+  if (isError || !clinic) {
+    return (
+      <Empty>
+        <EmptyTitle>Couldn&apos;t load this clinic.</EmptyTitle>
+        <EmptyDescription>
+          Something went wrong loading this data.
+        </EmptyDescription>
+        <EmptyContent>
+          <Button variant="outline" onClick={() => refetch()}>
+            Retry
+          </Button>
+        </EmptyContent>
+      </Empty>
     );
   }
 

@@ -6,6 +6,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyTitle,
   Form,
   FormControl,
   FormField,
@@ -69,9 +73,12 @@ export function PricingPlanFormDialog({
   onOpenChange: (open: boolean) => void;
 }) {
   const isEditMode = Boolean(planId);
-  const { data: plan, isPending: isLoadingPlan } = usePricingPlan(
-    planId ?? '',
-  );
+  const {
+    data: plan,
+    isPending: isLoadingPlan,
+    isError: isPlanError,
+    refetch: refetchPlan,
+  } = usePricingPlan(planId ?? '');
   const createPricingPlan = useCreatePricingPlan();
   const updatePricingPlan = useUpdatePricingPlan();
 
@@ -151,12 +158,24 @@ export function PricingPlanFormDialog({
           <DialogTitle>{isEditMode ? 'Edit Plan' : 'Add Plan'}</DialogTitle>
         </DialogHeader>
 
-        {isEditMode && (isLoadingPlan || !plan) ? (
+        {isEditMode && isLoadingPlan ? (
           <div className="grid gap-4">
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-24 w-full" />
           </div>
+        ) : isEditMode && (isPlanError || !plan) ? (
+          <Empty>
+            <EmptyTitle>Couldn&apos;t load this plan.</EmptyTitle>
+            <EmptyDescription>
+              Something went wrong loading this data.
+            </EmptyDescription>
+            <EmptyContent>
+              <Button variant="outline" onClick={() => refetchPlan()}>
+                Retry
+              </Button>
+            </EmptyContent>
+          </Empty>
         ) : (
           <Form {...form}>
             <form onSubmit={onSubmit} className="grid gap-4">

@@ -3,6 +3,10 @@ import {
   Button,
   Card,
   CardContent,
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyTitle,
   Form,
   FormControl,
   FormField,
@@ -71,9 +75,12 @@ export function BlogPostFormPage() {
   const isEditMode = Boolean(id);
   const navigate = useNavigate();
 
-  const { data: blogPost, isPending: isLoadingBlogPost } = useBlogPost(
-    id ?? '',
-  );
+  const {
+    data: blogPost,
+    isPending: isLoadingBlogPost,
+    isError: isBlogPostError,
+    refetch: refetchBlogPost,
+  } = useBlogPost(id ?? '');
   const createBlogPost = useCreateBlogPost();
   const updateBlogPost = useUpdateBlogPost();
 
@@ -136,13 +143,29 @@ export function BlogPostFormPage() {
     }
   });
 
-  if (isEditMode && (isLoadingBlogPost || !blogPost)) {
+  if (isEditMode && isLoadingBlogPost) {
     return (
       <div className="grid gap-4 max-w-2xl">
         <Skeleton className="h-8 w-64" />
         <Skeleton className="h-4 w-48" />
         <Skeleton className="h-96 w-full" />
       </div>
+    );
+  }
+
+  if (isEditMode && (isBlogPostError || !blogPost)) {
+    return (
+      <Empty>
+        <EmptyTitle>Couldn&apos;t load this post.</EmptyTitle>
+        <EmptyDescription>
+          Something went wrong loading this data.
+        </EmptyDescription>
+        <EmptyContent>
+          <Button variant="outline" onClick={() => refetchBlogPost()}>
+            Retry
+          </Button>
+        </EmptyContent>
+      </Empty>
     );
   }
 

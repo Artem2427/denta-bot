@@ -13,6 +13,10 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyTitle,
   Select,
   SelectContent,
   SelectItem,
@@ -51,20 +55,36 @@ const STATUS_OPTIONS: { value: LeadStatus; label: string }[] = [
 
 export function LeadDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { data: lead, isPending } = useLead(id ?? '');
+  const { data: lead, isPending, isError, refetch } = useLead(id ?? '');
   const updateStatus = useUpdateLeadStatus();
   const convertLead = useConvertLead();
 
   const [convertDialogOpen, setConvertDialogOpen] = useState(false);
   const [convertError, setConvertError] = useState<string | null>(null);
 
-  if (isPending || !lead) {
+  if (isPending) {
     return (
       <div className="grid gap-4 max-w-2xl">
         <Skeleton className="h-8 w-64" />
         <Skeleton className="h-4 w-48" />
         <Skeleton className="h-64 w-full" />
       </div>
+    );
+  }
+
+  if (isError || !lead) {
+    return (
+      <Empty>
+        <EmptyTitle>Couldn&apos;t load this lead.</EmptyTitle>
+        <EmptyDescription>
+          Something went wrong loading this data.
+        </EmptyDescription>
+        <EmptyContent>
+          <Button variant="outline" onClick={() => refetch()}>
+            Retry
+          </Button>
+        </EmptyContent>
+      </Empty>
     );
   }
 
