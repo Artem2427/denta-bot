@@ -52,15 +52,18 @@ The migrated site renders all six pages from the design faithfully — content, 
 - ✓ Prisma schema + migrations (`packages/db`, `@repo/db`) — 6-model schema (PlatformAdmin, RefreshToken, Clinic, Lead, BlogPost, PricingPlan), version-controlled `prisma migrate dev` history, generated client importable from `apps/server` — Phase 4
 - ✓ `PlatformAdmin` auth: JWT access + refresh tokens, dedicated table, argon2 password hashing, refresh rotation with reuse detection (atomic claim closes the TOCTOU race), server-side logout revocation, global fail-closed `AccessTokenGuard` — Phase 4
 - ✓ REST + Swagger API surface (`@nestjs/swagger`, `/api/docs`) — Phase 4 (auth endpoints only; Clinic/Lead/CMS endpoints are Phase 5)
+- ✓ Clinic (client) CRUD + account/subscription monitoring — `ClinicsModule` backend + `apps/platform-admin` Clinics list/detail/create screens — Phase 5
+- ✓ Unified Lead inbox: list/filter (status+date)/detail/status-update, plus atomic Lead→Clinic conversion (`prisma.$transaction`, race-guarded, TDD-covered) — backend + `apps/platform-admin` screens — Phase 5
+- ✓ CMS: blog posts + pricing plans DB-backed, full CRUD (incl. delete) via API/`platform-admin` — Phase 5
+- ✓ `TanStack Query` on `apps/platform-admin`, backed by an `openapi-typescript`-generated typed client (`openapi-fetch`) against the live Swagger spec — Phase 5
+- ✓ `apps/platform-admin` bootstrapped from an untouched Vite scaffold into an authenticated SPA — React Router v7 (auth-guarded layout route), single-in-flight-promise refresh interceptor, built entirely on `@repo/ui` (2 new primitives added: `Form`/`DataTable`) per explicit user directive — Phase 5
+- ✓ `updatedBy`/`updatedAt` trace fields on Clinic/Lead/BlogPost/PricingPlan (INFRA-05) — Phase 5
 
 ### Active
 
 **v1.1 (this milestone):**
 
-- [ ] Clinic (client) CRUD + account/subscription monitoring
-- [ ] Site leads: Contacts/Demo form submissions persisted + manageable in platform-admin
-- [ ] CMS: blog posts + pricing plans DB-backed, editable via API/platform-admin
-- [ ] `TanStack Query` on consuming frontends (`apps/platform-admin`)
+- [ ] `apps/web` wired to the real backend — Contacts/Demo submissions persist as Leads, Blog/Prices pages render real CMS content (Phase 6)
 
 **Carried backlog (not yet scheduled):**
 
@@ -70,7 +73,9 @@ The migrated site renders all six pages from the design faithfully — content, 
 - [ ] Dark mode for the premium `apps/web` site — no dark-mode `dt-*` token values exist; `ThemeToggle` removed from Header in Phase 01.1, component still exists unused; explicitly deferred at Phase 01.1 close, needs a fresh decision
 - [ ] Real bot/chat API wiring for the Demo page — deferred past v1.1 (v1.1 covers backend CRM/CMS, not the Telegram bot itself)
 - [ ] Code review findings from `04-REVIEW.md` (0 critical, 7 warning, non-blocking, all still open): no rate limiting on `POST /auth/login`; login timing side-channel partially defeats the "no user enumeration" claim (argon2.verify skipped on unknown emails); refresh cookie `Secure` flag depends on unvalidated `NODE_ENV`; `'refresh_token'` cookie name hardcoded in two places; `refresh()`'s `findUniqueOrThrow` can surface a raw 500 instead of 401; no max length on login password (argon2 CPU-amplification vector); Swagger docs registered unconditionally even in production
-- [ ] Leftover Docker Postgres container (`agent-a8976498097c8c381-postgres-1`) from an interrupted Phase 4 session is still bound to port 5432, holding the seeded dev schema — should be adopted into this repo's own `docker-compose.yml` project (or stopped and replaced by a fresh `docker compose up -d`) before Phase 5 assumes a clean local Postgres
+- [ ] Leftover Docker Postgres container (`agent-a8976498097c8c381-postgres-1`) from an interrupted Phase 4 session is still bound to port 5432, holding the seeded dev schema — should be adopted into this repo's own `docker-compose.yml` project (or stopped and replaced by a fresh `docker compose up -d`) before Phase 6 assumes a clean local Postgres (still open — used throughout Phase 5 too)
+- [ ] Code review findings from `05-REVIEW.md` (2 critical — both fixed same-session, see `05-REVIEW-FIX.md` — plus 2 warning + 1 info left open, non-blocking): `packages/ui`'s `DataTablePagination` is exported but unusable — `DataTable` never configures `getPaginationRowModel` or exposes its table instance, so it's dead code until a consumer needs real pagination; `useFormField`'s "used outside `<FormField>`" guard can never fire (context default is a truthy `{}`, not falsy) — low-severity DX-only issue; `updatedBy` isn't `include`d consistently across `BlogPostsService`/`PricingPlansService`/`LeadsService`'s `update()`/`updateStatus()` vs. `ClinicsService.update()` — currently masked by post-mutation refetch, no observed symptom
+- [ ] `packages/platform-admin`'s Vite bundle exceeds the 500kB chunk-size warning threshold (847kB, 246kB gzipped) — noted by the build, not yet addressed; code-splitting via dynamic `import()` would help once the app has more routes to split along
 
 ### Out of Scope
 
