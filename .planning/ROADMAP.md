@@ -70,7 +70,7 @@ Plans:
   4. All platform-admin list/detail screens fetch data via TanStack Query against a typed client generated from the OpenAPI spec, and reflect mutations without a manual page refresh
   5. Clinic, Lead, and Content records show who last updated them and when
 
-**Plans**: 5/7 plans executed
+**Plans**: 6/7 plans executed
 Plans:
 **Wave 1**
 
@@ -91,7 +91,7 @@ Plans:
 
 **Wave 5** *(blocked on Wave 4 — router.tsx conflict)*
 
-- [ ] 05-06-PLAN.md — Leads inbox + detail + status + convert-to-Clinic screens
+- [x] 05-06-PLAN.md — Leads inbox + detail + status + convert-to-Clinic screens
 
 **Wave 6** *(blocked on Wave 5 — router.tsx conflict)*
 
@@ -126,5 +126,5 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 2. Home, Contacts & Demo | 4/4 | Complete | 2026-08-09 |
 | 3. Prices & Blog | 2/2 | Complete | 2026-08-10 |
 | 4. Backend Foundation & Auth | 2/2 | Complete    | 2026-08-14 |
-| 5. Clinic, Lead & Content Management | 5/7 | In Progress|  |
+| 5. Clinic, Lead & Content Management | 6/7 | In Progress|  |
 | 6. apps/web Integration | 0/TBD | Not started | - |
