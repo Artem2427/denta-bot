@@ -1,7 +1,7 @@
 ---
 phase: 5
 slug: clinic-lead-content-management
-status: draft
+status: approved
 shadcn_initialized: true
 preset: new-york / neutral (packages/ui/components.json — pre-existing, monorepo design-system level)
 created: 2026-08-14
@@ -172,10 +172,11 @@ All values pulled directly from `packages/ui/styles/theme.css`'s `:root` block �
 
 ## UI Considerations
 
-Applicable state considerations resolved: 14 covered, 1 backstop, 0 unresolved.
+Applicable state considerations resolved: 15 covered, 1 backstop, 0 unresolved. (Ran via `ui-consideration-probe.cjs` against 8 phase surfaces — Clinics list, Clinic detail, Leads inbox, Lead detail, Blog Posts list+form, Pricing Plans list+form, Sidebar nav, and the trace-field display. The probe's `populated` category — the normal happy-path render at typical volume — was the one category not yet given its own row; added below.)
 
 | Category | Element(s) | Status | Resolution / Reason |
 |----------|------------|--------|---------------------|
+| populated | All 4 list screens at typical volume (Clinics, Leads, Blog Posts, Pricing Plans) | ✅ covered | Fully specified by the Component Inventory (`DataTable` + `Badge` status/plan columns + `Pagination`) and Copywriting Contract (per-flow CTA labels, per-status Badge mapping) — no separate happy-path consideration needed beyond those two sections |
 | empty | Clinics list (zero clinics ever) | ✅ covered | `Empty`/`EmptyTitle`/`EmptyDescription`/`EmptyContent` with "No clinics yet" copy + "Add Clinic" CTA (see Copywriting Contract) |
 | empty | Leads inbox (zero leads ever) | ✅ covered | "No leads yet" copy, no CTA — leads only originate from `apps/web` forms wired in Phase 6 |
 | empty | Leads inbox (filtered to zero) | ✅ covered | Distinct "No leads match these filters" + "Clear filters" link, not conflated with the true-zero-leads empty state |
@@ -207,11 +208,15 @@ No third-party registries declared this phase. Registry vetting gate not trigger
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS (1 non-blocking recommendation — addressed below)
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS
+- [x] Dimension 5 Spacing: PASS
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved (2026-08-14)
+
+**Dimension 2 recommendation, addressed:**
+- **Focal point per screen type:** List screens (Clinics, Leads, Blog Posts, Pricing Plans) — the `DataTable` is the primary focal point, positioned directly below the page title (`Display`, 24px) + primary CTA row. Detail screens (Clinic/Lead/Post/Plan) — the record's `Card` is the focal point, with the trace-field line (`INFRA-05`) as a secondary, visually de-emphasized element beneath it (see Copywriting Contract's "Trace field display" row).
+- **Icon-only row actions:** Every icon-only `DataTable` row action (e.g. the Delete icon button on Blog Posts/Pricing Plans rows) MUST carry an `aria-label` (e.g. `aria-label="Delete post"`) — icons alone are never a sufficient accessible name. Planner/executor treat this as a hard requirement for every icon-only `Button`, not just Delete.
