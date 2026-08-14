@@ -46,8 +46,10 @@ export class CreateBlogPostDto {
   image: string;
 
   // Matches the schema's `Json` type — accept any JSON object, no further
-  // shape validation this phase.
-  @ApiProperty()
+  // shape validation this phase. `additionalProperties: true` is required
+  // for openapi-typescript to emit `Record<string, unknown>` instead of
+  // collapsing to `Record<string, never>` for an untyped object schema.
+  @ApiProperty({ type: 'object', additionalProperties: true })
   @IsObject()
   body: Record<string, unknown>;
 

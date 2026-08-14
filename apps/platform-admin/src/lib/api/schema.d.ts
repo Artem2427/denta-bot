@@ -326,6 +326,29 @@ export interface components {
             /** @enum {string} */
             status: "new" | "contacted" | "converted";
         };
+        BlogPostUpdatedByDto: {
+            email: string;
+        };
+        BlogPostResponseDto: {
+            id: string;
+            slug: string;
+            title: string;
+            excerpt: string;
+            category: string;
+            date: string;
+            readTime: string;
+            image: string;
+            body: {
+                [key: string]: unknown;
+            };
+            published: boolean;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            updatedById?: string | null;
+            updatedBy?: components["schemas"]["BlogPostUpdatedByDto"] | null;
+        };
         CreateBlogPostDto: {
             slug: string;
             title: string;
@@ -334,7 +357,9 @@ export interface components {
             date: string;
             readTime: string;
             image: string;
-            body: Record<string, never>;
+            body: {
+                [key: string]: unknown;
+            };
             published?: boolean;
         };
         UpdateBlogPostDto: {
@@ -345,8 +370,30 @@ export interface components {
             date?: string;
             readTime?: string;
             image?: string;
-            body?: Record<string, never>;
+            body?: {
+                [key: string]: unknown;
+            };
             published?: boolean;
+        };
+        PricingPlanUpdatedByDto: {
+            email: string;
+        };
+        PricingPlanResponseDto: {
+            id: string;
+            name: string;
+            monthlyPrice: string;
+            yearlyPrice: string;
+            description: string;
+            features: string[];
+            isPopular: boolean;
+            sortOrder: number;
+            published: boolean;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            updatedById?: string | null;
+            updatedBy?: components["schemas"]["PricingPlanUpdatedByDto"] | null;
         };
         CreatePricingPlanDto: {
             name: string;
@@ -663,7 +710,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["BlogPostResponseDto"][];
+                };
             };
         };
     };
@@ -684,7 +733,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["BlogPostResponseDto"];
+                };
             };
         };
     };
@@ -703,7 +754,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["BlogPostResponseDto"];
+                };
             };
         };
     };
@@ -745,7 +798,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["BlogPostResponseDto"];
+                };
             };
         };
     };
@@ -762,7 +817,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["PricingPlanResponseDto"][];
+                };
             };
         };
     };
@@ -783,7 +840,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["PricingPlanResponseDto"];
+                };
             };
         };
     };
@@ -802,7 +861,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["PricingPlanResponseDto"];
+                };
             };
         };
     };
@@ -844,7 +905,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["PricingPlanResponseDto"];
+                };
             };
         };
     };
