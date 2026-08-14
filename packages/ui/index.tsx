@@ -14,6 +14,7 @@ export * from './src/components/shadcn-ui/dialog';
 export * from './src/components/shadcn-ui/drawer';
 export * from './src/components/shadcn-ui/dropdown-menu';
 export * from './src/components/shadcn-ui/empty';
+export * from './src/components/shadcn-ui/form';
 export * from './src/components/shadcn-ui/hover-card';
 export * from './src/components/shadcn-ui/input';
 export * from './src/components/shadcn-ui/label';
