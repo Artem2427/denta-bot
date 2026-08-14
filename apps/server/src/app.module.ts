@@ -8,6 +8,7 @@ import { BlogPostsModule } from './blog-posts/blog-posts.module';
 import { ClinicsModule } from './clinics/clinics.module';
 import { validateEnv } from './config/env.validation';
 import { LeadsModule } from './leads/leads.module';
+import { PricingPlansModule } from './pricing-plans/pricing-plans.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -26,6 +27,7 @@ import { PrismaModule } from './prisma/prisma.module';
     ClinicsModule,
     LeadsModule,
     BlogPostsModule,
+    PricingPlansModule,
   ],
   controllers: [AppController],
   providers: [AppService],
