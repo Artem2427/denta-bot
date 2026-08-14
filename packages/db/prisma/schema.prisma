@@ -16,6 +16,11 @@ model PlatformAdmin {
   updatedAt    DateTime @updatedAt
 
   refreshTokens RefreshToken[]
+
+  updatedClinics      Clinic[]      @relation("ClinicUpdatedBy")
+  updatedLeads        Lead[]        @relation("LeadUpdatedBy")
+  updatedBlogPosts    BlogPost[]    @relation("BlogPostUpdatedBy")
+  updatedPricingPlans PricingPlan[] @relation("PricingPlanUpdatedBy")
 }
 
 model RefreshToken {
@@ -57,6 +62,9 @@ model Clinic {
   updatedAt     DateTime     @updatedAt
 
   leads Lead[]
+
+  updatedById String?
+  updatedBy   PlatformAdmin? @relation("ClinicUpdatedBy", fields: [updatedById], references: [id])
 }
 
 enum LeadSource {
@@ -84,6 +92,9 @@ model Lead {
 
   clinicId String?
   clinic   Clinic? @relation(fields: [clinicId], references: [id])
+
+  updatedById String?
+  updatedBy   PlatformAdmin? @relation("LeadUpdatedBy", fields: [updatedById], references: [id])
 }
 
 model BlogPost {
@@ -99,6 +110,9 @@ model BlogPost {
   published Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  updatedById String?
+  updatedBy   PlatformAdmin? @relation("BlogPostUpdatedBy", fields: [updatedById], references: [id])
 }
 
 model PricingPlan {
@@ -113,4 +127,7 @@ model PricingPlan {
   published    Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  updatedById String?
+  updatedBy   PlatformAdmin? @relation("PricingPlanUpdatedBy", fields: [updatedById], references: [id])
 }
