@@ -17,7 +17,10 @@ export class BlogPostsService {
   }
 
   async findOne(id: string) {
-    const blogPost = await this.prisma.blogPost.findUnique({ where: { id } });
+    const blogPost = await this.prisma.blogPost.findUnique({
+      where: { id },
+      include: { updatedBy: { select: { email: true } } },
+    });
     if (!blogPost) {
       throw new NotFoundException('Blog post not found');
     }

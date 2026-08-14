@@ -9,10 +9,16 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { AccessTokenPayload } from '../auth/strategies/access-token.strategy';
 import { CreatePricingPlanDto } from './dto/create-pricing-plan.dto';
+import { PricingPlanResponseDto } from './dto/pricing-plan-response.dto';
 import { UpdatePricingPlanDto } from './dto/update-pricing-plan.dto';
 import { PricingPlansService } from './pricing-plans.service';
 
@@ -25,16 +31,19 @@ export class PricingPlansController {
   constructor(private readonly pricingPlansService: PricingPlansService) {}
 
   @Get()
+  @ApiOkResponse({ type: PricingPlanResponseDto, isArray: true })
   findAll() {
     return this.pricingPlansService.findAll();
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: PricingPlanResponseDto })
   findOne(@Param('id') id: string) {
     return this.pricingPlansService.findOne(id);
   }
 
   @Post()
+  @ApiCreatedResponse({ type: PricingPlanResponseDto })
   create(
     @Body() dto: CreatePricingPlanDto,
     @CurrentUser() user: AccessTokenPayload,
@@ -43,6 +52,7 @@ export class PricingPlansController {
   }
 
   @Patch(':id')
+  @ApiOkResponse({ type: PricingPlanResponseDto })
   update(
     @Param('id') id: string,
     @Body() dto: UpdatePricingPlanDto,

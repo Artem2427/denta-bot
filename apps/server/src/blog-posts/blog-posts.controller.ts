@@ -9,10 +9,16 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { AccessTokenPayload } from '../auth/strategies/access-token.strategy';
 import { BlogPostsService } from './blog-posts.service';
+import { BlogPostResponseDto } from './dto/blog-post-response.dto';
 import { CreateBlogPostDto } from './dto/create-blog-post.dto';
 import { UpdateBlogPostDto } from './dto/update-blog-post.dto';
 
@@ -25,16 +31,19 @@ export class BlogPostsController {
   constructor(private readonly blogPostsService: BlogPostsService) {}
 
   @Get()
+  @ApiOkResponse({ type: BlogPostResponseDto, isArray: true })
   findAll() {
     return this.blogPostsService.findAll();
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: BlogPostResponseDto })
   findOne(@Param('id') id: string) {
     return this.blogPostsService.findOne(id);
   }
 
   @Post()
+  @ApiCreatedResponse({ type: BlogPostResponseDto })
   create(
     @Body() dto: CreateBlogPostDto,
     @CurrentUser() user: AccessTokenPayload,
@@ -43,6 +52,7 @@ export class BlogPostsController {
   }
 
   @Patch(':id')
+  @ApiOkResponse({ type: BlogPostResponseDto })
   update(
     @Param('id') id: string,
     @Body() dto: UpdateBlogPostDto,
