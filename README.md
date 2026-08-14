@@ -104,6 +104,18 @@ pnpm exec turbo dev --filter=web
 pnpm exec turbo dev --filter=web
 ```
 
+## Backend Development (apps/server)
+
+`apps/server` (NestJS) is backed by a real Postgres database via Prisma, managed through the `packages/db` (`@repo/db`) workspace package. To run it locally from a clean clone:
+
+1. **Start local Postgres**: `docker compose up -d` (starts a `postgres:17` container per `docker-compose.yml`).
+2. **Create your env file**: copy `.env.example` to `.env` at the repo root, then fill in `PLATFORM_ADMIN_EMAIL`, `PLATFORM_ADMIN_PASSWORD`, and two distinct `JWT_ACCESS_SECRET`/`JWT_REFRESH_SECRET` values (never reuse the same secret for both).
+3. **Apply migrations** (`prisma migrate`): `pnpm --filter @repo/db run db:migrate` (use `db:migrate:deploy` in CI/production instead — never `prisma db push`, migrations are the only way the schema changes).
+4. **Seed the first PlatformAdmin**: `pnpm --filter @repo/db run db:seed`.
+5. **Start the API**: `pnpm --filter server run dev` (or the root `dev:server` script) — serves at `http://localhost:4000`, with Swagger docs at `/api/docs`.
+
+To browse the database, use Prisma Studio: `pnpm --filter @repo/db exec prisma studio` — there is no pgAdmin in this stack by design.
+
 ### Remote Caching
 
 > [!TIP]
