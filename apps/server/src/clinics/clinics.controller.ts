@@ -1,9 +1,15 @@
 import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { AccessTokenPayload } from '../auth/strategies/access-token.strategy';
 import { ClinicsService } from './clinics.service';
 import { ClinicQueryDto } from './dto/clinic-query.dto';
+import { ClinicResponseDto } from './dto/clinic-response.dto';
 import { CreateClinicDto } from './dto/create-clinic.dto';
 import { UpdateClinicDto } from './dto/update-clinic.dto';
 
@@ -16,16 +22,19 @@ export class ClinicsController {
   constructor(private readonly clinicsService: ClinicsService) {}
 
   @Get()
+  @ApiOkResponse({ type: ClinicResponseDto, isArray: true })
   findAll(@Query() query: ClinicQueryDto) {
     return this.clinicsService.findAll(query);
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: ClinicResponseDto })
   findOne(@Param('id') id: string) {
     return this.clinicsService.findOne(id);
   }
 
   @Post()
+  @ApiCreatedResponse({ type: ClinicResponseDto })
   create(
     @Body() dto: CreateClinicDto,
     @CurrentUser() user: AccessTokenPayload,
@@ -34,6 +43,7 @@ export class ClinicsController {
   }
 
   @Patch(':id')
+  @ApiOkResponse({ type: ClinicResponseDto })
   update(
     @Param('id') id: string,
     @Body() dto: UpdateClinicDto,
