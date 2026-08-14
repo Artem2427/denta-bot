@@ -4,6 +4,7 @@ import * as path from 'node:path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { BlogPostsModule } from './blog-posts/blog-posts.module';
 import { ClinicsModule } from './clinics/clinics.module';
 import { validateEnv } from './config/env.validation';
 import { LeadsModule } from './leads/leads.module';
@@ -24,6 +25,7 @@ import { PrismaModule } from './prisma/prisma.module';
     AuthModule,
     ClinicsModule,
     LeadsModule,
+    BlogPostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
