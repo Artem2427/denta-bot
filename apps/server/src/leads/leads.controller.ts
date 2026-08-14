@@ -9,10 +9,15 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { AccessTokenPayload } from '../auth/strategies/access-token.strategy';
 import { LeadQueryDto } from './dto/lead-query.dto';
+import { LeadResponseDto } from './dto/lead-response.dto';
 import { UpdateLeadStatusDto } from './dto/update-lead-status.dto';
 import { LeadsService } from './leads.service';
 
@@ -28,16 +33,19 @@ export class LeadsController {
   constructor(private readonly leadsService: LeadsService) {}
 
   @Get()
+  @ApiOkResponse({ type: LeadResponseDto, isArray: true })
   findAll(@Query() query: LeadQueryDto) {
     return this.leadsService.findAll(query);
   }
 
   @Get(':id')
+  @ApiOkResponse({ type: LeadResponseDto })
   findOne(@Param('id') id: string) {
     return this.leadsService.findOne(id);
   }
 
   @Patch(':id/status')
+  @ApiOkResponse({ type: LeadResponseDto })
   updateStatus(
     @Param('id') id: string,
     @Body() dto: UpdateLeadStatusDto,
@@ -48,6 +56,7 @@ export class LeadsController {
 
   @Post(':id/convert')
   @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({ type: LeadResponseDto })
   convert(@Param('id') id: string, @CurrentUser() user: AccessTokenPayload) {
     return this.leadsService.convert(id, user.sub);
   }

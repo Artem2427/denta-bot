@@ -300,6 +300,28 @@ export interface components {
             status?: "trial" | "active" | "suspended" | "cancelled";
             plan?: string;
         };
+        LeadUpdatedByDto: {
+            email: string;
+        };
+        LeadResponseDto: {
+            id: string;
+            name: string;
+            clinicName?: string | null;
+            email?: string | null;
+            phone?: string | null;
+            message?: string | null;
+            /** @enum {string} */
+            source: "contacts" | "demo";
+            /** @enum {string} */
+            status: "new" | "contacted" | "converted";
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            clinicId?: string | null;
+            updatedById?: string | null;
+            updatedBy?: components["schemas"]["LeadUpdatedByDto"] | null;
+        };
         UpdateLeadStatusDto: {
             /** @enum {string} */
             status: "new" | "contacted" | "converted";
@@ -555,7 +577,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["LeadResponseDto"][];
+                };
             };
         };
     };
@@ -574,7 +598,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["LeadResponseDto"];
+                };
             };
         };
     };
@@ -597,7 +623,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["LeadResponseDto"];
+                };
             };
         };
     };
@@ -616,7 +644,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["LeadResponseDto"];
+                };
             };
         };
     };
