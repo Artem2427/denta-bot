@@ -5,8 +5,8 @@ milestone_name: Platform Admin API
 current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
-stopped_at: Phase 6 context gathered
-last_updated: "2026-08-14T20:29:49.939Z"
+stopped_at: Phase 6 UI-SPEC approved
+last_updated: "2026-08-14T21:03:55.291Z"
 last_activity: 2026-08-14
 last_activity_desc: Plan 04-02 (refresh rotation, logout, global AccessTokenGuard) complete — Phase 4 (Backend Foundation & Auth) fully complete, all 7 requirements (INFRA-01/02/03, AUTH-01/02/03/04) satisfied
 progress:
@@ -129,9 +129,9 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-14T20:29:49.926Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-apps-web-integration/06-CONTEXT.md
+Last session: 2026-08-14T21:03:55.277Z
+Stopped at: Phase 6 UI-SPEC approved
+Resume file: .planning/phases/06-apps-web-integration/06-UI-SPEC.md
 
 Next: /gsd-plan-phase 4 — plan Phase 4 (Backend Foundation & Auth)
 
