@@ -10,59 +10,23 @@ import { Check } from '@phosphor-icons/react/ssr';
 import Link from 'next/link';
 import * as React from 'react';
 
-const plans = [
-  {
-    name: 'Старт',
-    monthlyPrice: '599',
-    yearlyPrice: '499',
-    description: 'Для невеликих клінік',
-    features: [
-      'До 100 записів/місяць',
-      '1 лікар',
-      'Telegram бот',
-      'Автонагадування',
-      'Базова аналітика',
-      'Email підтримка',
-    ],
-  },
-  {
-    name: 'Бізнес',
-    monthlyPrice: '1199',
-    yearlyPrice: '999',
-    description: 'Для середніх клінік',
-    popular: true,
-    features: [
-      'До 500 записів/місяць',
-      'До 5 лікарів',
-      'Telegram бот',
-      'Автонагадування',
-      'Розширена аналітика',
-      'Збір відгуків',
-      'Інтеграції',
-      'Пріоритетна підтримка',
-    ],
-  },
-  {
-    name: 'Клініка',
-    monthlyPrice: '2499',
-    yearlyPrice: '1999',
-    description: 'Для великих клінік',
-    features: [
-      'Необмежено записів',
-      'Необмежено лікарів',
-      'Telegram бот',
-      'Автонагадування',
-      'Повна аналітика',
-      'Збір відгуків',
-      'Всі інтеграції',
-      'API доступ',
-      'Декілька локацій',
-      'Персональний менеджер',
-    ],
-  },
-];
+import type { PricingPlan } from './types';
 
-export function PricingCards(): React.JSX.Element {
+function getGridClassName(count: number): string {
+  if (count === 1) {
+    return 'mx-auto grid max-w-md gap-6';
+  }
+  if (count === 2) {
+    return 'mx-auto grid max-w-4xl gap-6 lg:grid-cols-2';
+  }
+  return 'mx-auto grid max-w-6xl gap-6 lg:grid-cols-3';
+}
+
+export function PricingCards({
+  plans,
+}: {
+  plans: PricingPlan[];
+}): React.JSX.Element {
   const [isYearly, setIsYearly] = React.useState(false);
 
   return (
@@ -88,14 +52,14 @@ export function PricingCards(): React.JSX.Element {
 
       <section className="pb-8 lg:pb-12">
         <Container>
-          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
+          <div className={getGridClassName(plans.length)}>
             {plans.map((plan) => (
               <PremiumCard
-                key={plan.name}
+                key={plan.id}
                 className="flex h-full flex-col"
-                highlighted={plan.popular}
+                highlighted={plan.isPopular}
               >
-                {plan.popular && (
+                {plan.isPopular && (
                   <PremiumBadge
                     variant="coral"
                     className="absolute -top-4 left-1/2 -translate-x-1/2"
@@ -118,7 +82,7 @@ export function PricingCards(): React.JSX.Element {
                     <li key={feature} className="flex items-start gap-2">
                       <Check
                         weight="regular"
-                        className="mt-0.5 h-5 w-5 shrink-0 text-green-500"
+                        className="mt-0.5 h-5 w-5 shrink-0 text-dt-teal"
                       />
                       <span className="text-dt-graphite">{feature}</span>
                     </li>
@@ -127,7 +91,7 @@ export function PricingCards(): React.JSX.Element {
                 <div className="mt-auto pt-6">
                   <PremiumButton
                     asChild
-                    variant={plan.popular ? 'coral' : 'outline'}
+                    variant={plan.isPopular ? 'coral' : 'outline'}
                     size="lg"
                     className="w-full"
                   >

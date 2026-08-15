@@ -14,6 +14,28 @@ export class PricingPlansService {
     return this.prisma.pricingPlan.findMany({ orderBy: { sortOrder: 'asc' } });
   }
 
+  // Public, unauthenticated reads (apps/web Prices page) — published-only,
+  // least-privilege field selection (excludes updatedById/updatedBy/
+  // createdAt/updatedAt, T-06-11). The `published: true` filter happens
+  // here, never trusted to the caller (T-06-10).
+  findAllPublished() {
+    return this.prisma.pricingPlan.findMany({
+      where: { published: true },
+      orderBy: { sortOrder: 'asc' },
+      select: {
+        id: true,
+        name: true,
+        monthlyPrice: true,
+        yearlyPrice: true,
+        description: true,
+        features: true,
+        isPopular: true,
+        sortOrder: true,
+        published: true,
+      },
+    });
+  }
+
   async findOne(id: string) {
     const pricingPlan = await this.prisma.pricingPlan.findUnique({
       where: { id },
