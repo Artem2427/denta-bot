@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { PostBodyBlock } from './_data';
+import type { PostBodyBlock } from './types';
 
 export function PostBody({
   blocks,

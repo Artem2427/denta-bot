@@ -12,11 +12,11 @@ import { PremiumCard } from '@/shared/components/premium-card';
 import { PremiumInput } from '@/shared/components/premium-input';
 import { routes } from '@/shared/lib/routes';
 
-import { posts } from './_data';
+import type { Post } from './types';
 
 const categories = ['Всі', 'Автоматизація', 'Маркетинг', 'Управління клінікою'];
 
-export function BlogFilters(): React.JSX.Element {
+export function BlogFilters({ posts }: { posts: Post[] }): React.JSX.Element {
   const [search, setSearch] = React.useState('');
   const [activeCategory, setActiveCategory] = React.useState('Всі');
 
@@ -90,10 +90,12 @@ export function BlogFilters(): React.JSX.Element {
                       <Clock weight="regular" className="h-4 w-4" />
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
+                    <h3 className="line-clamp-2 text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                       {post.title}
                     </h3>
-                    <p className="mt-2 flex-1 text-dt-graphite">{post.excerpt}</p>
+                    <p className="mt-2 line-clamp-3 flex-1 text-dt-graphite">
+                      {post.excerpt}
+                    </p>
                     <div className="mt-4">
                       <PremiumButton asChild variant="ghost" className="px-0">
                         <span>Читати →</span>

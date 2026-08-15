@@ -3,16 +3,47 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 
-import { featuredPost } from '@/modules/blog/_data';
 import { BlogFilters } from '@/modules/blog/blog-filters';
+import type { Post } from '@/modules/blog/types';
 import { Container } from '@/shared/components/container';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
 
-export default function Blog(): React.JSX.Element {
+export default async function Blog(): Promise<React.JSX.Element> {
+  const res = await fetch(`${getServerApiUrl()}/public/blog-posts`, {
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch blog posts: ${res.status}`);
+  }
+  const posts = (await res.json()) as Post[];
+
+  if (posts.length === 0) {
+    return (
+      <div className="min-h-screen pb-16 pt-24 lg:pt-32">
+        <section>
+          <Container>
+            <div className="mx-auto max-w-2xl py-16 text-center">
+              <h1 className="text-dt-h1 font-dt-heading font-bold text-dt-navy">
+                Матеріалів поки немає
+              </h1>
+              <p className="mt-4 text-dt-body text-dt-graphite">
+                Ми вже готуємо перші статті. Загляньте трохи пізніше.
+              </p>
+            </div>
+          </Container>
+        </section>
+      </div>
+    );
+  }
+
+  const featuredPost = posts[0]!;
+  const remainingPosts = posts.slice(1);
+
   return (
     <div className="min-h-screen pb-16 pt-24 lg:pt-32">
       <section className="pb-12">
@@ -70,21 +101,13 @@ export default function Blog(): React.JSX.Element {
         </Container>
       </section>
 
-      <section className="pb-12">
-        <Container>
-          <BlogFilters />
-        </Container>
-      </section>
-
-      <section>
-        <Container>
-          <div className="text-center">
-            <PremiumButton variant="outline" size="lg">
-              Завантажити ще
-            </PremiumButton>
-          </div>
-        </Container>
-      </section>
+      {remainingPosts.length > 0 ? (
+        <section className="pb-12">
+          <Container>
+            <BlogFilters posts={remainingPosts} />
+          </Container>
+        </section>
+      ) : null}
     </div>
   );
 }
