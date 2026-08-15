@@ -15,6 +15,11 @@ export class LeadsService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(dto: CreateLeadDto) {
+    if (!dto.email && !dto.phone) {
+      throw new BadRequestException(
+        'Either email or phone must be provided',
+      );
+    }
     return this.prisma.lead.create({ data: dto });
   }
 

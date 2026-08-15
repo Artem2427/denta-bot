@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import { PostBody } from '@/modules/blog/post-body';
 import { RelatedPosts } from '@/modules/blog/related-posts';
-import type { Post, PostBodyBlock } from '@/modules/blog/types';
+import { extractPostBodyBlocks, type Post } from '@/modules/blog/types';
 import { Container } from '@/shared/components/container';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
@@ -21,7 +21,9 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const apiUrl = getServerApiUrl();
   const [postRes, listRes] = await Promise.all([
-    fetch(`${apiUrl}/public/blog-posts/${slug}`, { next: { revalidate: 60 } }),
+    fetch(`${apiUrl}/public/blog-posts/${encodeURIComponent(slug)}`, {
+      next: { revalidate: 60 },
+    }),
     fetch(`${apiUrl}/public/blog-posts`, { next: { revalidate: 60 } }),
   ]);
 
@@ -34,7 +36,7 @@ export default async function BlogPostPage({
 
   const post = (await postRes.json()) as Post;
   const allPosts = (await listRes.json()) as Post[];
-  const blocks = Array.isArray(post.body) ? (post.body as PostBodyBlock[]) : [];
+  const blocks = extractPostBodyBlocks(post.body);
 
   return (
     <div className="min-h-screen pb-16 pt-24 lg:pt-32">
