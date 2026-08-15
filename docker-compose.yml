@@ -18,3 +18,4 @@ services:
 
 volumes:
   denta_bot_postgres_data:
+    name: agent-a8976498097c8c381_denta_bot_postgres_data
