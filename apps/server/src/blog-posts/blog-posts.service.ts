@@ -27,6 +27,51 @@ export class BlogPostsService {
     return blogPost;
   }
 
+  // Public, unauthenticated reads (apps/web Blog list/detail) — published-only,
+  // least-privilege field selection (excludes updatedById/updatedBy/
+  // createdAt/updatedAt, T-06-07). The `published: true` filter/check happens
+  // here, never trusted to the caller (T-06-06).
+  findAllPublished() {
+    return this.prisma.blogPost.findMany({
+      where: { published: true },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        excerpt: true,
+        category: true,
+        date: true,
+        readTime: true,
+        image: true,
+        body: true,
+        published: true,
+      },
+    });
+  }
+
+  async findPublishedBySlug(slug: string) {
+    const blogPost = await this.prisma.blogPost.findUnique({
+      where: { slug },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        excerpt: true,
+        category: true,
+        date: true,
+        readTime: true,
+        image: true,
+        body: true,
+        published: true,
+      },
+    });
+    if (!blogPost || !blogPost.published) {
+      throw new NotFoundException('Blog post not found');
+    }
+    return blogPost;
+  }
+
   async create(dto: CreateBlogPostDto, adminId: string) {
     try {
       return await this.prisma.blogPost.create({

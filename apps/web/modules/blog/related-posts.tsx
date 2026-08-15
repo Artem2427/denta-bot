@@ -7,14 +7,16 @@ import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
 import { routes } from '@/shared/lib/routes';
 
-import { featuredPost, posts } from './_data';
+import type { Post } from './types';
 
 export function RelatedPosts({
+  allPosts,
   excludeSlug,
 }: {
+  allPosts: Post[];
   excludeSlug: string;
 }): React.JSX.Element {
-  const related = [featuredPost, ...posts]
+  const related = allPosts
     .filter((post) => post.slug !== excludeSlug)
     .slice(0, 3);
 
