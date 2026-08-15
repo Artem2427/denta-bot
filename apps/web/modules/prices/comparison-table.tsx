@@ -2,6 +2,8 @@ import { Container } from '@/shared/components/container';
 import { Reveal } from '@/shared/components/reveal';
 import { Check } from '@phosphor-icons/react/ssr';
 
+import type { PricingPlan } from './types';
+
 function CheckCell(): React.JSX.Element {
   return <Check weight="regular" className="mx-auto h-5 w-5 text-dt-teal" />;
 }
@@ -10,7 +12,15 @@ function DashCell(): React.JSX.Element {
   return <span className="text-dt-graphite">—</span>;
 }
 
-export function ComparisonTable(): React.JSX.Element {
+export function ComparisonTable({
+  plans,
+}: {
+  plans: PricingPlan[];
+}): React.JSX.Element {
+  const featureRows = Array.from(
+    new Set(plans.flatMap((plan) => plan.features)),
+  );
+
   return (
     <section className="bg-dt-navy/5 py-8 lg:py-12">
       <Container>
@@ -24,168 +34,28 @@ export function ComparisonTable(): React.JSX.Element {
             <thead>
               <tr className="border-b border-dt-navy/10">
                 <th className="py-4 text-left text-dt-navy">Функція</th>
-                <th className="py-4 text-center text-dt-navy">Старт</th>
-                <th className="py-4 text-center text-dt-navy">Бізнес</th>
-                <th className="py-4 text-center text-dt-navy">Клініка</th>
+                {plans.map((plan) => (
+                  <th key={plan.id} className="py-4 text-center text-dt-navy">
+                    {plan.name}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Записи на місяць</td>
-                <td className="py-4 text-center text-dt-navy">100</td>
-                <td className="py-4 text-center text-dt-navy">500</td>
-                <td className="py-4 text-center text-dt-navy">Необмежено</td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Кількість лікарів</td>
-                <td className="py-4 text-center text-dt-navy">1</td>
-                <td className="py-4 text-center text-dt-navy">5</td>
-                <td className="py-4 text-center text-dt-navy">Необмежено</td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Telegram бот</td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Автонагадування</td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Базова аналітика</td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Розширена аналітика</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Повна аналітика</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Збір відгуків</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Інтеграції</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">API доступ</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Декілька локацій</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Email підтримка</td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Пріоритетна підтримка</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
-              <tr className="border-b border-dt-navy/10">
-                <td className="py-4 text-dt-navy">Персональний менеджер</td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <DashCell />
-                </td>
-                <td className="py-4 text-center">
-                  <CheckCell />
-                </td>
-              </tr>
+              {featureRows.map((row) => (
+                <tr key={row} className="border-b border-dt-navy/10">
+                  <td className="py-4 text-dt-navy">{row}</td>
+                  {plans.map((plan) => (
+                    <td key={plan.id} className="py-4 text-center">
+                      {plan.features.includes(row) ? (
+                        <CheckCell />
+                      ) : (
+                        <DashCell />
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

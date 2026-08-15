@@ -45,7 +45,7 @@ export default async function Prices(): Promise<React.JSX.Element> {
   return (
     <div className="min-h-screen pb-16 pt-24 lg:pt-32">
       <PricingCards plans={plans} />
-      <ComparisonTable />
+      {plans.length >= 2 && <ComparisonTable plans={plans} />}
       <section className="bg-dt-navy/5 py-8 lg:py-12">
         <Container>
           <Reveal>
