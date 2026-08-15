@@ -4,12 +4,15 @@ import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { PremiumInput } from '@/shared/components/premium-input';
 import { PremiumTextarea } from '@/shared/components/premium-textarea';
+import { getClientApiUrl } from '@/shared/lib/api-url';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckCircle } from '@phosphor-icons/react';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(2, "Ім'я має містити щонайменше 2 символи"),
@@ -36,11 +39,36 @@ export function ContactForm(): React.JSX.Element {
   });
   const [isSubmitted, setIsSubmitted] = React.useState(false);
 
-  const onSubmit = form.handleSubmit(() => {
-    setTimeout(() => {
+  const onSubmit = form.handleSubmit(async (values) => {
+    try {
+      const isEmail = EMAIL_REGEX.test(values.contact);
+      const res = await fetch(`${getClientApiUrl()}/leads`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: values.name,
+          clinicName: values.clinic || undefined,
+          [isEmail ? 'email' : 'phone']: values.contact,
+          message: values.message || undefined,
+          source: 'contacts',
+        }),
+      });
+
+      if (res.status === 429) {
+        toast.error('Забагато спроб. Зачекайте хвилину і спробуйте ще раз.');
+        return;
+      }
+
+      if (!res.ok) {
+        toast.error('Не вдалося надіслати заявку. Спробуйте ще раз.');
+        return;
+      }
+
       setIsSubmitted(true);
       toast.success('Заявку успішно надіслано!');
-    }, 500);
+    } catch {
+      toast.error('Не вдалося надіслати заявку. Спробуйте ще раз.');
+    }
   });
 
   return (
@@ -122,8 +150,11 @@ export function ContactForm(): React.JSX.Element {
               variant="coral"
               size="lg"
               className="w-full"
+              disabled={form.formState.isSubmitting}
             >
-              Надіслати заявку
+              {form.formState.isSubmitting
+                ? 'Надсилаємо…'
+                : 'Надіслати заявку'}
             </PremiumButton>
           </form>
         </>

@@ -6,12 +6,17 @@ import {
 } from '@nestjs/common';
 import { Prisma } from '@repo/db';
 import { PrismaService } from '../prisma/prisma.service';
+import { CreateLeadDto } from './dto/create-lead.dto';
 import { LeadQueryDto } from './dto/lead-query.dto';
 import { UpdateLeadStatusDto } from './dto/update-lead-status.dto';
 
 @Injectable()
 export class LeadsService {
   constructor(private readonly prisma: PrismaService) {}
+
+  create(dto: CreateLeadDto) {
+    return this.prisma.lead.create({ data: dto });
+  }
 
   findAll(query: LeadQueryDto) {
     const createdAt: Prisma.DateTimeFilter | undefined =
