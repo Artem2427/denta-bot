@@ -4,12 +4,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import * as React from 'react';
 
-import { getPostBySlug } from '@/modules/blog/_data';
 import { PostBody } from '@/modules/blog/post-body';
 import { RelatedPosts } from '@/modules/blog/related-posts';
+import type { Post, PostBodyBlock } from '@/modules/blog/types';
 import { Container } from '@/shared/components/container';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
+import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
 
 export default async function BlogPostPage({
@@ -18,11 +19,22 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }): Promise<React.JSX.Element> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const apiUrl = getServerApiUrl();
+  const [postRes, listRes] = await Promise.all([
+    fetch(`${apiUrl}/public/blog-posts/${slug}`, { next: { revalidate: 60 } }),
+    fetch(`${apiUrl}/public/blog-posts`, { next: { revalidate: 60 } }),
+  ]);
 
-  if (!post) {
+  if (postRes.status === 404) {
     notFound();
   }
+  if (!postRes.ok || !listRes.ok) {
+    throw new Error(`Failed to fetch blog post: ${postRes.status}`);
+  }
+
+  const post = (await postRes.json()) as Post;
+  const allPosts = (await listRes.json()) as Post[];
+  const blocks = Array.isArray(post.body) ? (post.body as PostBodyBlock[]) : [];
 
   return (
     <div className="min-h-screen pb-16 pt-24 lg:pt-32">
@@ -66,7 +78,7 @@ export default async function BlogPostPage({
             />
           </div>
 
-          <PostBody blocks={post.body} />
+          <PostBody blocks={blocks} />
 
           <div className="mb-16 rounded-dt-card bg-dt-navy p-8 text-center text-dt-warm-white lg:p-12">
             <h3 className="text-dt-h3 font-dt-heading font-bold">
@@ -90,7 +102,7 @@ export default async function BlogPostPage({
             </div>
           </div>
 
-          <RelatedPosts excludeSlug={post.slug} />
+          <RelatedPosts allPosts={allPosts} excludeSlug={post.slug} />
         </div>
       </Container>
     </div>
