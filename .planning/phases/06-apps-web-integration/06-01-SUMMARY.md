@@ -157,3 +157,7 @@ None - no external service configuration required. (`apps/web/.env.example` docu
 ---
 *Phase: 06-apps-web-integration*
 *Completed: 2026-08-15*
+
+## Self-Check: PASSED
+
+All 6 created files verified present on disk; all 3 commits (`728e159`, `a381b98`, plus this summary's own commit) verified in `git log --all`.
