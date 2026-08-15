@@ -111,7 +111,20 @@ Plans:
   3. `apps/web`'s Blog list and blog post detail pages render real posts fetched from the API, with `modules/blog/_data.ts` removed
   4. `apps/web`'s Prices page renders real pricing plans fetched from the API, replacing hardcoded data and collapsing the `pricing-cards.tsx`/`comparison-table.tsx` duplication
 
-**Plans**: TBD
+**Plans**: 0/3 plans executed
+Plans:
+**Wave 1**
+
+- [ ] 06-01-PLAN.md — POST /leads (public, rate-limited) tracer + Contacts form real fetch + Demo modal (LEAD-01, LEAD-02)
+
+**Wave 2** *(blocked on Wave 1 — proves the public-route pattern)*
+
+- [ ] 06-02-PLAN.md — PublicBlogPostsController + apps/web Blog list/detail real-data wiring, _data.ts removed (CMS-02)
+
+**Wave 3** *(blocked on Wave 2 — sequential to avoid concurrent apps/server port/build contention during verify)*
+
+- [ ] 06-03-PLAN.md — PublicPricingPlansController + apps/web Prices page real-data wiring, comparison-table derived matrix (CMS-04)
+
 **UI hint**: yes
 
 ## Progress
@@ -127,4 +140,4 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 3. Prices & Blog | 2/2 | Complete | 2026-08-10 |
 | 4. Backend Foundation & Auth | 2/2 | Complete    | 2026-08-14 |
 | 5. Clinic, Lead & Content Management | 7/7 | Complete    | 2026-08-14 |
-| 6. apps/web Integration | 0/TBD | Not started | - |
+| 6. apps/web Integration | 0/3 | Planned | - |
