@@ -141,22 +141,24 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 4. Backend Foundation & Auth | 2/2 | Complete    | 2026-08-14 |
 | 5. Clinic, Lead & Content Management | 7/7 | Complete    | 2026-08-14 |
 | 6. apps/web Integration | 3/3 | In Progress|  |
+| 06.1. Premium Visual Restyle (apps/web) | 5/5 | Complete | 2026-08-18 |
 
-### Phase 06.1: Premium Visual Restyle (apps/web) — purely visual/CSS restyle of Home, Prices, Demo, Blog, Contacts pages to a premium look using dt- design tokens and shared primitive components (Section, Container, Eyebrow, SectionHeading, Card, Stat, Button); no route/prop/copy/dependency changes (INSERTED)
+### Phase 06.1: Premium Visual Restyle (apps/web) — purely visual/CSS restyle of Home, Prices, Demo, Blog, Contacts pages to a premium look using dt- design tokens and shared primitive components (Section, Container, Eyebrow, SectionHeading, Card, Stat, Button); no route/prop/copy/dependency changes (INSERTED) — Complete 2026-08-18
 
 **Goal:** Every page on `apps/web` (Home, Prices, Demo, Blog, Contacts) reads as premium and expensive — consistent `dt-` design tokens, shared `Section`/`Eyebrow`/`SectionHeading`/`Stat` primitives replacing today's duplicated per-page markup, tightened typography/motion/hairline-border/focus-ring spec — with zero route, prop, copy, or dependency changes.
 **Requirements**: None (urgent client-directed visual restyle, not a v1.1 roadmap requirement)
 **Depends on:** Phase 6
-**Plans:** 5 plans
+**Plans:** 5/5 plans executed
+**Verification:** `06.1-VERIFICATION.md` — 16/16 truths verified (one gap found and fixed same-session: 8 undocumented emoji in `modules/demo/_data.ts`'s bot scenario messages, commit `20714d9`)
 
 Plans:
 **Wave 1**
 
-- [ ] 06.1-01-PLAN.md — fonts (Manrope + JetBrains Mono) + new dt- tokens + Section/Eyebrow/SectionHeading/Stat primitives, tracer-proven on Home's Problem section and Hero stats
+- [x] 06.1-01-PLAN.md — fonts (Manrope + JetBrains Mono) + new dt- tokens + Section/Eyebrow/SectionHeading/Stat primitives, tracer-proven on Home's Problem section and Hero stats
 
 **Wave 2** *(blocked on Wave 1 — all 4 plans below depend only on 06.1-01 and touch disjoint files, so they run in parallel)*
 
-- [ ] 06.1-02-PLAN.md — PremiumButton/PremiumCard/motion.ts/Header/Footer/Dialog/Accordion retrofits
-- [ ] 06.1-03-PLAN.md — Home sweep remainder (Solution, UnifiedSource, Features, Testimonials, CtaBanner)
-- [ ] 06.1-04-PLAN.md — Prices + Contacts sweep
-- [ ] 06.1-05-PLAN.md — Demo + Blog sweep
+- [x] 06.1-02-PLAN.md — PremiumButton/PremiumCard/motion.ts/Header/Footer/Dialog/Accordion retrofits
+- [x] 06.1-03-PLAN.md — Home sweep remainder (Solution, UnifiedSource, Features, Testimonials, CtaBanner)
+- [x] 06.1-04-PLAN.md — Prices + Contacts sweep
+- [x] 06.1-05-PLAN.md — Demo + Blog sweep
