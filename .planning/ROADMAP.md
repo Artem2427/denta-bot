@@ -144,11 +144,19 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 
 ### Phase 06.1: Premium Visual Restyle (apps/web) — purely visual/CSS restyle of Home, Prices, Demo, Blog, Contacts pages to a premium look using dt- design tokens and shared primitive components (Section, Container, Eyebrow, SectionHeading, Card, Stat, Button); no route/prop/copy/dependency changes (INSERTED)
 
-**Goal:** [Urgent work - to be planned]
-**Requirements**: TBD
+**Goal:** Every page on `apps/web` (Home, Prices, Demo, Blog, Contacts) reads as premium and expensive — consistent `dt-` design tokens, shared `Section`/`Eyebrow`/`SectionHeading`/`Stat` primitives replacing today's duplicated per-page markup, tightened typography/motion/hairline-border/focus-ring spec — with zero route, prop, copy, or dependency changes.
+**Requirements**: None (urgent client-directed visual restyle, not a v1.1 roadmap requirement)
 **Depends on:** Phase 6
-**Plans:** 0 plans
+**Plans:** 5 plans
 
 Plans:
+**Wave 1**
 
-- [ ] TBD (run /gsd-plan-phase 06.1 to break down)
+- [ ] 06.1-01-PLAN.md — fonts (Manrope + JetBrains Mono) + new dt- tokens + Section/Eyebrow/SectionHeading/Stat primitives, tracer-proven on Home's Problem section and Hero stats
+
+**Wave 2** *(blocked on Wave 1 — all 4 plans below depend only on 06.1-01 and touch disjoint files, so they run in parallel)*
+
+- [ ] 06.1-02-PLAN.md — PremiumButton/PremiumCard/motion.ts/Header/Footer/Dialog/Accordion retrofits
+- [ ] 06.1-03-PLAN.md — Home sweep remainder (Solution, UnifiedSource, Features, Testimonials, CtaBanner)
+- [ ] 06.1-04-PLAN.md — Prices + Contacts sweep
+- [ ] 06.1-05-PLAN.md — Demo + Blog sweep
