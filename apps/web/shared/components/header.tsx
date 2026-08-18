@@ -36,7 +36,7 @@ export function Header() {
     <header
       className={
         isScrolled
-          ? 'fixed top-0 left-0 right-0 z-50 bg-dt-warm-white/80 shadow-sm backdrop-blur-md transition-all duration-300'
+          ? 'fixed top-0 left-0 right-0 z-50 bg-dt-warm-white/[0.86] shadow-sm backdrop-blur-[14px] border-b border-[var(--dt-border)] transition-all duration-[var(--dt-duration-base)]'
           : 'fixed top-0 left-0 right-0 z-50 bg-dt-warm-white transition-all duration-300'
       }
     >
@@ -113,7 +113,7 @@ export function Header() {
                   ? { duration: 0.01 }
                   : { duration: 0.25, ease: EASE_DT_EXPO_OUT }
               }
-              className="overflow-hidden border-t border-dt-navy/10 lg:hidden"
+              className="overflow-hidden border-t border-[var(--dt-border)] lg:hidden"
             >
               <nav className="flex flex-col gap-4 py-4">
                 {navLinks.map((link) => (

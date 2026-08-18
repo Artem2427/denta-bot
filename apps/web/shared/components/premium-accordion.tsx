@@ -17,7 +17,7 @@ function PremiumAccordionItem({
     <AccordionPrimitive.Item
       data-slot="premium-accordion-item"
       className={cn(
-        'rounded-dt-card border border-dt-navy/10 bg-dt-warm-white px-6',
+        'rounded-dt-card border border-[var(--dt-border)] bg-dt-warm-white px-6',
         className,
       )}
       {...props}

@@ -10,7 +10,7 @@ const socialIconClassName =
 
 export function Footer(): React.JSX.Element {
   return (
-    <footer className="border-t border-dt-navy/10 bg-dt-warm-white">
+    <footer className="border-t border-[var(--dt-border)] bg-dt-warm-white">
       <Container className="py-16 lg:py-24">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           {/* Column 1 — Logo + description */}
@@ -152,7 +152,7 @@ export function Footer(): React.JSX.Element {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-dt-navy/10 pt-8">
+        <div className="mt-12 border-t border-[var(--dt-border)] pt-8">
           <p className="text-center text-sm text-dt-graphite">
             © 2026 DentaBot by Dankohub
           </p>
