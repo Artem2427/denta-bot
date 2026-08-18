@@ -123,8 +123,8 @@ export function BotTab(): React.JSX.Element {
     <div className="grid gap-8 lg:grid-cols-3">
       <div className="lg:col-span-2">
         <div className="mx-auto max-w-md">
-          <div className="rounded-[3rem] bg-gray-900 p-3 shadow-2xl">
-            <div className="flex h-[600px] flex-col overflow-hidden rounded-[2.5rem] bg-dt-warm-white">
+          <div className="rounded-dt-frame bg-gray-900 p-3 shadow-[var(--shadow-dt-hover)]">
+            <div className="flex h-[600px] flex-col overflow-hidden rounded-dt-frame-inner bg-dt-warm-white">
               <div className="flex items-center gap-3 bg-dt-navy px-4 py-3 text-dt-warm-white">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-dt-warm-white">
                   <span className="text-2xl">🦷</span>
@@ -153,7 +153,7 @@ export function BotTab(): React.JSX.Element {
                         className={
                           message.type === 'user'
                             ? 'rounded-2xl bg-dt-navy px-4 py-2 text-dt-warm-white'
-                            : 'flex items-start gap-1.5 rounded-2xl border border-dt-navy/10 bg-dt-warm-white px-4 py-2 text-dt-navy'
+                            : 'flex items-start gap-1.5 rounded-2xl border border-[var(--dt-border)] bg-dt-warm-white px-4 py-2 text-dt-navy'
                         }
                       >
                         {message.type === 'bot' ? (
@@ -184,7 +184,7 @@ export function BotTab(): React.JSX.Element {
 
                 {isTyping ? (
                   <div className="flex justify-start">
-                    <div className="rounded-2xl border border-dt-navy/10 bg-dt-warm-white px-4 py-3">
+                    <div className="rounded-2xl border border-[var(--dt-border)] bg-dt-warm-white px-4 py-3">
                       <div className="flex items-center gap-1">
                         <span
                           className="h-1.5 w-1.5 rounded-full bg-dt-navy/40 motion-safe:animate-pulse"
@@ -230,7 +230,7 @@ export function BotTab(): React.JSX.Element {
             {scenario.label}
           </PremiumButton>
         ))}
-        <div className="border-t border-dt-navy/10 pt-4">
+        <div className="border-t border-[var(--dt-border)] pt-4">
           <p className="mb-3 text-sm text-dt-graphite">
             Або спробуйте в реальному Telegram:
           </p>
