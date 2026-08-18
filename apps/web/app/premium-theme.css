@@ -17,6 +17,8 @@
   /* Radius (D-12) */
   --radius-dt-card: 0.625rem; /* 10px — cards/buttons */
   --radius-dt-input: 0.375rem; /* 6px — inputs */
+  --radius-dt-frame: 3rem; /* Phase 06.1 D-22 — phone-frame bezel radius */
+  --radius-dt-frame-inner: 2.5rem; /* Phase 06.1 D-22 — phone-frame screen radius */
 
   /* Shadows (D-13) — soft, layered, navy-tinted (not pure black) */
   --shadow-dt-sm: 0 1px 2px rgba(26, 43, 61, 0.04);
@@ -39,6 +41,20 @@
   --text-dt-body: 1.125rem;
   --text-dt-body--line-height: 1.5;
   --text-dt-caption: 0.8125rem;
+  --text-dt-eyebrow: 0.8125rem; /* Phase 06.1 D-07 — formalizes the old .dt-caption utility class */
+  --text-dt-eyebrow--letter-spacing: 0.02em;
+
+  /* Spacing scale (Phase 06.1 D-03) — additive, 16px base */
+  --spacing-dt-4: 0.25rem;
+  --spacing-dt-8: 0.5rem;
+  --spacing-dt-12: 0.75rem;
+  --spacing-dt-16: 1rem;
+  --spacing-dt-24: 1.5rem;
+  --spacing-dt-32: 2rem;
+  --spacing-dt-48: 3rem;
+  --spacing-dt-64: 4rem;
+  --spacing-dt-96: 6rem;
+  --spacing-dt-112: 7rem;
 }
 
 @layer utilities {
@@ -52,6 +68,7 @@
   /* Bound at runtime by apps/web/app/fonts.ts's next/font/google variables (Task 3 / Plan 04). */
   --font-dt-heading: var(--font-dt-heading-raw);
   --font-dt-body: var(--font-dt-body-raw);
+  --font-dt-mono: var(--font-dt-mono-raw); /* Phase 06.1 D-02 */
 }
 
 :root {
@@ -59,6 +76,12 @@
   --dt-container-max: 80rem; /* 1280px */
   --dt-section-y: 7rem; /* 112px, within D-14's 96-140px desktop inter-section range */
   --dt-ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Phase 06.1 additions — additive, no existing token removed/renamed. */
+  --dt-border: rgba(26, 43, 61, 0.08); /* D-04 — canonical hairline border */
+  --dt-ring: var(--color-dt-teal); /* D-05 — teal focus ring reference */
+  --dt-duration-fast: 180ms; /* D-06 */
+  --dt-duration-base: 240ms; /* D-06 */
 }
 
 /* D-37 — CSS-only half of reduced-motion support. The JS-driven half

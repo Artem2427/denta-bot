@@ -3,25 +3,25 @@
 import { Container } from '@/shared/components/container';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 
 import { StaggerGrid, StaggerItem } from './stagger-grid';
 
 export function Problem(): React.JSX.Element {
   return (
-    <section className="py-8 lg:py-12">
+    <Section>
       <Container>
         <Reveal>
-          <div className="mb-12 text-center">
-            <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy">Знайомо?</h2>
-            <p className="mx-auto max-w-2xl text-dt-body text-dt-graphite">
-              Як зараз виглядає запис у більшості клінік
-            </p>
-          </div>
+          <SectionHeading
+            title="Знайомо?"
+            description="Як зараз виглядає запис у більшості клінік"
+          />
         </Reveal>
         <StaggerGrid className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <StaggerItem>
             <PremiumCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-coral/10">
                 <span className="text-2xl">📞</span>
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
@@ -34,7 +34,7 @@ export function Problem(): React.JSX.Element {
           </StaggerItem>
           <StaggerItem>
             <PremiumCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-orange-100">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-amber/10">
                 <span className="text-2xl">😔</span>
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
@@ -47,7 +47,7 @@ export function Problem(): React.JSX.Element {
           </StaggerItem>
           <StaggerItem>
             <PremiumCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-amber/10">
                 <span className="text-2xl">💬</span>
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
@@ -60,7 +60,7 @@ export function Problem(): React.JSX.Element {
           </StaggerItem>
           <StaggerItem>
             <PremiumCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-100">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-teal/10">
                 <span className="text-2xl">📊</span>
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
@@ -73,6 +73,6 @@ export function Problem(): React.JSX.Element {
           </StaggerItem>
         </StaggerGrid>
       </Container>
-    </section>
+    </Section>
   );
 }

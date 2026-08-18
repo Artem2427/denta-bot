@@ -1,19 +1,28 @@
-// Uses plain "Inter" via next/font/google for both heading and body registers
-// (differentiated by weight/letter-spacing) rather than manually self-hosting
-// "Inter Display" — D-08 explicitly allows plain Inter, and RESEARCH.md Open
-// Question 2 recommends this simpler, zero-manual-asset-vendoring path.
-import { Inter } from 'next/font/google';
+// Uses Manrope via next/font/google for both heading and body registers
+// (differentiated by weight/letter-spacing), plus JetBrains Mono as a third,
+// monospace register for eyebrow labels / KPI numbers / prices. D-01 swaps
+// the site off Inter (excluded by the client's premium-redesign brief) onto
+// Manrope; D-02 adds the mono register. All three subsets include 'cyrillic'
+// so Ukrainian copy renders with no fallback-font flash.
+import { JetBrains_Mono, Manrope } from 'next/font/google';
 
-export const interHeading = Inter({
+export const interHeading = Manrope({
   subsets: ['latin', 'cyrillic'],
-  weight: ['600', '700'],
+  weight: ['700', '800'],
   variable: '--font-dt-heading-raw',
   display: 'swap',
 });
 
-export const interBody = Inter({
+export const interBody = Manrope({
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500'],
   variable: '--font-dt-body-raw',
+  display: 'swap',
+});
+
+export const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['500'],
+  variable: '--font-dt-mono-raw',
   display: 'swap',
 });

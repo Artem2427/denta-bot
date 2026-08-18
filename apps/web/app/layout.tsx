@@ -4,7 +4,7 @@ import { Toaster } from '@repo/ui';
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 
-import { interHeading, interBody } from './fonts';
+import { interHeading, interBody, jetbrainsMono } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="uk" suppressHydrationWarning>
       <body
-        className={`${interHeading.variable} ${interBody.variable} font-dt-body overflow-x-hidden`}
+        className={`${interHeading.variable} ${interBody.variable} ${jetbrainsMono.variable} font-dt-body overflow-x-hidden`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />
