@@ -2,19 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Admin API
-current_phase: 6
-current_phase_name: apps-web-integration
+current_phase: 06.1
+current_phase_name: premium-visual-restyle-apps-web
 status: executing
 stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-08-18T18:51:51.178Z"
-last_activity: 2026-08-15
-last_activity_desc: Phase 6 execution started
+last_updated: "2026-08-18T19:35:49.348Z"
+last_activity: 2026-08-18
+last_activity_desc: Phase 06.1 execution started
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 12
+  total_plans: 17
   completed_plans: 12
-  percent: 75
+  percent: 71
 ---
 
 # Project State
@@ -24,14 +24,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-10)
 
 **Core value:** A real NestJS + Prisma backend feeds `apps/platform-admin` (clinic/lead/content monitoring) and the site's CMS-backed content, so denta-bot staff can operate on real data instead of hardcoded fixtures.
-**Current focus:** Phase 6 — apps-web-integration
+**Current focus:** Phase 06.1 — premium-visual-restyle-apps-web
 
 ## Current Position
 
-Phase: 6 (apps-web-integration) — EXECUTING
-Plan: 1 of 3
-Status: Executing Phase 6
-Last activity: 2026-08-15 — Phase 6 execution started
+Phase: 06.1 (premium-visual-restyle-apps-web) — EXECUTING
+Plan: 1 of 5
+Status: Executing Phase 06.1
+Last activity: 2026-08-18 — Phase 06.1 execution started
 
 Progress: [██████████] 100%
 
