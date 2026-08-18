@@ -57,13 +57,6 @@
   --spacing-dt-112: 7rem;
 }
 
-@layer utilities {
-  .dt-caption {
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-}
-
 @theme inline {
   /* Bound at runtime by apps/web/app/fonts.ts's next/font/google variables (Task 3 / Plan 04). */
   --font-dt-heading: var(--font-dt-heading-raw);

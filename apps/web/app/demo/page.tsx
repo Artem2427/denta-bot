@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Container } from '@/shared/components/container';
+import { Eyebrow } from '@/shared/components/eyebrow';
 import { DemoTabs } from '@/modules/demo/demo-tabs';
 import { DemoCta } from '@/modules/demo/demo-cta';
 
@@ -10,9 +11,9 @@ export default function Demo(): React.JSX.Element {
       <section className="pb-12">
         <Container>
           <div className="mb-8 text-center">
-            <span className="dt-caption mb-4 inline-block rounded-full bg-dt-coral/10 px-3 py-1 text-dt-coral">
+            <Eyebrow className="mb-4 inline-block rounded-full bg-dt-coral/10 px-3 py-1 text-dt-coral">
               DEMO MODE
-            </span>
+            </Eyebrow>
             <div className="mt-4">
               <DemoCta />
             </div>
