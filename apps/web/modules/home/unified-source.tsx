@@ -5,23 +5,20 @@ import { ArrowsClockwise, ChartPieSlice, UserGear } from '@phosphor-icons/react/
 import { Container } from '@/shared/components/container';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 
 import { StaggerGrid, StaggerItem } from './stagger-grid';
 
 export function UnifiedSource(): React.JSX.Element {
   return (
-    <section className="py-8 lg:py-12">
+    <Section>
       <Container>
         <Reveal>
-          <div className="mb-12 text-center">
-            <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy">
-              Єдине джерело правди — незалежно від каналу запису
-            </h2>
-            <p className="mx-auto max-w-2xl text-dt-body text-dt-graphite">
-              Бот і адміністратор працюють в одній системі запису — жодних розбіжностей і
-              подвійних бронювань
-            </p>
-          </div>
+          <SectionHeading
+            title="Єдине джерело правди — незалежно від каналу запису"
+            description="Бот і адміністратор працюють в одній системі запису — жодних розбіжностей і подвійних бронювань"
+          />
         </Reveal>
         <StaggerGrid className="grid gap-6 md:grid-cols-3">
           <StaggerItem>
@@ -64,6 +61,6 @@ export function UnifiedSource(): React.JSX.Element {
           </StaggerItem>
         </StaggerGrid>
       </Container>
-    </section>
+    </Section>
   );
 }

@@ -5,6 +5,8 @@ import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 import { routes } from '@/shared/lib/routes';
 
 const patientSteps = [
@@ -68,14 +70,10 @@ function StepColumn({
 
 export function Solution(): React.JSX.Element {
   return (
-    <section className="py-8 lg:py-12">
+    <Section>
       <Container>
         <Reveal>
-          <div className="mb-12 text-center">
-            <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy">
-              DentaBot бере це на себе
-            </h2>
-          </div>
+          <SectionHeading title="DentaBot бере це на себе" />
         </Reveal>
         <div className="grid gap-12 lg:grid-cols-2">
           <StepColumn heading="Для пацієнта" steps={patientSteps} />
@@ -90,6 +88,6 @@ export function Solution(): React.JSX.Element {
           </PremiumButton>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

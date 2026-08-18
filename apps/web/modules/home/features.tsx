@@ -14,19 +14,17 @@ import {
 import { Container } from '@/shared/components/container';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 
 import { StaggerGrid, StaggerItem } from './stagger-grid';
 
 export function Features(): React.JSX.Element {
   return (
-    <section id="features" className="py-8 lg:py-12">
+    <Section id="features">
       <Container>
         <Reveal>
-          <div className="mb-12 text-center">
-            <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy">
-              Все що потрібно для роботи клініки
-            </h2>
-          </div>
+          <SectionHeading title="Все що потрібно для роботи клініки" />
         </Reveal>
         <StaggerGrid className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <StaggerItem>
@@ -99,6 +97,6 @@ export function Features(): React.JSX.Element {
           </StaggerItem>
         </StaggerGrid>
       </Container>
-    </section>
+    </Section>
   );
 }
