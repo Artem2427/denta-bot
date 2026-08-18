@@ -7,6 +7,7 @@
     "dev:web": "turbo dev --filter=web",
     "dev:server": "turbo dev --filter=server",
     "dev:platform-admin": "turbo dev --filter=platform-admin",
+    "dev:client-admin": "turbo dev --filter=client-admin",
     "dev:docs": "turbo dev --filter=docs",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
