@@ -10,6 +10,7 @@ import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
 import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
 
@@ -46,7 +47,7 @@ export default async function Blog(): Promise<React.JSX.Element> {
 
   return (
     <div className="min-h-screen pb-16 pt-24 lg:pt-32">
-      <section className="pb-12">
+      <Section className="pb-12">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-dt-h1 font-dt-heading font-bold text-dt-navy">
@@ -58,9 +59,9 @@ export default async function Blog(): Promise<React.JSX.Element> {
             </p>
           </div>
         </Container>
-      </section>
+      </Section>
 
-      <section className="pb-12">
+      <Section className="pb-12">
         <Container>
           <Reveal>
             <Link href={routes.blogPost(featuredPost.slug)} className="block">
@@ -99,14 +100,14 @@ export default async function Blog(): Promise<React.JSX.Element> {
             </Link>
           </Reveal>
         </Container>
-      </section>
+      </Section>
 
       {remainingPosts.length > 0 ? (
-        <section className="pb-12">
+        <Section className="pb-12">
           <Container>
             <BlogFilters posts={remainingPosts} />
           </Container>
-        </section>
+        </Section>
       ) : null}
     </div>
   );
