@@ -1,6 +1,6 @@
 'use client';
 
-import { Star } from '@phosphor-icons/react/ssr';
+import { Star, UserCircle } from '@phosphor-icons/react/ssr';
 import Image from 'next/image';
 
 import { Container } from '@/shared/components/container';
@@ -63,8 +63,8 @@ export function Testimonials(): React.JSX.Element {
                 записуються самі через бота, а вона займається клінікою.
               </p>
               <div className="mt-4 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-dt-navy/10 text-2xl">
-                  👨‍⚕️
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-dt-navy/10">
+                  <UserCircle weight="fill" className="size-7 text-dt-navy/40" />
                 </div>
                 <div>
                   <div className="font-dt-heading font-semibold text-dt-navy">
@@ -83,8 +83,8 @@ export function Testimonials(): React.JSX.Element {
                 спеціаліст — все запрацювало одразу.
               </p>
               <div className="mt-4 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-dt-navy/10 text-2xl">
-                  👩‍⚕️
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-dt-navy/10">
+                  <UserCircle weight="fill" className="size-7 text-dt-navy/40" />
                 </div>
                 <div>
                   <div className="font-dt-heading font-semibold text-dt-navy">

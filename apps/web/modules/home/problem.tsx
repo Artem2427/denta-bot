@@ -1,5 +1,7 @@
 'use client';
 
+import { ChartBar, ChatCircleDots, Phone, SmileySad } from '@phosphor-icons/react/ssr';
+
 import { Container } from '@/shared/components/container';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
@@ -22,7 +24,7 @@ export function Problem(): React.JSX.Element {
           <StaggerItem>
             <PremiumCard>
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-coral/10">
-                <span className="text-2xl">📞</span>
+                <Phone weight="bold" className="size-6 text-dt-coral" />
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Адміністратор на телефоні
@@ -35,7 +37,7 @@ export function Problem(): React.JSX.Element {
           <StaggerItem>
             <PremiumCard>
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-amber/10">
-                <span className="text-2xl">😔</span>
+                <SmileySad weight="bold" className="size-6 text-dt-amber" />
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Пацієнти забувають
@@ -48,7 +50,7 @@ export function Problem(): React.JSX.Element {
           <StaggerItem>
             <PremiumCard>
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-amber/10">
-                <span className="text-2xl">💬</span>
+                <ChatCircleDots weight="bold" className="size-6 text-dt-amber" />
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Хаос в месенджерах
@@ -61,7 +63,7 @@ export function Problem(): React.JSX.Element {
           <StaggerItem>
             <PremiumCard>
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dt-teal/10">
-                <span className="text-2xl">📊</span>
+                <ChartBar weight="bold" className="size-6 text-dt-teal" />
               </div>
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
                 Немає статистики

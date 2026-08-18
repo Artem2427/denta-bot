@@ -1,3 +1,4 @@
+import { InstagramLogo, TelegramLogo } from '@phosphor-icons/react/ssr';
 import Link from 'next/link';
 
 import { routes } from '@/shared/lib/routes';
@@ -27,7 +28,7 @@ export function Footer(): React.JSX.Element {
                 rel="noopener noreferrer"
                 className={socialIconClassName}
               >
-                <span className="text-lg">✈️</span>
+                <TelegramLogo weight="bold" className="size-5" />
               </a>
               <a
                 href="https://instagram.com/dentabot"
@@ -35,7 +36,7 @@ export function Footer(): React.JSX.Element {
                 rel="noopener noreferrer"
                 className={socialIconClassName}
               >
-                <span className="text-lg">📷</span>
+                <InstagramLogo weight="bold" className="size-5" />
               </a>
             </div>
           </div>

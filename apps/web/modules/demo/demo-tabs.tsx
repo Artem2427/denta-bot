@@ -1,5 +1,6 @@
 'use client';
 
+import { GearSix, Robot } from '@phosphor-icons/react/ssr';
 import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
 
@@ -25,7 +26,8 @@ export function DemoTabs(): React.JSX.Element {
           variant={activeTab === 'bot' ? 'coral' : 'outline'}
           onClick={() => setActiveTab('bot')}
         >
-          🤖 Бот — вид пацієнта
+          <Robot weight="bold" className="size-4" />
+          Бот — вид пацієнта
         </PremiumButton>
         <PremiumButton
           role="tab"
@@ -33,7 +35,8 @@ export function DemoTabs(): React.JSX.Element {
           variant={activeTab === 'admin' ? 'coral' : 'outline'}
           onClick={() => setActiveTab('admin')}
         >
-          ⚙️ Адмін панель
+          <GearSix weight="bold" className="size-4" />
+          Адмін панель
         </PremiumButton>
       </div>
 

@@ -3,7 +3,7 @@
 import { PremiumButton } from '@/shared/components/premium-button';
 import { SignatureMark } from '@/shared/components/signature-mark';
 import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
-import { Checks } from '@phosphor-icons/react';
+import { Checks, Robot } from '@phosphor-icons/react';
 import { motion } from 'motion/react';
 import * as React from 'react';
 
@@ -127,7 +127,7 @@ export function BotTab(): React.JSX.Element {
             <div className="flex h-[600px] flex-col overflow-hidden rounded-dt-frame-inner bg-dt-warm-white">
               <div className="flex items-center gap-3 bg-dt-navy px-4 py-3 text-dt-warm-white">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-dt-warm-white">
-                  <span className="text-2xl">🦷</span>
+                  <Robot weight="bold" className="size-5 text-dt-navy" />
                 </div>
                 <div>
                   <div className="font-semibold">DentaBot</div>
