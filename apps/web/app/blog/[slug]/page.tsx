@@ -10,6 +10,7 @@ import { extractPostBodyBlocks, type Post } from '@/modules/blog/types';
 import { Container } from '@/shared/components/container';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
+import { SectionHeading } from '@/shared/components/section-heading';
 import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
 
@@ -83,12 +84,11 @@ export default async function BlogPostPage({
           <PostBody blocks={blocks} />
 
           <div className="mb-16 rounded-dt-card bg-dt-navy p-8 text-center text-dt-warm-white lg:p-12">
-            <h3 className="text-dt-h3 font-dt-heading font-bold">
-              Хочете автоматизувати запис у вашій клініці?
-            </h3>
-            <p className="mt-2 text-dt-warm-white/80">
-              Спробуйте DentaBot безкоштовно протягом 14 днів
-            </p>
+            <SectionHeading
+              tone="navy"
+              title="Хочете автоматизувати запис у вашій клініці?"
+              description="Спробуйте DentaBot безкоштовно протягом 14 днів"
+            />
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <PremiumButton asChild variant="coral" size="lg">
                 <Link href={routes.demo}>Спробувати демо</Link>

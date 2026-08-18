@@ -5,6 +5,8 @@ import { StaggerGrid, StaggerItem } from '@/modules/home/stagger-grid';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 import { routes } from '@/shared/lib/routes';
 
 import type { Post } from './types';
@@ -21,11 +23,9 @@ export function RelatedPosts({
     .slice(0, 3);
 
   return (
-    <section>
+    <Section>
       <Reveal>
-        <h2 className="mb-8 text-dt-h2 font-dt-heading font-bold text-dt-navy">
-          Схожі статті
-        </h2>
+        <SectionHeading title="Схожі статті" />
       </Reveal>
       <StaggerGrid className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {related.map((post) => (
@@ -45,6 +45,6 @@ export function RelatedPosts({
           </StaggerItem>
         ))}
       </StaggerGrid>
-    </section>
+    </Section>
   );
 }

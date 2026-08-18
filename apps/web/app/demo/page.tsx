@@ -2,13 +2,14 @@ import * as React from 'react';
 
 import { Container } from '@/shared/components/container';
 import { Eyebrow } from '@/shared/components/eyebrow';
+import { Section } from '@/shared/components/section';
 import { DemoTabs } from '@/modules/demo/demo-tabs';
 import { DemoCta } from '@/modules/demo/demo-cta';
 
 export default function Demo(): React.JSX.Element {
   return (
     <div className="min-h-screen pb-16 pt-24 lg:pt-32">
-      <section className="pb-12">
+      <Section className="pb-12">
         <Container>
           <div className="mb-8 text-center">
             <Eyebrow className="mb-4 inline-block rounded-full bg-dt-coral/10 px-3 py-1 text-dt-coral">
@@ -26,13 +27,13 @@ export default function Demo(): React.JSX.Element {
             </p>
           </div>
         </Container>
-      </section>
+      </Section>
 
-      <section>
+      <Section>
         <Container>
           <DemoTabs />
         </Container>
-      </section>
+      </Section>
     </div>
   );
 }
