@@ -141,3 +141,14 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 4. Backend Foundation & Auth | 2/2 | Complete    | 2026-08-14 |
 | 5. Clinic, Lead & Content Management | 7/7 | Complete    | 2026-08-14 |
 | 6. apps/web Integration | 3/3 | In Progress|  |
+
+### Phase 06.1: Premium Visual Restyle (apps/web) — purely visual/CSS restyle of Home, Prices, Demo, Blog, Contacts pages to a premium look using dt- design tokens and shared primitive components (Section, Container, Eyebrow, SectionHeading, Card, Stat, Button); no route/prop/copy/dependency changes (INSERTED)
+
+**Goal:** [Urgent work - to be planned]
+**Requirements**: TBD
+**Depends on:** Phase 6
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 06.1 to break down)

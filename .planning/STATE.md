@@ -6,15 +6,15 @@ current_phase: 6
 current_phase_name: apps-web-integration
 status: executing
 stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-08-15T06:58:52.166Z"
+last_updated: "2026-08-18T18:51:51.178Z"
 last_activity: 2026-08-15
 last_activity_desc: Phase 6 execution started
 progress:
-  total_phases: 3
-  completed_phases: 2
+  total_phases: 4
+  completed_phases: 3
   total_plans: 12
-  completed_plans: 9
-  percent: 67
+  completed_plans: 12
+  percent: 75
 ---
 
 # Project State
@@ -117,6 +117,7 @@ Open items carried into v1.1 (see PROJECT.md "Active" for full detail):
 v1.0 roadmap evolution history archived in `.planning/milestones/v1.0-ROADMAP.md`.
 
 - 2026-08-10: v1.1 roadmap created — Phases 4 (Backend Foundation & Auth), 5 (Clinic, Lead & Content Management), 6 (apps/web Integration). 25/25 v1 requirements mapped (REQUIREMENTS.md's stated "23 total" summary was stale against its own 25-row traceability table; corrected during roadmap creation).
+- Phase 06.1 inserted after Phase 6: Premium Visual Restyle (apps/web) — client-directed urgent visual restyle to premium look before further backend integration work (URGENT)
 
 ## Deferred Items
 
