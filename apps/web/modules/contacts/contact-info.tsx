@@ -23,20 +23,20 @@ const benefits: Array<{
   {
     Icon: Clock,
     label: 'Відповідаємо за 2 години',
-    bg: 'bg-green-50',
-    iconColor: 'text-green-600',
+    bg: 'bg-dt-teal/10',
+    iconColor: 'text-dt-teal',
   },
   {
     Icon: Sparkle,
     label: 'Безкоштовна демонстрація',
-    bg: 'bg-blue-50',
-    iconColor: 'text-blue-600',
+    bg: 'bg-dt-navy/10',
+    iconColor: 'text-dt-navy',
   },
   {
     Icon: Lightning,
     label: 'Налаштування за 1 день',
-    bg: 'bg-purple-50',
-    iconColor: 'text-purple-600',
+    bg: 'bg-dt-coral/10',
+    iconColor: 'text-dt-coral',
   },
 ];
 
