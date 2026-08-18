@@ -1,5 +1,7 @@
 import { Container } from '@/shared/components/container';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 import { Check } from '@phosphor-icons/react/ssr';
 
 import type { PricingPlan } from './types';
@@ -22,17 +24,15 @@ export function ComparisonTable({
   );
 
   return (
-    <section className="bg-dt-navy/5 py-8 lg:py-12">
+    <Section tone="muted">
       <Container>
         <Reveal>
-          <h2 className="mb-12 text-center text-dt-h2 font-dt-heading font-bold text-dt-navy">
-            Детальне порівняння планів
-          </h2>
+          <SectionHeading title="Детальне порівняння планів" />
         </Reveal>
         <div className="overflow-x-auto">
           <table className="mx-auto w-full max-w-5xl">
             <thead>
-              <tr className="border-b border-dt-navy/10">
+              <tr className="border-b border-[var(--dt-border)]">
                 <th className="py-4 text-left text-dt-navy">Функція</th>
                 {plans.map((plan) => (
                   <th key={plan.id} className="py-4 text-center text-dt-navy">
@@ -43,7 +43,7 @@ export function ComparisonTable({
             </thead>
             <tbody>
               {featureRows.map((row) => (
-                <tr key={row} className="border-b border-dt-navy/10">
+                <tr key={row} className="border-b border-[var(--dt-border)]">
                   <td className="py-4 text-dt-navy">{row}</td>
                   {plans.map((plan) => (
                     <td key={plan.id} className="py-4 text-center">
@@ -60,6 +60,6 @@ export function ComparisonTable({
           </table>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }
