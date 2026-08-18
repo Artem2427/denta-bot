@@ -35,7 +35,7 @@ function PremiumDialogContent({
       <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-dt-navy/40 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0" />
       <DialogPrimitive.Content
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-dt-card border border-dt-navy/10 bg-dt-warm-white p-6 shadow-[var(--shadow-dt-hover)] sm:p-8 max-h-[90vh] overflow-y-auto',
+          'fixed top-1/2 left-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-dt-card border border-[var(--dt-border)] bg-dt-warm-white p-6 shadow-[var(--shadow-dt-hover)] sm:p-8 max-h-[90vh] overflow-y-auto',
           className,
         )}
         {...props}
