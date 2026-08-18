@@ -5,6 +5,8 @@ import type { PricingPlan } from '@/modules/prices/types';
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
 import Link from 'next/link';
@@ -46,12 +48,10 @@ export default async function Prices(): Promise<React.JSX.Element> {
     <div className="min-h-screen pb-16 pt-24 lg:pt-32">
       <PricingCards plans={plans} />
       {plans.length >= 2 && <ComparisonTable plans={plans} />}
-      <section className="bg-dt-navy/5 py-8 lg:py-12">
+      <Section tone="muted">
         <Container>
           <Reveal>
-            <h2 className="mb-12 text-center text-dt-h2 font-dt-heading font-bold text-dt-navy">
-              Часті питання
-            </h2>
+            <SectionHeading title="Часті питання" />
           </Reveal>
           <div className="mx-auto max-w-3xl">
             <FaqAccordion />
@@ -65,7 +65,7 @@ export default async function Prices(): Promise<React.JSX.Element> {
             </div>
           </div>
         </Container>
-      </section>
+      </Section>
     </div>
   );
 }

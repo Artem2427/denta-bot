@@ -5,6 +5,7 @@ import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { PremiumSwitch } from '@/shared/components/premium-switch';
+import { Section } from '@/shared/components/section';
 import { routes } from '@/shared/lib/routes';
 import { Check } from '@phosphor-icons/react/ssr';
 import Link from 'next/link';
@@ -31,7 +32,7 @@ export function PricingCards({
 
   return (
     <>
-      <section className="pb-12">
+      <Section className="pb-12">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-dt-h1 font-dt-heading font-bold text-dt-navy">
@@ -48,9 +49,9 @@ export function PricingCards({
             </div>
           </div>
         </Container>
-      </section>
+      </Section>
 
-      <section className="pb-8 lg:pb-12">
+      <Section className="pb-8 lg:pb-12">
         <Container>
           <div className={getGridClassName(plans.length)}>
             {plans.map((plan) => (
@@ -72,7 +73,7 @@ export function PricingCards({
                 </h3>
                 <p className="mt-1 text-dt-graphite">{plan.description}</p>
                 <div className="mt-6">
-                  <span className="text-dt-h2 font-dt-heading font-bold text-dt-navy">
+                  <span className="text-dt-h2 font-dt-heading font-bold tabular-nums text-dt-navy">
                     {isYearly ? plan.yearlyPrice : plan.monthlyPrice} ₴
                   </span>
                   <span className="text-dt-graphite">/міс</span>
@@ -102,7 +103,7 @@ export function PricingCards({
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
     </>
   );
 }
