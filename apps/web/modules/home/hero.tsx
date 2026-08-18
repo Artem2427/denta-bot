@@ -3,6 +3,7 @@
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { Reveal } from '@/shared/components/reveal';
+import { Stat } from '@/shared/components/stat';
 import { useCountUp } from '@/shared/hooks/use-count-up';
 import { idleBounceAnimate, idleBounceTransition } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
@@ -30,13 +31,10 @@ function HeroStat({
   const count = useCountUp(stat.target, 1800);
 
   return (
-    <div className="space-y-1">
-      <div className="text-dt-h2 font-dt-heading font-bold text-dt-teal">
-        {formatStatNumber(count, stat.thousands)}
-        {stat.suffix}
-      </div>
-      <div className="text-sm text-dt-graphite">{stat.label}</div>
-    </div>
+    <Stat
+      value={`${formatStatNumber(count, stat.thousands)}${stat.suffix}`}
+      label={stat.label}
+    />
   );
 }
 
@@ -49,7 +47,7 @@ export function Hero(): React.JSX.Element {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-dt-navy/10 bg-dt-navy/5 px-4 py-1.5 text-sm font-medium text-dt-navy">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--dt-border)] bg-dt-navy/5 px-4 py-1.5 text-sm font-medium text-dt-navy">
                 <span className="relative flex h-2 w-2">
                   <span className="motion-safe:animate-ping absolute h-full w-full rounded-full bg-dt-teal opacity-75" />
                   <span className="relative h-2 w-2 rounded-full bg-dt-teal" />
