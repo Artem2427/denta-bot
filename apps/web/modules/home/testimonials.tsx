@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { Container } from '@/shared/components/container';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
+import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 
 import { StaggerGrid, StaggerItem } from './stagger-grid';
 
@@ -23,14 +25,10 @@ function Stars(): React.JSX.Element {
 
 export function Testimonials(): React.JSX.Element {
   return (
-    <section className="py-8 lg:py-12">
+    <Section>
       <Container>
         <Reveal>
-          <div className="mb-12 text-center">
-            <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy">
-              Що кажуть клініки
-            </h2>
-          </div>
+          <SectionHeading title="Що кажуть клініки" />
         </Reveal>
         <StaggerGrid className="grid gap-6 md:grid-cols-3">
           <StaggerItem>
@@ -99,6 +97,6 @@ export function Testimonials(): React.JSX.Element {
           </StaggerItem>
         </StaggerGrid>
       </Container>
-    </section>
+    </Section>
   );
 }
