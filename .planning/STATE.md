@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 Phase: 6 — apps/web Integration
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-08-20 - Completed quick task 260820-1bb: responsive h2 section heading sizing matched to reference design
+Last activity: 2026-08-20 - Completed quick task 260820-1r2: lead-section eyebrow+h2+description deduped into shared SectionHeading component
 
 Progress: [██████████] 100%
 
@@ -124,6 +124,7 @@ None yet.
 | 260810-ddh | Add unified-source-of-truth admin highlight block to Home page (bot+manual booking single core, role-based access, created_via analytics) | 2026-08-10 | 2b2af6c | [260810-ddh-add-a-new-dedicated-highlight-block-to-t](./quick/260810-ddh-add-a-new-dedicated-highlight-block-to-t/) |
 | 260819-oyk | Make [locale] the true top-level route wrapper for apps/web — moved /blog, /prices, /demo, /contacts inside app/[locale]/, fixed LocaleSwitcher to preserve current pathname (rebuilt as a flag dropdown), fixed Header's Blog link to be locale-aware | 2026-08-19 | 89c6c11 | [260819-oyk-make-locale-the-true-top-level-route-wra](./quick/260819-oyk-make-locale-the-true-top-level-route-wra/) |
 | 260820-1bb | Match --text-dt-h2 fluid token (font-size clamp, line-height, letter-spacing) to reference design's exact devtools-inspected computed style; section-heading.tsx bumped to font-extrabold | 2026-08-20 | 0c69e50 | [260820-1bb-make-all-section-heading-h2-font-sizes-r](./quick/260820-1bb-make-all-section-heading-h2-font-sizes-r/) |
+| 260820-1r2 | Dedupe lead-section.tsx's inline eyebrow+h2+description block into the shared SectionHeading component (tone=navy) | 2026-08-20 | 80b634f | [260820-1r2-apps-web-modules-landing-lead-section-ts](./quick/260820-1r2-apps-web-modules-landing-lead-section-ts/) |
 
 ### Blockers/Concerns
 
