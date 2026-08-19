@@ -26,10 +26,10 @@ export async function Faq(): Promise<React.JSX.Element> {
   return (
     <Section id="faq" className="scroll-mt-16 lg:scroll-mt-20" tone="muted">
       <Container>
-        <Reveal>
-          <SectionHeading title={t('title')} />
-        </Reveal>
-        <div className="mx-auto max-w-3xl">
+        <div className="grid gap-10 md:grid-cols-2 md:items-start md:gap-16">
+          <Reveal>
+            <SectionHeading title={t('title')} className="mb-0" />
+          </Reveal>
           <PremiumAccordion type="single" collapsible className="space-y-4">
             {items.map((item, index) => (
               <PremiumAccordionItem key={item.question} value={`item-${index}`}>
