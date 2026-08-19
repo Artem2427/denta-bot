@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { Container } from './container';
 import { Eyebrow } from './eyebrow';
+import { Logo } from './logo';
 
 // Server Component (getTranslations, not useTranslations) — no
 // interactivity required.
@@ -14,16 +15,7 @@ export async function Footer(): Promise<React.JSX.Element> {
         <div className="flex flex-wrap items-start justify-between gap-10">
           {/* Logo + tagline */}
           <div className="max-w-xs space-y-3">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-dt-input bg-dt-teal">
-                <span className="font-dt-heading text-sm font-extrabold text-dt-warm-white">
-                  D
-                </span>
-              </div>
-              <span className="font-dt-heading text-lg font-extrabold text-dt-warm-white">
-                DentaBot
-              </span>
-            </div>
+            <Logo variant="inverted" />
             <p className="text-sm text-dt-warm-white/70">{t('tagline')}</p>
           </div>
 
