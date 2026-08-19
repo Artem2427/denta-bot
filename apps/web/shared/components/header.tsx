@@ -1,13 +1,12 @@
 'use client';
 
+import { Link, usePathname } from '@/i18n/navigation';
 import { LocaleSwitcher } from '@/shared/components/locale-switcher';
 import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
 import { List, X } from '@phosphor-icons/react/ssr';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
 import { Container } from './container';
@@ -56,10 +55,6 @@ export function Header() {
           <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) =>
               link.isBlog ? (
-                // /blog is permanently outside the locale segment (D-09) —
-                // plain next/link, not the locale-aware Link from
-                // @/i18n/navigation, which would incorrectly prefix it
-                // (e.g. /ru/blog, a URL that doesn't exist).
                 <Link
                   key={link.href}
                   href={link.href}
@@ -169,18 +164,12 @@ export function Header() {
                 <div className="flex flex-col gap-2 pt-2">
                   <LocaleSwitcher />
                   <PremiumButton variant="outline" size="default" asChild>
-                    <a
-                      href="#demo"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
+                    <a href="#demo" onClick={() => setIsMobileMenuOpen(false)}>
                       {t('ctaOutline')}
                     </a>
                   </PremiumButton>
                   <PremiumButton variant="coral" size="default" asChild>
-                    <a
-                      href="#lead"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
+                    <a href="#lead" onClick={() => setIsMobileMenuOpen(false)}>
                       {t('ctaPrimary')}
                     </a>
                   </PremiumButton>

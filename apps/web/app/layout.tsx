@@ -6,7 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { ThemeProvider } from 'next-themes';
 
-import { interHeading, interBody, jetbrainsMono } from './fonts';
+import { interBody, interHeading, jetbrainsMono } from './fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -20,11 +20,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>): Promise<React.JSX.Element> {
-  // Resolves via apps/web/i18n/request.ts's hasLocale fallback to
-  // routing.defaultLocale ('uk') whenever no [locale] segment is present in
-  // the request (i.e. on /blog, which proxy.ts's matcher excludes) — this
-  // is what gives Header/Footer working uk translations on /blog for free,
-  // with no second NextIntlClientProvider needed in app/[locale]/layout.tsx.
+  // getLocale()/getMessages() feed the single NextIntlClientProvider below,
+  // which gives Header/Footer (rendered here in the root layout, outside
+  // app/[locale]/layout.tsx) their translations on every route. Every real
+  // route now resolves its own [locale] segment (260819-oyk), so
+  // apps/web/i18n/request.ts's hasLocale fallback to routing.defaultLocale
+  // is a purely defensive branch — no real route depends on it anymore.
   const locale = await getLocale();
   const messages = await getMessages();
 

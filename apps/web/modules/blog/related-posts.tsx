@@ -1,13 +1,12 @@
-import Link from 'next/link';
-import * as React from 'react';
-
-import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
+import { Link } from '@/i18n/navigation';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
+import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
 import { routes } from '@/shared/lib/routes';
+import * as React from 'react';
 
 import type { Post } from './types';
 

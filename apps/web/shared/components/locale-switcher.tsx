@@ -1,42 +1,84 @@
 'use client';
 
+import { Link, usePathname } from '@/i18n/navigation';
 import { cn } from '@/shared/lib/cn';
+import { CaretDown, Check } from '@phosphor-icons/react/ssr';
 import { useLocale } from 'next-intl';
-import Link from 'next/link';
+import { DropdownMenu } from 'radix-ui';
 
-// Deliberately hardcoded absolute paths, not next-intl's locale-aware
-// router/pathname-preservation helpers: this phase has exactly one real
-// page (the landing page root) plus the untouched /blog, so hardcoded
-// roots are correct in 100% of this phase's actual routes (switching
-// locale while on /blog correctly lands on the equivalent-locale landing
-// page root — RESEARCH.md Open Question 2's recommended option).
+// href={pathname} + an explicit `locale` prop on each option is what
+// preserves the CURRENT page across a locale switch, on every route
+// including dynamic ones (e.g. a blog post) — usePathname() from
+// @/i18n/navigation returns the locale-agnostic pathname with dynamic
+// segments already resolved to their concrete value (e.g.
+// /blog/my-post-slug), not the route template.
 const locales = [
-  { code: 'uk', href: '/', label: 'UA' },
-  { code: 'ru', href: '/ru', label: 'RU' },
-  { code: 'en', href: '/en', label: 'EN' },
+  { code: 'uk', flag: '\u{1F1FA}\u{1F1E6}', label: 'Українська', short: 'UA' },
+  { code: 'ru', flag: '\u{1F1F7}\u{1F1FA}', label: 'Русский', short: 'RU' },
+  { code: 'en', flag: '\u{1F1EC}\u{1F1E7}', label: 'English', short: 'EN' },
 ] as const;
 
 export function LocaleSwitcher(): React.JSX.Element {
-  // useLocale() works everywhere including /blog, resolving to 'uk' there
-  // per the root layout's getLocale() fallback.
+  // useLocale() works everywhere including redirect stubs, resolving to
+  // the active [locale] route segment.
   const activeLocale = useLocale();
+  const pathname = usePathname();
+  const active =
+    locales.find((locale) => locale.code === activeLocale) ?? locales[0];
 
   return (
-    <div className="flex items-center gap-1">
-      {locales.map((locale) => (
-        <Link
-          key={locale.code}
-          href={locale.href}
-          className={cn(
-            'rounded-dt-input px-2 py-1 text-sm font-medium transition-colors',
-            activeLocale === locale.code
-              ? 'text-dt-navy font-semibold'
-              : 'text-dt-graphite hover:text-dt-teal',
-          )}
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <button
+          type="button"
+          aria-label="Обрати мову"
+          className="flex items-center gap-1.5 rounded-dt-input px-2 py-1 text-sm font-medium text-dt-graphite transition-colors hover:text-dt-teal data-[state=open]:text-dt-teal"
         >
-          {locale.label}
-        </Link>
-      ))}
-    </div>
+          <span aria-hidden="true" className="text-base leading-none">
+            {active.flag}
+          </span>
+          <span className="text-dt-navy font-semibold">{active.short}</span>
+          <CaretDown weight="bold" className="h-3 w-3" />
+        </button>
+      </DropdownMenu.Trigger>
+      {/* Deliberately no DropdownMenu.Portal wrapper: Radix's Portal only
+          renders once mounted client-side (there is no `document` during
+          SSR), which would strip every locale option's Link out of the
+          server-rendered HTML entirely. Rendering Content inline instead
+          (a fully supported Radix usage — Portal is optional) combined
+          with forceMount keeps each option's real <a href> in the initial
+          markup — crawlable, and functional even before JS hydrates —
+          while data-[state=closed]:hidden keeps it visually collapsed
+          until DropdownMenu.Trigger opens it. */}
+      <DropdownMenu.Content
+        forceMount
+        align="end"
+        sideOffset={8}
+        className="z-50 min-w-[180px] rounded-dt-card border border-[var(--dt-border)] bg-dt-warm-white p-1 shadow-[var(--shadow-dt-hover)] data-[state=closed]:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
+      >
+        {locales.map((locale) => (
+          <DropdownMenu.Item key={locale.code} asChild>
+            <Link
+              href={pathname}
+              locale={locale.code}
+              className={cn(
+                'flex cursor-pointer items-center gap-2 rounded-dt-input px-3 py-2 text-sm outline-none transition-colors hover:bg-dt-teal/10',
+                activeLocale === locale.code
+                  ? 'text-dt-navy font-semibold'
+                  : 'text-dt-graphite',
+              )}
+            >
+              <span aria-hidden="true" className="text-base leading-none">
+                {locale.flag}
+              </span>
+              <span>{locale.label}</span>
+              {activeLocale === locale.code ? (
+                <Check weight="bold" className="ml-auto h-4 w-4 text-dt-teal" />
+              ) : null}
+            </Link>
+          </DropdownMenu.Item>
+        ))}
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
   );
 }

@@ -1,18 +1,17 @@
-import { ArrowLeft, Clock, ShareNetwork } from '@phosphor-icons/react/ssr';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import * as React from 'react';
-
+import { Link } from '@/i18n/navigation';
 import { PostBody } from '@/modules/blog/post-body';
 import { RelatedPosts } from '@/modules/blog/related-posts';
-import { extractPostBodyBlocks, type Post } from '@/modules/blog/types';
+import { type Post, extractPostBodyBlocks } from '@/modules/blog/types';
 import { Container } from '@/shared/components/container';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
+import { ArrowLeft, Clock, ShareNetwork } from '@phosphor-icons/react/ssr';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import * as React from 'react';
 
 export default async function BlogPostPage({
   params,
@@ -63,11 +62,7 @@ export default async function BlogPostPage({
                 <span>{post.readTime}</span>
               </div>
             </div>
-            <PremiumButton
-              variant="ghost"
-              size="icon"
-              aria-label="Поділитися"
-            >
+            <PremiumButton variant="ghost" size="icon" aria-label="Поділитися">
               <ShareNetwork weight="regular" className="h-5 w-5" />
             </PremiumButton>
           </div>

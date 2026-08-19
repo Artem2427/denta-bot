@@ -1,16 +1,15 @@
 'use client';
 
-import { Clock, MagnifyingGlass } from '@phosphor-icons/react/ssr';
-import Image from 'next/image';
-import Link from 'next/link';
-import * as React from 'react';
-
-import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
+import { Link } from '@/i18n/navigation';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { PremiumInput } from '@/shared/components/premium-input';
+import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
 import { routes } from '@/shared/lib/routes';
+import { Clock, MagnifyingGlass } from '@phosphor-icons/react/ssr';
+import Image from 'next/image';
+import * as React from 'react';
 
 import type { Post } from './types';
 
@@ -80,7 +79,9 @@ export function BlogFilters({ posts }: { posts: Post[] }): React.JSX.Element {
                       className="object-cover"
                     />
                     <div className="absolute top-3 left-3">
-                      <PremiumBadge variant="teal">{post.category}</PremiumBadge>
+                      <PremiumBadge variant="teal">
+                        {post.category}
+                      </PremiumBadge>
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col p-6">

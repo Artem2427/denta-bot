@@ -1,8 +1,4 @@
-import { Clock } from '@phosphor-icons/react/ssr';
-import Image from 'next/image';
-import Link from 'next/link';
-import * as React from 'react';
-
+import { Link } from '@/i18n/navigation';
 import { BlogFilters } from '@/modules/blog/blog-filters';
 import type { Post } from '@/modules/blog/types';
 import { Container } from '@/shared/components/container';
@@ -13,6 +9,9 @@ import { Reveal } from '@/shared/components/reveal';
 import { Section } from '@/shared/components/section';
 import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
+import { Clock } from '@phosphor-icons/react/ssr';
+import Image from 'next/image';
+import * as React from 'react';
 
 export default async function Blog(): Promise<React.JSX.Element> {
   const res = await fetch(`${getServerApiUrl()}/public/blog-posts`, {
@@ -89,7 +88,9 @@ export default async function Blog(): Promise<React.JSX.Element> {
                   <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy">
                     {featuredPost.title}
                   </h2>
-                  <p className="mt-4 text-dt-graphite">{featuredPost.excerpt}</p>
+                  <p className="mt-4 text-dt-graphite">
+                    {featuredPost.excerpt}
+                  </p>
                   <div className="mt-6">
                     <PremiumButton asChild variant="coral">
                       <span>Читати статтю →</span>
