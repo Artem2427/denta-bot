@@ -26,11 +26,19 @@ export function Header() {
   // "Контакти", but that's superseded by the primary CTA's #lead target,
   // kept to 4 to avoid redundancy per the client's "not overloaded"
   // instruction).
+  // Anchor links always target the full landing-page path + hash (e.g.
+  // `/#demo`, or `/ru#demo` once the locale-aware Link below resolves it) —
+  // never a bare `#demo`. A bare hash only appends to whatever page you're
+  // currently on instead of navigating (client-reported bug: clicking
+  // "Демо" from /blog just changed the URL to /blog#demo and did nothing).
+  // Next.js's Link already scrolls to the hash target after navigating,
+  // including when you're already on the landing page (same-route hash
+  // change — no extra logic needed for that case).
   const navLinks = [
-    { href: '#product', label: t('product'), isBlog: false },
-    { href: '#pricing', label: t('pricing'), isBlog: false },
-    { href: '#demo', label: t('demo'), isBlog: false },
-    { href: routes.blog, label: t('blog'), isBlog: true },
+    { href: `${routes.home}#product`, label: t('product') },
+    { href: `${routes.home}#pricing`, label: t('pricing') },
+    { href: `${routes.home}#demo`, label: t('demo') },
+    { href: routes.blog, label: t('blog') },
   ] as const;
 
   React.useEffect(() => {
@@ -53,41 +61,29 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((link) =>
-              link.isBlog ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={
-                    pathname === link.href
-                      ? 'text-base font-semibold text-dt-navy transition-colors'
-                      : 'text-base font-medium text-dt-graphite transition-colors hover:text-dt-teal'
-                  }
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                // Same-page hash jump — no active-state (meaningless for
-                // hash links), no Next Link needed at all.
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium text-dt-graphite transition-colors hover:text-dt-teal"
-                >
-                  {link.label}
-                </a>
-              ),
-            )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={
+                  pathname === link.href
+                    ? 'text-base font-semibold text-dt-navy transition-colors'
+                    : 'text-base font-medium text-dt-graphite transition-colors hover:text-dt-teal'
+                }
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-3 lg:flex">
             <LocaleSwitcher />
             <PremiumButton variant="outline" size="default" asChild>
-              <a href="#demo">{t('ctaOutline')}</a>
+              <Link href={`${routes.home}#demo`}>{t('ctaOutline')}</Link>
             </PremiumButton>
             <PremiumButton variant="coral" size="default" asChild>
-              <a href="#lead">{t('ctaPrimary')}</a>
+              <Link href={`${routes.home}#lead`}>{t('ctaPrimary')}</Link>
             </PremiumButton>
           </div>
 
@@ -137,42 +133,37 @@ export function Header() {
               className="overflow-hidden border-t border-[var(--dt-border)] lg:hidden"
             >
               <nav className="flex flex-col gap-4 py-4">
-                {navLinks.map((link) =>
-                  link.isBlog ? (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={
-                        pathname === link.href
-                          ? 'px-2 py-2 text-base font-semibold text-dt-navy transition-colors'
-                          : 'px-2 py-2 text-base font-medium text-dt-graphite transition-colors'
-                      }
-                    >
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-2 py-2 text-base font-medium text-dt-graphite transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  ),
-                )}
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={
+                      pathname === link.href
+                        ? 'px-2 py-2 text-base font-semibold text-dt-navy transition-colors'
+                        : 'px-2 py-2 text-base font-medium text-dt-graphite transition-colors'
+                    }
+                  >
+                    {link.label}
+                  </Link>
+                ))}
                 <div className="flex flex-col gap-2 pt-2">
                   <LocaleSwitcher />
                   <PremiumButton variant="outline" size="default" asChild>
-                    <a href="#demo" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Link
+                      href={`${routes.home}#demo`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
                       {t('ctaOutline')}
-                    </a>
+                    </Link>
                   </PremiumButton>
                   <PremiumButton variant="coral" size="default" asChild>
-                    <a href="#lead" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Link
+                      href={`${routes.home}#lead`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
                       {t('ctaPrimary')}
-                    </a>
+                    </Link>
                   </PremiumButton>
                 </div>
               </nav>

@@ -86,12 +86,15 @@ export function Reviews(): React.JSX.Element {
           </div>
         </Reveal>
 
-        {/* -my-4/py-4 give the cards' hover-lift + shadow room to breathe
+        {/* -my-14/py-14 give the cards' hover-lift + shadow room to breathe
             inside the clipped viewport instead of getting cut off flush at
             the edge — the negative margin on the viewport cancels the
-            padding on the track so overall vertical space is unchanged. */}
-        <div className="-my-4 overflow-hidden" ref={emblaRef}>
-          <div className="-ml-6 flex py-4">
+            padding on the track so overall vertical space is unchanged.
+            56px, not a token guess: --shadow-dt-hover's largest layer is
+            `0 20px 32px`, i.e. up to ~52px of vertical reach — a smaller
+            py-4 (16px) was nowhere near enough and still visibly clipped. */}
+        <div className="-my-14 overflow-hidden" ref={emblaRef}>
+          <div className="-ml-6 flex py-14">
             {items.map((item) => (
               <div
                 key={item.name}
