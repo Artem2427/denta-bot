@@ -10,7 +10,8 @@ const premiumButtonVariants = cva(
     variants: {
       variant: {
         coral:
-          'bg-dt-coral text-dt-navy font-extrabold shadow-[0_8px_16px_rgba(232,107,90,0.28)] hover:bg-dt-coral/[0.94] hover:-translate-y-0.5',
+          'bg-dt-coral text-dt-warm-white font-extrabold shadow-[0_8px_16px_rgba(232,107,90,0.28)] hover:bg-dt-coral/[0.94] hover:-translate-y-0.5',
+        navy: 'bg-dt-navy text-dt-warm-white font-extrabold shadow-[0_8px_16px_rgba(26,43,61,0.24)] hover:bg-dt-navy/[0.92] hover:-translate-y-0.5',
         outline:
           'border border-[var(--dt-border)] text-dt-navy bg-transparent hover:bg-dt-navy/5 hover:-translate-y-0.5',
         ghost: 'text-dt-navy hover:bg-dt-navy/5',

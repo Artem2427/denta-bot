@@ -104,7 +104,7 @@ export function PricingSection({
               <div className="mt-auto pt-6">
                 <PremiumButton
                   asChild
-                  variant={plan.isPopular ? 'coral' : 'outline'}
+                  variant={plan.isPopular ? 'coral' : 'navy'}
                   size="lg"
                   className="w-full"
                 >

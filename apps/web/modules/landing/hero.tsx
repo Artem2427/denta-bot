@@ -40,7 +40,7 @@ export async function Hero(): Promise<React.JSX.Element> {
               </h1>
               <p className="text-dt-body text-dt-graphite">{t('subtitle')}</p>
               <div className="flex flex-col gap-4 sm:flex-row">
-                <PremiumButton variant="coral" size="lg" asChild>
+                <PremiumButton variant="navy" size="lg" asChild>
                   <a href="#demo">{t('ctaPrimary')}</a>
                 </PremiumButton>
                 <PremiumButton variant="outline" size="lg" asChild>
