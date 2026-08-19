@@ -3,6 +3,11 @@
 // This script never wipes or bulk-clears rows — matched by `name` (no
 // @unique on `name` exists; adding one is a schema change outside D-04's
 // scope), so each entry is upserted individually via findFirst -> update/create.
+// WR-06: the findFirst -> update/create pair for each plan runs inside a
+// Serializable transaction, so two concurrent invocations of this script
+// can no longer both observe "no existing row" and both create a
+// duplicate — one transaction will fail with a serialization error instead
+// (acceptable for a manually-triggered seed script; the caller can rerun).
 import { PrismaClient } from '../generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 
@@ -73,18 +78,23 @@ const PLANS: PlanSeed[] = [
 
 async function main() {
   for (const plan of PLANS) {
-    const existing = await prisma.pricingPlan.findFirst({
-      where: { name: plan.name },
-    });
+    await prisma.$transaction(
+      async (tx) => {
+        const existing = await tx.pricingPlan.findFirst({
+          where: { name: plan.name },
+        });
 
-    if (existing) {
-      await prisma.pricingPlan.update({
-        where: { id: existing.id },
-        data: plan,
-      });
-    } else {
-      await prisma.pricingPlan.create({ data: plan });
-    }
+        if (existing) {
+          await tx.pricingPlan.update({
+            where: { id: existing.id },
+            data: plan,
+          });
+        } else {
+          await tx.pricingPlan.create({ data: plan });
+        }
+      },
+      { isolationLevel: 'Serializable' },
+    );
   }
 }
 
