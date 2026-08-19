@@ -12,7 +12,8 @@ export function PremiumCard({
       data-slot="premium-card"
       className={cn(
         'h-full rounded-dt-card border border-[var(--dt-border)] bg-dt-warm-white p-6 shadow-[var(--shadow-dt-card)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-dt-hover)]',
-        highlighted && 'border-2 border-dt-teal relative',
+        highlighted &&
+          'relative border-dt-navy bg-dt-navy text-dt-warm-white shadow-[var(--shadow-dt-hover)]',
         className,
       )}
       {...props}

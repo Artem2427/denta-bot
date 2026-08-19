@@ -8,9 +8,9 @@ import { Container } from '@/shared/components/container';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
-import { PremiumSwitch } from '@/shared/components/premium-switch';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
+import { cn } from '@/shared/lib/cn';
 
 import type { PricingPlan } from './types';
 
@@ -53,15 +53,31 @@ export function PricingSection({
             title={t('title')}
             className="mb-0 lg:mx-0"
           />
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-sm text-dt-graphite">
+          <div className="inline-flex items-center gap-1 rounded-full border border-[var(--dt-border)] bg-dt-warm-white p-1">
+            <button
+              type="button"
+              onClick={() => setIsYearly(false)}
+              className={cn(
+                'rounded-full px-4 py-2 text-sm font-semibold transition-colors',
+                !isYearly
+                  ? 'bg-dt-navy text-dt-warm-white'
+                  : 'text-dt-graphite hover:text-dt-navy',
+              )}
+            >
               {t('billingMonthly')}
-            </span>
-            <PremiumSwitch checked={isYearly} onCheckedChange={setIsYearly} />
-            <span className="text-sm text-dt-graphite">
-              {t('billingYearly')}
-            </span>
-            <PremiumBadge variant="teal">{t('billingDiscount')}</PremiumBadge>
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsYearly(true)}
+              className={cn(
+                'rounded-full px-4 py-2 text-sm font-semibold transition-colors',
+                isYearly
+                  ? 'bg-dt-navy text-dt-warm-white'
+                  : 'text-dt-graphite hover:text-dt-navy',
+              )}
+            >
+              {t('billingYearly')} · {t('billingDiscount')}
+            </button>
           </div>
         </div>
 
@@ -80,24 +96,58 @@ export function PricingSection({
                   {t('popularBadge')}
                 </PremiumBadge>
               )}
-              <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
+              <h3
+                className={cn(
+                  'text-dt-h3 font-dt-heading font-semibold',
+                  plan.isPopular ? 'text-dt-warm-white' : 'text-dt-navy',
+                )}
+              >
                 {plan.name}
               </h3>
-              <p className="mt-1 text-dt-graphite">{plan.description}</p>
+              <p
+                className={cn(
+                  'mt-1',
+                  plan.isPopular ? 'text-dt-warm-white/70' : 'text-dt-graphite',
+                )}
+              >
+                {plan.description}
+              </p>
               <div className="mt-6">
-                <span className="text-dt-h2 font-dt-heading font-bold tabular-nums text-dt-navy">
+                <span
+                  className={cn(
+                    'text-dt-h2 font-dt-heading font-bold tabular-nums',
+                    plan.isPopular ? 'text-dt-warm-white' : 'text-dt-navy',
+                  )}
+                >
                   {isYearly ? plan.yearlyPrice : plan.monthlyPrice} ₴
                 </span>
-                <span className="text-dt-graphite">{t('perMonth')}</span>
+                <span
+                  className={
+                    plan.isPopular ? 'text-dt-warm-white/70' : 'text-dt-graphite'
+                  }
+                >
+                  {t('perMonth')}
+                </span>
               </div>
               <ul className="mt-6 space-y-3">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2">
                     <Check
                       weight="regular"
-                      className="mt-0.5 h-5 w-5 shrink-0 text-dt-teal"
+                      className={cn(
+                        'mt-0.5 h-5 w-5 shrink-0',
+                        plan.isPopular ? 'text-dt-warm-white' : 'text-dt-teal',
+                      )}
                     />
-                    <span className="text-dt-graphite">{feature}</span>
+                    <span
+                      className={
+                        plan.isPopular
+                          ? 'text-dt-warm-white/80'
+                          : 'text-dt-graphite'
+                      }
+                    >
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -115,7 +165,7 @@ export function PricingSection({
           ))}
         </div>
 
-        <p className="mt-dt-48 text-center text-sm text-dt-graphite">
+        <p className="mt-8 text-center text-sm text-dt-graphite">
           {t('footnote')}
         </p>
       </Container>
