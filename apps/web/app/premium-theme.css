@@ -77,6 +77,13 @@
   --dt-duration-base: 240ms; /* D-06 */
 }
 
+/* Phase 06.2 — base smooth-scroll for in-page anchor nav (#pricing, #lead,
+ * etc.). The reduced-motion override below (already present) correctly
+ * turns this off for accessibility. */
+html {
+  scroll-behavior: smooth;
+}
+
 /* D-37 — CSS-only half of reduced-motion support. The JS-driven half
  * (Motion's useReducedMotion() hook) is Plan 03's concern. */
 @media (prefers-reduced-motion: reduce) {

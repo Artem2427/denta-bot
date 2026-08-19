@@ -12,5 +12,27 @@
       { "value": "24/7", "label": "запись без админа" },
       { "value": "1 день", "label": "на внедрение" }
     ]
+  },
+  "nav": {
+    "product": "Продукт",
+    "pricing": "Цены",
+    "demo": "Демо",
+    "blog": "Блог",
+    "ctaOutline": "Демо",
+    "ctaPrimary": "Подключить клинику",
+    "menuOpen": "Открыть меню",
+    "menuClose": "Закрыть меню"
+  },
+  "footer": {
+    "tagline": "Автоматизация записи пациентов в стоматологические клиники через Telegram-бота",
+    "productHeading": "Продукт",
+    "linkFeatures": "Возможности",
+    "linkAdmin": "Админ-панель",
+    "linkPricing": "Цены",
+    "contactHeading": "Контакты",
+    "linkLead": "Заявка на подключение",
+    "hoursLabel": "Рабочие часы",
+    "hoursValue": "Пн-Пт: 9:00 - 18:00",
+    "copyright": "© 2026 DentaBot by Dankohub"
   }
 }

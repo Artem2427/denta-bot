@@ -1,9 +1,11 @@
 'use client';
 
+import { LocaleSwitcher } from '@/shared/components/locale-switcher';
 import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
 import { List, X } from '@phosphor-icons/react/ssr';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
@@ -12,19 +14,25 @@ import { Container } from './container';
 import { Logo } from './logo';
 import { PremiumButton } from './premium-button';
 
-const navLinks = [
-  { href: routes.home, label: 'Продукт' },
-  { href: routes.prices, label: 'Ціни' },
-  { href: routes.demo, label: 'Демо' },
-  { href: routes.blog, label: 'Блог' },
-  { href: routes.contacts, label: 'Контакти' },
-];
-
 export function Header() {
+  const t = useTranslations('nav');
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  // 3 in-page anchors (retired-route content folds into the single landing
+  // page as sections, Plan 07) + Blog, which stays a real, unprefixed route
+  // (D-09) — deliberately only 4 nav items (design's own header also shows
+  // "Контакти", but that's superseded by the primary CTA's #lead target,
+  // kept to 4 to avoid redundancy per the client's "not overloaded"
+  // instruction).
+  const navLinks = [
+    { href: '#product', label: t('product'), isBlog: false },
+    { href: '#pricing', label: t('pricing'), isBlog: false },
+    { href: '#demo', label: t('demo'), isBlog: false },
+    { href: routes.blog, label: t('blog'), isBlog: true },
+  ] as const;
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -46,28 +54,45 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={
-                  pathname === link.href
-                    ? 'text-base font-semibold text-dt-navy transition-colors'
-                    : 'text-base font-medium text-dt-graphite transition-colors hover:text-dt-teal'
-                }
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.isBlog ? (
+                // /blog is permanently outside the locale segment (D-09) —
+                // plain next/link, not the locale-aware Link from
+                // @/i18n/navigation, which would incorrectly prefix it
+                // (e.g. /ru/blog, a URL that doesn't exist).
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={
+                    pathname === link.href
+                      ? 'text-base font-semibold text-dt-navy transition-colors'
+                      : 'text-base font-medium text-dt-graphite transition-colors hover:text-dt-teal'
+                  }
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                // Same-page hash jump — no active-state (meaningless for
+                // hash links), no Next Link needed at all.
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-base font-medium text-dt-graphite transition-colors hover:text-dt-teal"
+                >
+                  {link.label}
+                </a>
+              ),
+            )}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-3 lg:flex">
+            <LocaleSwitcher />
             <PremiumButton variant="outline" size="default" asChild>
-              <Link href={routes.demo}>Демо</Link>
+              <a href="#demo">{t('ctaOutline')}</a>
             </PremiumButton>
             <PremiumButton variant="coral" size="default" asChild>
-              <Link href={routes.contacts}>Спробувати безкоштовно</Link>
+              <a href="#lead">{t('ctaPrimary')}</a>
             </PremiumButton>
           </div>
 
@@ -76,7 +101,7 @@ export function Header() {
             <PremiumButton
               variant="ghost"
               size="icon"
-              aria-label={isMobileMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
+              aria-label={isMobileMenuOpen ? t('menuClose') : t('menuOpen')}
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -116,36 +141,48 @@ export function Header() {
               className="overflow-hidden border-t border-[var(--dt-border)] lg:hidden"
             >
               <nav className="flex flex-col gap-4 py-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={
-                      pathname === link.href
-                        ? 'px-2 py-2 text-base font-semibold text-dt-navy transition-colors'
-                        : 'px-2 py-2 text-base font-medium text-dt-graphite transition-colors'
-                    }
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="flex flex-col gap-2 pt-2">
-                  <PremiumButton variant="outline" size="default" asChild>
+                {navLinks.map((link) =>
+                  link.isBlog ? (
                     <Link
-                      href={routes.demo}
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={
+                        pathname === link.href
+                          ? 'px-2 py-2 text-base font-semibold text-dt-navy transition-colors'
+                          : 'px-2 py-2 text-base font-medium text-dt-graphite transition-colors'
+                      }
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="px-2 py-2 text-base font-medium text-dt-graphite transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ),
+                )}
+                <div className="flex flex-col gap-2 pt-2">
+                  <LocaleSwitcher />
+                  <PremiumButton variant="outline" size="default" asChild>
+                    <a
+                      href="#demo"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Демо
-                    </Link>
+                      {t('ctaOutline')}
+                    </a>
                   </PremiumButton>
                   <PremiumButton variant="coral" size="default" asChild>
-                    <Link
-                      href={routes.contacts}
+                    <a
+                      href="#lead"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      Спробувати безкоштовно
-                    </Link>
+                      {t('ctaPrimary')}
+                    </a>
                   </PremiumButton>
                 </div>
               </nav>

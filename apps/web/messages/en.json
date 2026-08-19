@@ -12,5 +12,27 @@
       { "value": "24/7", "label": "booking without staff" },
       { "value": "1 day", "label": "to go live" }
     ]
+  },
+  "nav": {
+    "product": "Product",
+    "pricing": "Pricing",
+    "demo": "Demo",
+    "blog": "Blog",
+    "ctaOutline": "Demo",
+    "ctaPrimary": "Connect your clinic",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "footer": {
+    "tagline": "Automated patient booking for dental clinics via a Telegram bot",
+    "productHeading": "Product",
+    "linkFeatures": "Features",
+    "linkAdmin": "Admin panel",
+    "linkPricing": "Pricing",
+    "contactHeading": "Contact",
+    "linkLead": "Request a connection",
+    "hoursLabel": "Business hours",
+    "hoursValue": "Mon–Fri: 9:00 AM – 6:00 PM",
+    "copyright": "© 2026 DentaBot by Dankohub"
   }
 }
