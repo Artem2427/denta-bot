@@ -34,8 +34,9 @@
   /* Type scale (D-09/D-10) */
   --text-dt-h1: clamp(2.25rem, 6vw + 1rem, 4rem); /* hero, fluid mobile→desktop, caps at the original 3.5-4.5rem range */
   --text-dt-h1--line-height: 1.15;
-  --text-dt-h2: clamp(2rem, 4.5vw + 0.75rem, 3.25rem); /* sections, fluid mobile→desktop — bumped up from the 2.5rem cap per client feedback ("дуже мілке" — section headings read too small next to the h1 hero) */
-  --text-dt-h2--line-height: 1.15;
+  --text-dt-h2: clamp(1.9rem, 3.4vw, 2.75rem); /* sections, fluid mobile→desktop — matches the reference design prototype's own devtools-inspected computed style exactly (sourced 2026-08-20, quick task 260820-1bb), superseding the earlier hand-derived "bumped up... too small" clamp. Flat at 30.4px for all widths ≤~894px (phone and tablet-portrait render identically — no distinct phone step), only scaling up between ~894-1294px toward the 44px desktop cap — a deliberate, ground-truth-sourced departure from a continuous 3-tier phone/tablet/desktop stepping */
+  --text-dt-h2--line-height: 1.1;
+  --text-dt-h2--letter-spacing: -0.03em;
   --text-dt-h3: 1.5rem; /* card subheads */
   --text-dt-h3--line-height: 1.15;
   --text-dt-body: 1.125rem;
