@@ -1,9 +1,5 @@
-import { Footer } from '@/shared/components/footer';
-import { Header } from '@/shared/components/header';
 import { Toaster } from '@repo/ui';
 import type { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
 import { ThemeProvider } from 'next-themes';
 
 import { interBody, interHeading, jetbrainsMono } from './fonts';
@@ -15,33 +11,34 @@ export const metadata: Metadata = {
     'Автоматизація запису пацієнтів у стоматологічні клініки через Telegram бот',
 };
 
-export default async function RootLayout({
+// This is the ONE Next.js layout allowed to declare <html>/<body>, so it
+// sits ABOVE app/[locale]/layout.tsx in the file tree — which means it
+// can NEVER reliably read the [locale] dynamic segment: Next.js only
+// threads a segment's params down to layouts nested inside it, not up to
+// ancestors above it (confirmed live: params.locale was undefined here
+// even on a fresh SSR request, no client-nav caching involved). Locale-
+// dependent UI (Header/Footer/NextIntlClientProvider) therefore lives in
+// app/[locale]/layout.tsx instead, where it correctly reflects the URL
+// and re-renders on every locale-segment navigation — this file used to
+// own that provider directly, which produced a real bug: Header/Footer
+// showing a stale/wrong locale (e.g. English chrome on a /ru page) since
+// this layout's request-scoped locale resolution isn't guaranteed to
+// track the actual route. <html lang> here is a static best-effort
+// default, not the source of truth for any visible content.
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>): Promise<React.JSX.Element> {
-  // getLocale()/getMessages() feed the single NextIntlClientProvider below,
-  // which gives Header/Footer (rendered here in the root layout, outside
-  // app/[locale]/layout.tsx) their translations on every route. Every real
-  // route now resolves its own [locale] segment (260819-oyk), so
-  // apps/web/i18n/request.ts's hasLocale fallback to routing.defaultLocale
-  // is a purely defensive branch — no real route depends on it anymore.
-  const locale = await getLocale();
-  const messages = await getMessages();
-
+}>): React.JSX.Element {
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang="uk" suppressHydrationWarning>
       <body
         className={`${interHeading.variable} ${interBody.variable} ${jetbrainsMono.variable} font-dt-body overflow-x-hidden`}
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-            <Header />
-            <main className="pt-16 lg:pt-20">{children}</main>
-            <Footer />
-            <Toaster />
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
