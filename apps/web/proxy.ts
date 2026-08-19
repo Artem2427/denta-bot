@@ -13,7 +13,13 @@ export const config = {
   // same tree position as /blog; without this exclusion the locale
   // middleware rewrites them to a nonexistent /uk/prices etc. and they
   // 404 instead of redirecting to their landing-page anchors.
+  //
+  // Each excluded literal is anchored to a path-segment boundary
+  // (`(?:/|$)`) so it only matches the whole segment, not any path that
+  // merely starts with the same characters (WR-04) — e.g. a future
+  // `/blog-tags` or `/demography` route must still go through the locale
+  // middleware instead of silently bypassing it.
   matcher: [
-    '/((?!api|_next|_vercel|blog|prices|demo|contacts|.*\\..*).*)',
+    '/((?!api/|_next/|_vercel/|blog(?:/|$)|prices(?:/|$)|demo(?:/|$)|contacts(?:/|$)|.*\\..*).*)',
   ],
 };
