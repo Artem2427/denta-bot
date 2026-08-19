@@ -10,9 +10,18 @@
     "reminderBadge": "Reminders sent to 24 patients",
     "notificationBadge": "New booking from Olena Koval",
     "stats": [
-      { "value": "−70%", "label": "no-shows" },
-      { "value": "24/7", "label": "booking without staff" },
-      { "value": "1 day", "label": "to go live" }
+      {
+        "value": "−70%",
+        "label": "no-shows"
+      },
+      {
+        "value": "24/7",
+        "label": "booking without staff"
+      },
+      {
+        "value": "1 day",
+        "label": "to go live"
+      }
     ]
   },
   "nav": {
@@ -35,7 +44,7 @@
     "linkLead": "Request a connection",
     "hoursLabel": "Business hours",
     "hoursValue": "Mon–Fri: 9:00 AM – 6:00 PM",
-    "copyright": "© 2026 DentaBot by Dankohub"
+    "copyright": "© 2026 DentaBot. All rights reserved."
   },
   "marquee": {
     "channels": [
@@ -98,14 +107,38 @@
   "features": {
     "title": "Everything a clinic needs to run",
     "items": [
-      { "title": "Telegram bot", "text": "Booking in a messenger patients already use — no apps, no sign-ups." },
-      { "title": "Shared schedule", "text": "Bot bookings and manual staff entries live on one calendar." },
-      { "title": "Auto-reminders", "text": "Scenarios a day before, an hour before, and after the visit." },
-      { "title": "Analytics", "text": "Workload, services, booking sources, repeat visits." },
-      { "title": "Role-based access", "text": "Staff see their own day, the owner sees the whole clinic." },
-      { "title": "Reviews", "text": "Automatic review requests and rating collection after appointments." },
-      { "title": "Reschedule & cancel", "text": "Patients reschedule themselves — the slot opens up instantly." },
-      { "title": "Multiple locations", "text": "A clinic network in one panel with combined reports." }
+      {
+        "title": "Telegram bot",
+        "text": "Booking in a messenger patients already use — no apps, no sign-ups."
+      },
+      {
+        "title": "Shared schedule",
+        "text": "Bot bookings and manual staff entries live on one calendar."
+      },
+      {
+        "title": "Auto-reminders",
+        "text": "Scenarios a day before, an hour before, and after the visit."
+      },
+      {
+        "title": "Analytics",
+        "text": "Workload, services, booking sources, repeat visits."
+      },
+      {
+        "title": "Role-based access",
+        "text": "Staff see their own day, the owner sees the whole clinic."
+      },
+      {
+        "title": "Reviews",
+        "text": "Automatic review requests and rating collection after appointments."
+      },
+      {
+        "title": "Reschedule & cancel",
+        "text": "Patients reschedule themselves — the slot opens up instantly."
+      },
+      {
+        "title": "Multiple locations",
+        "text": "A clinic network in one panel with combined reports."
+      }
     ]
   },
   "pricing": {
