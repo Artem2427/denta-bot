@@ -5,16 +5,16 @@ milestone_name: Platform Admin API
 current_phase: 06.1
 current_phase_name: premium-visual-restyle-apps-web
 status: executing
-stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-08-18T20:09:28.065Z"
+stopped_at: Phase 06.2 context gathered
+last_updated: "2026-08-19T08:08:50.787Z"
 last_activity: 2026-08-18
 last_activity_desc: Phase 06.1 (Premium Visual Restyle) completed and verified; returning to Phase 6
 progress:
-  total_phases: 4
+  total_phases: 5
   completed_phases: 4
   total_plans: 17
   completed_plans: 17
-  percent: 100
+  percent: 80
 ---
 
 # Project State
@@ -119,6 +119,7 @@ v1.0 roadmap evolution history archived in `.planning/milestones/v1.0-ROADMAP.md
 - 2026-08-10: v1.1 roadmap created — Phases 4 (Backend Foundation & Auth), 5 (Clinic, Lead & Content Management), 6 (apps/web Integration). 25/25 v1 requirements mapped (REQUIREMENTS.md's stated "23 total" summary was stale against its own 25-row traceability table; corrected during roadmap creation).
 - Phase 06.1 inserted after Phase 6: Premium Visual Restyle (apps/web) — client-directed urgent visual restyle to premium look before further backend integration work (URGENT)
 - Phase 06.1 completed: Premium Visual Restyle (apps/web) shipped 2026-08-18 — 5 plans + 2 gap-closure commits (emoji removal per client's no-emoji constraint), gsd-verifier confirmed 16/16 truths
+- Phase 06.2 inserted after Phase 6: Single-Page Landing Consolidation + i18n (apps/web) — client-directed pivot: collapse Home/Prices/Contacts/Demo into one scrolling landing page, copy sourced from DentaBot Landing design export; add uk/ru/en URL-based locale routing; Blog stays the only other route (URGENT)
 
 ## Deferred Items
 
@@ -131,12 +132,13 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-14T21:03:55.277Z
-Stopped at: Phase 6 UI-SPEC approved
-Resume file: .planning/phases/06-apps-web-integration/06-UI-SPEC.md
+Last session: 2026-08-19T08:08:50.771Z
+Stopped at: Phase 06.2 context gathered
+Resume file: .planning/phases/06.2-single-page-landing-consolidation-i18n-apps-web-collapse-hom/06.2-CONTEXT.md
 
-Next: /gsd-plan-phase 4 — plan Phase 4 (Backend Foundation & Auth)
+Next: /gsd-plan-phase 06.2 — plan Phase 06.2 (Single-Page Landing Consolidation + i18n)
 
 ## Operator Next Steps
 
-- Run /gsd-plan-phase 4 to create the detailed plan for Phase 4
+- Run /gsd-plan-phase 06.2 to create the detailed plan for Phase 06.2 (urgent insertion, precedes Phase 4)
+- Run /gsd-plan-phase 4 to create the detailed plan for Phase 4 (Backend Foundation & Auth) once 06.2 ships
