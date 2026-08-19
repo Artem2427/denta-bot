@@ -96,15 +96,15 @@ export function Header() {
             <PremiumButton
               variant="outline"
               size="icon"
-              className="size-14"
+              className="size-10"
               aria-label={isMobileMenuOpen ? t('menuClose') : t('menuOpen')}
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <X weight="bold" className="h-7 w-7" />
+                <X weight="bold" className="h-6 w-6" />
               ) : (
-                <List weight="bold" className="h-7 w-7" />
+                <List weight="bold" className="h-6 w-6" />
               )}
             </PremiumButton>
           </div>
