@@ -114,6 +114,8 @@
     "billingMonthly": "Щомісяця",
     "billingYearly": "Щороку",
     "billingDiscount": "-20%",
+    "popularBadge": "Популярний",
+    "perMonth": "/міс",
     "footnote": "Підключення, налаштування бота і навчання команди — безкоштовно на всіх тарифах.",
     "ctaLabel": "Обрати план"
   },

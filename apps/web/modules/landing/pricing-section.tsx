@@ -34,8 +34,8 @@ function getGridClassName(count: number): string {
 // a prop, matching the existing Phase 6 fetch-then-render pattern (no
 // internal fetch here). Plan name/description/features render exactly as
 // returned by the API — Ukrainian-only regardless of active locale (D-11);
-// only the surrounding chrome (heading, billing toggle, CTA, footnote) is
-// translated via useTranslations('pricing').
+// all surrounding chrome (heading, billing toggle, popular badge, CTA,
+// per-month suffix, footnote) is translated via useTranslations('pricing').
 export function PricingSection({
   plans,
 }: {
@@ -77,7 +77,7 @@ export function PricingSection({
                   variant="coral"
                   className="absolute -top-4 left-1/2 -translate-x-1/2"
                 >
-                  Популярний
+                  {t('popularBadge')}
                 </PremiumBadge>
               )}
               <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
@@ -88,7 +88,7 @@ export function PricingSection({
                 <span className="text-dt-h2 font-dt-heading font-bold tabular-nums text-dt-navy">
                   {isYearly ? plan.yearlyPrice : plan.monthlyPrice} ₴
                 </span>
-                <span className="text-dt-graphite">/міс</span>
+                <span className="text-dt-graphite">{t('perMonth')}</span>
               </div>
               <ul className="mt-6 space-y-3">
                 {plan.features.map((feature) => (

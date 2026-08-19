@@ -114,6 +114,8 @@
     "billingMonthly": "Monthly",
     "billingYearly": "Yearly",
     "billingDiscount": "-20%",
+    "popularBadge": "Most popular",
+    "perMonth": "/mo",
     "footnote": "Setup, bot configuration, and team training are free on every plan.",
     "ctaLabel": "Choose a plan"
   },
