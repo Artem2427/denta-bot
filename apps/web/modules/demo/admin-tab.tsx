@@ -14,7 +14,18 @@ import {
   TableHeader,
   TableRow,
 } from '@repo/ui';
-import { Calendar, CheckCircle, Clock, Phone, User, X } from 'lucide-react';
+import {
+  Calendar,
+  CheckCircle,
+  Clock,
+  LayoutDashboard,
+  Phone,
+  Settings,
+  Stethoscope,
+  User,
+  Users,
+  X,
+} from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import * as React from 'react';
@@ -131,35 +142,40 @@ export function AdminTab(): React.JSX.Element {
             className="w-full justify-start"
             onClick={() => setSelectedSection('dashboard')}
           >
-            📊 Dashboard
+            <LayoutDashboard className="mr-2 h-4 w-4" />
+            Dashboard
           </Button>
           <Button
             variant={selectedSection === 'appointments' ? 'default' : 'ghost'}
             className="w-full justify-start"
             onClick={() => setSelectedSection('appointments')}
           >
-            📅 Записи
+            <Calendar className="mr-2 h-4 w-4" />
+            Записи
           </Button>
           <Button
             variant={selectedSection === 'doctors' ? 'default' : 'ghost'}
             className="w-full justify-start"
             onClick={() => setSelectedSection('doctors')}
           >
-            👨‍⚕️ Лікарі
+            <Stethoscope className="mr-2 h-4 w-4" />
+            Лікарі
           </Button>
           <Button
             variant={selectedSection === 'patients' ? 'default' : 'ghost'}
             className="w-full justify-start"
             onClick={() => setSelectedSection('patients')}
           >
-            🧑‍🤝‍🧑 Пацієнти
+            <Users className="mr-2 h-4 w-4" />
+            Пацієнти
           </Button>
           <Button
             variant={selectedSection === 'settings' ? 'default' : 'ghost'}
             className="w-full justify-start"
             onClick={() => setSelectedSection('settings')}
           >
-            ⚙️ Налаштування
+            <Settings className="mr-2 h-4 w-4" />
+            Налаштування
           </Button>
         </div>
 

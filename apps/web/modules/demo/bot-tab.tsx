@@ -24,7 +24,7 @@ function nowTime(): string {
 
 function seedGreetings(): ChatMessage[] {
   return [
-    { type: 'bot', text: 'Вітаю! Я DentaBot 🦷', time: nowTime() },
+    { type: 'bot', text: 'Вітаю! Я DentaBot', time: nowTime() },
     {
       type: 'bot',
       text: 'Допоможу записатись на прийом до стоматолога',
