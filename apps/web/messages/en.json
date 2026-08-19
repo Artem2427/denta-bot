@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "badge": "Platform for dental clinics",
+    "titleLine1": "Patient booking",
+    "titleLine2": "runs itself.",
+    "titleHighlight": "Around the clock.",
+    "subtitle": "A Telegram bot books, reminds, and brings patients back. The admin panel shows every doctor's schedule, workload, and analytics on one screen. Live in a single day.",
+    "ctaPrimary": "Try the bot",
+    "ctaSecondary": "Request a connection",
+    "stats": [
+      { "value": "−70%", "label": "no-shows" },
+      { "value": "24/7", "label": "booking without staff" },
+      { "value": "1 day", "label": "to go live" }
+    ]
+  }
+}
