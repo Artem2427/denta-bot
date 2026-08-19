@@ -42,7 +42,7 @@ export function BotTab(): React.JSX.Element {
   const messageTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
-  const messagesEndRef = React.useRef<HTMLDivElement>(null);
+  const messagesContainerRef = React.useRef<HTMLDivElement>(null);
 
   const runScenario = React.useCallback((scenarioIndex: number) => {
     // Defensive cleanup guard: cancel any in-flight playback before starting
@@ -116,7 +116,15 @@ export function BotTab(): React.JSX.Element {
   }, []);
 
   React.useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Scroll only the chat container's own scrollTop, not scrollIntoView —
+    // scrollIntoView walks up every scrollable ancestor including the
+    // document, so it was dragging the whole page down to bring this
+    // below-the-fold widget into view on mount (client-reported bug: page
+    // auto-scrolls on first visit).
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+    }
   }, [chatMessages, isTyping]);
 
   return (
@@ -135,7 +143,10 @@ export function BotTab(): React.JSX.Element {
                 </div>
               </div>
 
-              <div className="flex-1 space-y-3 overflow-y-auto p-4">
+              <div
+                ref={messagesContainerRef}
+                className="flex-1 space-y-3 overflow-y-auto p-4"
+              >
                 {chatMessages.map((message, index) => (
                   <motion.div
                     key={index}
@@ -202,8 +213,6 @@ export function BotTab(): React.JSX.Element {
                     </div>
                   </div>
                 ) : null}
-
-                <div ref={messagesEndRef} />
               </div>
 
               <div className="p-3">
