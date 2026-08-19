@@ -6,7 +6,7 @@ current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
 stopped_at: Completed 06.2-07-PLAN.md
-last_updated: "2026-08-19T14:08:54.016Z"
+last_updated: "2026-08-19T15:24:39.942Z"
 last_activity: 2026-08-19
 last_activity_desc: Phase 06.2 execution started
 progress:
@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 Phase: 6 — apps/web Integration
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-08-19 — Phase 06.2 complete, transitioned to Phase 6
+Last activity: 2026-08-19 - Completed quick task 260819-oyk: locale-as-top-level-wrapper routing fix + flag-dropdown LocaleSwitcher
 
 Progress: [██████████] 100%
 
@@ -122,6 +122,7 @@ None yet.
 | 260809-vac | Switch idle bounce ease to spring/overshoot EASE_DT_BOUNCE curve for a more physical bounce feel | 2026-08-09 | bf5b359 | [260809-vac-switch-idle-bounce-animation-ease-to-a-s](./quick/260809-vac-switch-idle-bounce-animation-ease-to-a-s/) |
 | 260809-vcj | Add count-up animation to Home hero stats (500+/15 000+/98%) — new useCountUp hook, animates on first load | 2026-08-09 | 713d8b1 | [260809-vcj-add-count-up-animation-to-the-3-hero-sta](./quick/260809-vcj-add-count-up-animation-to-the-3-hero-sta/) |
 | 260810-ddh | Add unified-source-of-truth admin highlight block to Home page (bot+manual booking single core, role-based access, created_via analytics) | 2026-08-10 | 2b2af6c | [260810-ddh-add-a-new-dedicated-highlight-block-to-t](./quick/260810-ddh-add-a-new-dedicated-highlight-block-to-t/) |
+| 260819-oyk | Make [locale] the true top-level route wrapper for apps/web — moved /blog, /prices, /demo, /contacts inside app/[locale]/, fixed LocaleSwitcher to preserve current pathname (rebuilt as a flag dropdown), fixed Header's Blog link to be locale-aware | 2026-08-19 | 89c6c11 | [260819-oyk-make-locale-the-true-top-level-route-wra](./quick/260819-oyk-make-locale-the-true-top-level-route-wra/) |
 
 ### Blockers/Concerns
 
