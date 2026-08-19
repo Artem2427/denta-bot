@@ -172,6 +172,24 @@
         "initials": "MP",
         "name": "Maria Petrenko",
         "clinic": "Lux Dental"
+      },
+      {
+        "text": "Patients reschedule themselves right in the bot — no more calls asking to move the time. The schedule is always up to date.",
+        "initials": "IP",
+        "name": "Iryna Pavlenko",
+        "clinic": "Usmishka Dental"
+      },
+      {
+        "text": "We connected two branches in a week. Now I see the workload for both clinics in one panel instead of two separate logs.",
+        "initials": "DK",
+        "name": "Dmytro Kravets",
+        "clinic": "MediSmile"
+      },
+      {
+        "text": "We used to lose about a quarter of bookings to human error. With the bot that simply doesn't happen — everything is logged automatically.",
+        "initials": "NS",
+        "name": "Natalia Sydorenko",
+        "clinic": "Dental Pro Clinic"
       }
     ],
     "prevLabel": "Previous review",

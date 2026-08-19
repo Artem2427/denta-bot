@@ -86,8 +86,12 @@ export function Reviews(): React.JSX.Element {
           </div>
         </Reveal>
 
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="-ml-6 flex">
+        {/* -my-4/py-4 give the cards' hover-lift + shadow room to breathe
+            inside the clipped viewport instead of getting cut off flush at
+            the edge — the negative margin on the viewport cancels the
+            padding on the track so overall vertical space is unchanged. */}
+        <div className="-my-4 overflow-hidden" ref={emblaRef}>
+          <div className="-ml-6 flex py-4">
             {items.map((item) => (
               <div
                 key={item.name}
