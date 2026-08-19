@@ -9,7 +9,8 @@
     "db:generate": "prisma generate",
     "db:migrate": "dotenv -e ../../.env -- prisma migrate dev",
     "db:migrate:deploy": "dotenv -e ../../.env -- prisma migrate deploy",
-    "db:seed": "dotenv -e ../../.env -- tsx prisma/seed.ts"
+    "db:seed": "dotenv -e ../../.env -- tsx prisma/seed.ts",
+    "db:seed:pricing": "dotenv -e ../../.env -- tsx prisma/seed-pricing.ts"
   },
   "dependencies": {
     "@prisma/client": "7.9.1",
