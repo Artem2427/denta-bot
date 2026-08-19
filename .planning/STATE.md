@@ -5,15 +5,15 @@ milestone_name: Platform Admin API
 current_phase: 06.2
 current_phase_name: single-page-landing-consolidation-i18n-apps-web-collapse-hom
 status: executing
-stopped_at: Completed 06.2-04-PLAN.md
-last_updated: "2026-08-19T09:25:22.704Z"
+stopped_at: Completed 06.2-05-PLAN.md
+last_updated: "2026-08-19T09:30:02.012Z"
 last_activity: 2026-08-19
 last_activity_desc: Phase 06.2 execution started
 progress:
   total_phases: 5
   completed_phases: 4
   total_plans: 24
-  completed_plans: 21
+  completed_plans: 22
   percent: 80
 ---
 
@@ -29,11 +29,11 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 ## Current Position
 
 Phase: 06.2 (single-page-landing-consolidation-i18n-apps-web-collapse-hom) — EXECUTING
-Plan: 5 of 7
+Plan: 6 of 7
 Status: Ready to execute
 Last activity: 2026-08-19 — Phase 06.2 execution started
 
-Progress: [█████████░] 88%
+Progress: [█████████░] 92%
 
 ## Performance Metrics
 
@@ -73,6 +73,7 @@ Progress: [█████████░] 88%
 | Phase 06.2 P02 | 12min | 2 tasks | 2 files |
 | Phase 06.2 P03 | 12min | 2 tasks | 3 files |
 | Phase 06.2 P04 | 5min | 3 tasks | 6 files |
+| Phase 06.2 P05 | 15min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,8 @@ v1.1 roadmap-level decisions:
 - [Phase ?]: [Phase 06.2] Plan 06.2-03: marquee.channels kept byte-identical across uk/ru/en (channel/brand names, not translated); features namespace drops design's numeric mark field (Plan 05 uses Phosphor icons per index instead); lead namespace field labels/errors reuse contact-form.tsx's existing Ukrainian strings verbatim so Wave 3 can rewire to useTranslations() with zero copy drift
 - [Phase ?]: [Phase 06.2] Plan 06.2-04: admin-showcase.tsx embeds existing DemoTabs inside a browser-chrome frame wrapper (not a static screenshot) — resolves CONTEXT.md's 'Claude's Discretion' interactive-demo-vs-screenshot question in favor of the already-built simulation
 - [Phase ?]: [Phase 06.2] Plan 06.2-04: id="demo" moved to admin-showcase.tsx (not how-it-works.tsx) — Header/Footer's #demo anchor now targets the interactive bot/admin simulation, matching user expectation of what 'Демо' should scroll to
+- [Phase ?]: [Phase 06.2] Plan 06.2-05: faq.tsx built as an async Server Component (getTranslations), not client — matches sibling landing modules' established interactive-vs-static split; PremiumAccordion's Radix internals already carry their own client boundary
+- [Phase ?]: [Phase 06.2] Plan 06.2-05: features.tsx maps the SAME icon array [ChatCircleText,Calendar,Bell,ChartBar,Star,Gear,Users,Check] index-for-index onto t.raw('items') per the plan's literal ordering instruction, even though the plan's own concept-list rationale text doesn't 1:1 match past index 4
 
 ### Pending Todos
 
@@ -142,8 +145,8 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-19T09:25:22.689Z
-Stopped at: Completed 06.2-04-PLAN.md
+Last session: 2026-08-19T09:30:01.997Z
+Stopped at: Completed 06.2-05-PLAN.md
 Resume file: None
 
 Next: /gsd-plan-phase 06.2 — plan Phase 06.2 (Single-Page Landing Consolidation + i18n)
