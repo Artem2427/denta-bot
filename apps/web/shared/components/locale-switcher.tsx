@@ -1,17 +1,29 @@
 'use client';
 
-import { Link, usePathname } from '@/i18n/navigation';
+import { usePathname } from '@/i18n/navigation';
+import { routing } from '@/i18n/routing';
 import { cn } from '@/shared/lib/cn';
 import { CaretDown, Check } from '@phosphor-icons/react/ssr';
 import { useLocale } from 'next-intl';
+import Link from 'next/link';
 import { DropdownMenu } from 'radix-ui';
 
-// href={pathname} + an explicit `locale` prop on each option is what
-// preserves the CURRENT page across a locale switch, on every route
-// including dynamic ones (e.g. a blog post) — usePathname() from
-// @/i18n/navigation returns the locale-agnostic pathname with dynamic
-// segments already resolved to their concrete value (e.g.
-// /blog/my-post-slug), not the route template.
+// usePathname() from @/i18n/navigation returns the locale-agnostic
+// pathname with dynamic segments already resolved to their concrete
+// value (e.g. /blog/my-post-slug), not the route template — this is
+// what preserves the CURRENT page across a locale switch.
+//
+// The href is built manually (plain next/link, routing.defaultLocale
+// check) rather than via next-intl's own <Link locale={...}> helper:
+// that helper prefixes EVERY explicit-locale target, including the
+// default locale, regardless of routing.ts's `localePrefix: 'as-needed'`
+// — 'as-needed' only omits the prefix for implicit/auto-detected
+// navigation, not when a locale is passed explicitly. Confirmed via a
+// live curl check: the uk option rendered href="/uk/blog" instead of
+// the required unprefixed "/blog" (D-08).
+function localeHref(locale: string, pathname: string): string {
+  return locale === routing.defaultLocale ? pathname : `/${locale}${pathname}`;
+}
 const locales = [
   { code: 'uk', flag: '\u{1F1FA}\u{1F1E6}', label: 'Українська', short: 'UA' },
   { code: 'ru', flag: '\u{1F1F7}\u{1F1FA}', label: 'Русский', short: 'RU' },
@@ -59,8 +71,7 @@ export function LocaleSwitcher(): React.JSX.Element {
         {locales.map((locale) => (
           <DropdownMenu.Item key={locale.code} asChild>
             <Link
-              href={pathname}
-              locale={locale.code}
+              href={localeHref(locale.code, pathname)}
               className={cn(
                 'flex cursor-pointer items-center gap-2 rounded-dt-input px-3 py-2 text-sm outline-none transition-colors hover:bg-dt-teal/10',
                 activeLocale === locale.code
