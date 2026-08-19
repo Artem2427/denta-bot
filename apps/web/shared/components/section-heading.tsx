@@ -37,7 +37,7 @@ function SectionHeading({
       ) : null}
       <h2
         className={cn(
-          'text-dt-h2 font-dt-heading font-bold text-balance',
+          'text-dt-h2 font-dt-heading font-extrabold text-balance',
           isNavy ? 'text-dt-warm-white' : 'text-dt-navy',
         )}
       >
