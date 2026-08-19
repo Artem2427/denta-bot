@@ -9,7 +9,7 @@ import { Reveal } from '@/shared/components/reveal';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 
-import { StaggerGrid, StaggerItem } from '@/modules/home/stagger-grid';
+import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
 
 type ReviewItem = { text: string; initials: string; name: string; clinic: string };
 

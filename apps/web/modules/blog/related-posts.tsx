@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import * as React from 'react';
 
-import { StaggerGrid, StaggerItem } from '@/modules/home/stagger-grid';
+import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';

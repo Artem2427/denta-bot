@@ -18,7 +18,7 @@ import { Reveal } from '@/shared/components/reveal';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 
-import { StaggerGrid, StaggerItem } from '@/modules/home/stagger-grid';
+import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
 
 type FeatureItem = { title: string; text: string };
 
