@@ -142,7 +142,7 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 5. Clinic, Lead & Content Management | 7/7 | Complete    | 2026-08-14 |
 | 6. apps/web Integration | 3/3 | In Progress|  |
 | 06.1. Premium Visual Restyle (apps/web) | 5/5 | Complete | 2026-08-18 |
-| 06.2. Single-Page Landing Consolidation + i18n (apps/web) | 6/7 | In Progress|  |
+| 06.2. Single-Page Landing Consolidation + i18n (apps/web) | 7/7 | In Progress|  |
 
 ### Phase 06.2: Single-Page Landing Consolidation + i18n (apps/web) (INSERTED)
 
@@ -151,7 +151,7 @@ Collapse Home/Prices/Contacts/Demo into one scrolling landing page sourced from 
 **Goal:** `apps/web` serves one scrolling, fully-translated (uk default-unprefixed/ru/en) landing page at `/` composed from the design export's sections and sales copy, with real API-backed pricing/lead-capture data; `/blog` stays the only other real, unlocalized route; `/prices`, `/demo`, `/contacts` are retired as destinations and redirect to landing anchors.
 **Requirements**: None (urgent client-directed insertion, tracked via ROADMAP.md/STATE.md entry, not the v1.1 requirement traceability table — CONTEXT.md decisions D-01 through D-11 serve as this phase's acceptance criteria)
 **Depends on:** Phase 6
-**Plans:** 6/7 plans executed
+**Plans:** 7/7 plans executed
 
 Plans:
 **Wave 1**
@@ -171,7 +171,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 — composes all sections into one page, retires old routes)*
 
-- [ ] 06.2-07-PLAN.md — final page assembly (all 10 sections) + /prices/demo/contacts redirects (D-01, D-03) + dead-file cleanup
+- [x] 06.2-07-PLAN.md — final page assembly (all 10 sections) + /prices/demo/contacts redirects (D-01, D-03) + dead-file cleanup
 
 ### Phase 06.1: Premium Visual Restyle (apps/web) — purely visual/CSS restyle of Home, Prices, Demo, Blog, Contacts pages to a premium look using dt- design tokens and shared primitive components (Section, Container, Eyebrow, SectionHeading, Card, Stat, Button); no route/prop/copy/dependency changes (INSERTED) — Complete 2026-08-18
 
