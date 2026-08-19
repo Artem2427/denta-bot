@@ -14,6 +14,7 @@ import { PremiumCard } from '@/shared/components/premium-card';
 import { PremiumInput } from '@/shared/components/premium-input';
 import { PremiumTextarea } from '@/shared/components/premium-textarea';
 import { Section } from '@/shared/components/section';
+import { SectionHeading } from '@/shared/components/section-heading';
 import { getClientApiUrl } from '@/shared/lib/api-url';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,15 +95,13 @@ export function LeadSection(): React.JSX.Element {
       <Container>
         <div className="grid items-start gap-12 lg:grid-cols-2">
           <div>
-            <span className="font-dt-mono text-dt-eyebrow text-dt-warm-white/80 uppercase">
-              {t('eyebrow')}
-            </span>
-            <h2 className="mt-2 text-dt-h2 font-dt-heading font-bold text-balance text-dt-warm-white">
-              {t('title')}
-            </h2>
-            <p className="mt-4 text-dt-body text-pretty text-dt-warm-white/80">
-              {t('description')}
-            </p>
+            <SectionHeading
+              eyebrow={t('eyebrow')}
+              title={t('title')}
+              description={t('description')}
+              tone="navy"
+              className="mb-0"
+            />
             <ul className="mt-8 space-y-4">
               {guarantees.map((item) => (
                 <li key={item} className="flex items-start gap-3">
