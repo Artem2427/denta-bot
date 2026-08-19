@@ -153,7 +153,7 @@
     "ctaLabel": "Choose a plan"
   },
   "reviews": {
-    "title": "What clinics say",
+    "title": "Client Reviews",
     "items": [
       {
         "text": "No-shows dropped 70% in two months. Patients get reminders and actually show up on time.",
@@ -173,7 +173,9 @@
         "name": "Maria Petrenko",
         "clinic": "Lux Dental"
       }
-    ]
+    ],
+    "prevLabel": "Previous review",
+    "nextLabel": "Next review"
   },
   "lead": {
     "eyebrow": "Get connected",
