@@ -94,16 +94,17 @@ export function Header() {
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
             <PremiumButton
-              variant="ghost"
+              variant="outline"
               size="icon"
+              className="size-14"
               aria-label={isMobileMenuOpen ? t('menuClose') : t('menuOpen')}
               aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <X weight="regular" className="h-6 w-6" />
+                <X weight="bold" className="h-7 w-7" />
               ) : (
-                <List weight="regular" className="h-6 w-6" />
+                <List weight="bold" className="h-7 w-7" />
               )}
             </PremiumButton>
           </div>

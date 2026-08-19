@@ -39,7 +39,13 @@ export function LocaleSwitcher(): React.JSX.Element {
     locales.find((locale) => locale.code === activeLocale) ?? locales[0];
 
   return (
-    <DropdownMenu.Root>
+    // modal={false}: this is a lightweight menu, not a dialog — Radix's
+    // default modal behavior body-scroll-locks and disables pointer
+    // events outside the menu while open, which is unwanted here and,
+    // combined with the (now-removed) no-Portal setup, was the root
+    // cause of two client-reported bugs: page scroll getting stuck, and
+    // the language options being unclickable/mispositioned.
+    <DropdownMenu.Root modal={false}>
       <DropdownMenu.Trigger asChild>
         <button
           type="button"
@@ -53,43 +59,45 @@ export function LocaleSwitcher(): React.JSX.Element {
           <CaretDown weight="bold" className="h-3 w-3" />
         </button>
       </DropdownMenu.Trigger>
-      {/* Deliberately no DropdownMenu.Portal wrapper: Radix's Portal only
-          renders once mounted client-side (there is no `document` during
-          SSR), which would strip every locale option's Link out of the
-          server-rendered HTML entirely. Rendering Content inline instead
-          (a fully supported Radix usage — Portal is optional) combined
-          with forceMount keeps each option's real <a href> in the initial
-          markup — crawlable, and functional even before JS hydrates —
-          while data-[state=closed]:hidden keeps it visually collapsed
-          until DropdownMenu.Trigger opens it. */}
-      <DropdownMenu.Content
-        forceMount
-        align="end"
-        sideOffset={8}
-        className="z-50 min-w-[180px] rounded-dt-card border border-[var(--dt-border)] bg-dt-warm-white p-1 shadow-[var(--shadow-dt-hover)] data-[state=closed]:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
-      >
-        {locales.map((locale) => (
-          <DropdownMenu.Item key={locale.code} asChild>
-            <Link
-              href={localeHref(locale.code, pathname)}
-              className={cn(
-                'flex cursor-pointer items-center gap-2 rounded-dt-input px-3 py-2 text-sm outline-none transition-colors hover:bg-dt-teal/10',
-                activeLocale === locale.code
-                  ? 'text-dt-navy font-semibold'
-                  : 'text-dt-graphite',
-              )}
-            >
-              <span aria-hidden="true" className="text-base leading-none">
-                {locale.flag}
-              </span>
-              <span>{locale.label}</span>
-              {activeLocale === locale.code ? (
-                <Check weight="bold" className="ml-auto h-4 w-4 text-dt-teal" />
-              ) : null}
-            </Link>
-          </DropdownMenu.Item>
-        ))}
-      </DropdownMenu.Content>
+      {/* Portal (the standard Radix pattern): renders Content into
+          document.body so Popper positioning isn't affected by any
+          transformed/overflow-clipping ancestor, and click-outside/escape
+          dismissal works correctly. The 3 language links are absent from
+          pre-hydration HTML as a result — an acceptable tradeoff since
+          every target page is reachable through other crawlable links,
+          and a working menu matters far more than that. */}
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          align="end"
+          sideOffset={8}
+          className="z-50 min-w-[180px] rounded-dt-card border border-[var(--dt-border)] bg-dt-warm-white p-1 shadow-[var(--shadow-dt-hover)] data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
+        >
+          {locales.map((locale) => (
+            <DropdownMenu.Item key={locale.code} asChild>
+              <Link
+                href={localeHref(locale.code, pathname)}
+                className={cn(
+                  'flex cursor-pointer items-center gap-2 rounded-dt-input px-3 py-2 text-sm outline-none transition-colors hover:bg-dt-teal/10',
+                  activeLocale === locale.code
+                    ? 'text-dt-navy font-semibold'
+                    : 'text-dt-graphite',
+                )}
+              >
+                <span aria-hidden="true" className="text-base leading-none">
+                  {locale.flag}
+                </span>
+                <span>{locale.label}</span>
+                {activeLocale === locale.code ? (
+                  <Check
+                    weight="bold"
+                    className="ml-auto h-4 w-4 text-dt-teal"
+                  />
+                ) : null}
+              </Link>
+            </DropdownMenu.Item>
+          ))}
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
     </DropdownMenu.Root>
   );
 }
