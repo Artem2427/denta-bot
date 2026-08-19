@@ -17,15 +17,24 @@ import { getServerApiUrl } from '@/shared/lib/api-url';
 // empty `plans` array is NOT a reason to hide the rest of the landing page
 // (unlike the old dedicated-page empty-state branch): it renders through as
 // a Plan-02-reseed-failure signal instead, since Plan 02 already guarantees
-// 3 published rows exist under normal operation.
+// 3 published rows exist under normal operation. A fetch/backend failure
+// must not take down the whole consolidated page (CR-01) — Hero, Header,
+// Footer, and every other section now share this render pass, so a
+// transient pricing-API blip degrades to an empty pricing section instead
+// of a full-site outage.
 export default async function LandingPage(): Promise<React.JSX.Element> {
-  const res = await fetch(`${getServerApiUrl()}/public/pricing-plans`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch pricing plans: ${res.status}`);
+  let plans: PricingPlan[] = [];
+  try {
+    const res = await fetch(`${getServerApiUrl()}/public/pricing-plans`, {
+      next: { revalidate: 60 },
+    });
+    if (res.ok) {
+      plans = (await res.json()) as PricingPlan[];
+    }
+  } catch {
+    // network/backend failure — render the rest of the landing page with an
+    // empty pricing section rather than throwing and crashing the page.
   }
-  const plans = (await res.json()) as PricingPlan[];
 
   return (
     <div>
