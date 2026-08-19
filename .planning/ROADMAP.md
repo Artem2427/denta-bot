@@ -142,7 +142,7 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 5. Clinic, Lead & Content Management | 7/7 | Complete    | 2026-08-14 |
 | 6. apps/web Integration | 3/3 | In Progress|  |
 | 06.1. Premium Visual Restyle (apps/web) | 5/5 | Complete | 2026-08-18 |
-| 06.2. Single-Page Landing Consolidation + i18n (apps/web) | 2/7 | In Progress|  |
+| 06.2. Single-Page Landing Consolidation + i18n (apps/web) | 3/7 | In Progress|  |
 
 ### Phase 06.2: Single-Page Landing Consolidation + i18n (apps/web) (INSERTED)
 
@@ -151,7 +151,7 @@ Collapse Home/Prices/Contacts/Demo into one scrolling landing page sourced from 
 **Goal:** `apps/web` serves one scrolling, fully-translated (uk default-unprefixed/ru/en) landing page at `/` composed from the design export's sections and sales copy, with real API-backed pricing/lead-capture data; `/blog` stays the only other real, unlocalized route; `/prices`, `/demo`, `/contacts` are retired as destinations and redirect to landing anchors.
 **Requirements**: None (urgent client-directed insertion, tracked via ROADMAP.md/STATE.md entry, not the v1.1 requirement traceability table — CONTEXT.md decisions D-01 through D-11 serve as this phase's acceptance criteria)
 **Depends on:** Phase 6
-**Plans:** 2/7 plans executed
+**Plans:** 3/7 plans executed
 
 Plans:
 **Wave 1**
@@ -161,7 +161,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 — extends the same messages/*.json files 06.2-01 created)*
 
-- [ ] 06.2-03-PLAN.md — full uk/ru/en message content for every remaining landing section (D-10)
+- [x] 06.2-03-PLAN.md — full uk/ru/en message content for every remaining landing section (D-10)
 
 **Wave 3** *(blocked on Wave 2 — all 3 plans below depend only on 06.2-03's message contract and touch disjoint component files, so they run in parallel)*
 
