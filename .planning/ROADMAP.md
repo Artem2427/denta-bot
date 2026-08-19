@@ -142,6 +142,36 @@ Phases execute in numeric order: 1 → 01.1 → 2 → 3 → 4 → 5 → 6
 | 5. Clinic, Lead & Content Management | 7/7 | Complete    | 2026-08-14 |
 | 6. apps/web Integration | 3/3 | In Progress|  |
 | 06.1. Premium Visual Restyle (apps/web) | 5/5 | Complete | 2026-08-18 |
+| 06.2. Single-Page Landing Consolidation + i18n (apps/web) | 0/7 | Planned |  |
+
+### Phase 06.2: Single-Page Landing Consolidation + i18n (apps/web) (INSERTED)
+
+Collapse Home/Prices/Contacts/Demo into one scrolling landing page sourced from the DentaBot Landing design export (header, hero, problem/solution, how-it-works, admin showcase, features, pricing, reviews, lead-capture, FAQ, footer as anchor sections), rewritten sales copy from that design as source of truth. Add uk/ru/en URL-based locale routing (next-intl style). Blog remains the only other real route, staying Ukrainian-only this phase. /prices, /demo, /contacts retired as destinations (redirect to landing anchors).
+
+**Goal:** `apps/web` serves one scrolling, fully-translated (uk default-unprefixed/ru/en) landing page at `/` composed from the design export's sections and sales copy, with real API-backed pricing/lead-capture data; `/blog` stays the only other real, unlocalized route; `/prices`, `/demo`, `/contacts` are retired as destinations and redirect to landing anchors.
+**Requirements**: None (urgent client-directed insertion, tracked via ROADMAP.md/STATE.md entry, not the v1.1 requirement traceability table — CONTEXT.md decisions D-01 through D-11 serve as this phase's acceptance criteria)
+**Depends on:** Phase 6
+**Plans:** 7 plans
+
+Plans:
+**Wave 1**
+
+- [ ] 06.2-01-PLAN.md — next-intl locale-routing infrastructure (tracer) + translated Hero + Header/Footer chrome + blog-coexistence proof (D-08, D-09, D-11)
+- [ ] 06.2-02-PLAN.md — idempotent PricingPlan reseed script (Старт/Клініка/Мережа, D-04, D-05) — parallel, independent domain
+
+**Wave 2** *(blocked on Wave 1 — extends the same messages/*.json files 06.2-01 created)*
+
+- [ ] 06.2-03-PLAN.md — full uk/ru/en message content for every remaining landing section (D-10)
+
+**Wave 3** *(blocked on Wave 2 — all 3 plans below depend only on 06.2-03's message contract and touch disjoint component files, so they run in parallel)*
+
+- [ ] 06.2-04-PLAN.md — channel marquee, problem/solution, how-it-works, admin+bot interactive demo showcase + emoji cleanup
+- [ ] 06.2-05-PLAN.md — features grid, reviews, consolidated FAQ
+- [ ] 06.2-06-PLAN.md — pricing section (real API data) + single lead-capture form (D-04, D-06, D-07, D-11)
+
+**Wave 4** *(blocked on Wave 3 — composes all sections into one page, retires old routes)*
+
+- [ ] 06.2-07-PLAN.md — final page assembly (all 10 sections) + /prices/demo/contacts redirects (D-01, D-03) + dead-file cleanup
 
 ### Phase 06.1: Premium Visual Restyle (apps/web) — purely visual/CSS restyle of Home, Prices, Demo, Blog, Contacts pages to a premium look using dt- design tokens and shared primitive components (Section, Container, Eyebrow, SectionHeading, Card, Stat, Button); no route/prop/copy/dependency changes (INSERTED) — Complete 2026-08-18
 
