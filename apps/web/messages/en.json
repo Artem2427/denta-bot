@@ -34,5 +34,163 @@
     "hoursLabel": "Business hours",
     "hoursValue": "Mon–Fri: 9:00 AM – 6:00 PM",
     "copyright": "© 2026 DentaBot by Dankohub"
+  },
+  "marquee": {
+    "channels": [
+      "Telegram",
+      "Viber",
+      "WhatsApp",
+      "Google Calendar",
+      "SMS-шлюз",
+      "Instagram",
+      "Веб-віджет",
+      "API"
+    ]
+  },
+  "problemSolution": {
+    "eyebrow": "The problem",
+    "title": "Clinics lose patients over small things",
+    "description": "A booking that landed in the wrong slot, a callback nobody made, a reminder nobody sent. None of that is a staff mistake — it's a missing system.",
+    "beforeLabel": "Without DentaBot",
+    "afterLabel": "With DentaBot",
+    "before": [
+      "Front desk spends the whole day on the phone, writing bookings into a notebook or Excel",
+      "Bookings are scattered across WhatsApp, Viber, and Instagram",
+      "Patients forget their appointment — the open slot just goes to waste",
+      "The owner can't see workload or where patients actually come from"
+    ],
+    "after": [
+      "Patients book themselves in 30 seconds, any time of day",
+      "Every channel feeds one schedule — no double-booking",
+      "Reminders go out automatically a day and an hour before",
+      "Analytics on doctors, services, and booking sources — in real time"
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "Three minutes for the patient — zero minutes for staff",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Patient opens the bot",
+        "text": "A button on the site, Instagram, or a QR code in the clinic. The bot greets them and shows open slots."
+      },
+      {
+        "n": "02",
+        "title": "Picks a time and a doctor",
+        "text": "Real open slots straight from the schedule. A booked slot disappears instantly — in the bot and in the panel."
+      },
+      {
+        "n": "03",
+        "title": "The clinic sees the booking",
+        "text": "The booking lands in the admin panel, and the bot sends reminders and collects a review after the visit on its own."
+      }
+    ]
+  },
+  "adminShowcase": {
+    "eyebrow": "Admin panel",
+    "title": "The whole clinic in one screen",
+    "description": "Bookings from the bot and bookings staff enter by hand live on the same schedule.",
+    "urlLabel": "app.dentabot.ua/clinic"
+  },
+  "features": {
+    "title": "Everything a clinic needs to run",
+    "items": [
+      { "title": "Telegram bot", "text": "Booking in a messenger patients already use — no apps, no sign-ups." },
+      { "title": "Shared schedule", "text": "Bot bookings and manual staff entries live on one calendar." },
+      { "title": "Auto-reminders", "text": "Scenarios a day before, an hour before, and after the visit." },
+      { "title": "Analytics", "text": "Workload, services, booking sources, repeat visits." },
+      { "title": "Role-based access", "text": "Staff see their own day, the owner sees the whole clinic." },
+      { "title": "Reviews", "text": "Automatic review requests and rating collection after appointments." },
+      { "title": "Reschedule & cancel", "text": "Patients reschedule themselves — the slot opens up instantly." },
+      { "title": "Multiple locations", "text": "A clinic network in one panel with combined reports." }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Transparent pricing, no hidden fees",
+    "billingMonthly": "Monthly",
+    "billingYearly": "Yearly",
+    "billingDiscount": "-20%",
+    "footnote": "Setup, bot configuration, and team training are free on every plan.",
+    "ctaLabel": "Choose a plan"
+  },
+  "reviews": {
+    "title": "What clinics say",
+    "items": [
+      {
+        "text": "No-shows dropped 70% in two months. Patients get reminders and actually show up on time.",
+        "initials": "OK",
+        "name": "Olena Kovalchuk",
+        "clinic": "Posmishka Clinic"
+      },
+      {
+        "text": "Our front desk isn't glued to the phone all day anymore — patients book themselves, and she runs the clinic instead.",
+        "initials": "AM",
+        "name": "Andriy Melnyk",
+        "clinic": "Denta Plus"
+      },
+      {
+        "text": "Setup took an hour, no technical specialist needed. The analytics showed us which services actually make money.",
+        "initials": "MP",
+        "name": "Maria Petrenko",
+        "clinic": "Lux Dental"
+      }
+    ]
+  },
+  "lead": {
+    "eyebrow": "Get connected",
+    "title": "See a demo of the admin panel and bot for your clinic",
+    "description": "We'll show the panel using your own service list and set up the bot to match your schedule. Demo takes 20 minutes, going live takes one business day.",
+    "guarantees": [
+      "A demo built on your clinic's own data",
+      "We handle migrating your current schedule",
+      "First month is refundable"
+    ],
+    "formTitle": "Send a request",
+    "thanksTitle": "Thank you!",
+    "thanksBody": "Your request has been sent. We'll reach out to you shortly.",
+    "nameLabel": "Name *",
+    "namePlaceholder": "Your name",
+    "nameError": "Name must be at least 2 characters",
+    "clinicLabel": "Clinic name",
+    "clinicPlaceholder": "Your clinic's name",
+    "contactLabel": "Phone or email *",
+    "contactPlaceholder": "+380 XX XXX XX XX or email@example.com",
+    "contactRequiredError": "Enter a phone number or email",
+    "contactInvalidError": "Enter a valid phone number or email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about your needs...",
+    "submitLabel": "Send request",
+    "submittingLabel": "Sending…",
+    "consentNote": "By clicking the button you agree to the processing of your contact details. No spam.",
+    "toastRateLimited": "Too many attempts. Wait a minute and try again.",
+    "toastGenericError": "Couldn't send the request. Please try again.",
+    "toastSuccess": "Request sent successfully!"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "question": "How long does setup take?",
+        "answer": "One business day. We build the bot, import your doctors' schedules and services, and walk your team through the panel. All we need from you is a service list and working hours."
+      },
+      {
+        "question": "Does the clinic need a technical specialist?",
+        "answer": "No. We handle setup — after that, everything is managed from the admin panel: hours, services, prices, reminder texts."
+      },
+      {
+        "question": "What happens to bookings staff enter manually?",
+        "answer": "They live on the same schedule as bot bookings. A booked slot disappears from the bot instantly, so double-booking never happens."
+      },
+      {
+        "question": "Can we work in channels other than Telegram?",
+        "answer": "Yes. The Clinic and Network plans add Viber, WhatsApp, and a web widget for the clinic's site. Every channel feeds the same schedule."
+      },
+      {
+        "question": "Where is patient data stored?",
+        "answer": "On servers in the EU, with access restricted by staff role. Data can be exported or deleted on request."
+      }
+    ]
   }
 }
