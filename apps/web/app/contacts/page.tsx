@@ -13,7 +13,7 @@ import { routing } from '@/i18n/routing';
 // keeps ru/en visitors — including the demo tab's "Connect your clinic"
 // CTA, which links here — on their selected locale instead of being
 // silently dropped back to Ukrainian).
-export default async function Contacts(): Promise<never> {
+export default async function Contacts(): Promise<void> {
   const cookieStore = await cookies();
   const localeCookie = cookieStore.get('NEXT_LOCALE')?.value;
   const locale = hasLocale(routing.locales, localeCookie)

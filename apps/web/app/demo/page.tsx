@@ -12,7 +12,7 @@ import { routing } from '@/i18n/routing';
 // does go through it (e.g. /en, /ru), falling back to the default locale
 // when absent (WR-01: keeps ru/en visitors on their selected locale
 // instead of being silently dropped back to Ukrainian).
-export default async function Demo(): Promise<never> {
+export default async function Demo(): Promise<void> {
   const cookieStore = await cookies();
   const localeCookie = cookieStore.get('NEXT_LOCALE')?.value;
   const locale = hasLocale(routing.locales, localeCookie)
