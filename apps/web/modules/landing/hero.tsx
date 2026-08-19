@@ -60,11 +60,11 @@ export async function Hero(): Promise<React.JSX.Element> {
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="h-auto w-full rounded-dt-card shadow-[var(--shadow-dt-card)]"
             />
-            <HeroNotificationBadge />
+            <HeroNotificationBadge text={t('notificationBadge')} />
             <div className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-dt-card bg-dt-warm-white p-4 shadow-[var(--shadow-dt-hover)]">
               <BellIcon weight="regular" className="h-5 w-5 text-dt-teal" />
               <span className="text-sm font-medium text-dt-navy">
-                Нагадування відправлено 24 пацієнтам
+                {t('reminderBadge')}
               </span>
             </div>
           </div>

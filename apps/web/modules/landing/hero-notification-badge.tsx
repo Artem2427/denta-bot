@@ -4,7 +4,11 @@ import { idleBounceAnimate, idleBounceTransition } from '@/shared/lib/motion';
 import { CheckIcon } from '@phosphor-icons/react/ssr';
 import { motion, useReducedMotion } from 'motion/react';
 
-export function HeroNotificationBadge(): React.JSX.Element {
+export function HeroNotificationBadge({
+  text,
+}: {
+  text: string;
+}): React.JSX.Element {
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -14,9 +18,7 @@ export function HeroNotificationBadge(): React.JSX.Element {
       transition={prefersReducedMotion ? undefined : idleBounceTransition}
     >
       <CheckIcon weight="bold" className="h-5 w-5 text-dt-teal" />
-      <span className="text-sm font-medium text-dt-navy">
-        Новий запис від Олени Коваль
-      </span>
+      <span className="text-sm font-medium text-dt-navy">{text}</span>
     </motion.div>
   );
 }
