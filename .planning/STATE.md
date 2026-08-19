@@ -2,19 +2,19 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Admin API
-current_phase: 06.1
-current_phase_name: premium-visual-restyle-apps-web
+current_phase: 06.2
+current_phase_name: single-page-landing-consolidation-i18n-apps-web-collapse-hom
 status: executing
-stopped_at: Phase 06.2 planned — 7 plans, 4 waves, verified clean
-last_updated: "2026-08-19T08:44:33.993Z"
-last_activity: 2026-08-18
-last_activity_desc: Phase 06.1 (Premium Visual Restyle) completed and verified; returning to Phase 6
+stopped_at: Completed 06.2-01-PLAN.md
+last_updated: "2026-08-19T09:11:43.341Z"
+last_activity: 2026-08-19
+last_activity_desc: Phase 06.2 execution started
 progress:
   total_phases: 5
   completed_phases: 4
   total_plans: 24
-  completed_plans: 17
-  percent: 71
+  completed_plans: 18
+  percent: 75
 ---
 
 # Project State
@@ -24,16 +24,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-08-10)
 
 **Core value:** A real NestJS + Prisma backend feeds `apps/platform-admin` (clinic/lead/content monitoring) and the site's CMS-backed content, so denta-bot staff can operate on real data instead of hardcoded fixtures.
-**Current focus:** Phase 06.1 — premium-visual-restyle-apps-web
+**Current focus:** Phase 06.2 — single-page-landing-consolidation-i18n-apps-web-collapse-hom
 
 ## Current Position
 
-Phase: 06.1 (premium-visual-restyle-apps-web) — EXECUTING
-Plan: 1 of 5
-Status: Executing Phase 06.1
-Last activity: 2026-08-18 — Phase 06.1 execution started
+Phase: 06.2 (single-page-landing-consolidation-i18n-apps-web-collapse-hom) — EXECUTING
+Plan: 2 of 7
+Status: Ready to execute
+Last activity: 2026-08-19 — Phase 06.2 execution started
 
-Progress: [██████████] 100%
+Progress: [████████░░] 75%
 
 ## Performance Metrics
 
@@ -69,6 +69,7 @@ Progress: [██████████] 100%
 | Phase 03 P01 | 25min | 3 tasks | 7 files |
 | Phase 03 P02 | 20min | 3 tasks | 6 files |
 | Phase 04 P02 | 50min | 2 tasks | 10 files |
+| Phase 06.2 P01 | 45min | 2 tasks | 20 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,8 @@ v1.1 roadmap-level decisions:
 - [Phase 04]: Plan 04-02: Registered RefreshTokenStrategy in auth.module.ts during Task 1 (ahead of Task 2's planned registration) — required for Passport to resolve the 'jwt-refresh' strategy at all
 - [Phase 04]: Plan 04-02: Embedded email in the access-token JWT payload (issueTokenPair signature extended) — GET /auth/me needs the admin's email, which Plan 04-01's token payload didn't carry
 - [Phase 04]: Plan 04-02: AuthResponseDto.platformAdmin made optional — POST /refresh omits it (no re-fetch needed), POST /login still returns it
+- [Phase ?]: [Phase 06.2] Plan 06.2-01: Hero/Footer rewritten as Server Components (getTranslations) instead of client components (useTranslations) — Task 1's [locale]/layout.tsx intentionally has no NextIntlClientProvider until Task 2's root layout, so client components using useTranslations() would 500 until Task 2 ran
+- [Phase ?]: [Phase 06.2] Plan 06.2-01: Added footer.hoursLabel/hoursValue translation keys beyond the plan's literal namespace list, per the task's own 'wire every string through useTranslations' instruction
 
 ### Pending Todos
 
@@ -132,9 +135,9 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-19T08:44:33.977Z
-Stopped at: Phase 06.2 planned — 7 plans, 4 waves, verified clean
-Resume file: .planning/phases/06.2-single-page-landing-consolidation-i18n-apps-web-collapse-hom/06.2-01-PLAN.md
+Last session: 2026-08-19T09:11:43.328Z
+Stopped at: Completed 06.2-01-PLAN.md
+Resume file: None
 
 Next: /gsd-plan-phase 06.2 — plan Phase 06.2 (Single-Page Landing Consolidation + i18n)
 
