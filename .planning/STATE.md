@@ -5,15 +5,15 @@ milestone_name: Platform Admin API
 current_phase: 06.2
 current_phase_name: single-page-landing-consolidation-i18n-apps-web-collapse-hom
 status: executing
-stopped_at: Completed 06.2-03-PLAN.md
-last_updated: "2026-08-19T09:19:38.182Z"
+stopped_at: Completed 06.2-04-PLAN.md
+last_updated: "2026-08-19T09:25:22.704Z"
 last_activity: 2026-08-19
 last_activity_desc: Phase 06.2 execution started
 progress:
   total_phases: 5
   completed_phases: 4
   total_plans: 24
-  completed_plans: 20
+  completed_plans: 21
   percent: 80
 ---
 
@@ -29,11 +29,11 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 ## Current Position
 
 Phase: 06.2 (single-page-landing-consolidation-i18n-apps-web-collapse-hom) — EXECUTING
-Plan: 4 of 7
+Plan: 5 of 7
 Status: Ready to execute
 Last activity: 2026-08-19 — Phase 06.2 execution started
 
-Progress: [████████░░] 83%
+Progress: [█████████░] 88%
 
 ## Performance Metrics
 
@@ -72,6 +72,7 @@ Progress: [████████░░] 83%
 | Phase 06.2 P01 | 45min | 2 tasks | 20 files |
 | Phase 06.2 P02 | 12min | 2 tasks | 2 files |
 | Phase 06.2 P03 | 12min | 2 tasks | 3 files |
+| Phase 06.2 P04 | 5min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,8 @@ v1.1 roadmap-level decisions:
 - [Phase ?]: [Phase 06.2] Plan 06.2-01: Added footer.hoursLabel/hoursValue translation keys beyond the plan's literal namespace list, per the task's own 'wire every string through useTranslations' instruction
 - [Phase ?]: [Phase 06.2] Plan 06.2-02: Reworded seed-pricing.ts's safety comment to avoid literal 'deleteMany'/'truncate' substrings — the plan's own verify grep was false-positive-matching its own safety documentation text
 - [Phase ?]: [Phase 06.2] Plan 06.2-03: marquee.channels kept byte-identical across uk/ru/en (channel/brand names, not translated); features namespace drops design's numeric mark field (Plan 05 uses Phosphor icons per index instead); lead namespace field labels/errors reuse contact-form.tsx's existing Ukrainian strings verbatim so Wave 3 can rewire to useTranslations() with zero copy drift
+- [Phase ?]: [Phase 06.2] Plan 06.2-04: admin-showcase.tsx embeds existing DemoTabs inside a browser-chrome frame wrapper (not a static screenshot) — resolves CONTEXT.md's 'Claude's Discretion' interactive-demo-vs-screenshot question in favor of the already-built simulation
+- [Phase ?]: [Phase 06.2] Plan 06.2-04: id="demo" moved to admin-showcase.tsx (not how-it-works.tsx) — Header/Footer's #demo anchor now targets the interactive bot/admin simulation, matching user expectation of what 'Демо' should scroll to
 
 ### Pending Todos
 
@@ -139,8 +142,8 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-19T09:19:38.168Z
-Stopped at: Completed 06.2-03-PLAN.md
+Last session: 2026-08-19T09:25:22.689Z
+Stopped at: Completed 06.2-04-PLAN.md
 Resume file: None
 
 Next: /gsd-plan-phase 06.2 — plan Phase 06.2 (Single-Page Landing Consolidation + i18n)
