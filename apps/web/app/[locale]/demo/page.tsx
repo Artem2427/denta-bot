@@ -1,23 +1,17 @@
-import { hasLocale } from 'next-intl';
-import { cookies } from 'next/headers';
-
 import { redirect } from '@/i18n/navigation';
-import { routing } from '@/i18n/routing';
 
 // Retired destination route (D-01, D-03). Content now lives at the
 // #demo anchor (AdminShowcase section) on the single-page landing. This
-// route sits outside the [locale] segment (proxy.ts matcher exclusion), so
-// there is no locale context from the URL — instead we read the
-// NEXT_LOCALE cookie next-intl's middleware sets on every request that
-// does go through it (e.g. /en, /ru), falling back to the default locale
-// when absent (WR-01: keeps ru/en visitors on their selected locale
-// instead of being silently dropped back to Ukrainian).
-export default async function Demo(): Promise<void> {
-  const cookieStore = await cookies();
-  const localeCookie = cookieStore.get('NEXT_LOCALE')?.value;
-  const locale = hasLocale(routing.locales, localeCookie)
-    ? localeCookie
-    : routing.defaultLocale;
+// route lives inside the [locale] segment, so the visitor's locale comes
+// directly from the route param — already validated upstream by
+// app/[locale]/layout.tsx's hasLocale()/notFound() guard, so no
+// re-validation is needed here.
+export default async function Demo({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<void> {
+  const { locale } = await params;
 
   redirect({ href: '/#demo', locale });
 }
