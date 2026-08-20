@@ -85,43 +85,49 @@ export function Reviews(): React.JSX.Element {
             </div>
           </div>
         </Reveal>
+      </Container>
 
-        {/* -my-14/py-14 give the cards' hover-lift + shadow room to breathe
-            inside the clipped viewport instead of getting cut off flush at
-            the edge — the negative margin on the viewport cancels the
-            padding on the track so overall vertical space is unchanged.
-            56px, not a token guess: --shadow-dt-hover's largest layer is
-            `0 20px 32px`, i.e. up to ~52px of vertical reach — a smaller
-            py-4 (16px) was nowhere near enough and still visibly clipped. */}
-        <div className="-my-14 overflow-hidden" ref={emblaRef}>
-          <div className="-ml-6 flex py-14">
-            {items.map((item) => (
-              <div
-                key={item.name}
-                className="min-w-0 flex-[0_0_100%] pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.3333%]"
-              >
-                <PremiumCard className="h-full">
-                  <Stars />
-                  <p className="mt-4 text-dt-graphite italic">{item.text}</p>
-                  <div className="mt-4 flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-dt-navy/10 font-dt-heading font-semibold text-dt-navy">
-                      {item.initials}
+      {/* Full-bleed sibling of Container: no max-width cap, so the carousel
+          spans the full section width while the heading+nav row above stays
+          capped at --dt-container-max. px-4 lg:px-8 matches Container's own
+          horizontal padding so the first card still lines up under the
+          heading. Vertical clearance for the hover shadow is genuinely
+          additive (pt-6/pb-16 on the track, no negative margin anywhere to
+          cancel it) — it can't be silently eaten by Section's own fluid
+          clamp padding regardless of viewport width. Asymmetric because
+          every shadow layer has a positive/downward Y-offset: --shadow-dt-card
+          reaches ~36px down / ~12px up, --shadow-dt-hover reaches ~52px down
+          / ~12px up — pt-6 (24px) comfortably covers the upward bleed while
+          pb-16 (64px) gives the downward bleed a genuine, non-borrowed
+          margin. */}
+      <div className="overflow-hidden px-4 lg:px-8" ref={emblaRef}>
+        <div className="-ml-6 flex pt-6 pb-16">
+          {items.map((item) => (
+            <div
+              key={item.name}
+              className="min-w-0 flex-[0_0_100%] pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.3333%]"
+            >
+              <PremiumCard className="h-full">
+                <Stars />
+                <p className="mt-4 text-dt-graphite italic">{item.text}</p>
+                <div className="mt-4 flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-dt-navy/10 font-dt-heading font-semibold text-dt-navy">
+                    {item.initials}
+                  </div>
+                  <div>
+                    <div className="font-dt-heading font-semibold text-dt-navy">
+                      {item.name}
                     </div>
-                    <div>
-                      <div className="font-dt-heading font-semibold text-dt-navy">
-                        {item.name}
-                      </div>
-                      <div className="text-sm text-dt-graphite">
-                        {item.clinic}
-                      </div>
+                    <div className="text-sm text-dt-graphite">
+                      {item.clinic}
                     </div>
                   </div>
-                </PremiumCard>
-              </div>
-            ))}
-          </div>
+                </div>
+              </PremiumCard>
+            </div>
+          ))}
         </div>
-      </Container>
+      </div>
     </Section>
   );
 }
