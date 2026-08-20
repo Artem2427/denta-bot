@@ -5,10 +5,10 @@ milestone_name: Platform Admin API
 current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
-stopped_at: Completed quick task 260820-csp (Reviews carousel card width fixed to 300px)
-last_updated: "2026-08-20T06:20:00.000Z"
+stopped_at: Completed quick task 260820-csn (section-heading.tsx stale-buffer restore + eyebrow on-navy coral color)
+last_updated: "2026-08-20T06:29:00.000Z"
 last_activity: 2026-08-20
-last_activity_desc: "Completed quick task 260820-csp: reviews carousel card width fixed to 300px"
+last_activity_desc: "Completed quick task 260820-csn: section-heading.tsx restored (font-extrabold/max-w-2xl), eyebrow on-navy tone changed to text-dt-coral"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 Phase: 6 — apps/web Integration
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-08-20 - Completed quick task 260820-csp: reviews carousel card width fixed to 300px
+Last activity: 2026-08-20 - Completed quick task 260820-csn: section-heading.tsx restored (font-extrabold/max-w-2xl), eyebrow on-navy tone changed to text-dt-coral
 
 Progress: [██████████] 100%
 
@@ -129,6 +129,7 @@ None yet.
 | 260820-1r2 | Dedupe lead-section.tsx's inline eyebrow+h2+description block into the shared SectionHeading component (tone=navy) | 2026-08-20 | 80b634f | [260820-1r2-apps-web-modules-landing-lead-section-ts](./quick/260820-1r2-apps-web-modules-landing-lead-section-ts/) |
 | 260820-1oe | Reviews carousel made full-bleed (carousel breaks out of Container, heading stays capped); shadow-clipping fix restructured to genuinely-additive pt-6/pb-16 (no negative-margin cancellation) | 2026-08-20 | e85533f | [260820-1oe-reviews-carousel-apps-web-modules-landin](./quick/260820-1oe-reviews-carousel-apps-web-modules-landin/) |
 | 260820-csp | Reviews carousel card width changed from responsive percentage flex-basis to fixed 300px | 2026-08-20 | e7ef909 | [260820-csp-reviews-tsx-change-each-carousel-card-s-](./quick/260820-csp-reviews-tsx-change-each-carousel-card-s-/) |
+| 260820-csn | Restored section-heading.tsx (stale editor buffer had reverted font-extrabold→font-bold, dropped max-w-2xl); eyebrow.tsx on-navy tone changed to text-dt-coral matching reference design | 2026-08-20 | c7d4285 | [260820-csn-fix-section-heading-tsx-stale-editor-buf](./quick/260820-csn-fix-section-heading-tsx-stale-editor-buf/) |
 
 ### Blockers/Concerns
 
