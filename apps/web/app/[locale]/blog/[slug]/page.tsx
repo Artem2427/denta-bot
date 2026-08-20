@@ -8,7 +8,11 @@ import { PremiumButton } from '@/shared/components/premium-button';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
-import { ArrowLeft, Clock, ShareNetwork } from '@phosphor-icons/react/ssr';
+import {
+  ArrowLeftIcon,
+  ClockIcon,
+  ShareNetworkIcon,
+} from '@phosphor-icons/react/ssr';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import * as React from 'react';
@@ -44,7 +48,7 @@ export default async function BlogPostPage({
         <div className="mx-auto max-w-4xl">
           <PremiumButton asChild variant="ghost" className="mb-8 px-0">
             <Link href={routes.blog}>
-              <ArrowLeft weight="regular" className="mr-2 h-5 w-5" />
+              <ArrowLeftIcon weight="regular" className="mr-2 h-5 w-5" />
               Назад до блогу
             </Link>
           </PremiumButton>
@@ -58,12 +62,12 @@ export default async function BlogPostPage({
               <div className="mt-4 flex items-center gap-2 text-sm text-dt-graphite">
                 <span>{post.date}</span>
                 <span>•</span>
-                <Clock weight="regular" className="h-4 w-4" />
+                <ClockIcon weight="regular" className="h-4 w-4" />
                 <span>{post.readTime}</span>
               </div>
             </div>
             <PremiumButton variant="ghost" size="icon" aria-label="Поділитися">
-              <ShareNetwork weight="regular" className="h-5 w-5" />
+              <ShareNetworkIcon weight="regular" className="h-5 w-5" />
             </PremiumButton>
           </div>
 

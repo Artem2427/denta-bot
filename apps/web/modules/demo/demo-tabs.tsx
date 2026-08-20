@@ -1,10 +1,9 @@
 'use client';
 
-import { GearSix, Robot } from '@phosphor-icons/react/ssr';
+import { PremiumButton } from '@/shared/components/premium-button';
+import { GearSixIcon, RobotIcon } from '@phosphor-icons/react/ssr';
 import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
-
-import { PremiumButton } from '@/shared/components/premium-button';
 
 import { AdminTab } from './admin-tab';
 import { BotTab } from './bot-tab';
@@ -26,7 +25,7 @@ export function DemoTabs(): React.JSX.Element {
           variant={activeTab === 'bot' ? 'coral' : 'outline'}
           onClick={() => setActiveTab('bot')}
         >
-          <Robot weight="bold" className="size-4" />
+          <RobotIcon weight="bold" className="size-4" />
           Бот — вид пацієнта
         </PremiumButton>
         <PremiumButton
@@ -35,7 +34,7 @@ export function DemoTabs(): React.JSX.Element {
           variant={activeTab === 'admin' ? 'coral' : 'outline'}
           onClick={() => setActiveTab('admin')}
         >
-          <GearSix weight="bold" className="size-4" />
+          <GearSixIcon weight="bold" className="size-4" />
           Адмін панель
         </PremiumButton>
       </div>

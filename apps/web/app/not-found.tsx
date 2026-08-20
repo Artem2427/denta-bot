@@ -1,8 +1,7 @@
-import { House } from '@phosphor-icons/react/ssr';
-import Link from 'next/link';
-
 import { PremiumButton } from '@/shared/components/premium-button';
 import { routes } from '@/shared/lib/routes';
+import { HouseIcon } from '@phosphor-icons/react/ssr';
+import Link from 'next/link';
 
 export default function NotFound(): React.JSX.Element {
   return (
@@ -15,7 +14,7 @@ export default function NotFound(): React.JSX.Element {
         </p>
         <PremiumButton variant="coral" size="lg" asChild>
           <Link href={routes.home}>
-            <House weight="regular" className="mr-2 h-5 w-5" />
+            <HouseIcon weight="regular" className="mr-2 h-5 w-5" />
             На головну
           </Link>
         </PremiumButton>

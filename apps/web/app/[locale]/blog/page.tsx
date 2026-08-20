@@ -9,7 +9,7 @@ import { Reveal } from '@/shared/components/reveal';
 import { Section } from '@/shared/components/section';
 import { getServerApiUrl } from '@/shared/lib/api-url';
 import { routes } from '@/shared/lib/routes';
-import { Clock } from '@phosphor-icons/react/ssr';
+import { ClockIcon } from '@phosphor-icons/react/ssr';
 import Image from 'next/image';
 import * as React from 'react';
 
@@ -82,7 +82,7 @@ export default async function Blog(): Promise<React.JSX.Element> {
                   <div className="mb-4 flex items-center gap-2 text-sm text-dt-graphite">
                     <span>{featuredPost.date}</span>
                     <span>•</span>
-                    <Clock weight="regular" className="h-4 w-4" />
+                    <ClockIcon weight="regular" className="h-4 w-4" />
                     <span>{featuredPost.readTime}</span>
                   </div>
                   <h2 className="text-[clamp(1.9rem,3.4vw,2.75rem)] leading-[1.1] tracking-[-0.03em] font-dt-heading font-bold text-dt-navy">
