@@ -5,10 +5,10 @@ milestone_name: Platform Admin API
 current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
-stopped_at: Completed quick task 260820-i6d (pricing-section heading/toggle centered, 3-plan grid stretches to fill Container width)
-last_updated: "2026-08-20T08:35:00.000Z"
+stopped_at: Completed quick task 260820-if0 (standardized 22 bare phosphor icon imports to Icon-suffixed convention across 14 apps/web files)
+last_updated: "2026-08-20T10:30:09.213Z"
 last_activity: 2026-08-20
-last_activity_desc: "Completed quick task 260820-i6d: pricing-section.tsx heading+toggle row changed lg:items-end to lg:items-center; removed redundant max-w-6xl from 3-plan grid so cards stretch to fill Container's width"
+last_activity_desc: "Completed quick task 260820-if0: standardized 22 bare @phosphor-icons/react imports to Icon-suffixed convention across 14 apps/web files"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 Phase: 6 — apps/web Integration
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-08-20 - Completed quick task 260820-i6d: pricing-section heading/toggle centered, 3-plan grid stretches to fill Container
+Last activity: 2026-08-20 - Completed quick task 260820-if0: standardized 22 bare phosphor icon imports to Icon-suffixed convention across 14 apps/web files
 
 Progress: [██████████] 100%
 
@@ -78,6 +78,7 @@ Progress: [██████████] 100%
 | Phase 06.2 P06 | 6min | 2 tasks | 3 files |
 | Phase 06.2 P07 | ~35min (Tasks 2-3, this session) | 3 tasks | 33 files |
 | Phase quick P260820-1oe | 8min | 2 tasks | 1 files |
+| Phase quick P260820-if0 | 20min | 3 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -134,6 +135,7 @@ None yet.
 | 260820-enw | Root-cause fix: cn.ts registers text-dt-{h1,h2,h3,body,caption,eyebrow} into tailwind-merge's font-size classGroup — fixes sitewide silent-drop of every size class combined with a color class in one cn() call | 2026-08-20 | 0d44f03 | [260820-enw-root-cause-fix-apps-web-shared-lib-cn-ts](./quick/260820-enw-root-cause-fix-apps-web-shared-lib-cn-ts/) |
 | 260820-eyj | Converted all 27 text-dt-{h1,h2,h3,body,caption,eyebrow} usages (15 files) to direct Tailwind arbitrary-value classes; removed dead --text-dt-* tokens from premium-theme.css; cn.ts fix (260820-enw) kept as defense-in-depth | 2026-08-20 | a0991f5 | [260820-eyj-convert-every-text-dt-h1-h2-h3-body-capt](./quick/260820-eyj-convert-every-text-dt-h1-h2-h3-body-capt/) |
 | 260820-i6d | pricing-section.tsx: heading+toggle row lg:items-end -> lg:items-center; removed redundant max-w-6xl from 3-plan grid so cards stretch to fill Container's width | 2026-08-20 | a5e1337 | [260820-i6d-apps-web-modules-landing-pricing-section](./quick/260820-i6d-apps-web-modules-landing-pricing-section/) |
+| 260820-if0 | Standardized 22 bare @phosphor-icons/react imports to Icon-suffixed convention (Check->CheckIcon, House->HouseIcon, etc.) across 14 apps/web files, matching hero.tsx/reviews.tsx's existing convention; preserved header.tsx's pre-existing nav-link reorder | 2026-08-20 | 6cc5e98 | [260820-if0-standardize-phosphor-icons-react-imports](./quick/260820-if0-standardize-phosphor-icons-react-imports/) |
 
 ### Blockers/Concerns
 
@@ -164,8 +166,8 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-20T06:23:42.466Z
-Stopped at: Completed quick task 260820-cz1 (landed --text-dt-body 1rem fix + lead-section.tsx import reorder)
+Last session: 2026-08-20T10:30:09.198Z
+Stopped at: Completed quick task 260820-if0 (standardized 22 bare phosphor icon imports to Icon-suffixed convention across 14 apps/web files)
 Resume file: None
 
 Next: /gsd-plan-phase 06.2 — plan Phase 06.2 (Single-Page Landing Consolidation + i18n)
