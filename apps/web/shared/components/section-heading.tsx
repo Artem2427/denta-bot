@@ -1,6 +1,5 @@
-import * as React from 'react';
-
 import { cn } from '@/shared/lib/cn';
+import * as React from 'react';
 
 import { Eyebrow } from './eyebrow';
 
@@ -22,13 +21,6 @@ function SectionHeading({
   const isNavy = tone === 'navy';
 
   return (
-    // Left-aligned by default — matches the design reference (every
-    // section heading in DentaBot Landing.dc.html sits at the left edge
-    // of its container, several paired with a right-side element like a
-    // "Подивитись демо" link or the billing toggle). The previous
-    // hardcoded text-center made every section heading site-wide look
-    // generic/centered instead of this editorial left-aligned style —
-    // client-reported ("виглядає тупо" vs. the reference screenshots).
     <div data-slot="section-heading" className={cn('mb-dt-48', className)}>
       {eyebrow ? (
         <Eyebrow tone={isNavy ? 'on-navy' : 'navy'} className="mb-2 block">
