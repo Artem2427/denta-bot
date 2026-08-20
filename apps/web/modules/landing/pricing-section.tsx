@@ -25,7 +25,7 @@ function getGridClassName(count: number): string {
   if (count === 2) {
     return 'mx-auto grid max-w-4xl gap-6 lg:grid-cols-2';
   }
-  return 'mx-auto grid max-w-6xl gap-6 lg:grid-cols-3';
+  return 'mx-auto grid gap-6 lg:grid-cols-3';
 }
 
 // Presentational client component — `plans` is fetched server-side by Plan
@@ -48,7 +48,7 @@ export function PricingSection({
   return (
     <Section id="pricing" className="scroll-mt-16 lg:scroll-mt-20">
       <Container>
-        <div className="mb-dt-48 flex flex-col items-center gap-6 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
+        <div className="mb-dt-48 flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
           <SectionHeading
             eyebrow={t('eyebrow')}
             title={t('title')}
