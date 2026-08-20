@@ -2,11 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Platform Admin API
-current_phase: 6
-current_phase_name: apps/web Integration
-status: planning
+status: Awaiting next milestone
 stopped_at: Completed quick task 260820-if0 (standardized 22 bare phosphor icon imports to Icon-suffixed convention across 14 apps/web files)
-last_updated: "2026-08-20T10:30:09.213Z"
+last_updated: "2026-08-20T15:53:45.114Z"
 last_activity: 2026-08-20
 last_activity_desc: "Completed quick task 260820-if0: standardized 22 bare @phosphor-icons/react imports to Icon-suffixed convention across 14 apps/web files"
 progress:
@@ -15,25 +13,26 @@ progress:
   total_plans: 24
   completed_plans: 24
   percent: 100
+current_phase: null
+current_phase_name: null
+closeout_type: override_closeout
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-08-10)
+See: .planning/PROJECT.md (updated 2026-08-20)
 
-**Core value:** A real NestJS + Prisma backend feeds `apps/platform-admin` (clinic/lead/content monitoring) and the site's CMS-backed content, so denta-bot staff can operate on real data instead of hardcoded fixtures.
-**Current focus:** Phase 06.2 — single-page-landing-consolidation-i18n-apps-web-collapse-hom
+**Core value:** Real data end-to-end — staff operate the business on a real backend instead of fixtures, and the public site converts visitors into Leads that land in that backend.
+**Current focus:** Planning next milestone (v1.2 Multi-tenant Core) — spec at `.planning/phases/999.1-server-platform-multi-tenant-clinics-per-clinic-telegram-bot/SERVER-TZ.md`
 
 ## Current Position
 
-Phase: 6 — apps/web Integration
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-08-20 - Completed quick task 260820-if0: standardized 22 bare phosphor icon imports to Icon-suffixed convention across 14 apps/web files
-
-Progress: [██████████] 100%
+Phase: Milestone v1.1 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-08-20 — Milestone v1.1 completed and archived
 
 ## Performance Metrics
 
@@ -162,17 +161,18 @@ Items acknowledged and carried forward from previous milestone close:
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
 | Dark mode (THEME-03 regression) | Premium `apps/web` site has no dark-mode `dt-*` token values; `ThemeToggle` removed from Header in Phase 01.1's code-review fix. `apps/web/shared/components/theme-toggle.tsx` still exists, unused. Needs a decision: design dark `dt-*` values and re-wire, or formally drop dark mode for the premium site this milestone. | Deferred — explicit user decision (2026-08-09): "skip for now" | Phase 01.1 |
+| apps/docs type-check | `apps/docs` (untouched create-turbo starter) fails `pnpm check-types`: `app/page.tsx(2,24): error TS2307: Cannot find module '@repo/ui/button'`. Only red in the repo-wide type check at v1.1 close; unrelated to any shipped surface. Fix the import or drop the app. | Acknowledged at v1.1 milestone close (2026-08-20) | v1.1 close |
+| packages/ui tsc errors (Phase 06.1 deviation) | `spinner.tsx` / `button-group.tsx` pre-existing `tsc` errors that Phase 06.1 deferred as out-of-scope | **Resolved** — re-verified 2026-08-20 at milestone close: `pnpm exec tsc --noEmit` in `packages/ui` exits 0, neither error reproduces | Phase 06.1 → closed v1.1 |
 | csstype dependency conflict | `pnpm --filter web check-types`/`build`'s `tsc` step fails on a pre-existing `csstype@3.1.3`/`3.2.3` duplicate-resolution conflict confined to `packages/ui/src/components/shadcn-ui/{button-group,calendar,sidebar}.tsx` — surfaced identically across every Phase 01.1/2/3 plan's verify step, confirmed unrelated to any file any plan created/modified. Requires a monorepo-wide `pnpm.overrides` fix. | Acknowledged at v1.0 milestone close (2026-08-10) — does not block any shipped page; recommended before/during next milestone | Phase 1 (first seen), open through v1.0 close |
 
 ## Session Continuity
 
-Last session: 2026-08-20T10:30:09.198Z
-Stopped at: Completed quick task 260820-if0 (standardized 22 bare phosphor icon imports to Icon-suffixed convention across 14 apps/web files)
+Last session: 2026-08-20T18:40:00.000Z
+Stopped at: v1.1 (Platform Admin API) milestone closed and archived
 Resume file: None
 
-Next: /gsd-plan-phase 06.2 — plan Phase 06.2 (Single-Page Landing Consolidation + i18n)
+Next: /gsd-new-milestone — define v1.2 Multi-tenant Core from `SERVER-TZ.md`
 
 ## Operator Next Steps
 
-- Run /gsd-plan-phase 06.2 to create the detailed plan for Phase 06.2 (urgent insertion, precedes Phase 4)
-- Run /gsd-plan-phase 4 to create the detailed plan for Phase 4 (Backend Foundation & Auth) once 06.2 ships
+- Start the next milestone with /gsd-new-milestone

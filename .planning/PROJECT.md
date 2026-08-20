@@ -2,33 +2,29 @@
 
 ## What This Is
 
-denta-bot is a SaaS product that gives dental clinics a Telegram/chat bot for patient booking automation. `apps/web` is the public marketing site (Home, Prices, Demo, Blog, Blog Post, Contacts), migrated from a Figma-exported design prototype into Next.js 16 (App Router) and shipped as v1.0. It runs on its own bespoke premium `dt-*` design system (own palette/typography/motion), not `@repo/ui` — `@repo/ui`/`packages/ui` remains the base only for `apps/admin-panel`-lineage apps (`apps/platform-admin`, `apps/client-admin`) and the Demo page's embedded admin-panel simulation. Starting v1.1, the product grows a real backend (`apps/server`, NestJS + Prisma) and its first real admin surface, `apps/platform-admin` — a SaaS-staff dashboard for monitoring clinic accounts, site leads, and content — replacing the mock-data-only, backend-less v1.0 state.
+denta-bot is a SaaS product that gives dental clinics a Telegram/chat bot for patient booking automation. `apps/web` is the public marketing site — as of v1.1 a **single scrolling landing page** (hero, problem/solution, how-it-works, admin showcase, features, pricing, reviews, lead form, FAQ) served in **uk/ru/en** via URL locale routing, plus a Ukrainian-only Blog; `/prices`, `/demo` and `/contacts` survive only as redirects to landing anchors. It runs on its own bespoke premium `dt-*` design system (own palette/typography/motion), not `@repo/ui` — `@repo/ui`/`packages/ui` remains the base only for `apps/admin-panel`-lineage apps (`apps/platform-admin`, `apps/client-admin`) and the landing's embedded admin-panel simulation. Behind it sits a real backend (`apps/server`, NestJS + Prisma + Postgres) and `apps/platform-admin` — a SaaS-staff dashboard for clinic accounts, site leads, and CMS content.
 
 ## Core Value
 
-The migrated site renders all six pages from the design faithfully — content, layout, and theme — using Next.js App Router conventions, so the marketing site is production-shaped (typed, validated forms, proper routing). **Milestone v1.0 shipped 2026-08-10: all six routes (`/`, `/prices`, `/demo`, `/blog`, `/blog/[slug]`, `/contacts`) are live**, still on mock data. **Milestone v1.1 (in progress)** replaces the mock layer: a real NestJS + Prisma backend feeds `apps/platform-admin` (clinic/lead/content monitoring) and the site's CMS-backed content, so denta-bot staff can operate on real data instead of hardcoded fixtures.
+Real data end-to-end: denta-bot staff operate the business on a real backend instead of hardcoded fixtures, and the public site converts visitors into Leads that land in that backend. **v1.0 shipped 2026-08-10** (six mock-data routes). **v1.1 shipped 2026-08-20**: NestJS + Prisma + Postgres backend, `apps/platform-admin` for clinic/lead/CMS management, and `apps/web` consolidated into a trilingual single-page landing fed by real CMS content and a real lead funnel.
 
-## Current Milestone: v1.1 Platform Admin API
+## Current State
 
-**Progress:** Phase 4 (Backend Foundation & Auth) complete 2026-08-14 — real Postgres/Prisma/NestJS backend with full JWT auth lifecycle live. Next: Phase 5 (Clinic, Lead & Content Management).
+**Shipped:** v1.1 Platform Admin API (2026-08-20) — Phases 4, 5, 6, 06.1, 06.2 · 24 plans · 59 feat commits · 207 files changed since v1.0.
 
-**Goal:** Build a real NestJS + Prisma backend that powers `apps/platform-admin` — a SaaS-staff dashboard for monitoring clinic accounts — and give it a CMS layer for the marketing site's content, replacing the current no-backend / mock-data state.
+Working surfaces: `apps/server` (auth + clinics + leads + CMS + public read routes, Swagger at `/api/docs`), `packages/db` (Prisma 7 schema/migrations/seeds), `apps/platform-admin` (authenticated SPA on a generated typed client), `apps/web` (trilingual landing + blog on real API data). `apps/client-admin` is still an untouched Vite scaffold. No Telegram bot exists yet.
 
-**Target features:**
-- Dedicated `PlatformAdmin` auth table (JWT access + refresh tokens; separate from any future clinic-user table)
-- Clinic (client) monitoring: CRUD + account/subscription status; bot-usage fields modeled but stubbed (no real bot exists yet)
-- Site leads: Contacts + Demo form submissions from `apps/web` persist to the DB and are manageable in `platform-admin`
-- CMS: blog posts and pricing plans become DB-backed and editable via the API/`platform-admin`, replacing `apps/web/modules/blog/_data.ts` and hardcoded pricing data
-- Prisma ORM, schema changes only via migrations, generated types/client shared via a `packages/` package usable from `server`, `web`, and `platform-admin`
-- REST + Swagger (`@nestjs/swagger`) on the backend; `TanStack Query` on the frontend(s)
+## Next Milestone Goals
 
-**Explicitly deferred:** `apps/client-admin` (per-clinic self-service panel) — next milestone. Real Telegram bot integration (webhook, booking flow) — future milestone.
+**v1.2 Multi-tenant Core** — turn `Clinic` from a CRM row into a real tenant: `ClinicUser` auth + RBAC, tenant scoping via Prisma Client Extensions, `AuditLog`, doctors/services/patients/appointments + slot calculator, `/api/{public,admin,clinic}` route prefixes (migrating existing `apps/web` + `apps/platform-admin` callers), and a shared `packages/shared` for cross-surface types/utils.
+
+Then **v1.3 Telegram** (Redis + BullMQ, per-clinic bot provisioning, webhook routing, booking FSM, reminders) and **v1.4 Billing & Analytics** (Subscription/Payment/LiqPay, analytics, health). Full spec: `.planning/phases/999.1-server-platform-multi-tenant-clinics-per-clinic-telegram-bot/SERVER-TZ.md`.
 
 ## Business Context
 
 - **Customer**: Dental clinic owners/admins evaluating denta-bot as a booking automation tool
 - **Revenue model**: Clinics subscribe to a paid plan (see Prices page) after trialing the bot
-- **Success metric**: Contact/demo-request form completions (currently mocked — no backend yet)
+- **Success metric**: Lead-form completions on the landing page — now real: `POST /leads` persists them and they surface in `apps/platform-admin`'s Lead inbox
 - **Strategy notes**: none external; design source of truth is the Figma file referenced in the design archive's README
 
 ## Requirements
@@ -58,12 +54,19 @@ The migrated site renders all six pages from the design faithfully — content, 
 - ✓ `TanStack Query` on `apps/platform-admin`, backed by an `openapi-typescript`-generated typed client (`openapi-fetch`) against the live Swagger spec — Phase 5
 - ✓ `apps/platform-admin` bootstrapped from an untouched Vite scaffold into an authenticated SPA — React Router v7 (auth-guarded layout route), single-in-flight-promise refresh interceptor, built entirely on `@repo/ui` (2 new primitives added: `Form`/`DataTable`) per explicit user directive — Phase 5
 - ✓ `updatedBy`/`updatedAt` trace fields on Clinic/Lead/BlogPost/PricingPlan (INFRA-05) — Phase 5
+- ✓ `apps/web` wired to the real backend — rate-limited public `POST /leads` from both lead forms, and published-only `GET /public/blog-posts(/:slug)` + `GET /public/pricing-plans` replacing `modules/blog/_data.ts` and hardcoded pricing (LEAD-01, LEAD-02, CMS-02, CMS-04) — Phase 6
+- ✓ Premium `dt-*` restyle of every `apps/web` route — Manrope + JetBrains Mono, 8 additive tokens, 4 CVA primitives (Section/Eyebrow/SectionHeading/Stat) replacing duplicated per-page markup — Phase 06.1
+- ✓ Single-page landing consolidation + uk/ru/en URL locale routing (next-intl); `/prices`, `/demo`, `/contacts` retired to 307 anchor redirects; one lead funnel at `#lead`; Blog stays Ukrainian-only — Phase 06.2
 
 ### Active
 
-**v1.1 (this milestone):**
+**v1.2 (next milestone — see `SERVER-TZ.md`):**
 
-- [ ] `apps/web` wired to the real backend — Contacts/Demo submissions persist as Leads, Blog/Prices pages render real CMS content (Phase 6)
+- [ ] `Clinic` becomes a real tenant (slug, timezone, currency, trial/suspend dates) with `ClinicUser` auth, RBAC (owner/admin/doctor/reception) and polymorphic `RefreshToken`
+- [ ] Tenant scoping via Prisma **Client Extensions** (`$use` middleware does not exist in Prisma 7) + explicit unscoped client for PlatformAdmin routes, every bypass logged to `AuditLog`
+- [ ] Domain models + endpoints: Doctors, Services, Patients, Appointments (slot calculator with `SELECT … FOR UPDATE` race guard), Schedule (shifts/templates/time-off)
+- [ ] `/api/{public,admin,clinic}` route prefixes — breaking; `apps/web` + `apps/platform-admin` callers migrate in the same milestone
+- [ ] `packages/shared` for utilities/types used by server and all front ends
 
 **Carried backlog (not yet scheduled):**
 
@@ -75,12 +78,13 @@ The migrated site renders all six pages from the design faithfully — content, 
 - [ ] Code review findings from `04-REVIEW.md` (0 critical, 7 warning, non-blocking, all still open): no rate limiting on `POST /auth/login`; login timing side-channel partially defeats the "no user enumeration" claim (argon2.verify skipped on unknown emails); refresh cookie `Secure` flag depends on unvalidated `NODE_ENV`; `'refresh_token'` cookie name hardcoded in two places; `refresh()`'s `findUniqueOrThrow` can surface a raw 500 instead of 401; no max length on login password (argon2 CPU-amplification vector); Swagger docs registered unconditionally even in production
 - [ ] Leftover Docker Postgres container (`agent-a8976498097c8c381-postgres-1`) from an interrupted Phase 4 session is still bound to port 5432, holding the seeded dev schema — should be adopted into this repo's own `docker-compose.yml` project (or stopped and replaced by a fresh `docker compose up -d`) before Phase 6 assumes a clean local Postgres (still open — used throughout Phase 5 too)
 - [ ] Code review findings from `05-REVIEW.md` (2 critical — both fixed same-session, see `05-REVIEW-FIX.md` — plus 2 warning + 1 info left open, non-blocking): `packages/ui`'s `DataTablePagination` is exported but unusable — `DataTable` never configures `getPaginationRowModel` or exposes its table instance, so it's dead code until a consumer needs real pagination; `useFormField`'s "used outside `<FormField>`" guard can never fire (context default is a truthy `{}`, not falsy) — low-severity DX-only issue; `updatedBy` isn't `include`d consistently across `BlogPostsService`/`PricingPlansService`/`LeadsService`'s `update()`/`updateStatus()` vs. `ClinicsService.update()` — currently masked by post-mutation refetch, no observed symptom
+- [ ] `apps/docs` (untouched create-turbo starter) fails `pnpm check-types` — `app/page.tsx` cannot resolve `@repo/ui/button`; the only red in the repo-wide type check at v1.1 close. Either fix the import or drop the app.
 - [ ] `packages/platform-admin`'s Vite bundle exceeds the 500kB chunk-size warning threshold (847kB, 246kB gzipped) — noted by the build, not yet addressed; code-splitting via dynamic `import()` would help once the app has more routes to split along
 
 ### Out of Scope
 
 - ~~CMS or MDX-based blog content — mock data in code is sufficient for now~~ — **invalidated at v1.1 start**: blog/pricing content becomes DB-backed via the new platform-admin API this milestone
-- i18n / multi-language support — site ships Ukrainian-only, matching the design
+- ~~i18n / multi-language support — site ships Ukrainian-only, matching the design~~ — **invalidated at Phase 06.2**: the landing ships uk/ru/en via URL locale routing (next-intl); only the Blog stays Ukrainian-only
 - ~~New/duplicate component library — everything routes through the existing `@repo/ui`~~ — **invalidated at Phase 01.1**: the client's premium-redesign ТЗ required a bespoke `dt-*` system for the marketing site specifically because `@repo/ui`'s theme couldn't express it; `@repo/ui` remains authoritative only for `apps/admin-panel` and the Demo page's admin-simulation tab
 
 ## Context
@@ -88,7 +92,9 @@ The migrated site renders all six pages from the design faithfully — content, 
 - **v1.0 shipped 2026-08-10.** Design source was a Figma file (`Дизайн з темами`), exported as a Vite + react-router + Tailwind v4 + shadcn code bundle (`Дизайн з темами.zip`) and unzipped to ephemeral scratch paths per-session for reference during each phase — all relevant content was transcribed into `apps/web` during execution, nothing depends on that scratch path persisting.
 - Final architecture: `apps/web` runs its own bespoke premium `dt-*` design system (`apps/web/shared/components/premium-*.tsx`, `apps/web/app/premium-theme.css`) built in Phase 01.1, not `@repo/ui` — this was a mid-milestone pivot after the client sent a premium visual-redesign ТЗ during Phase 2. `@repo/ui`/`packages/ui/styles/theme.css` remains the styling source of truth only for `apps/admin-panel` and the Demo page's embedded admin-panel simulation tab.
 - Final route structure: `apps/web/app/` holds only route files (`page.tsx`, `layout.tsx`, `not-found.tsx`); `apps/web/modules/<page>/` holds page-specific composition components; `apps/web/shared/{components,lib,hooks}/` holds cross-page code; `apps/web/shared/lib/routes.ts` centralizes all internal route constants.
-- No `.env`, no database client, no deployment config exists in the monorepo (per `.planning/codebase/STACK.md`) — v1.0 is frontend-only, mock-data-only, matching scope.
+- ~~No `.env`, no database client, no deployment config exists in the monorepo — v1.0 is frontend-only, mock-data-only~~ — **superseded by v1.1**: `docker-compose.yml` runs `postgres:17`, `packages/db` owns the Prisma 7 schema/migrations/seeds (driver adapter `@prisma/adapter-pg`), `apps/server` boots on `PORT`/`DATABASE_URL`/`JWT_*`/`CORS_ALLOWED_ORIGINS` from a root `.env` validated at startup. Redis still absent — arrives with v1.3.
+- **v1.1 shipped 2026-08-20.** 233 commits since `v1.0`, 207 non-planning files changed (+13,104/−3,179). Timeline 2026-08-10 → 2026-08-20.
+- Repo-wide `pnpm check-types` is green except `apps/docs`, the untouched create-turbo starter (`@repo/ui/button` unresolved). The `packages/ui` `spinner.tsx`/`button-group.tsx` errors deferred during Phase 06.1 no longer reproduce — `packages/ui` type-checks clean.
 
 ## Constraints
 
@@ -114,6 +120,12 @@ The migrated site renders all six pages from the design faithfully — content, 
 | `apps/web` restructured: `app/` holds only route files; shared components live in a top-level `components/`, route paths centralized in `lib/routes.ts` (with a `@/*` tsconfig alias) | User-directed mid-Phase-1 refactor — keeps Next.js App Router convention clean as page count grows in Phase 2/3, avoids hardcoded href strings scattered across components | ✓ Good — Phase 1, structure held (evolved to `modules/<page>/` + `shared/` at Phase 01.1) all the way through Phase 3 |
 | Styling changes route through `packages/ui/styles/theme.css` (via `apps/web/app/globals.css`'s import); `@repo/ui` components can gain new variants as pages need them, keeping palette consistency with established tokens | User-confirmed ongoing convention for this milestone — the token/component layer is a living part of the design-archive port, not frozen after Phase 1 | Superseded — `apps/web` moved to the standalone `dt-*` system at Phase 01.1; this convention held only for `apps/admin-panel`/Demo's admin-simulation as originally scoped |
 | Blog posts beyond the one archived article need original body content (5 of 6 posts) | Design archive only fully wrote body content for the featured post; the other 5 posts had title/excerpt only | ✓ Good — Phase 3, written in matching tone, grounded in each post's existing title/excerpt, no fabricated stats contradicting the archived article's figures |
+| `packages/db` as a shared Prisma package (`@repo/db`) with the Prisma 7 driver adapter (`@prisma/adapter-pg`), not a Prisma client inside `apps/server` | Schema/types must be importable by server and (later) both admin surfaces; migrations stay the single way the DB changes | ✓ Good — Phase 4, held through Phase 6 |
+| Refresh-token rotation with an **atomic claim** (single `updateMany` guard) rather than read-then-write | Closes the TOCTOU race that would let a concurrent reuse slip past detection | ✓ Good — Phase 4 |
+| `apps/platform-admin` consumes an `openapi-typescript`-generated client (`openapi-fetch`) against the live Swagger spec, not hand-written fetch wrappers | Backend DTOs are the contract; regenerating catches drift at compile time | ✓ Good — Phase 5, made Phase 6's DTO changes cheap |
+| `apps/platform-admin` built entirely on `@repo/ui` (2 new primitives added: `Form`, `DataTable`) while `apps/web` stays on `dt-*` | Explicit user directive — the admin lineage keeps the shared design system; only the marketing site is bespoke | ✓ Good — Phase 5 |
+| Collapse Home/Prices/Demo/Contacts into one landing page; retire those routes as 307 anchor redirects | Client-directed (DentaBot Landing design export); one scroll, one funnel — every pricing CTA points at `#lead` instead of a separate contact page | ✓ Good — Phase 06.2 |
+| Add uk/ru/en URL locale routing (next-intl) for the landing, Blog stays Ukrainian-only | Sales copy must reach ru/en clinics; blog content volume doesn't justify triple translation yet | ✓ Good — Phase 06.2, 100% key/array parity verified across all 3 locale files |
 | Blog search/category filters made functional (not decorative like the archive) | Archive's filter UI had zero wiring; functional filtering was a small addition given the data was already local | ✓ Good — Phase 3, AND-combined exact-category + substring-search, verified via UAT |
 
 ## Evolution
@@ -134,4 +146,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-08-14 after Phase 4 (Backend Foundation & Auth) completion*
+*Last updated: 2026-08-20 after v1.1 (Platform Admin API) milestone completion*

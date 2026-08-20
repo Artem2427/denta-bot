@@ -1,9 +1,10 @@
 ---
 phase: 06-apps-web-integration
 verified: 2026-08-15T12:30:00Z
-status: human_needed
+status: passed
 score: 4/4 must-haves verified
 behavior_unverified: 0
+uat: 06-UAT.md (5/5 passed, 0 issues, 2026-08-15T12:55:00Z)
 overrides_applied: 0
 human_verification:
   - test: "Submit the Contacts form (/contacts) with a valid name+email and observe the button label/disabled state while the request is in flight, then confirm the success panel appears"
@@ -153,7 +154,11 @@ No blocking gaps. Both BLOCKER-severity findings from `06-REVIEW.md` (CR-01: blo
 
 The only outstanding item is a documentation-sync gap: `.planning/REQUIREMENTS.md` has not been updated to reflect Phase 6's completion (still shows "Pending"/unchecked for all four IDs). This should be corrected but does not represent a functional gap in the phase goal.
 
-Status is `human_needed` rather than `passed` solely because several UI/UX behaviors (loading states, modal interaction, toast copy, responsive grid/empty-state layouts) are inherently visual and were verified only by code inspection, not by rendering in a browser — per the verification process's mandatory human-verification triggers for visual/interactive behavior.
+Status was initially `human_needed` rather than `passed` solely because several UI/UX behaviors (loading states, modal interaction, toast copy, responsive grid/empty-state layouts) are inherently visual and were verified only by code inspection, not by rendering in a browser — per the verification process's mandatory human-verification triggers for visual/interactive behavior.
+
+## Addendum — human verification closed (2026-08-20)
+
+All five human-verification items listed in this report's frontmatter were run through conversational UAT on 2026-08-15 and recorded in `06-UAT.md`: `status: complete`, total 5, **passed 5, issues 0**, no gaps. Status updated `human_needed` → `passed` at v1.1 milestone close; no code changes were required to close them.
 
 ---
 
