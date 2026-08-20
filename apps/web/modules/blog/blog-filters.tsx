@@ -62,7 +62,7 @@ export function BlogFilters({ posts }: { posts: Post[] }): React.JSX.Element {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="py-16 text-center text-dt-body text-dt-graphite">
+        <p className="py-16 text-center text-[1rem] leading-[1.5] text-dt-graphite">
           За вашим запитом нічого не знайдено
         </p>
       ) : (
@@ -91,7 +91,7 @@ export function BlogFilters({ posts }: { posts: Post[] }): React.JSX.Element {
                       <Clock weight="regular" className="h-4 w-4" />
                       <span>{post.readTime}</span>
                     </div>
-                    <h3 className="line-clamp-2 text-dt-h3 font-dt-heading font-semibold text-dt-navy">
+                    <h3 className="line-clamp-2 text-[1.5rem] leading-[1.15] font-dt-heading font-semibold text-dt-navy">
                       {post.title}
                     </h3>
                     <p className="mt-2 line-clamp-3 flex-1 text-dt-graphite">

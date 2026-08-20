@@ -177,8 +177,8 @@ export function BotTab(): React.JSX.Element {
                       <div
                         className={
                           message.type === 'user'
-                            ? 'flex items-center justify-end gap-1 text-dt-caption text-dt-navy/50'
-                            : 'flex items-center justify-start gap-1 text-dt-caption text-dt-navy/50'
+                            ? 'flex items-center justify-end gap-1 text-[0.8125rem] text-dt-navy/50'
+                            : 'flex items-center justify-start gap-1 text-[0.8125rem] text-dt-navy/50'
                         }
                       >
                         <span>{message.time}</span>
@@ -226,7 +226,7 @@ export function BotTab(): React.JSX.Element {
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-dt-h3 font-semibold text-dt-navy">
+        <h3 className="text-[1.5rem] leading-[1.15] font-semibold text-dt-navy">
           Оберіть сценарій:
         </h3>
         {scenarios.map((scenario, index) => (

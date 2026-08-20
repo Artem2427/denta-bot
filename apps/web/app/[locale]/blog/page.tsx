@@ -28,10 +28,10 @@ export default async function Blog(): Promise<React.JSX.Element> {
         <section>
           <Container>
             <div className="mx-auto max-w-2xl py-16 text-center">
-              <h1 className="text-dt-h1 font-dt-heading font-bold text-dt-navy">
+              <h1 className="text-[clamp(2.25rem,6vw+1rem,4rem)] leading-[1.15] font-dt-heading font-bold text-dt-navy">
                 Матеріалів поки немає
               </h1>
-              <p className="mt-4 text-dt-body text-dt-graphite">
+              <p className="mt-4 text-[1rem] leading-[1.5] text-dt-graphite">
                 Ми вже готуємо перші статті. Загляньте трохи пізніше.
               </p>
             </div>
@@ -49,10 +49,10 @@ export default async function Blog(): Promise<React.JSX.Element> {
       <Section className="pb-12">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-dt-h1 font-dt-heading font-bold text-dt-navy">
+            <h1 className="text-[clamp(2.25rem,6vw+1rem,4rem)] leading-[1.15] font-dt-heading font-bold text-dt-navy">
               Корисні матеріали для стоматологій
             </h1>
-            <p className="mt-4 text-dt-body text-dt-graphite">
+            <p className="mt-4 text-[1rem] leading-[1.5] text-dt-graphite">
               Поради, дослідження та практичні кейси про автоматизацію запису
               пацієнтів.
             </p>
@@ -85,7 +85,7 @@ export default async function Blog(): Promise<React.JSX.Element> {
                     <Clock weight="regular" className="h-4 w-4" />
                     <span>{featuredPost.readTime}</span>
                   </div>
-                  <h2 className="text-dt-h2 font-dt-heading font-bold text-dt-navy">
+                  <h2 className="text-[clamp(1.9rem,3.4vw,2.75rem)] leading-[1.1] tracking-[-0.03em] font-dt-heading font-bold text-dt-navy">
                     {featuredPost.title}
                   </h2>
                   <p className="mt-4 text-dt-graphite">

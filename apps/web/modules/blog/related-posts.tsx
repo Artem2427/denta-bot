@@ -31,7 +31,7 @@ export function RelatedPosts({
           <StaggerItem key={post.slug}>
             <Link href={routes.blogPost(post.slug)} className="block h-full">
               <PremiumCard className="flex h-full flex-col">
-                <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
+                <h3 className="text-[1.5rem] leading-[1.15] font-dt-heading font-semibold text-dt-navy">
                   {post.title}
                 </h3>
                 <div className="mt-auto pt-4">

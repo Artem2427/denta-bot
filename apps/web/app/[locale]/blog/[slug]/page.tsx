@@ -52,7 +52,7 @@ export default async function BlogPostPage({
           <div className="mb-6 flex items-start justify-between gap-4">
             <div>
               <PremiumBadge variant="teal">{post.category}</PremiumBadge>
-              <h1 className="mt-4 text-dt-h1 font-dt-heading font-bold text-dt-navy">
+              <h1 className="mt-4 text-[clamp(2.25rem,6vw+1rem,4rem)] leading-[1.15] font-dt-heading font-bold text-dt-navy">
                 {post.title}
               </h1>
               <div className="mt-4 flex items-center gap-2 text-sm text-dt-graphite">
