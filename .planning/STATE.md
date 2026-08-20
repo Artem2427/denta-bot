@@ -5,10 +5,10 @@ milestone_name: Platform Admin API
 current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
-stopped_at: Completed quick task 260820-cz1 (landed --text-dt-body 1rem fix + lead-section.tsx import reorder)
-last_updated: "2026-08-20T06:23:42.482Z"
+stopped_at: Completed quick task 260820-enw (root-cause fix: tailwind-merge was silently dropping every text-dt-{size} class sitewide)
+last_updated: "2026-08-20T07:50:00.000Z"
 last_activity: 2026-08-20
-last_activity_desc: "Completed quick task 260820-csn: section-heading.tsx restored (font-extrabold/max-w-2xl), eyebrow on-navy tone changed to text-dt-coral"
+last_activity_desc: "Completed quick task 260820-enw: cn.ts registers dt- font-size tokens into tailwind-merge's font-size classGroup, fixing a sitewide bug where every text-dt-{h1,h2,h3,body,caption,eyebrow} class was silently dropped whenever combined with a text-dt-{color} class"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 Phase: 6 — apps/web Integration
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-08-20 - Completed quick task 260820-csn: section-heading.tsx restored (font-extrabold/max-w-2xl), eyebrow on-navy tone changed to text-dt-coral
+Last activity: 2026-08-20 - Completed quick task 260820-enw: root-cause sitewide font-size fix in cn.ts (tailwind-merge classGroup collision)
 
 Progress: [██████████] 100%
 
@@ -131,6 +131,7 @@ None yet.
 | 260820-csp | Reviews carousel card width changed from responsive percentage flex-basis to fixed 300px | 2026-08-20 | e7ef909 | [260820-csp-reviews-tsx-change-each-carousel-card-s-](./quick/260820-csp-reviews-tsx-change-each-carousel-card-s-/) |
 | 260820-csn | Restored section-heading.tsx (stale editor buffer had reverted font-extrabold→font-bold, dropped max-w-2xl); eyebrow.tsx on-navy tone changed to text-dt-coral matching reference design | 2026-08-20 | c7d4285 | [260820-csn-fix-section-heading-tsx-stale-editor-buf](./quick/260820-csn-fix-section-heading-tsx-stale-editor-buf/) |
 | 260820-cz1 | Land two already-verified uncommitted edits: --text-dt-body 1.125rem->1rem, lead-section.tsx import reorder | 2026-08-20 | 6e8a0e8 | [260820-cz1-land-two-already-made-verified-uncommitt](./quick/260820-cz1-land-two-already-made-verified-uncommitt/) |
+| 260820-enw | Root-cause fix: cn.ts registers text-dt-{h1,h2,h3,body,caption,eyebrow} into tailwind-merge's font-size classGroup — fixes sitewide silent-drop of every size class combined with a color class in one cn() call | 2026-08-20 | 0d44f03 | [260820-enw-root-cause-fix-apps-web-shared-lib-cn-ts](./quick/260820-enw-root-cause-fix-apps-web-shared-lib-cn-ts/) |
 
 ### Blockers/Concerns
 
