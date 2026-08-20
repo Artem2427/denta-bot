@@ -1,6 +1,6 @@
 'use client';
 
-import { Moon, Sun } from '@phosphor-icons/react/ssr';
+import { MoonIcon, SunIcon } from '@phosphor-icons/react/ssr';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 
@@ -17,7 +17,7 @@ export function ThemeToggle(): React.JSX.Element {
   if (!mounted) {
     return (
       <PremiumButton variant="ghost" size="icon" className="h-10 w-10">
-        <Sun weight="regular" className="h-5 w-5" />
+        <SunIcon weight="regular" className="h-5 w-5" />
         <span className="sr-only">Перемкнути тему</span>
       </PremiumButton>
     );
@@ -31,9 +31,9 @@ export function ThemeToggle(): React.JSX.Element {
       className="h-10 w-10"
     >
       {theme === 'dark' ? (
-        <Sun weight="regular" className="h-5 w-5" />
+        <SunIcon weight="regular" className="h-5 w-5" />
       ) : (
-        <Moon weight="regular" className="h-5 w-5" />
+        <MoonIcon weight="regular" className="h-5 w-5" />
       )}
       <span className="sr-only">Перемкнути тему</span>
     </PremiumButton>

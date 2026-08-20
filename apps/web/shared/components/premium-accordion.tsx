@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/cn';
-import { CaretDown } from '@phosphor-icons/react/ssr';
+import { CaretDownIcon } from '@phosphor-icons/react/ssr';
 import { Accordion as AccordionPrimitive } from 'radix-ui';
 import * as React from 'react';
 
@@ -41,7 +41,7 @@ function PremiumAccordionTrigger({
         {...props}
       >
         {children}
-        <CaretDown className="h-5 w-5 shrink-0 text-dt-navy transition-transform duration-200" />
+        <CaretDownIcon className="h-5 w-5 shrink-0 text-dt-navy transition-transform duration-200" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

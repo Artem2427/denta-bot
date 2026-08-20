@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib/cn';
-import { X } from '@phosphor-icons/react';
+import { XIcon } from '@phosphor-icons/react';
 import { Dialog as DialogPrimitive } from 'radix-ui';
 import * as React from 'react';
 
@@ -48,7 +48,7 @@ function PremiumDialogContent({
             aria-label="Закрити"
             className="absolute top-4 right-4"
           >
-            <X weight="regular" className="h-5 w-5" />
+            <XIcon weight="regular" className="h-5 w-5" />
           </PremiumButton>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>

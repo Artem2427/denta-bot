@@ -4,7 +4,7 @@ import { Link, usePathname } from '@/i18n/navigation';
 import { LocaleSwitcher } from '@/shared/components/locale-switcher';
 import { EASE_DT_EXPO_OUT } from '@/shared/lib/motion';
 import { routes } from '@/shared/lib/routes';
-import { List, X } from '@phosphor-icons/react/ssr';
+import { ListIcon, XIcon } from '@phosphor-icons/react/ssr';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
@@ -36,8 +36,8 @@ export function Header() {
   // change — no extra logic needed for that case).
   const navLinks = [
     { href: `${routes.home}#product`, label: t('product') },
-    { href: `${routes.home}#pricing`, label: t('pricing') },
     { href: `${routes.home}#demo`, label: t('demo') },
+    { href: `${routes.home}#pricing`, label: t('pricing') },
     { href: routes.blog, label: t('blog') },
   ] as const;
 
@@ -98,9 +98,9 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <X weight="bold" className="h-6 w-6" />
+                <XIcon weight="bold" className="h-6 w-6" />
               ) : (
-                <List weight="bold" className="h-6 w-6" />
+                <ListIcon weight="bold" className="h-6 w-6" />
               )}
             </PremiumButton>
           </div>

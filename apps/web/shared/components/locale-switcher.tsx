@@ -3,7 +3,7 @@
 import { usePathname } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { cn } from '@/shared/lib/cn';
-import { CaretDown, Check } from '@phosphor-icons/react/ssr';
+import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react/ssr';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import { DropdownMenu } from 'radix-ui';
@@ -56,7 +56,7 @@ export function LocaleSwitcher(): React.JSX.Element {
             {active.flag}
           </span>
           <span className="text-dt-navy font-semibold">{active.short}</span>
-          <CaretDown weight="bold" className="h-3 w-3" />
+          <CaretDownIcon weight="bold" className="h-3 w-3" />
         </button>
       </DropdownMenu.Trigger>
       {/* Portal (the standard Radix pattern): renders Content into
@@ -88,7 +88,7 @@ export function LocaleSwitcher(): React.JSX.Element {
                 </span>
                 <span>{locale.label}</span>
                 {activeLocale === locale.code ? (
-                  <Check
+                  <CheckIcon
                     weight="bold"
                     className="ml-auto h-4 w-4 text-dt-teal"
                   />
