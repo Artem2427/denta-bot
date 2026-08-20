@@ -29,7 +29,7 @@ function SectionHeading({
       ) : null}
       <h2
         className={cn(
-          'text-dt-h2 font-dt-heading font-extrabold text-balance',
+          'text-[clamp(1.9rem,3.4vw,2.75rem)] leading-[1.1] tracking-[-0.03em] font-dt-heading font-extrabold text-balance',
           isNavy ? 'text-dt-warm-white' : 'text-dt-navy',
         )}
       >
@@ -38,7 +38,7 @@ function SectionHeading({
       {description ? (
         <p
           className={cn(
-            'mt-4 max-w-2xl text-dt-body text-pretty',
+            'mt-4 max-w-2xl text-[1rem] leading-[1.5] text-pretty',
             isNavy ? 'text-dt-warm-white/80' : 'text-dt-graphite',
           )}
         >

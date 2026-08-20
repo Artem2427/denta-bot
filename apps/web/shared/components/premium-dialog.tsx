@@ -17,7 +17,7 @@ function PremiumDialogTitle({
   return (
     <DialogPrimitive.Title
       className={cn(
-        'text-dt-h3 font-dt-heading font-semibold text-dt-navy',
+        'text-[1.5rem] leading-[1.15] font-dt-heading font-semibold text-dt-navy',
         className,
       )}
       {...props}
