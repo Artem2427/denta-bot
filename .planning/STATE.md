@@ -5,10 +5,10 @@ milestone_name: Platform Admin API
 current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
-stopped_at: Completed quick task 260820-1oe (Reviews carousel full-bleed + shadow-clip fix)
-last_updated: "2026-08-20T04:29:07.165Z"
+stopped_at: Completed quick task 260820-csp (Reviews carousel card width fixed to 300px)
+last_updated: "2026-08-20T06:20:00.000Z"
 last_activity: 2026-08-20
-last_activity_desc: "Completed quick task 260820-1r2: lead-section eyebrow+h2+description deduped into shared SectionHeading component"
+last_activity_desc: "Completed quick task 260820-csp: reviews carousel card width fixed to 300px"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 Phase: 6 — apps/web Integration
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-08-20 - Completed quick task 260820-1r2: lead-section eyebrow+h2+description deduped into shared SectionHeading component
+Last activity: 2026-08-20 - Completed quick task 260820-csp: reviews carousel card width fixed to 300px
 
 Progress: [██████████] 100%
 
@@ -127,6 +127,8 @@ None yet.
 | 260819-oyk | Make [locale] the true top-level route wrapper for apps/web — moved /blog, /prices, /demo, /contacts inside app/[locale]/, fixed LocaleSwitcher to preserve current pathname (rebuilt as a flag dropdown), fixed Header's Blog link to be locale-aware | 2026-08-19 | 89c6c11 | [260819-oyk-make-locale-the-true-top-level-route-wra](./quick/260819-oyk-make-locale-the-true-top-level-route-wra/) |
 | 260820-1bb | Match --text-dt-h2 fluid token (font-size clamp, line-height, letter-spacing) to reference design's exact devtools-inspected computed style; section-heading.tsx bumped to font-extrabold | 2026-08-20 | 0c69e50 | [260820-1bb-make-all-section-heading-h2-font-sizes-r](./quick/260820-1bb-make-all-section-heading-h2-font-sizes-r/) |
 | 260820-1r2 | Dedupe lead-section.tsx's inline eyebrow+h2+description block into the shared SectionHeading component (tone=navy) | 2026-08-20 | 80b634f | [260820-1r2-apps-web-modules-landing-lead-section-ts](./quick/260820-1r2-apps-web-modules-landing-lead-section-ts/) |
+| 260820-1oe | Reviews carousel made full-bleed (carousel breaks out of Container, heading stays capped); shadow-clipping fix restructured to genuinely-additive pt-6/pb-16 (no negative-margin cancellation) | 2026-08-20 | e85533f | [260820-1oe-reviews-carousel-apps-web-modules-landin](./quick/260820-1oe-reviews-carousel-apps-web-modules-landin/) |
+| 260820-csp | Reviews carousel card width changed from responsive percentage flex-basis to fixed 300px | 2026-08-20 | e7ef909 | [260820-csp-reviews-tsx-change-each-carousel-card-s-](./quick/260820-csp-reviews-tsx-change-each-carousel-card-s-/) |
 
 ### Blockers/Concerns
 
