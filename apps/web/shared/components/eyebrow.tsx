@@ -1,13 +1,12 @@
+import { cn } from '@/shared/lib/cn';
 import { type VariantProps, cva } from 'class-variance-authority';
 import * as React from 'react';
-
-import { cn } from '@/shared/lib/cn';
 
 const eyebrowVariants = cva('uppercase text-dt-eyebrow font-dt-mono', {
   variants: {
     tone: {
       navy: 'text-dt-navy',
-      'on-navy': 'text-dt-warm-white/80',
+      'on-navy': 'text-dt-coral',
     },
   },
   defaultVariants: {
