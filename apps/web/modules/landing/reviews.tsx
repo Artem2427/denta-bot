@@ -102,7 +102,7 @@ export function Reviews(): React.JSX.Element {
       <div className="overflow-hidden px-4 lg:px-8" ref={emblaRef}>
         <div className="-ml-6 flex pt-6 pb-16">
           {items.map((item) => (
-            <div key={item.name} className="min-w-0 flex-[0_0_300px] pl-6">
+            <div key={item.name} className="min-w-0 flex-[0_0_330px] pl-6">
               <PremiumCard className="h-full">
                 <Stars />
                 <p className="mt-4 text-dt-graphite italic">{item.text}</p>
