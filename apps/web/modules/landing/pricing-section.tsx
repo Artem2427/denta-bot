@@ -1,9 +1,5 @@
 'use client';
 
-import { Check } from '@phosphor-icons/react/ssr';
-import { useTranslations } from 'next-intl';
-import * as React from 'react';
-
 import { Container } from '@/shared/components/container';
 import { PremiumBadge } from '@/shared/components/premium-badge';
 import { PremiumButton } from '@/shared/components/premium-button';
@@ -11,6 +7,9 @@ import { PremiumCard } from '@/shared/components/premium-card';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { cn } from '@/shared/lib/cn';
+import { Check } from '@phosphor-icons/react/ssr';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 
 import type { PricingPlan } from './types';
 
@@ -43,6 +42,8 @@ export function PricingSection({
 }): React.JSX.Element {
   const t = useTranslations('pricing');
   const [isYearly, setIsYearly] = React.useState(false);
+
+  console.log(plans, 'plans');
 
   return (
     <Section id="pricing" className="scroll-mt-16 lg:scroll-mt-20">
@@ -98,7 +99,7 @@ export function PricingSection({
               )}
               <h3
                 className={cn(
-                  'text-dt-h3 font-dt-heading font-semibold',
+                  'text-[1.5rem] leading-[1.15] font-dt-heading font-semibold',
                   plan.isPopular ? 'text-dt-warm-white' : 'text-dt-navy',
                 )}
               >
@@ -115,7 +116,7 @@ export function PricingSection({
               <div className="mt-6">
                 <span
                   className={cn(
-                    'text-dt-h2 font-dt-heading font-bold tabular-nums',
+                    'text-[clamp(1.9rem,3.4vw,2.75rem)] leading-[1.1] tracking-[-0.03em] font-dt-heading font-bold tabular-nums',
                     plan.isPopular ? 'text-dt-warm-white' : 'text-dt-navy',
                   )}
                 >
@@ -123,7 +124,9 @@ export function PricingSection({
                 </span>
                 <span
                   className={
-                    plan.isPopular ? 'text-dt-warm-white/70' : 'text-dt-graphite'
+                    plan.isPopular
+                      ? 'text-dt-warm-white/70'
+                      : 'text-dt-graphite'
                   }
                 >
                   {t('perMonth')}

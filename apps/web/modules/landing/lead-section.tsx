@@ -118,7 +118,7 @@ export function LeadSection(): React.JSX.Element {
           <PremiumCard>
             {!isSubmitted ? (
               <>
-                <h3 className="text-dt-h3 font-dt-heading font-semibold text-dt-navy">
+                <h3 className="text-[1.5rem] leading-[1.15] font-dt-heading font-semibold text-dt-navy">
                   {t('formTitle')}
                 </h3>
                 <form onSubmit={onSubmit} className="mt-6 space-y-6">
@@ -206,7 +206,7 @@ export function LeadSection(): React.JSX.Element {
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-dt-teal/10">
                   <CheckCircle weight="fill" className="h-8 w-8 text-dt-teal" />
                 </div>
-                <h3 className="text-dt-h3 font-dt-heading font-bold text-dt-navy">
+                <h3 className="text-[1.5rem] leading-[1.15] font-dt-heading font-bold text-dt-navy">
                   {t('thanksTitle')}
                 </h3>
                 <p className="mb-6 text-dt-graphite">{t('thanksBody')}</p>

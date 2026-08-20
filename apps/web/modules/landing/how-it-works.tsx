@@ -1,11 +1,10 @@
-import { getTranslations } from 'next-intl/server';
-
 import { Container } from '@/shared/components/container';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
+import { getTranslations } from 'next-intl/server';
 
 type HowItWorksStep = { n: string; title: string; text: string };
 
@@ -29,7 +28,7 @@ export async function HowItWorks(): Promise<React.JSX.Element> {
                 <div className="font-dt-mono text-3xl font-medium text-dt-navy/15">
                   {step.n}
                 </div>
-                <h3 className="mt-3.5 text-dt-h3 font-dt-heading font-semibold text-dt-navy">
+                <h3 className="mt-3.5 text-[1.5rem] leading-[1.15] font-dt-heading font-semibold text-dt-navy">
                   {step.title}
                 </h3>
                 <p className="mt-2.5 text-dt-graphite">{step.text}</p>

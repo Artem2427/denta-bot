@@ -31,14 +31,16 @@ export async function Hero(): Promise<React.JSX.Element> {
                 </span>
                 {t('badge')}
               </div>
-              <h1 className="text-dt-h1 font-dt-heading font-bold text-dt-navy">
+              <h1 className="text-[clamp(2.25rem,6vw+1rem,4rem)] leading-[1.15] font-dt-heading font-bold text-dt-navy">
                 {t('titleLine1')}
                 <br />
                 {t('titleLine2')}
                 <br />
                 <span className="text-dt-teal">{t('titleHighlight')}</span>
               </h1>
-              <p className="text-dt-body text-dt-graphite">{t('subtitle')}</p>
+              <p className="text-[1rem] leading-[1.5] text-dt-graphite">
+                {t('subtitle')}
+              </p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <PremiumButton variant="navy" size="lg" asChild>
                   <a href="#demo">{t('ctaPrimary')}</a>
