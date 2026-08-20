@@ -9,7 +9,7 @@ import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { getClientApiUrl } from '@/shared/lib/api-url';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircle } from '@phosphor-icons/react/ssr';
+import { CheckCircleIcon } from '@phosphor-icons/react/ssr';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
@@ -105,7 +105,7 @@ export function LeadSection(): React.JSX.Element {
               {guarantees.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-dt-teal/20 text-dt-teal">
-                    <CheckCircle weight="fill" className="h-4 w-4" />
+                    <CheckCircleIcon weight="fill" className="h-4 w-4" />
                   </span>
                   <span className="leading-[1.45] text-dt-warm-white/90">
                     {item}
@@ -204,7 +204,10 @@ export function LeadSection(): React.JSX.Element {
             ) : (
               <div className="py-12 text-center">
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-dt-teal/10">
-                  <CheckCircle weight="fill" className="h-8 w-8 text-dt-teal" />
+                  <CheckCircleIcon
+                    weight="fill"
+                    className="h-8 w-8 text-dt-teal"
+                  />
                 </div>
                 <h3 className="text-[1.5rem] leading-[1.15] font-dt-heading font-bold text-dt-navy">
                   {t('thanksTitle')}

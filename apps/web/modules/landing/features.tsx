@@ -7,14 +7,14 @@ import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
 import {
-  Bell,
-  Calendar,
-  ChartBar,
-  ChatCircleText,
-  Check,
-  Gear,
-  Star,
-  Users,
+  BellIcon,
+  CalendarIcon,
+  ChartBarIcon,
+  ChatCircleTextIcon,
+  CheckIcon,
+  GearIcon,
+  StarIcon,
+  UsersIcon,
 } from '@phosphor-icons/react/ssr';
 import { useTranslations } from 'next-intl';
 
@@ -24,14 +24,14 @@ type FeatureItem = { title: string; text: string };
 // design file's 8 feature items map 1:1 onto the existing icon-per-card
 // grid; content is re-copied per the design's exact wording via t.raw.
 const FEATURE_ICONS = [
-  ChatCircleText,
-  Calendar,
-  Bell,
-  ChartBar,
-  Star,
-  Gear,
-  Users,
-  Check,
+  ChatCircleTextIcon,
+  CalendarIcon,
+  BellIcon,
+  ChartBarIcon,
+  StarIcon,
+  GearIcon,
+  UsersIcon,
+  CheckIcon,
 ];
 
 export function Features(): React.JSX.Element {

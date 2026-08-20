@@ -7,7 +7,7 @@ import { PremiumCard } from '@/shared/components/premium-card';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { cn } from '@/shared/lib/cn';
-import { Check } from '@phosphor-icons/react/ssr';
+import { CheckIcon } from '@phosphor-icons/react/ssr';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
@@ -135,7 +135,7 @@ export function PricingSection({
               <ul className="mt-6 space-y-3">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2">
-                    <Check
+                    <CheckIcon
                       weight="regular"
                       className={cn(
                         'mt-0.5 h-5 w-5 shrink-0',

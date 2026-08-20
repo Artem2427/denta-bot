@@ -7,7 +7,7 @@ import { PremiumCard } from '@/shared/components/premium-card';
 import { PremiumInput } from '@/shared/components/premium-input';
 import { StaggerGrid, StaggerItem } from '@/shared/components/stagger-grid';
 import { routes } from '@/shared/lib/routes';
-import { Clock, MagnifyingGlass } from '@phosphor-icons/react/ssr';
+import { ClockIcon, MagnifyingGlassIcon } from '@phosphor-icons/react/ssr';
 import Image from 'next/image';
 import * as React from 'react';
 
@@ -34,7 +34,7 @@ export function BlogFilters({ posts }: { posts: Post[] }): React.JSX.Element {
     <div>
       <div className="mx-auto mb-12 max-w-2xl space-y-6">
         <div className="relative">
-          <MagnifyingGlass
+          <MagnifyingGlassIcon
             weight="regular"
             className="pointer-events-none absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-dt-graphite/50"
           />
@@ -88,7 +88,7 @@ export function BlogFilters({ posts }: { posts: Post[] }): React.JSX.Element {
                     <div className="mb-2 flex items-center gap-2 text-sm text-dt-graphite">
                       <span>{post.date}</span>
                       <span>•</span>
-                      <Clock weight="regular" className="h-4 w-4" />
+                      <ClockIcon weight="regular" className="h-4 w-4" />
                       <span>{post.readTime}</span>
                     </div>
                     <h3 className="line-clamp-2 text-[1.5rem] leading-[1.15] font-dt-heading font-semibold text-dt-navy">
