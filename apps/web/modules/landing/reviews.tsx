@@ -1,15 +1,18 @@
 'use client';
 
-import { CaretLeftIcon, CaretRightIcon, StarIcon } from '@phosphor-icons/react/ssr';
-import useEmblaCarousel from 'embla-carousel-react';
-import { useTranslations } from 'next-intl';
-import * as React from 'react';
-
 import { Container } from '@/shared/components/container';
 import { PremiumCard } from '@/shared/components/premium-card';
 import { Reveal } from '@/shared/components/reveal';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
+import {
+  CaretLeftIcon,
+  CaretRightIcon,
+  StarIcon,
+} from '@phosphor-icons/react/ssr';
+import useEmblaCarousel from 'embla-carousel-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 
 type ReviewItem = {
   text: string;
@@ -24,11 +27,7 @@ function Stars(): React.JSX.Element {
   return (
     <div className="flex gap-1">
       {Array.from({ length: 5 }).map((_, i) => (
-        <StarIcon
-          key={i}
-          weight="fill"
-          className="h-4 w-4 text-yellow-400"
-        />
+        <StarIcon key={i} weight="fill" className="h-4 w-4 text-yellow-400" />
       ))}
     </div>
   );
@@ -103,10 +102,7 @@ export function Reviews(): React.JSX.Element {
       <div className="overflow-hidden px-4 lg:px-8" ref={emblaRef}>
         <div className="-ml-6 flex pt-6 pb-16">
           {items.map((item) => (
-            <div
-              key={item.name}
-              className="min-w-0 flex-[0_0_100%] pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.3333%]"
-            >
+            <div key={item.name} className="min-w-0 flex-[0_0_300px] pl-6">
               <PremiumCard className="h-full">
                 <Stars />
                 <p className="mt-4 text-dt-graphite italic">{item.text}</p>
