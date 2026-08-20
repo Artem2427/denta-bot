@@ -5,10 +5,10 @@ milestone_name: Platform Admin API
 current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
-stopped_at: Completed 06.2-07-PLAN.md
-last_updated: "2026-08-19T15:24:39.942Z"
-last_activity: 2026-08-19
-last_activity_desc: Phase 06.2 execution started
+stopped_at: Completed quick task 260820-1oe (Reviews carousel full-bleed + shadow-clip fix)
+last_updated: "2026-08-20T04:29:07.165Z"
+last_activity: 2026-08-20
+last_activity_desc: "Completed quick task 260820-1r2: lead-section eyebrow+h2+description deduped into shared SectionHeading component"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -77,6 +77,7 @@ Progress: [██████████] 100%
 | Phase 06.2 P05 | 15min | 3 tasks | 3 files |
 | Phase 06.2 P06 | 6min | 2 tasks | 3 files |
 | Phase 06.2 P07 | ~35min (Tasks 2-3, this session) | 3 tasks | 33 files |
+| Phase quick P260820-1oe | 8min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -104,6 +105,7 @@ v1.1 roadmap-level decisions:
 - [Phase ?]: [Phase 06.2] Plan 06.2-06: lead-section.tsx reuses t('lead.submitLabel') for the post-submission 'send another' button — the plan-03-authored lead namespace has no separate key and the task instructed sourcing all copy from the existing namespace only
 - [Phase ?]: [Phase 06.2] Plan 06.2-07: Relocated modules/home/stagger-grid.tsx to shared/components/stagger-grid.tsx instead of deleting it — active cross-page dependency in 5 files (modules/landing + modules/blog), not Home-page-only dead code
 - [Phase ?]: [Phase 06.2] Plan 06.2-07: Fixed proxy.ts next-intl middleware matcher to exclude /prices, /demo, /contacts alongside /blog — without this the new redirect stubs 404'd instead of redirecting
+- [Phase ?]: Reviews carousel: kept plan's literal px-4 lg:px-8 edge padding (not a calc()-based pixel-perfect alignment) per plan's explicit action+verify; causes an 80px left-edge misalignment vs heading at viewports >1280px — documented as a known limitation, not fixed inline
 
 ### Pending Todos
 
@@ -155,8 +157,8 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-08-19T13:46:00.924Z
-Stopped at: Completed 06.2-07-PLAN.md
+Last session: 2026-08-20T04:29:00.814Z
+Stopped at: Completed quick task 260820-1oe (Reviews carousel full-bleed + shadow-clip fix)
 Resume file: None
 
 Next: /gsd-plan-phase 06.2 — plan Phase 06.2 (Single-Page Landing Consolidation + i18n)
