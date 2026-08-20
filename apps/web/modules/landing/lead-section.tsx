@@ -1,13 +1,5 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { CheckCircle } from '@phosphor-icons/react/ssr';
-import { useTranslations } from 'next-intl';
-import * as React from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
-
 import { Container } from '@/shared/components/container';
 import { PremiumButton } from '@/shared/components/premium-button';
 import { PremiumCard } from '@/shared/components/premium-card';
@@ -16,6 +8,13 @@ import { PremiumTextarea } from '@/shared/components/premium-textarea';
 import { Section } from '@/shared/components/section';
 import { SectionHeading } from '@/shared/components/section-heading';
 import { getClientApiUrl } from '@/shared/lib/api-url';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CheckCircle } from '@phosphor-icons/react/ssr';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CONTACT_PHONE_REGEX = /^\+?[0-9\s\-()]{7,20}$/;
