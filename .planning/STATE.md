@@ -5,10 +5,10 @@ milestone_name: Platform Admin API
 current_phase: 6
 current_phase_name: apps/web Integration
 status: planning
-stopped_at: Completed quick task 260820-enw (root-cause fix: tailwind-merge was silently dropping every text-dt-{size} class sitewide)
-last_updated: "2026-08-20T07:50:00.000Z"
+stopped_at: Completed quick task 260820-eyj (converted all 27 text-dt-{size} usages to direct Tailwind arbitrary values; removed dead premium-theme.css tokens)
+last_updated: "2026-08-20T08:15:00.000Z"
 last_activity: 2026-08-20
-last_activity_desc: "Completed quick task 260820-enw: cn.ts registers dt- font-size tokens into tailwind-merge's font-size classGroup, fixing a sitewide bug where every text-dt-{h1,h2,h3,body,caption,eyebrow} class was silently dropped whenever combined with a text-dt-{color} class"
+last_activity_desc: "Completed quick task 260820-eyj: converted every text-dt-{h1,h2,h3,body,caption,eyebrow} usage (15 files) to direct Tailwind arbitrary-value classes per user preference; removed the six now-dead --text-dt-* custom properties from premium-theme.css; cn.ts's defensive fix (260820-enw) stays in place"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -31,7 +31,7 @@ See: .planning/PROJECT.md (updated 2026-08-10)
 Phase: 6 — apps/web Integration
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-08-20 - Completed quick task 260820-enw: root-cause sitewide font-size fix in cn.ts (tailwind-merge classGroup collision)
+Last activity: 2026-08-20 - Completed quick task 260820-eyj: converted all text-dt-{size} usages sitewide to direct Tailwind arbitrary values
 
 Progress: [██████████] 100%
 
@@ -132,6 +132,7 @@ None yet.
 | 260820-csn | Restored section-heading.tsx (stale editor buffer had reverted font-extrabold→font-bold, dropped max-w-2xl); eyebrow.tsx on-navy tone changed to text-dt-coral matching reference design | 2026-08-20 | c7d4285 | [260820-csn-fix-section-heading-tsx-stale-editor-buf](./quick/260820-csn-fix-section-heading-tsx-stale-editor-buf/) |
 | 260820-cz1 | Land two already-verified uncommitted edits: --text-dt-body 1.125rem->1rem, lead-section.tsx import reorder | 2026-08-20 | 6e8a0e8 | [260820-cz1-land-two-already-made-verified-uncommitt](./quick/260820-cz1-land-two-already-made-verified-uncommitt/) |
 | 260820-enw | Root-cause fix: cn.ts registers text-dt-{h1,h2,h3,body,caption,eyebrow} into tailwind-merge's font-size classGroup — fixes sitewide silent-drop of every size class combined with a color class in one cn() call | 2026-08-20 | 0d44f03 | [260820-enw-root-cause-fix-apps-web-shared-lib-cn-ts](./quick/260820-enw-root-cause-fix-apps-web-shared-lib-cn-ts/) |
+| 260820-eyj | Converted all 27 text-dt-{h1,h2,h3,body,caption,eyebrow} usages (15 files) to direct Tailwind arbitrary-value classes; removed dead --text-dt-* tokens from premium-theme.css; cn.ts fix (260820-enw) kept as defense-in-depth | 2026-08-20 | a0991f5 | [260820-eyj-convert-every-text-dt-h1-h2-h3-body-capt](./quick/260820-eyj-convert-every-text-dt-h1-h2-h3-body-capt/) |
 
 ### Blockers/Concerns
 
