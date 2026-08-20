@@ -192,3 +192,21 @@ Plans:
 - [x] 06.1-03-PLAN.md — Home sweep remainder (Solution, UnifiedSource, Features, Testimonials, CtaBanner)
 - [x] 06.1-04-PLAN.md — Prices + Contacts sweep
 - [x] 06.1-05-PLAN.md — Demo + Blog sweep
+
+## Backlog
+
+### Phase 999.1: Server platform — multi-tenant clinics, per-clinic Telegram bots, billing (BACKLOG)
+
+**Goal:** [Captured for future planning] Full server-side ТЗ (2026-08-20, client-supplied) covering `apps/server` + `packages/db`: Clinic as tenant, ClinicUser auth + RBAC, doctors/services/patients/appointments/schedule, one Telegram bot per clinic (webhook routing + booking FSM + reminders), subscriptions/payments, analytics, audit. Full spec: `.planning/phases/999.1-server-platform-multi-tenant-clinics-per-clinic-telegram-bot/SERVER-TZ.md`
+
+**Agreed slicing** (2026-08-20): this backlog item is NOT one milestone — it splits into three, planned in order after v1.1 ships:
+
+- **v1.2 Multi-tenant Core** — Clinic-as-tenant schema, ClinicUser + clinic-auth, tenant scoping via Prisma Client Extensions, RBAC, AuditLog, Doctors/Services/Patients/Appointments + slot calculator, `/api/{public,admin,clinic}` prefixes (+ migrating existing web/platform-admin callers), `packages/shared`
+- **v1.3 Telegram** — Redis + BullMQ infra, AES-256-GCM bot-token storage, provisioning/setWebhook, webhook routing by path, booking FSM, reminders, `TelegramApiClient`
+- **v1.4 Billing & Analytics** — Subscription/Payment/LiqPay, analytics for both admin panels, health endpoints
+
+**Requirements:** TBD
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (promote with /gsd-review-backlog when ready)
