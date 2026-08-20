@@ -29,28 +29,6 @@
     0 2px 4px rgba(26, 43, 61, 0.06), 0 8px 16px rgba(26, 43, 61, 0.08),
     0 20px 32px rgba(26, 43, 61, 0.1);
 
-  /* Type scale (D-09/D-10) */
-  --text-dt-h1: clamp(
-    2.25rem,
-    6vw + 1rem,
-    4rem
-  ); /* hero, fluid mobile→desktop, caps at the original 3.5-4.5rem range */
-  --text-dt-h1--line-height: 1.15;
-  --text-dt-h2: clamp(
-    1.9rem,
-    3.4vw,
-    2.75rem
-  ); /* sections, fluid mobile→desktop — matches the reference design prototype's own devtools-inspected computed style exactly (sourced 2026-08-20, quick task 260820-1bb), superseding the earlier hand-derived "bumped up... too small" clamp. Flat at 30.4px for all widths ≤~894px (phone and tablet-portrait render identically — no distinct phone step), only scaling up between ~894-1294px toward the 44px desktop cap — a deliberate, ground-truth-sourced departure from a continuous 3-tier phone/tablet/desktop stepping */
-  --text-dt-h2--line-height: 1.1;
-  --text-dt-h2--letter-spacing: -0.03em;
-  --text-dt-h3: 1.5rem; /* card subheads */
-  --text-dt-h3--line-height: 1.15;
-  --text-dt-body: 1rem;
-  --text-dt-body--line-height: 1.5;
-  --text-dt-caption: 0.8125rem;
-  --text-dt-eyebrow: 0.8125rem; /* Phase 06.1 D-07 — formalizes the old .dt-caption utility class */
-  --text-dt-eyebrow--letter-spacing: 0.02em;
-
   /* Spacing scale (Phase 06.1 D-03) — additive, 16px base */
   --spacing-dt-4: 0.25rem;
   --spacing-dt-8: 0.5rem;
